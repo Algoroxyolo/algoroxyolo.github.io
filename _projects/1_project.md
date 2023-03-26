@@ -21,4 +21,4 @@ This is a project I did for 15-112
 
 Specifically, you can generate simple questions from the text by putting test into the textbox. The question will be the basic 4W1H questions and the answers will be stored. You can also answer the questions by using the app as well.
 
-{% endraw %}
+

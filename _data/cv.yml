@@ -33,7 +33,7 @@
 - title: Academic Interests
   type: nested_list
   contents:
-    - title: Natural Language Processing
+    - title: Natural Language Processing 
       items: 
         - Description 1.
         - Description 2.

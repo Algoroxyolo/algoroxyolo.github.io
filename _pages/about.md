@@ -19,6 +19,7 @@ social: true  # includes social icons at the bottom of the page
 ---
 
 I am an undergraduate student at CMUQ interested in Natural Language Processing, as well as Computer Science. I am very interested in field which computers challenges human behaviors,also have a passion to spread knowledge to more people- not only computer sciences but also security awareness and many other topics as well. Outside of academics, I enjoy computer gaming and anime.
+<a href="https://leetcode.com/Algoroxyolo/">Here is my leetcode</a>
 
 
 

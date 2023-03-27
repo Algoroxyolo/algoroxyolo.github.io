@@ -8,12 +8,12 @@ middle_name: (Lorenzo)
 last_name: Xiao
 email: yunzex@andrew.cmu.edu
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
- 114514
+A website of Lorenzo. What!!! you do not know Lorenzo! Go check it out!
  
-keywords: jekyll, jekyll-theme, academic-website, portfolio-website  # add your own keywords or leave empty
+keywords: Natrual Language Processing,Prompt Engineering,Computer Security, Social Engineering, 
 
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
-icon: ⚛️  # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
+icon: favicon.jpg # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
 
 url: https://algoroxyolo.github.io # the base hostname & protocol for your site
 baseurl: # the subpath of your site, e.g. /blog/

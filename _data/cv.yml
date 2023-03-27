@@ -35,12 +35,12 @@
   contents:
     - title: Natural Language Processing 
       items: 
-        - Description 1.
-        - Description 2.
+        - Sentimental analysis and Immitation
+        - Trustworthy AI
     - title: Computer Security
       items:
-        - Description 1.
-        - Description 2.
+        - Social Engineering 
+        - Adversarial attack for AI model
 
 - title: Other Interests
   type: list

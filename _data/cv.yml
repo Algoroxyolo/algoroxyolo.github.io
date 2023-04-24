@@ -23,7 +23,7 @@
     
     - title: Head of Academics
       institution: Carnegie Mellon University in Qatar
-      year: 2023 
+      year: 2023-2024
 
 
 - title: Honors and Awards
@@ -39,12 +39,13 @@
   contents:
     - title: Natural Language Processing 
       items: 
-        - Sentimental analysis and Immitation
+        - Offensive Word Detection
+        - Machine personality 
         - Trustworthy AI
     - title: Computer Security
       items:
         - Social Engineering 
-        - Adversarial attack for AI model
+        - Adversarial attack of AI model
 
 - title: Other Interests
   type: list

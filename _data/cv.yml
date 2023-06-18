@@ -24,7 +24,10 @@
     - title: Head of Academics
       institution: Carnegie Mellon University in Qatar
       year: 2023-2024
-
+    
+    - title: Research Intern
+      institution: Qatar Computing Research Institute
+      year: 2023 May - 2023 August
 
 - title: Honors and Awards
   type: time_table
@@ -42,6 +45,7 @@
         - Offensive Word Detection
         - Machine personality 
         - Trustworthy AI
+        - AI+education
     - title: Computer Security
       items:
         - Social Engineering 

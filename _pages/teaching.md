@@ -13,4 +13,4 @@ As an Undergraduate, there are two types of teaching related task that I perform
     - Fall 2023 15-110 
 2. Research Mentor
     Current mentee:
-        Yiyang (Ethan) Pan (ypan36@u.rochester.edu)[LinkedIn](https://www.linkedin.com/in/ethan-pan-65b27a288/) University of Rochester
+        Yiyang (Ethan) Pan (ypan36@u.rochester.edu)[LinkedIn](https://www.linkedin.com/in/ethan-pan-65b27a288/)

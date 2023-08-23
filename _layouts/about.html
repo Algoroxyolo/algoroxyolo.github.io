@@ -3,6 +3,14 @@ layout: default
 ---
 
 <!-- about.html -->
+  <style>
+    .calendar-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+  </style>
       <div class="post">
         <header class="post-header">
           <h1 class="post-title">
@@ -66,5 +74,9 @@ layout: default
             </div>
           {%- endif %}
         </article>
+        <div class="calendar-container">
+          <iframe src="https://calendar.google.com/calendar/embed?src=yunzex%40andrew.cmu.edu&ctz=Asia%2FQatar" style="border:2px #ffffff solid;" name="myiFrame" scrolling="yes" frameborder="1" marginheight="0px" marginwidth="0px" height="400px" width="600px" allowfullscreen></iframe>
+        </div>
+         
 
 </div>

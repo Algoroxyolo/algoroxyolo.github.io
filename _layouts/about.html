@@ -59,6 +59,10 @@ layout: default
             <h2><a href="{{ '/publications/' | relative_url }}" style="color: inherit;">selected publications</a></h2>
             {%- include selected_papers.html %}
           {%- endif %}
+          <!-- calendar -->
+          <div class="calendar-container">
+            <iframe src="https://calendar.google.com/calendar/embed?src=yunzex%40andrew.cmu.edu&ctz=Asia%2FQatar" style="border:2px #ffffff solid;" name="myiFrame" scrolling="yes" frameborder="1" marginheight="0px" marginwidth="0px" height="55%" width="55%" allowfullscreen></iframe>
+          </div>
 
           <!-- Social -->
           {%- if page.social %}
@@ -73,9 +77,7 @@ layout: default
               
             </div>
           {%- endif %}
-          <div class="calendar-container">
-            <iframe src="https://calendar.google.com/calendar/embed?src=yunzex%40andrew.cmu.edu&ctz=Asia%2FQatar" style="border:2px #ffffff solid;" name="myiFrame" scrolling="yes" frameborder="1" marginheight="0px" marginwidth="0px" height="400px" width="600px" allowfullscreen></iframe>
-          </div>
+
         </article>
 
          

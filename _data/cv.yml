@@ -4,12 +4,12 @@
     - name: Full Name
       value: Yunze Xiao
     - name: Languages
-      value: English, Chinese, Japanese(still learning)
+      value: English, Chinese, Japanese(In Progress)
 
 - title: Education
   type: time_table
   contents:
-    - title: Undergraduate
+    - title: BS in Computer Scinece with a minor in Computational Ethics 
       institution: Carnegie Mellon University in Qatar
       year: 2022-2026
 
@@ -27,7 +27,7 @@
     
     - title: Research Intern
       institution: Qatar Computing Research Institute
-      year: 2023 May - 2023 August
+      year: 2023
 
 - title: Honors and Awards
   type: time_table
@@ -46,10 +46,6 @@
         - Machine personality 
         - Trustworthy AI
         - AI+education
-    - title: Computer Security
-      items:
-        - Social Engineering 
-        - Adversarial attack of AI model
 
 - title: Other Interests
   type: list

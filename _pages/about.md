@@ -7,7 +7,7 @@ subtitle: <a href='https://qatar.cmu.edu/'>Carnegie Mellon University In Qatar</
 profile:
   align: right
   image: Yunze Xiao.jpg
-  image_circular: False # crops the image to make it circular
+  image_circular: true # crops the image to make it circular
   address: >
     <p>2080-O</p>
     <p>Education City, Al Luqta St, Ar Rayyan</p>

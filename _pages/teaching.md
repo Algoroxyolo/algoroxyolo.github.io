@@ -16,5 +16,5 @@ As an Undergraduate, there are 3 types of teaching related task that I perform.
         - Yiyang (Ethan) Pan (2023-Current) [email](mailto:ypan36@u.rochester.edu) || [LinkedIn](https://www.linkedin.com/in/ethan-pan-65b27a288/)
 3. Student Instructor
     - I created an Student-taught Course on [NLP ethics in a Nutshell](assets/pdf/NLP_Ethics.pdf).
-    - The course will serve 8 to 12 students to explore fundementals of NLP ethics
+    - The course served 15 students to explore fundementals of NLP ethics
     - Multiple projects will be mentored and presented to academic experts.

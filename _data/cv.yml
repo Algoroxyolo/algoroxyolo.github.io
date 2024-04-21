@@ -24,13 +24,21 @@
       institution: Carnegie Mellon University in Qatar
       year: 2023-2024    
       
-    - title: Research assitant
+    - title: Research Assistant
       institution: Carnegie Mellon University in Qatar
       year: 2023-2024
     
     - title: Research Intern
       institution: Qatar Computing Research Institute
       year: 2023
+    
+    - title: Research Assistant
+      institution: Singapore University of Technology and Design
+      year: 2023
+
+    - title: AI reseacher (Part-time)
+      institution: Figura AI
+      year: 2024
 
 - title: Honors and Awards
   type: time_table
@@ -46,9 +54,9 @@
   contents:
     - title: Natural Language Processing 
       items: 
-        - Offensive Word Detection
-        - Machine personality 
-        - Trustworthy AI
+        - Offensive Language Detection
+        - Machine Personality 
+        - Social Simulation
         - AI+education
 
 - title: Other Interests

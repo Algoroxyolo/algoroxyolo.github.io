@@ -18,13 +18,16 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-As an Computer Science student at Carnegie Mellon University Qatar, I have been fascinated by the intersection of computer science and artificial intelligence. My passion for these fields has driven me to pursue learning and researching in the areas of natural language processing (NLP) and Computational Social Science.
+I am a Junior Computer Science major at Carnegie Mellon University in Qatar, where I have been advised by [Prof. Houda Bouamor](https://www.andrew.cmu.edu/user/hbouamor/). I also had the amazing opportunities to work with [Dr. Firoj Alam](https://firojalam.one/) at [QCRI](https://www.hbku.edu.qa/en/qcri) and [Prof. Roy Ka-Wei Lee](https://info.roylee.sg/) at [SUTD](https://sutd.edu.sg/).
 
-My research journey has been rewarding, marked by collaborations and impactful projects. At Qatar Computing Research Institute (QCRI), I closely worked with [Dr. Firoj Alam](https://firojalam.one/), gaining insights into Arabic NLP, contributing to stance classification and fake news detection. At Carnegie Mellon University Qatar, alongside [Prof. Houda Bouamor](https://www.andrew.cmu.edu/user/hbouamor/) , I focused on detecting "Abstract language" ("抽象话"), an encoded offensive language in Chinese text, showcasing my dedication to linguistics. These experiences underline my commitment to computer science and natural language processing.
+For now my research interests mainly revolve around Intersections between Computational Social Science, Human Computer Interaction and Natural Language Processing, specifically:
+1. How can we understand and represents **emotions** under the context of LLMs?
+2. How to constantly improve LLMs in understanding various **cultures**？
+3. How does LLMs interacts **socially** and can this interaction become a trustworthy tool to simulate human society？
 
-As an undergraduate student at CMU-Q, I've made impactful contributions to our academic and student communities. I designed and taught ["NLP Ethics in a Nutshell"](https://algoroxyolo.github.io/assets/pdf/NLP_Ethics.pdf),shedding light on comtemporary ethical discussions. As a Course Assistant, I help in [15-110](https://web2.qatar.cmu.edu/cs/15110/#staff), refining pedagogical and Python skills. As a Curriculum Support Developer, I shaped academics, curating question banks and an intuitive web app. Formerly the Head of Academic , I bridged faculty and student concerns for collaborative solutions.
+In the end, we are looking for applying these research for authentic AI companion as a potential solution to [the global lonliness and disconnection](https://en.wikipedia.org/wiki/Death_Stranding)
 
-
+Feel Free to reach out to me on [email](mailto:yunzex@andrew.cmu.edu)
 
 
 

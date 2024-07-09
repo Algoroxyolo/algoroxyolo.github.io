@@ -28,7 +28,7 @@ For now my research interests mainly revolve around Intersections between Comput
 In the end, we are looking for applying these research for authentic AI companion as a potential solution to [the global lonliness and disconnection](https://en.wikipedia.org/wiki/Death_Stranding)
 
 
-Currently hosting a non-profit organization [Cranberry Lemon Research](cranberry-lemon-research.github.io). Currently looking for more collaborators and members.
+Currently hosting a non-profit organization [Cranberry Lemon Research](https://cranberry-lemon-research.github.io). Currently looking for more collaborators and members.
 
 Feel Free to reach out to me on [email](mailto:yunzex@andrew.cmu.edu) or [x](https://x.com/LrzNeedResearch)
 

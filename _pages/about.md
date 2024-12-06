@@ -18,7 +18,7 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-I am a Junior Computer Science major at Carnegie Mellon University in Qatar, where I have been advised by [Prof. Houda Bouamor](https://www.andrew.cmu.edu/user/hbouamor/). I also had the amazing opportunities to work with [Dr. Firoj Alam](https://firojalam.one/) at [QCRI](https://www.hbku.edu.qa/en/qcri) and [Prof. Roy Ka-Wei Lee](https://info.roylee.sg/) at [SUTD](https://sutd.edu.sg/). Currently, I am working with [Dr.Xiaoyuan Yi](https://www.linkedin.com/in/xiaoyuan-yi-471212a5/) at MSRA(https://www.msra.cn/) as an *Incoming Research Intern* .
+I am a Junior Computer Science major at Carnegie Mellon University in Qatar, where I have been advised by [Prof. Houda Bouamor](https://www.andrew.cmu.edu/user/hbouamor/). I also had the amazing opportunities to work with [Dr. Firoj Alam](https://firojalam.one/) at [QCRI](https://www.hbku.edu.qa/en/qcri) and [Prof. Roy Ka-Wei Lee](https://info.roylee.sg/) at [SUTD](https://sutd.edu.sg/). Currently, I am working with [Dr.Xiaoyuan Yi](https://www.linkedin.com/in/xiaoyuan-yi-471212a5/) at [Microsoft Ressearch Asia](https://www.msra.cn/) as an *Incoming Research Intern* .
 
 For now my research interests mainly revolve around Intersections between Computational Social Science, Human Computer Interaction and Natural Language Processing, specifically:
 1. [Emerging Online Languages](https://arxiv.org/pdf/2402.18121v1) and Offensive Language Detection
@@ -30,6 +30,8 @@ In the end, we are looking for applying these research for authentic AI companio
 
 
 Currently hosting a non-profit organization [Cranberry Lemon Research](https://cranberry-lemon-research.github.io). Currently looking for more collaborators and members.
+
+In the process of recruiting interested people to join preperation for PersonaNLP workshop at [ICML 2025](icml).
 
 Feel Free to reach out to me on [email](mailto:yunzex@andrew.cmu.edu) or [x](https://x.com/LrzNeedResearch)
 

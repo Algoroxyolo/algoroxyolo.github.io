@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: /people/
-title: A list of amazing people I have worked with
+title: collaborators
 description: a list of amazing people I have worked with
 nav: true
 nav_order: 6

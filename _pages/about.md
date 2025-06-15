@@ -22,15 +22,15 @@ I am an incoming master student in LTI at Carnegie Mellon University where I am 
 
 Previously,I have been advised by [Prof. Houda Bouamor](https://www.andrew.cmu.edu/user/hbouamor/) and [Prof. Kemal Oflazer](https://www.andrew.cmu.edu/user/ko/) in Carengie Mellon University in Qatar. I also had the amazing opportunities to work with [Dr. Firoj Alam](https://firojalam.one/) at [QCRI](https://www.hbku.edu.qa/en/qcri) and [Prof. Roy Ka-Wei Lee](https://info.roylee.sg/) at [SUTD](https://sutd.edu.sg/).
 
-For now my research interests mainly revolve around Intersections between Computational Social Science, Human Computer Interaction and Natural Language Processing:
-1. Speech-centric LLM Persona and Roleplay Agents: How can we present emotions and personality of a character in a speech-centric way?
-2. Emerging and Existing Cultures: How does culture affect the way we interact with LLMs and how can we make LLMs more culturally sensitive?
-3. Human-centric Anthropomorphic Agents: Why should we make LLMs more human-like, and how does it benefit the users?
+Broadly, I aim to develop large language models that move beyond surface-level fluency toward genuine human-like intelligence- systems that can think, remember, feel, and interact in socially and cognitively coherent ways. This goal connects three intersecting research directions across NLP, Computational Social Science, and HCI:
+
+1. Anthropomorphism as a Modeling Dimension: How do training objectives, architectural decisions, and interface designs shape the emergence of human-like traits in LLMs? I study anthropomorphism not just as a risk or illusion, but as a controllable and analyzable design space.
+2.Anthropomorphism for Applictaions: How can human-like attributes—such as emotional resonance, persona consistency, or contextual memory—be used to improve LLM performance in real-world applications like education, therapy, and collaborative writing?
+3.Architectures for Synthetic Human-Likeness: What design innovations (e.g., memory modules, affective simulation, multi-modal grounding) are needed to support truly interactive and situated AI agents? I seek to build systems that engage users as intuitive, emotionally-aware collaborators.
+
 
 In the end, we are looking for applying these research for authentic AI companion as a potential solution to [the global lonliness and disconnection](https://en.wikipedia.org/wiki/Death_Stranding)
 
-
-Currently hosting a non-profit organization [Cranberry Lemon Research](https://cranberry-lemon-research.github.io). Currently looking for more collaborators and members.
 
 
 Feel Free to reach out to me on [email](mailto:yunzex@andrew.cmu.edu) or [x](https://x.com/LrzNeedResearch)

@@ -26,9 +26,9 @@ Broadly, I aim to develop large language models that move beyond surface-level f
 
 1. Anthropomorphism as a Modeling Dimension: How do training objectives, architectural decisions, and interface designs shape the emergence of human-like traits in LLMs? I study anthropomorphism not just as a risk or illusion, but as a controllable and analyzable design space.
 
-2.Anthropomorphism for Applictaions: How can human-like attributes—such as emotional resonance, persona consistency, or contextual memory—be used to improve LLM performance in real-world applications like education, therapy, and collaborative writing?
+2. Anthropomorphism for Applictaions: How can human-like attributes—such as emotional resonance, persona consistency, or contextual memory—be used to improve LLM performance in real-world applications like education, therapy, and collaborative writing?
 
-3.Architectures for Synthetic Human-Likeness: What design innovations (e.g., memory modules, affective simulation, multi-modal grounding) are needed to support truly interactive and situated AI agents? I seek to build systems that engage users as intuitive, emotionally-aware collaborators.
+3. Architectures for Synthetic Human-Likeness: What design innovations (e.g., memory modules, affective simulation, multi-modal grounding) are needed to support truly interactive and situated AI agents? I seek to build systems that engage users as intuitive, emotionally-aware collaborators.
 
 
 In the end, we are looking for applying these research for authentic AI companion as a potential solution to [the global lonliness and disconnection](https://en.wikipedia.org/wiki/Death_Stranding)

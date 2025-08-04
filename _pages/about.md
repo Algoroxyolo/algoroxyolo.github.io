@@ -18,7 +18,7 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-I am an incoming master student in LTI at Carnegie Mellon University where I am advised by [Prof.Mona Diab](https://r3lit-lab.github.io/) I also work close with [Prof. Dakuo Wang](https://www.dakuowang.com/). 
+I am an Master student in LTI at Carnegie Mellon University where I am advised by [Prof.Mona Diab](https://r3lit-lab.github.io/) I also work close with [Prof. Dakuo Wang](https://www.dakuowang.com/). 
 
 Previously,I have been advised by [Prof. Houda Bouamor](https://www.andrew.cmu.edu/user/hbouamor/) and [Prof. Kemal Oflazer](https://www.andrew.cmu.edu/user/ko/) in Carengie Mellon University in Qatar. I also had the amazing opportunities to work with [Dr. Firoj Alam](https://firojalam.one/) at [QCRI](https://www.hbku.edu.qa/en/qcri) and [Prof. Roy Ka-Wei Lee](https://info.roylee.sg/) at [SUTD](https://sutd.edu.sg/).
 

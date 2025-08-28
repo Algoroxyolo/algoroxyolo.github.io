@@ -9,16 +9,16 @@ profile:
   image: Yunze Xiao.jpg
   image_circular: true # crops the image to make it circular
   address: >
-    <p>2080-O</p>
-    <p>Education City, Al Luqta St, Ar Rayyan</p>
-    <p>Doha,Qatar</p>
+    <p>GHC 5418</p>
+    <p>4902 Forbes Ave, Pittsburgh,PA 15213</p>
+    <p>Pittsburgh,PA</p>
 
 news: true  # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-I am an Master student in LTI at Carnegie Mellon University where I am advised by [Prof.Mona Diab](https://r3lit-lab.github.io/) I also work close with [Prof. Dakuo Wang](https://www.dakuowang.com/). 
+I am an Master student in LTI at Carnegie Mellon University where I am advised by [Prof.Mona Diab](https://r3lit-lab.github.io/). 
 
 Previously,I have been advised by [Prof. Houda Bouamor](https://www.andrew.cmu.edu/user/hbouamor/) and [Prof. Kemal Oflazer](https://www.andrew.cmu.edu/user/ko/) in Carengie Mellon University in Qatar. I also had the amazing opportunities to work with [Dr. Firoj Alam](https://firojalam.one/) at [QCRI](https://www.hbku.edu.qa/en/qcri) and [Prof. Roy Ka-Wei Lee](https://info.roylee.sg/) at [SUTD](https://sutd.edu.sg/).
 

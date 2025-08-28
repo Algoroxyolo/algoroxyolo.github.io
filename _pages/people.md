@@ -8,7 +8,6 @@ nav_order: 6
 ---
 
 ## My Mentors
-- [Prof. Dakuo Wang](https://www.dakuowang.com/)
 - [Prof. Houda Bouamor](https://www.andrew.cmu.edu/user/hbouamor/)
 - [Prof. Irene Li](https://ireneli.eu/)
 - [Prof. Kemal Oflazer](https://sites.google.com/andrew.cmu.edu/kemal-oflazer/)

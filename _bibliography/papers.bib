@@ -1,5 +1,3 @@
----
----
 @inproceedings{xiao-alam-2023-nexus,
     title = "Nexus at {A}r{AIE}val Shared Task: Fine-Tuning {A}rabic Language Models for Propaganda and Disinformation Detection",
     author = "Xiao, Yunze  and
@@ -21,21 +19,47 @@
       archivePrefix={arXiv},
       primaryClass={cs.CL}
 }
-@misc{xiao2024toxicloakcn,
-      title={ToxiCloakCN: Evaluating Robustness of Offensive Language Detection in Chinese with Cloaking Perturbations}, 
-      author={Yunze Xiao and Yujia Hu and Kenny Tsu Wei Choo and Roy Ka-wei Lee},
-      year={2024},
-      eprint={2406.12223},
-      archivePrefix={arXiv},
-      primaryClass={id='cs.CL' full_name='Computation and Language' is_active=True alt_name='cmp-lg' in_archive='cs' is_general=False description='Covers natural language processing. Roughly includes material in ACM Subject Class I.2.7. Note that work on artificial languages (programming languages, logics, formal systems) that does not explicitly address natural-language issues broadly construed (natural-language processing, computational linguistics, speech, text retrieval, etc.) is not appropriate for this area.'}
+@inproceedings{xiao-etal-2024-toxicloakcn,
+    title = "{T}oxi{C}loak{CN}: Evaluating Robustness of Offensive Language Detection in {C}hinese with Cloaking Perturbations",
+    author = "Xiao, Yunze  and
+      Hu, Yujia  and
+      Choo, Kenny Tsu Wei  and
+      Lee, Roy Ka-Wei",
+    editor = "Al-Onaizan, Yaser  and
+      Bansal, Mohit  and
+      Chen, Yun-Nung",
+    booktitle = "Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing",
+    month = nov,
+    year = "2024",
+    address = "Miami, Florida, USA",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2024.emnlp-main.345/",
+    doi = "10.18653/v1/2024.emnlp-main.345",
+    pages = "6012--6025",
+    abstract = "Detecting hate speech and offensive language is essential for maintaining a safe and respectful digital environment. This study examines the limitations of state-of-the-art large language models (LLMs) in identifying offensive content within systematically perturbed data, with a focus on Chinese, a language particularly susceptible to such perturbations. We introduce ToxiCloakCN, an enhanced dataset derived from ToxiCN, augmented with homophonic substitutions and emoji transformations, to test the robustness of LLMs against these cloaking perturbations. Our findings reveal that existing models significantly underperform in detecting offensive content when these perturbations are applied. We provide an in-depth analysis of how different types of offensive content are affected by these perturbations and explore the alignment between human and model explanations of offensiveness. Our work highlights the urgent need for more advanced techniques in offensive language detection to combat the evolving tactics used to evade detection mechanisms.",
+    selected={true}
 }
-@misc{mortensen2024verbing,
-      title={Verbing Weirds Language (Models): Evaluation of English Zero-Derivation in Five LLMs}, 
-      author={David R. Mortensen and Valentina Izrailevitch and Yunze Xiao and Hinrich Schütze and Leonie Weissweiler},
-      year={2024},
-      eprint={2403.17856},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL}
+@inproceedings{mortensen-etal-2024-verbing,
+    title = "Verbing Weirds Language (Models): Evaluation of {E}nglish Zero-Derivation in Five {LLM}s",
+    author = {Mortensen, David R.  and
+      Izrailevitch, Valentina  and
+      Xiao, Yunze  and
+      Sch{\"u}tze, Hinrich  and
+      Weissweiler, Leonie},
+    editor = "Calzolari, Nicoletta  and
+      Kan, Min-Yen  and
+      Hoste, Veronique  and
+      Lenci, Alessandro  and
+      Sakti, Sakriani  and
+      Xue, Nianwen",
+    booktitle = "Proceedings of the 2024 Joint International Conference on Computational Linguistics, Language Resources and Evaluation (LREC-COLING 2024)",
+    month = may,
+    year = "2024",
+    address = "Torino, Italia",
+    publisher = "ELRA and ICCL",
+    url = "https://aclanthology.org/2024.lrec-main.1508/",
+    pages = "17359--17364",
+    abstract = "Lexical-syntactic flexibility, in the form of conversion (or zero-derivation) is a hallmark of English morphology. In conversion, a word with one part of speech is placed in a non-prototypical context, where it is coerced to behave as if it had a different part of speech. However, while this process affects a large part of the English lexicon, little work has been done to establish the degree to which language models capture this type of generalization. This paper reports the first study on the behavior of large language models with reference to conversion. We design a task for testing lexical-syntactic flexibility{---}the degree to which models can generalize over words in a construction with a non-prototypical part of speech. This task is situated within a natural language inference paradigm. We test the abilities of five language models{---}two proprietary models (GPT-3.5 and GPT-4), three open source model (Mistral 7B, Falcon 40B, and Llama 2 70B). We find that GPT-4 performs best on the task, followed by GPT-3.5, but that the open source language models are also able to perform it and that the 7-billion parameter Mistral displays as little difference between its baseline performance on the natural language inference task and the non-prototypical syntactic category task, as the massive GPT-4."
 }
 @inproceedings{wang-etal-2024-incharacter,
     title = "{I}n{C}haracter: Evaluating Personality Fidelity in Role-Playing Agents through Psychological Interviews",
@@ -63,6 +87,8 @@
     url = "https://aclanthology.org/2024.acl-long.102",
     pages = "1840--1873",
     abstract = "Role-playing agents (RPAs), powered by large language models, have emerged as a flourishing field of applications. However, a key challenge lies in assessing whether RPAs accurately reproduce the personas of target characters, namely their character fidelity. Existing methods mainly focus on the knowledge and linguistic patterns of characters. This paper, instead, introduces a novel perspective to evaluate the personality fidelity of RPAs with psychological scales. Overcoming drawbacks of previous self-report assessments on RPAs, we propose InCharacter, namely **In**terviewing **Character** agents for personality tests. Experiments include various types of RPAs and LLMs, covering 32 distinct characters on 14 widely used psychological scales. The results validate the effectiveness of InCharacter in measuring RPA personalities. Then, with InCharacter, we show that state-of-the-art RPAs exhibit personalities highly aligned with the human-perceived personalities of the characters, achieving an accuracy up to 80.7{\%}.",
+    selected={true}
+
 }
 
 @misc{wu2024surveying,
@@ -83,14 +109,54 @@
   pages={167-170},
   keywords={Training;Deep learning;Computational modeling;Semantics;Transformer cores;Transformers;Feature extraction;Natural Language Processing;Self-attention;Q&AProblem;BiDAF},
   doi={10.1109/ICCRD54409.2022.9730454}}
-@misc{xuan2025mmluproxmultilingualbenchmarkadvanced,
-      title={MMLU-ProX: A Multilingual Benchmark for Advanced Large Language Model Evaluation}, 
-      author={Weihao Xuan and Rui Yang and Heli Qi and Qingcheng Zeng and Yunze Xiao and Yun Xing and Junjue Wang and Huitao Li and Xin Li and Kunyu Yu and Nan Liu and Qingyu Chen and Douglas Teodoro and Edison Marrese-Taylor and Shijian Lu and Yusuke Iwasawa and Yutaka Matsuo and Irene Li},
-      year={2025},
-      eprint={2503.10497},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2503.10497}, 
+@inproceedings{xuan-etal-2025-mmlu,
+    title = "{MMLU}-{P}ro{X}: A Multilingual Benchmark for Advanced Large Language Model Evaluation",
+    author = "Xuan, Weihao  and
+      Yang, Rui  and
+      Qi, Heli  and
+      Zeng, Qingcheng  and
+      Xiao, Yunze  and
+      Feng, Aosong  and
+      Liu, Dairui  and
+      Xing, Yun  and
+      Wang, Junjue  and
+      Gao, Fan  and
+      Lu, Jinghui  and
+      Jiang, Yuang  and
+      Li, Huitao  and
+      Li, Xin  and
+      Yu, Kunyu  and
+      Dong, Ruihai  and
+      Gu, Shangding  and
+      Li, Yuekang  and
+      Xie, Xiaofei  and
+      Juefei-Xu, Felix  and
+      Khomh, Foutse  and
+      Yoshie, Osamu  and
+      Chen, Qingyu  and
+      Teodoro, Douglas  and
+      Liu, Nan  and
+      Goebel, Randy  and
+      Ma, Lei  and
+      Marrese-Taylor, Edison  and
+      Lu, Shijian  and
+      Iwasawa, Yusuke  and
+      Matsuo, Yutaka  and
+      Li, Irene",
+    editor = "Christodoulopoulos, Christos  and
+      Chakraborty, Tanmoy  and
+      Rose, Carolyn  and
+      Peng, Violet",
+    booktitle = "Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing",
+    month = nov,
+    year = "2025",
+    address = "Suzhou, China",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2025.emnlp-main.79/",
+    doi = "10.18653/v1/2025.emnlp-main.79",
+    pages = "1513--1532",
+    ISBN = "979-8-89176-332-6",
+    abstract = "Existing large language model (LLM) evaluation benchmarks primarily focus on English, while current multilingual tasks lack parallel questions that specifically assess cross-lingual reasoning abilities. This dual limitation makes it challenging to assess LLMs' performance in the multilingual setting comprehensively. To fill this gap, we introduce MMLU-ProX, a comprehensive benchmark covering 29 languages, built on an English benchmark. Each language version consists of 11,829 identical questions, enabling direct cross-lingual comparisons. Additionally, to meet efficient evaluation needs, we provide a lite version containing 658 questions per language. To ensure the high quality of MMLU-ProX, we employ a rigorous development process that involves multiple powerful LLMs for translation, followed by expert review to ensure accurate expression, consistent terminology, and cultural relevance. Building on this, we systematically evaluate 36 state-of-the-art LLMs, including reasoning-enhanced and multilingual-optimized LLMs. The results reveal significant disparities in the multilingual capabilities of LLMs: While they perform well in high-resource languages, their performance declines markedly in low-resource languages, particularly for African languages. Through MMLU-ProX, we aim to advance the development of more inclusive AI systems and promote equitable access to technology across global contexts."
 }
 @misc{xiao2025jiraibenchbilingualbenchmarkevaluating,
       title={JiraiBench: A Bilingual Benchmark for Evaluating Large Language Models' Detection of Human Self-Destructive Behavior Content in Jirai Community}, 
@@ -110,30 +176,89 @@
       primaryClass={cs.CL},
       url={https://arxiv.org/abs/2504.02956}, 
 }
-@misc{dai2025embracingcontradictiontheoreticalinconsistency,
-      title={Embracing Contradiction: Theoretical Inconsistency Will Not Impede the Road of Building Responsible AI Systems}, 
+@inproceedings{dai2025embracingcontradictiontheoreticalinconsistency,
+      title={Embracing Contradiction: Theoretical Inconsistency Will Not Impede the Road of Building Responsible AI Systems},
       author={Gordon Dai and Yunze Xiao},
+      booktitle={Advances in Neural Information Processing Systems},
       year={2025},
+      volume={38},
       eprint={2505.18139},
       archivePrefix={arXiv},
       primaryClass={cs.AI},
-      url={https://arxiv.org/abs/2505.18139}, 
+      url={https://arxiv.org/abs/2505.18139},
+      selected={true}
 }
-@misc{liu2025syntheticsocraticdebatesexamining,
-      title={Synthetic Socratic Debates: Examining Persona Effects on Moral Decision and Persuasion Dynamics}, 
-      author={Jiarui Liu and Yueqi Song and Yunze Xiao and Mingqian Zheng and Lindia Tjuatja and Jana Schaich Borg and Mona Diab and Maarten Sap},
-      year={2025},
-      eprint={2506.12657},
+@inproceedings{liu-etal-2025-synthetic,
+    title = "Synthetic Socratic Debates: Examining Persona Effects on Moral Decision and Persuasion Dynamics",
+    author = "Liu, Jiarui  and
+      Song, Yueqi  and
+      Xiao, Yunze  and
+      Zheng, Mingqian  and
+      Tjuatja, Lindia  and
+      Schaich Borg, Jana  and
+      Diab, Mona T.  and
+      Sap, Maarten",
+    editor = "Christodoulopoulos, Christos  and
+      Chakraborty, Tanmoy  and
+      Rose, Carolyn  and
+      Peng, Violet",
+    booktitle = "Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing",
+    month = nov,
+    year = "2025",
+    address = "Suzhou, China",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2025.emnlp-main.831/",
+    doi = "10.18653/v1/2025.emnlp-main.831",
+    pages = "16428--16458",
+    ISBN = "979-8-89176-332-6",
+    abstract = "As large language models (LLMs) are increasingly used in morally sensitive domains, it is crucial to understand how persona traits affect their moral reasoning and persuasive behavior. We present the first large-scale study of multi-dimensional persona effects in AI-AI debates over real-world moral dilemmas. Using a 6-dimensional persona space (age, gender, country, social class, ideology, and personality), we simulate structured debates between AI agents over 131 relationship-based cases. Our results show that personas affect initial moral stances and debate outcomes, with political ideology and personality traits exerting the strongest influence. Persuasive success varies across traits, with liberal and open personalities reaching higher consensus. While logit-based confidence grows during debates, emotional and credibility-based appeals diminish, indicating more tempered argumentation over time. These trends mirror findings from psychology and cultural studies, reinforcing the need for persona-aware evaluation frameworks for AI moral reasoning."
+}
+@inproceedings{xiao-etal-2025-humanizing,
+    title = "Humanizing Machines: Rethinking {LLM} Anthropomorphism Through a Multi-Level Framework of Design",
+    author = "Xiao, Yunze  and
+      Ng, Lynnette Hui Xian  and
+      Liu, Jiarui  and
+      Diab, Mona T.",
+    editor = "Christodoulopoulos, Christos  and
+      Chakraborty, Tanmoy  and
+      Rose, Carolyn  and
+      Peng, Violet",
+    booktitle = "Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing",
+    month = nov,
+    year = "2025",
+    address = "Suzhou, China",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2025.emnlp-main.164/",
+    doi = "10.18653/v1/2025.emnlp-main.164",
+    pages = "3331--3350",
+    ISBN = "979-8-89176-332-6",
+    abstract = "Large Language Models (LLMs) increasingly exhibit \textbf{anthropomorphism} characteristics {--} human-like qualities portrayed across their outlook, language, behavior, and reasoning functions. Such characteristics enable more intuitive and engaging human-AI interactions. However, current research on anthropomorphism remains predominantly risk-focused, emphasizing over-trust and user deception while offering limited design guidance. We argue that anthropomorphism should instead be treated as a \textit{concept of design} that can be intentionally tuned to support user goals. Drawing from multiple disciplines, we propose that the anthropomorphism of an LLM-based artifact should reflect the interaction between artifact designers and interpreters. This interaction is facilitated by cues embedded in the artifact by the designers and the (cognitive) responses of the interpreters to the cues. Cues are categorized into four dimensions: \textit{perceptive, linguistic, behavioral}, and \textit{cognitive}. By analyzing the manifestation and effectiveness of each cue, we provide a unified taxonomy with actionable levers for practitioners. Consequently, we advocate for function-oriented evaluations of anthropomorphic design.",
+    selected={true}
+}
+@misc{yang2026globallargelanguagemodels,
+      title={Toward Global Large Language Models in Medicine}, 
+      author={Rui Yang and Huitao Li and Weihao Xuan and Heli Qi and Xin Li and Kunyu Yu and Yingjian Chen and Rongrong Wang and Jacques Behmoaras and Tianxi Cai and Bibhas Chakraborty and Qingyu Chen and Lionel Tim-Ee Cheng and Marie-Louise Damwanza and Chido Dzinotyiwei and Aosong Feng and Chuan Hong and Yusuke Iwasawa and Yuhe Ke and Linah Kitala and Taehoon Ko and Jisan Lee and Irene Li and Jonathan Chong Kai Liew and Hongfang Liu and Lian Leng Low and Edison Marrese-Taylor and Yutaka Matsuo and Isheanesu Misi and Yilin Ning and Jasmine Chiat Ling Ong and Marcus Eng Hock Ong and Enrico Petretto and Hossein Rouhizadeh and Abiram Sandralegar and Oren Schreier and Iain Bee Huat Tan and Patrick Tan and Daniel Shu Wei Ting and Junjue Wang and Chunhua Weng and Matthew Yu Heng Wong and Fang Wu and Yunze Xiao and Xuhai Xu and Qingcheng Zeng and Zhuo Zheng and Yifan Peng and Douglas Teodoro and Nan Liu},
+      year={2026},
+      eprint={2601.02186},
       archivePrefix={arXiv},
       primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2506.12657}, 
+      url={https://arxiv.org/abs/2601.02186}, 
 }
-@misc{xiao2025humanizingmachinesrethinkingllm,
-      title={Humanizing Machines: Rethinking LLM Anthropomorphism Through a Multi-Level Framework of Design}, 
-      author={Yunze Xiao and Lynnette Hui Xian Ng and Jiarui Liu and Mona T. Diab},
+@misc{alkhamissi2025hireanthropologistrethinkingculture,
+      title={Hire Your Anthropologist! Rethinking Culture Benchmarks Through an Anthropological Lens}, 
+      author={Mai AlKhamissi and Yunze Xiao and Badr AlKhamissi and Mona Diab},
       year={2025},
-      eprint={2508.17573},
+      eprint={2510.05931},
       archivePrefix={arXiv},
       primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2508.17573}, 
+      url={https://arxiv.org/abs/2510.05931}, 
+}
+@misc{li2025llmsestimatestudentstruggles,
+      title={Can LLMs Estimate Student Struggles? Human-AI Difficulty Alignment with Proficiency Simulation for Item Difficulty Prediction}, 
+      author={Ming Li and Han Chen and Yunze Xiao and Jian Chen and Hong Jiao and Tianyi Zhou},
+      year={2025},
+      eprint={2512.18880},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2512.18880}, 
 }

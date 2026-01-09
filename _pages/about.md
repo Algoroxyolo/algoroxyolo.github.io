@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='https://qatar.cmu.edu/'>Carnegie Mellon University In Qatar</a>.
+subtitle: <a href='https://r3lit-lab.github.io/'>R3lit Lab @ LTI, CMU</a>.
 
 profile:
   align: right
@@ -18,9 +18,9 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-I am an Master student in LTI at Carnegie Mellon University where I am advised by [Prof.Mona Diab](https://r3lit-lab.github.io/). 
+I am an Master student in [Langugage Technology Institute](https://lti.cmu.edu) where I am advised by [Prof.Mona Diab](https://en.wikipedia.org/wiki/Mona_Diab). 
 
-Previously,I have been advised by [Prof. Houda Bouamor](https://www.andrew.cmu.edu/user/hbouamor/) and [Prof. Kemal Oflazer](https://www.andrew.cmu.edu/user/ko/) in Carengie Mellon University in Qatar. I also had the amazing opportunities to work with [Dr. Firoj Alam](https://firojalam.one/) at [QCRI](https://www.hbku.edu.qa/en/qcri) and [Prof. Roy Ka-Wei Lee](https://info.roylee.sg/) at [SUTD](https://sutd.edu.sg/).
+Previously, I have been advised by [Prof. Houda Bouamor](https://www.andrew.cmu.edu/user/hbouamor/) and [Prof. Kemal Oflazer](https://www.andrew.cmu.edu/user/ko/) in Carengie Mellon University in Qatar. 
 
 Broadly, I aim to develop large language models that move beyond surface-level fluency toward genuine human-like intelligence- systems that can think, remember, feel, and interact in socially and cognitively coherent ways. This goal connects three intersecting research directions across NLP, Computational Social Science, and HCI:
 

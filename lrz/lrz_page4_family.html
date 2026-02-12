@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lrz_limited — For Family Caregivers</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #fdfaf6;
+      --surface: #ffffff;
+      --border: #e8e1d6;
+      --accent: #7c5cbf;
+      --accent2: #5a3fa0;
+      --accent-dim: rgba(124,92,191,0.08);
+      --text: #1e1a2e;
+      --muted: #7a7189;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0; right: 0;
+      width: 50vw;
+      height: 50vw;
+      background: radial-gradient(circle at top right, rgba(124,92,191,0.06), transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    nav {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 48px;
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-family: 'Lora', serif;
+      font-size: 1.2rem;
+      color: var(--accent);
+    }
+    .badge {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(124,92,191,0.3);
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: var(--accent-dim);
+    }
+
+    .hero {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 90px 48px 60px;
+    }
+    .hero-left { }
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 22px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease 0.1s forwards;
+    }
+    h1 {
+      font-family: 'Lora', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.2;
+      font-weight: 600;
+      margin-bottom: 22px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.25s forwards;
+    }
+    h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .sub {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--muted);
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.4s forwards;
+    }
+
+    .quote-block {
+      background: var(--accent-dim);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 10px 10px 0;
+      padding: 20px 24px;
+      margin-bottom: 36px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.55s forwards;
+    }
+    .quote-block p {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--text);
+    }
+    .quote-block cite {
+      display: block;
+      margin-top: 10px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-style: normal;
+    }
+
+    .bullets {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.7s forwards;
+    }
+    .bullet {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .bullet-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      margin-top: 7px;
+    }
+    .bullet p { font-size: 0.93rem; line-height: 1.6; }
+    .bullet p strong { font-weight: 500; color: var(--text); }
+
+    /* Right column = form */
+    .hero-right {
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.5s forwards;
+    }
+    .form-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px 32px;
+      box-shadow: 0 8px 40px rgba(124,92,191,0.08);
+    }
+    .form-card h2 {
+      font-family: 'Lora', serif;
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+    }
+    .form-card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 28px;
+      line-height: 1.65;
+    }
+    .form-card iframe {
+      width: 100%;
+      min-height: 340px;
+      border: none;
+      border-radius: 8px;
+    }
+    .trust-line {
+      margin-top: 16px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    footer {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 24px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      border-top: 1px solid var(--border);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 760px) {
+      nav { padding: 18px 20px; }
+      .hero { grid-template-columns: 1fr; gap: 40px; padding: 60px 20px 36px; }
+      .form-card { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="logo">Lrz_limited</span>
+    <span class="badge">For Families</span>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-left">
+      <span class="eyebrow">For Family Caregivers</span>
+      <h1>Finally understand <em>why</em> your loved one is&nbsp;upset.</h1>
+      <p class="sub">When a parent with dementia is pacing, shouting, or refusing to eat — you shouldn't have to guess. Lrz_limited translates their behavior into clear explanations and gentle steps you can take right now.</p>
+
+      <div class="quote-block">
+        <p>"I kept giving her medication when she was actually just cold and scared. I didn't know. I wish I'd had something like this."</p>
+        <cite>— Family caregiver, early tester</cite>
+      </div>
+
+      <div class="bullets">
+        <div class="bullet">
+          <span class="bullet-dot"></span>
+          <p><strong>Plain language, no medical jargon.</strong> Get three possible explanations for what your loved one might be experiencing — written like a message from a knowledgeable friend.</p>
+        </div>
+        <div class="bullet">
+          <span class="bullet-dot"></span>
+          <p><strong>Learns their unique patterns.</strong> Over time, it builds a picture of your loved one specifically — not a generic dementia patient.</p>
+        </div>
+        <div class="bullet">
+          <span class="bullet-dot"></span>
+          <p><strong>Available when you need it most.</strong> 3 AM or 3 PM — behavioral crises don't keep office hours. Neither do we.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="form-card">
+        <h2>Get Early Access</h2>
+        <p>We're opening access to a small group of family caregivers first. No cost. No sales call. Just a simpler way to understand your loved one.</p>
+
+        <!--
+          SETUP INSTRUCTIONS (Google Sites / Option A):
+          1. Go to forms.google.com → create a form with Name + Email fields.
+          2. Click Send → Embed tab → copy the iframe embed code.
+          3. Replace the src below with your actual Google Form embed URL.
+          4. Set confirmation message: "Thanks — we'll be in touch within 48 hours."
+        -->
+        <iframe
+          src="https://docs.google.com/forms/d/e/1FAIpQLSdv8m3qW5kmbXLkE5nzM02GNt1huZYZB46-EmNoez2jUwyl4Q/viewform?embedded=true"
+          frameborder="0"
+          marginheight="0"
+          marginwidth="0">
+          Loading form...
+        </iframe>
+
+        <p class="trust-line">🔒 No spam. No sales calls. Unsubscribe anytime.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Lrz_limited · <a href="/cdn-cgi/l/email-protection#dcb4b9b0b0b39cb0aea6f2b0b5b1b5a8b9b8" style="color:var(--muted)"><span clas

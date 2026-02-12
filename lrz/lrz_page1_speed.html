@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lrz_limited — Answers in Seconds</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #21262d;
+      --accent: #f0a500;
+      --accent2: #e05a00;
+      --text: #e6edf3;
+      --muted: #8b949e;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Noise texture overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Glow blob */
+    .glow {
+      position: fixed;
+      top: -20vh;
+      right: -10vw;
+      width: 60vw;
+      height: 60vw;
+      background: radial-gradient(circle, rgba(240,165,0,0.08) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    nav {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 48px;
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+    }
+    .badge {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 999px;
+    }
+
+    .hero {
+      position: relative;
+      z-index: 2;
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 100px 32px 60px;
+      text-align: center;
+    }
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.1s forwards;
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      line-height: 1.08;
+      font-weight: 900;
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.25s forwards;
+    }
+    h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .sub {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 560px;
+      margin: 0 auto 48px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.4s forwards;
+    }
+
+    .bullets {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      max-width: 520px;
+      margin: 0 auto 64px;
+      text-align: left;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.55s forwards;
+    }
+    .bullet {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+    .bullet-icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .bullet-text {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--text);
+    }
+    .bullet-text strong { color: var(--accent); font-weight: 500; }
+
+    /* Form section */
+    .form-section {
+      position: relative;
+      z-index: 2;
+      max-width: 520px;
+      margin: 0 auto 80px;
+      padding: 0 32px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.7s forwards;
+    }
+    .form-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px 32px;
+    }
+    .form-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      margin-bottom: 6px;
+    }
+    .form-card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+    .form-card iframe {
+      width: 100%;
+      min-height: 340px;
+      border: none;
+      border-radius: 8px;
+    }
+    .trust-line {
+      margin-top: 16px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    /* Divider */
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      margin: 0 auto 40px;
+      border-radius: 999px;
+    }
+
+    footer {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 24px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      border-top: 1px solid var(--border);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 20px 24px; }
+      .hero { padding: 70px 24px 40px; }
+      .form-section { padding: 0 24px; }
+      .form-card { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+
+  <nav>
+    <span class="logo">Lrz_limited</span>
+    <span class="badge">Early Access</span>
+  </nav>
+
+  <section class="hero">
+    <span class="eyebrow">For Professional Caregivers</span>
+    <h1>Get <em>answers</em> in&nbsp;seconds,<br/>not shifts.</h1>
+    <p class="sub">Stop playing the guessing game every time a resident escalates. Lrz_limited gives you three high-probability explanations and a safe intervention — before the situation gets worse.</p>
+
+    <div class="bullets">
+      <div class="bullet">
+        <span class="bullet-icon">⚡</span>
+        <p class="bullet-text"><strong>Instant clarity.</strong> Input a behavior and get evidence-backed explanations in under 30 seconds — no charts, no dashboards.</p>
+      </div>
+      <div class="bullet">
+        <span class="bullet-icon">🎯</span>
+        <p class="bullet-text"><strong>Personalized over time.</strong> The more you use it, the more it learns that patient's specific patterns — outperforming a relief nurse within a week.</p>
+      </div>
+      <div class="bullet">
+        <span class="bullet-icon">🛡️</span>
+        <p class="bullet-text"><strong>Designed for the floor, not the office.</strong> No lengthy setup, no IT onboarding. Built for the caregiver, not the administrator.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="form-section">
+    <div class="divider"></div>
+    <div class="form-card">
+      <h2>Get Early Access</h2>
+      <p>We're onboarding our first cohort of care professionals. No cost, no commitment.</p>
+
+      <!--
+        SETUP INSTRUCTIONS (Google Sites / Option A):
+        1. Go to forms.google.com → create a form with two fields: Name (Short answer) + Email (Short answer).
+        2. Click Send → Embed tab → copy the <iframe> embed code.
+        3. Replace this placeholder iframe with the one from Google Forms.
+        4. Set the form confirmation message to: "Thanks! If you're a fit, we'll email you within 48 hours."
+      -->
+      <iframe
+        src="https://docs.google.com/forms/d/e/1FAIpQLSdv8m3qW5kmbXLkE5nzM02GNt1huZYZB46-EmNoez2jUwyl4Q/viewform?embedded=true"
+        frameborder="0"
+        marginheight="0"
+        marginwidth="0">
+        Loading form...
+      </iframe>
+
+      <p class="trust-line">🔒 No spam. No sales calls. Unsubscribe anytime.</p>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Lrz_limited · <a href="/cdn-cgi/l/email-protection#0d65686161624d617f772361646064796869" style="color:var(--muted)"><span clas

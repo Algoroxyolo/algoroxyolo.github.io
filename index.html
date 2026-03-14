@@ -24,7 +24,7 @@
     <!-- Fonts & Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha256-i1+4qU2G2860dGGIOJscdC30s9beBXjFfzjWLjBRsBg=" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400&amp;family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;family=Material+Icons&amp;display=swap">
 
     <!-- Code Syntax Highlighting -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/github.css" media="" id="highlight_theme_light">
@@ -84,18 +84,11 @@
               <li class="nav-item ">
                 <a class="nav-link" href="/cv/">cv</a>
               </li>
-              <li class="nav-item ">
-                <a class="nav-link" href="/teaching/">teaching</a>
-              </li>
-              <li class="nav-item ">
-                <a class="nav-link" href="/people/">collaborators</a>
-              </li>
               <li class="nav-item dropdown ">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">submenus</a>
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">more</a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="/publications/">publications</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="/projects/">projects</a>
+                  <a class="dropdown-item" href="/teaching/">teaching</a>
+                  <a class="dropdown-item" href="/people/">collaborators</a>
                 </div>
               </li>
 
@@ -124,13 +117,80 @@
     <div class="container mt-5">
       <!-- about.html -->
     <style>
-      .calendar-container {
+      /* ── Job-seeking banner ── */
+      .opportunity-banner {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
+        align-items: flex-start;
+        gap: 16px;
+        margin: 32px 0;
+        padding: 20px 24px;
+        border: 1px solid var(--global-theme-color);
+        border-left: 4px solid var(--global-theme-color);
+        border-radius: 8px;
+        background: var(--global-code-bg-color);
+        font-size: 0.92rem;
+        line-height: 1.6;
+      }
+      .opportunity-banner__icon {
+        color: var(--global-theme-color);
+        font-size: 1.2rem;
+        margin-top: 2px;
+        flex-shrink: 0;
+      }
+      .opportunity-banner strong {
+        color: var(--global-theme-color);
+      }
+
+      /* ── Calendar card ── */
+      .calendar-card {
+        margin: 40px 0;
+        border: 1px solid var(--global-divider-color);
+        border-radius: 10px;
+        overflow: hidden;
+        background: var(--global-card-bg-color, var(--global-bg-color));
+      }
+      .calendar-card__header {
+        padding: 16px 20px 0;
+      }
+      .calendar-card__header h2 {
+        margin: 0 0 4px;
+        font-size: 1.3rem;
+      }
+      .calendar-card__note {
+        font-size: 0.85rem;
+        color: var(--global-text-color-light);
+        margin: 0 0 12px;
+      }
+      .calendar-card__embed {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%; /* 16:9 */
+        height: 0;
+      }
+      .calendar-card__embed iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      /* ── Visit counter (subtle) ── */
+      .visit-note {
+        font-size: 0.82rem;
+        color: var(--global-text-color-light);
+        text-align: center;
+        margin: 32px 0 8px;
+        font-style: italic;
+      }
+      .visit-note span {
+        font-weight: 600;
+        color: var(--global-text-color);
+        font-style: normal;
       }
     </style>
+
       <div class="post">
         <header class="post-header">
           <h1 class="post-title">
@@ -188,6 +248,17 @@
 <p>Feel Free to reach out to me on <a href="mailto:yunzex@andrew.cmu.edu">email</a> or <a href="https://x.com/LrzNeedResearch" rel="external nofollow noopener" target="_blank">x</a></p>
 
 
+          </div>
+
+          <!-- Open to opportunities -->
+          <div class="opportunity-banner">
+            <div class="opportunity-banner__icon">
+              <i class="fas fa-briefcase"></i>
+            </div>
+            <div>
+              <strong>Open to opportunities</strong> —
+              I am completing my Master's at CMU LTI in May 2026 and actively seeking research scientist and applied NLP positions in both academia and industry. Feel free to reach out!
+            </div>
           </div>
 
           <!-- News -->
@@ -432,103 +503,28 @@
 </ol>
           </div>
 
-          <!-- calendar -->
-          <div class="calendar-container">
-            <iframe src="https://calendar.google.com/calendar/embed?src=yunzex%40andrew.cmu.edu&amp;ctz=Asia%2FQatar" style="border:2px #ffffff solid;" name="myiFrame" scrolling="yes" frameborder="1" marginheight="0px" marginwidth="0px" height="55%" width="55%" allowfullscreen></iframe>
+
+          <!-- Calendar -->
+          <div class="calendar-card">
+            <div class="calendar-card__header">
+              <h2>my schedule</h2>
+              <p class="calendar-card__note">Feel free to check my availability. Times shown in Eastern Time (Pittsburgh).</p>
+            </div>
+            <div class="calendar-card__embed">
+              <iframe src="https://calendar.google.com/calendar/embed?src=yunzex%40andrew.cmu.edu&amp;ctz=America%2FNew_York&amp;mode=WEEK" scrolling="no" title="Google Calendar"></iframe>
+            </div>
           </div>
 
           <!-- Visit counter -->
-          <style>
-            .visit-counter {
-              display: flex;
-              align-items: center;
-              gap: 20px;
-              flex-wrap: wrap;
-              margin: 24px 0 8px;
-              padding: 16px 20px;
-              border: 1px solid var(--global-divider-color);
-              border-radius: 12px;
-              background: var(--global-code-bg-color);
-              font-size: 0.82rem;
-              color: var(--global-text-color-light);
-            }
-            .visit-counter__stat {
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              gap: 2px;
-              min-width: 60px;
-            }
-            .visit-counter__num {
-              font-size: 1.35rem;
-              font-weight: 700;
-              color: var(--global-text-color);
-              font-family: monospace;
-              line-height: 1;
-            }
-            .visit-counter__num--loading::after {
-              content: '…';
-            }
-            .visit-counter__label {
-              font-size: 0.7rem;
-              text-transform: uppercase;
-              letter-spacing: 0.8px;
-              color: var(--global-text-color-light);
-            }
-            .visit-counter__sep {
-              width: 1px;
-              height: 32px;
-              background: var(--global-divider-color);
-            }
-            .visit-counter__title {
-              font-size: 0.72rem;
-              text-transform: uppercase;
-              letter-spacing: 1px;
-              color: var(--global-text-color-light);
-              margin-right: auto;
-            }
-          </style>
-          <div class="visit-counter" id="visit-counter">
-            <span class="visit-counter__title">site stats</span>
-            <div class="visit-counter__stat">
-              <span class="visit-counter__num visit-counter__num--loading" id="gc-total"></span>
-              <span class="visit-counter__label">total views</span>
-            </div>
-            <div class="visit-counter__sep"></div>
-            <div class="visit-counter__stat">
-              <span class="visit-counter__num visit-counter__num--loading" id="gc-home"></span>
-              <span class="visit-counter__label">home views</span>
-            </div>
-            <div class="visit-counter__sep"></div>
-            <div class="visit-counter__stat">
-              <span class="visit-counter__num visit-counter__num--loading" id="gc-blog"></span>
-              <span class="visit-counter__label">blog views</span>
-            </div>
-          </div>
+          <p class="visit-note" id="visit-counter">
+            This site has been visited <span id="gc-total">…</span> times since March 2026.
+          </p>
           <script>
             (function() {
               var base = 'https://algoroxyolo.goatcounter.com/counter/';
               function fmt(n) {
                 return n >= 1000 ? (n / 1000).toFixed(1) + 'k' : String(n);
               }
-              function load(path, elId) {
-                fetch(base + encodeURIComponent(path) + '.json')
-                  .then(function(r) { return r.json(); })
-                  .then(function(d) {
-                    var el = document.getElementById(elId);
-                    if (el) {
-                      el.textContent = fmt(Number(d.count_unique) || Number(d.count) || 0);
-                      el.classList.remove('visit-counter__num--loading');
-                    }
-                  })
-                  .catch(function() {
-                    var el = document.getElementById(elId);
-                    if (el) { el.textContent = '—'; el.classList.remove('visit-counter__num--loading'); }
-                  });
-              }
-              load('/', 'gc-home');
-              load('/blog/', 'gc-blog');
-              /* total: sum all known pages */
               var paths = ['/', '/blog/', '/people/', '/teaching/', '/publications/', '/cv/', '/projects/', '/repositories/', '/blog/2026/nemo-gym-architecture/', '/blog/2026/llm-agents-blueprint/'];
               Promise.all(paths.map(function(p) {
                 return fetch(base + encodeURIComponent(p) + '.json')
@@ -538,7 +534,7 @@
               })).then(function(counts) {
                 var total = counts.reduce(function(a, b) { return a + b; }, 0);
                 var el = document.getElementById('gc-total');
-                if (el) { el.textContent = fmt(total); el.classList.remove('visit-counter__num--loading'); }
+                if (el) el.textContent = fmt(total);
               });
             })();
           </script>
@@ -559,12 +555,12 @@
               <div class="contact-note">
                 
               </div>
-              
+
             </div>
 
         </article>
 
-         
+
 
 </div>
 

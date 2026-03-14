@@ -100,6 +100,19 @@ body.sticky-bottom-footer {
 /*******************************************************************************
  * Styles for the base elements of the theme.
  ******************************************************************************/
+body {
+  font-family: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: "Fraunces", Georgia, serif;
+}
+
+code, pre, kbd, samp, .address {
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+}
+
 p,
 h1,
 h2,

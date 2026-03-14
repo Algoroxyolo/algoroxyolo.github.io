@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://algoroxyolo.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://algoroxyolo.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-03-14T16:28:43+00:00</updated><id>https://algoroxyolo.github.io/feed.xml</id><title type="html">blank</title><subtitle>A website of Lorenzo. What!!! you do not know Lorenzo! Go check it out!
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://algoroxyolo.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://algoroxyolo.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-03-14T16:38:23+00:00</updated><id>https://algoroxyolo.github.io/feed.xml</id><title type="html">blank</title><subtitle>A website of Lorenzo. What!!! you do not know Lorenzo! Go check it out!
 </subtitle><entry><title type="html">A Systems Engineering Approach to LLM Agents — Series Overview</title><link href="https://algoroxyolo.github.io/blog/2026/llm-agents-blueprint/" rel="alternate" type="text/html" title="A Systems Engineering Approach to LLM Agents — Series Overview" /><published>2026-03-14T00:00:00+00:00</published><updated>2026-03-14T00:00:00+00:00</updated><id>https://algoroxyolo.github.io/blog/2026/llm-agents-blueprint</id><content type="html" xml:base="https://algoroxyolo.github.io/blog/2026/llm-agents-blueprint/"><![CDATA[<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -574,4 +574,839 @@
 </footer>
 
 </body>
-</html>]]></content><author><name>Lorenzo Xiao</name></author><category term="blog" /><category term="academic" /><category term="AI" /><category term="engineering" /><summary type="html"><![CDATA[Everyone's building agents. Almost nobody is engineering them. A 7-part series on the full lifecycle — from problem framing to production monitoring.]]></summary></entry><entry><title type="html">Displaying External Posts on Your al-folio Blog</title><link href="https://algoroxyolo.github.io/blog/2022/displaying-external-posts-on-your-al-folio-blog/" rel="alternate" type="text/html" title="Displaying External Posts on Your al-folio Blog" /><published>2022-04-23T23:20:09+00:00</published><updated>2022-04-23T23:20:09+00:00</updated><id>https://algoroxyolo.github.io/blog/2022/displaying-external-posts-on-your-al-folio-blog</id><content type="html" xml:base="https://algoroxyolo.github.io/blog/2022/displaying-external-posts-on-your-al-folio-blog/"><![CDATA[]]></content><author><name></name></author></entry></feed>
+</html>]]></content><author><name>Lorenzo Xiao</name></author><category term="blog" /><category term="academic" /><category term="AI" /><category term="engineering" /><summary type="html"><![CDATA[Everyone's building agents. Almost nobody is engineering them. A 7-part series on the full lifecycle — from problem framing to production monitoring.]]></summary></entry><entry><title type="html">Dissecting NeMo Gym: How NVIDIA Built a Modular Microservice Architecture for RL Verification at Scale</title><link href="https://algoroxyolo.github.io/blog/2026/nemo-gym-architecture/" rel="alternate" type="text/html" title="Dissecting NeMo Gym: How NVIDIA Built a Modular Microservice Architecture for RL Verification at Scale" /><published>2026-03-14T00:00:00+00:00</published><updated>2026-03-14T00:00:00+00:00</updated><id>https://algoroxyolo.github.io/blog/2026/nemo-gym-architecture</id><content type="html" xml:base="https://algoroxyolo.github.io/blog/2026/nemo-gym-architecture/"><![CDATA[<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dissecting NeMo Gym: How NVIDIA Built a Modular Microservice Architecture for RL Verification at Scale</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --paper: #faf8f5;
+    --accent: #c4553a;
+    --accent-light: #e8725a;
+    --accent-bg: #fdf0ed;
+    --muted: #6b6560;
+    --border: #e0dbd5;
+    --code-bg: #f0ece7;
+    --card-bg: #ffffff;
+    --shadow: rgba(26, 26, 26, 0.06);
+    --deep: #2c2420;
+    --teal: #2a8f82;
+    --teal-bg: #e8f5f3;
+    --blue: #3b6fa0;
+    --blue-bg: #eaf1f7;
+    --purple: #6b4c8a;
+    --purple-bg: #f3eef8;
+    --orange: #d4843e;
+    --orange-bg: #fdf3e8;
+    --green: #3a7d44;
+    --green-bg: #eaf4ec;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Source Sans 3', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.72;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Nav ── */
+  .site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(250,248,245,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .site-nav a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--muted);
+    text-decoration: none;
+    border: none;
+    letter-spacing: 0.3px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.15s;
+  }
+  .site-nav a:hover { color: var(--accent); border: none; }
+  .site-nav .sep { color: var(--border); }
+
+  /* ── Hero ── */
+  .hero {
+    position: relative;
+    padding: 100px 24px 80px;
+    text-align: center;
+    overflow: hidden;
+    background: linear-gradient(175deg, #1a2535 0%, #1e3248 40%, #243b56 100%);
+    color: #faf8f5;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 15% 60%, rgba(59,111,160,0.3) 0%, transparent 50%),
+      radial-gradient(circle at 85% 25%, rgba(42,143,130,0.2) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #7eb8e0;
+    border: 1px solid rgba(126,184,224,0.4);
+    padding: 6px 18px;
+    border-radius: 100px;
+    margin-bottom: 32px;
+    position: relative;
+  }
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(2rem, 4.8vw, 3.4rem);
+    line-height: 1.15;
+    max-width: 820px;
+    margin: 0 auto 24px;
+    letter-spacing: -0.02em;
+    position: relative;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: #7eb8e0;
+  }
+  .hero-sub {
+    font-size: 1.1rem;
+    color: rgba(250,248,245,0.68);
+    max-width: 580px;
+    margin: 0 auto 40px;
+    line-height: 1.65;
+  }
+  .hero-meta {
+    font-size: 0.85rem;
+    color: rgba(250,248,245,0.4);
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── Article ── */
+  article {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .lead {
+    font-size: 1.2rem;
+    color: var(--muted);
+    margin: 56px 0 48px;
+    padding-left: 20px;
+    border-left: 3px solid var(--blue);
+    line-height: 1.75;
+  }
+
+  p { margin-bottom: 1.5em; }
+
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 1.85rem;
+    margin: 64px 0 20px;
+    color: var(--deep);
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+  h2 .section-label {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65em;
+    color: var(--blue);
+    margin-right: 8px;
+    font-weight: 500;
+    vertical-align: middle;
+  }
+
+  h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 1.25rem;
+    margin: 36px 0 12px;
+    color: var(--deep);
+  }
+  h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--blue);
+    margin: 28px 0 8px;
+    letter-spacing: 0.3px;
+  }
+
+  strong { font-weight: 600; color: var(--deep); }
+  em { font-style: italic; }
+
+  a { color: var(--blue); text-decoration: none; border-bottom: 1px solid rgba(59,111,160,0.3); }
+  a:hover { border-bottom-color: var(--blue); }
+
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.83em;
+    background: var(--code-bg);
+    padding: 2px 7px;
+    border-radius: 4px;
+  }
+
+  /* ── Diagrams ── */
+  .diagram-wrap {
+    margin: 40px -40px;
+  }
+  @media (max-width: 800px) { .diagram-wrap { margin: 32px 0; } }
+  .diagram-wrap svg { width: 100%; height: auto; display: block; }
+  .diagram-caption {
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-top: 12px;
+    font-style: italic;
+  }
+
+  /* ── Callouts ── */
+  .callout {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin: 32px 0;
+    box-shadow: 0 2px 12px var(--shadow);
+    position: relative;
+  }
+  .callout.tip { border-left: 4px solid var(--teal); background: var(--teal-bg); }
+  .callout.tip::before {
+    content: '💡'; position: absolute; top: -12px; left: 20px;
+    font-size: 1.3rem; background: var(--teal-bg); padding: 0 6px;
+  }
+  .callout.info { border-left: 4px solid var(--blue); background: var(--blue-bg); }
+  .callout.info::before {
+    content: '🔍'; position: absolute; top: -12px; left: 20px;
+    font-size: 1.3rem; background: var(--blue-bg); padding: 0 6px;
+  }
+  .callout.warn { border-left: 4px solid var(--orange); background: var(--orange-bg); }
+  .callout.warn::before {
+    content: '⚠️'; position: absolute; top: -12px; left: 20px;
+    font-size: 1.3rem; background: var(--orange-bg); padding: 0 6px;
+  }
+  .callout p:last-child { margin-bottom: 0; }
+  .callout-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 8px;
+    color: var(--deep);
+  }
+
+  /* ── Tables ── */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 32px 0;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 12px var(--shadow);
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  thead { background: var(--deep); color: var(--paper); }
+  th { padding: 13px 18px; text-align: left; font-weight: 600; font-size: 0.78rem; letter-spacing: 0.5px; text-transform: uppercase; }
+  td { padding: 11px 18px; border-top: 1px solid var(--border); vertical-align: top; }
+  tbody tr:nth-child(even) { background: rgba(0,0,0,0.02); }
+  tbody tr:hover { background: var(--blue-bg); }
+
+  /* ── Divider ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 56px 0;
+  }
+
+  /* ── Count badges ── */
+  .count-badge {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    padding: 2px 9px;
+    border-radius: 100px;
+    margin-left: 8px;
+    vertical-align: middle;
+    background: var(--blue-bg);
+    color: var(--blue);
+    border: 1px solid rgba(59,111,160,0.25);
+  }
+
+  /* ── Footer ── */
+  footer {
+    text-align: center;
+    padding: 60px 24px 48px;
+    color: var(--muted);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border);
+    margin-top: 80px;
+  }
+  footer a { color: var(--blue); border: none; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-badge, .hero h1, .hero-sub, .hero-meta { animation: fadeUp 0.7s ease-out both; }
+  .hero h1 { animation-delay: 0.1s; }
+  .hero-sub { animation-delay: 0.2s; }
+  .hero-meta { animation-delay: 0.3s; }
+
+  @media (max-width: 600px) {
+    .hero { padding: 72px 20px 56px; }
+    article { padding: 0 18px; }
+    .callout { padding: 20px 22px; }
+    h2 { font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════ NAV ════════ -->
+<nav class="site-nav">
+  <a href="/">← Home</a>
+  <span class="sep">/</span>
+  <a href="/blog/">Blog</a>
+</nav>
+
+<!-- ════════ HERO ════════ -->
+<header class="hero">
+  <div class="hero-badge">ML Infrastructure</div>
+  <h1>Dissecting NeMo Gym: How NVIDIA Built a Modular Microservice Architecture for <em>RL Verification at Scale</em></h1>
+  <p class="hero-sub">Three server types. Thirty-four verifiers. One HTTP protocol. A close read of how composability beats configuration in RLVR pipelines.</p>
+  <p class="hero-meta">Lorenzo Xiao &middot; Language Technologies Institute, CMU &middot; March 2026</p>
+</header>
+
+<!-- ════════ ARTICLE ════════ -->
+<article>
+
+<p class="lead">If you have spent any time working on reinforcement learning from verifiable rewards (RLVR), you know the pain: a model generating rollouts, tools for it to interact with, a verifier to score the output, and some orchestration glue to hold it together. Most frameworks handle this by cramming everything into a monolithic training loop that becomes impossible to extend. NeMo Gym decomposes the entire pipeline into three types of composable microservices, connected by nothing more than async HTTP calls and cookie-based sessions.</p>
+
+<p>This post is a deep dive into the architecture — the design philosophy, the three server types, the data flow from input to reward profiling, and the infrastructure decisions that make it work at scale.</p>
+
+<!-- ── System Architecture Diagram ── -->
+<div class="diagram-wrap">
+<svg viewBox="0 0 800 310" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <defs>
+    <filter id="sh" x="-4%" y="-8%" width="108%" height="124%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.08"/>
+    </filter>
+    <filter id="sh2" x="-4%" y="-8%" width="108%" height="124%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.06"/>
+    </filter>
+    <linearGradient id="head-g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3b6fa0"/>
+      <stop offset="100%" stop-color="#2a5a8a"/>
+    </linearGradient>
+    <linearGradient id="agent-g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a8f82"/>
+      <stop offset="100%" stop-color="#1f7268"/>
+    </linearGradient>
+    <linearGradient id="model-g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6b4c8a"/>
+      <stop offset="100%" stop-color="#573d72"/>
+    </linearGradient>
+    <linearGradient id="res-g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c4553a"/>
+      <stop offset="100%" stop-color="#a34430"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Title -->
+  <text x="400" y="22" text-anchor="middle" fill="#2c2420" font-family="Fraunces" font-weight="700" font-size="14">System Architecture</text>
+
+  <!-- HeadServer -->
+  <g filter="url(#sh)">
+    <rect x="290" y="36" width="220" height="52" rx="10" fill="url(#head-g)"/>
+    <text x="400" y="58" text-anchor="middle" fill="#fff" font-family="Fraunces" font-weight="700" font-size="13">HeadServer</text>
+    <text x="400" y="76" text-anchor="middle" fill="rgba(255,255,255,0.65)" font-family="JetBrains Mono" font-size="10">port 11000 · lifecycle &amp; config</text>
+  </g>
+
+  <!-- Connector lines from HeadServer to three servers -->
+  <line x1="330" y1="88" x2="168" y2="138" stroke="#3b6fa0" stroke-width="1.2" stroke-dasharray="5 3" opacity="0.5"/>
+  <line x1="400" y1="88" x2="400" y2="138" stroke="#3b6fa0" stroke-width="1.2" stroke-dasharray="5 3" opacity="0.5"/>
+  <line x1="470" y1="88" x2="632" y2="138" stroke="#3b6fa0" stroke-width="1.2" stroke-dasharray="5 3" opacity="0.5"/>
+
+  <!-- Agent Server -->
+  <g filter="url(#sh)">
+    <rect x="62" y="138" width="212" height="76" rx="10" fill="url(#agent-g)"/>
+    <text x="168" y="162" text-anchor="middle" fill="#fff" font-family="Fraunces" font-weight="700" font-size="13">Agent Server</text>
+    <text x="168" y="179" text-anchor="middle" fill="rgba(255,255,255,0.65)" font-family="Source Sans 3" font-size="11">Orchestration · 7 types</text>
+    <text x="168" y="204" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="JetBrains Mono" font-size="10">POST /run · POST /v1/responses</text>
+  </g>
+
+  <!-- Model Server -->
+  <g filter="url(#sh)">
+    <rect x="294" y="138" width="212" height="76" rx="10" fill="url(#model-g)"/>
+    <text x="400" y="162" text-anchor="middle" fill="#fff" font-family="Fraunces" font-weight="700" font-size="13">Model Server</text>
+    <text x="400" y="179" text-anchor="middle" fill="rgba(255,255,255,0.65)" font-family="Source Sans 3" font-size="11">LLM Inference · 5 types</text>
+    <text x="400" y="204" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="JetBrains Mono" font-size="10">POST /v1/chat/completions</text>
+  </g>
+
+  <!-- Resources Server -->
+  <g filter="url(#sh)">
+    <rect x="526" y="138" width="212" height="76" rx="10" fill="url(#res-g)"/>
+    <text x="632" y="162" text-anchor="middle" fill="#fff" font-family="Fraunces" font-weight="700" font-size="13">Resources Server</text>
+    <text x="632" y="179" text-anchor="middle" fill="rgba(255,255,255,0.65)" font-family="Source Sans 3" font-size="11">Tools &amp; Verifiers · 34 types</text>
+    <text x="632" y="204" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="JetBrains Mono" font-size="10">POST /verify · POST /&lt;tool&gt;</text>
+  </g>
+
+  <!-- Agent → Model (call) -->
+  <path d="M274 172 L292 172" stroke="#6b4c8a" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="283" y="166" text-anchor="middle" fill="#6b4c8a" font-family="JetBrains Mono" font-size="9">call</text>
+
+  <!-- Model → Agent (response) -->
+  <path d="M292 184 L274 184" stroke="#6b4c8a" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="283" y="196" text-anchor="middle" fill="#6b4c8a" font-family="JetBrains Mono" font-size="9">resp</text>
+
+  <!-- Agent → Resources (tool / verify) -->
+  <path d="M274 168 C360 230 440 240 524 185" stroke="#c4553a" stroke-width="1.2" stroke-dasharray="5 3" opacity="0.6" marker-end="url(#arr-r)"/>
+  <text x="400" y="245" text-anchor="middle" fill="#c4553a" font-family="JetBrains Mono" font-size="9">tool calls &amp; /verify</text>
+
+  <!-- Protocol label -->
+  <rect x="290" y="258" width="220" height="32" rx="8" fill="rgba(59,111,160,0.08)" stroke="rgba(59,111,160,0.2)" stroke-width="1"/>
+  <text x="400" y="278" text-anchor="middle" fill="#3b6fa0" font-family="JetBrains Mono" font-size="11" font-weight="500">All comms: async HTTP (aiohttp)</text>
+
+  <defs>
+    <marker id="arr" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+      <polygon points="0 0, 7 3.5, 0 7" fill="#6b4c8a" opacity="0.7"/>
+    </marker>
+    <marker id="arr-r" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+      <polygon points="0 0, 7 3.5, 0 7" fill="#c4553a" opacity="0.7"/>
+    </marker>
+  </defs>
+</svg>
+</div>
+<p class="diagram-caption">The complete system. HeadServer handles lifecycle; the three core servers handle data flow. HTTP throughout.</p>
+
+<div class="divider"></div>
+
+<!-- ════════ AGENT SERVERS ════════ -->
+<h2><span class="section-label">01</span> Agent Servers: The Orchestration Layer <span class="count-badge">7 types</span></h2>
+
+<p>Agent servers are the conductors of the system. They receive a task via <code>POST /run</code>, execute the full loop — call the model, extract function calls, dispatch them to the resources server, feed results back, repeat — and then call <code>/verify</code> to return a reward. What makes the design interesting is that "orchestration" is not one-size-fits-all. NeMo Gym ships seven distinct agents, each encoding a different loop pattern.</p>
+
+<!-- 7 Agent Types Diagram -->
+<div class="diagram-wrap">
+<svg viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <defs>
+    <filter id="sh3" x="-3%" y="-6%" width="106%" height="120%">
+      <feDropShadow dx="0" dy="1" stdDeviation="3" flood-opacity="0.07"/>
+    </filter>
+  </defs>
+  <text x="400" y="22" text-anchor="middle" fill="#2c2420" font-family="Fraunces" font-weight="700" font-size="14">Seven Agent Implementations</text>
+
+  <!-- Row 1 -->
+  <!-- simple_agent -->
+  <g filter="url(#sh3)">
+    <rect x="16" y="38" width="230" height="80" rx="10" fill="#fff" stroke="#2a8f82" stroke-width="1.2"/>
+    <rect x="16" y="38" width="230" height="28" rx="10" fill="#2a8f82"/>
+    <rect x="16" y="54" width="230" height="12" fill="#2a8f82"/>
+    <text x="131" y="56" text-anchor="middle" fill="#fff" font-family="JetBrains Mono" font-size="11" font-weight="500">simple_agent</text>
+    <text x="131" y="82" text-anchor="middle" fill="#2c2420" font-family="Source Sans 3" font-size="11">Tool-augmented while loop.</text>
+    <text x="131" y="100" text-anchor="middle" fill="#6b6560" font-family="Source Sans 3" font-size="10.5">Call → extract → dispatch → repeat.</text>
+  </g>
+
+  <!-- aviary_agent -->
+  <g filter="url(#sh3)">
+    <rect x="258" y="38" width="230" height="80" rx="10" fill="#fff" stroke="#3b6fa0" stroke-width="1.2"/>
+    <rect x="258" y="38" width="230" height="28" rx="10" fill="#3b6fa0"/>
+    <rect x="258" y="54" width="230" height="12" fill="#3b6fa0"/>
+    <text x="373" y="56" text-anchor="middle" fill="#fff" font-family="JetBrains Mono" font-size="11" font-weight="500">aviary_agent</text>
+    <text x="373" y="82" text-anchor="middle" fill="#2c2420" font-family="Source Sans 3" font-size="11">RL gym environments.</text>
+    <text x="373" y="100" text-anchor="middle" fill="#6b6560" font-family="Source Sans 3" font-size="10.5">seed_session → step → verify → close.</text>
+  </g>
+
+  <!-- proof_refinement_agent -->
+  <g filter="url(#sh3)">
+    <rect x="500" y="38" width="285" height="80" rx="10" fill="#fff" stroke="#6b4c8a" stroke-width="1.2"/>
+    <rect x="500" y="38" width="285" height="28" rx="10" fill="#6b4c8a"/>
+    <rect x="500" y="54" width="285" height="12" fill="#6b4c8a"/>
+    <text x="642" y="56" text-anchor="middle" fill="#fff" font-family="JetBrains Mono" font-size="11" font-weight="500">proof_refinement_agent</text>
+    <text x="642" y="82" text-anchor="middle" fill="#2c2420" font-family="Source Sans 3" font-size="11">Error-feedback loop for formal proofs.</text>
+    <text x="642" y="100" text-anchor="middle" fill="#6b6560" font-family="Source Sans 3" font-size="10.5">No tool calls — model ↔ verifier only.</text>
+  </g>
+
+  <!-- Row 2 -->
+  <!-- tool_simulation_agent -->
+  <g filter="url(#sh3)">
+    <rect x="16" y="138" width="230" height="80" rx="10" fill="#fff" stroke="#d4843e" stroke-width="1.2"/>
+    <rect x="16" y="138" width="230" height="28" rx="10" fill="#d4843e"/>
+    <rect x="16" y="154" width="230" height="12" fill="#d4843e"/>
+    <text x="131" y="156" text-anchor="middle" fill="#fff" font-family="JetBrains Mono" font-size="11" font-weight="500">tool_simulation_agent</text>
+    <text x="131" y="182" text-anchor="middle" fill="#2c2420" font-family="Source Sans 3" font-size="11">Single call + single verify.</text>
+    <text x="131" y="200" text-anchor="middle" fill="#6b6560" font-family="Source Sans 3" font-size="10.5">Tool use simulated inside verifier.</text>
+  </g>
+
+  <!-- verifiers_agent -->
+  <g filter="url(#sh3)">
+    <rect x="258" y="138" width="230" height="80" rx="10" fill="#fff" stroke="#c4553a" stroke-width="1.2"/>
+    <rect x="258" y="138" width="230" height="28" rx="10" fill="#c4553a"/>
+    <rect x="258" y="154" width="230" height="12" fill="#c4553a"/>
+    <text x="373" y="156" text-anchor="middle" fill="#fff" font-family="JetBrains Mono" font-size="11" font-weight="500">verifiers_agent</text>
+    <text x="373" y="182" text-anchor="middle" fill="#2c2420" font-family="Source Sans 3" font-size="11">External verifiers library.</text>
+    <text x="373" y="200" text-anchor="middle" fill="#6b6560" font-family="Source Sans 3" font-size="10.5">Preserves token IDs + logprobs for RL.</text>
+  </g>
+
+  <!-- mini_swe_agent -->
+  <g filter="url(#sh3)">
+    <rect x="500" y="138" width="135" height="80" rx="10" fill="#fff" stroke="#2a8f82" stroke-width="1.2"/>
+    <rect x="500" y="138" width="135" height="28" rx="10" fill="#2a8f82"/>
+    <rect x="500" y="154" width="135" height="12" fill="#2a8f82"/>
+    <text x="567" y="156" text-anchor="middle" fill="#fff" font-family="JetBrains Mono" font-size="10" font-weight="500">mini_swe_agent</text>
+    <text x="567" y="182" text-anchor="middle" fill="#2c2420" font-family="Source Sans 3" font-size="11">SWE-gym via Ray.</text>
+    <text x="567" y="200" text-anchor="middle" fill="#6b6560" font-family="Source Sans 3" font-size="10.5">Docker + Singularity.</text>
+  </g>
+
+  <!-- swe_agents -->
+  <g filter="url(#sh3)">
+    <rect x="650" y="138" width="135" height="80" rx="10" fill="#fff" stroke="#3b6fa0" stroke-width="1.2"/>
+    <rect x="650" y="138" width="135" height="28" rx="10" fill="#3b6fa0"/>
+    <rect x="650" y="154" width="135" height="12" fill="#3b6fa0"/>
+    <text x="717" y="156" text-anchor="middle" fill="#fff" font-family="JetBrains Mono" font-size="10" font-weight="500">swe_agents</text>
+    <text x="717" y="182" text-anchor="middle" fill="#2c2420" font-family="Source Sans 3" font-size="11">Full SWE-bench.</text>
+    <text x="717" y="200" text-anchor="middle" fill="#6b6560" font-family="Source Sans 3" font-size="10.5">100 turns, 4 frameworks.</text>
+  </g>
+
+  <!-- Shared base note -->
+  <rect x="16" y="240" width="769" height="36" rx="8" fill="rgba(42,143,130,0.07)" stroke="rgba(42,143,130,0.2)" stroke-width="1"/>
+  <text x="400" y="262" text-anchor="middle" fill="#2a8f82" font-family="Source Sans 3" font-size="12">All inherit from <tspan font-family="JetBrains Mono" font-size="11">SimpleResponsesAPIAgent → SimpleServer → BaseServer</tspan> for shared endpoint registration, health checks &amp; session middleware.</text>
+
+  <!-- Workhorse label -->
+  <text x="131" y="130" text-anchor="middle" fill="#2a8f82" font-family="Source Sans 3" font-size="11" font-style="italic">← workhorse</text>
+</svg>
+</div>
+<p class="diagram-caption">Seven agents, seven loop patterns. The shared base class provides infrastructure; each leaf defines behavior.</p>
+
+<div class="callout tip">
+  <div class="callout-title">The Composability Principle</div>
+  <p>Instead of building one agent with a hundred config flags, NeMo Gym builds seven agents that each do one thing well. The <code>tool_simulation_agent</code> does not have a "disable tool calls" flag — it simply never makes tool calls. The <code>proof_refinement_agent</code> does not have a "correction mode" toggle — it always does correction. Each implementation is small, testable, and easy to reason about.</p>
+</div>
+
+<p>The <code>simple_agent</code> is the workhorse: a while loop that calls the model, extracts function calls, POSTs each one to the resources server's <code>/&lt;tool_name&gt;</code> endpoint, accumulates outputs, feeds them back, and repeats until there are no more function calls or <code>max_steps</code> is reached. The <code>verifiers_agent</code> is the most RL-aware: it preserves <code>prompt_token_ids</code>, <code>generation_token_ids</code>, and <code>logprobs</code> in its output, making it directly compatible with policy gradient training pipelines that need these quantities.</p>
+
+<div class="divider"></div>
+
+<!-- ════════ MODEL SERVERS ════════ -->
+<h2><span class="section-label">02</span> Model Servers: Abstracting Inference <span class="count-badge">5 types</span></h2>
+
+<p>Model servers expose two endpoints — <code>POST /v1/chat/completions</code> and <code>POST /v1/responses</code> — and return a <code>NeMoGymResponse</code> containing <code>output[]</code> (messages and function calls) and <code>usage</code> (input and output token counts). The five implementations form a clean capability inheritance chain.</p>
+
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr><th>Server</th><th>Extends</th><th>Key Capability Added</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>openai_model</strong></td>
+      <td><code>SimpleModelServer</code></td>
+      <td>Generic OpenAI-compatible client. Works with any endpoint that speaks the OpenAI API.</td>
+    </tr>
+    <tr>
+      <td><strong>azure_openai_model</strong></td>
+      <td><code>openai_model</code></td>
+      <td>Azure deployments with <code>api-version</code> handling, <code>VLLMConverter</code>, semaphore concurrency control.</td>
+    </tr>
+    <tr>
+      <td><strong>vllm_model</strong></td>
+      <td><code>azure_openai_model</code></td>
+      <td>Multi-endpoint round-robin, <code>&lt;think&gt;</code> tag reasoning parser, token ID + logprob tracking, graceful context-length truncation.</td>
+    </tr>
+    <tr>
+      <td><strong>local_vllm_model</strong></td>
+      <td><code>vllm_model</code></td>
+      <td>Launches vLLM as a Ray actor. Tensor, pipeline, and data parallelism via Ray placement groups. Multi-node GPU support.</td>
+    </tr>
+    <tr>
+      <td><strong>genrm_model</strong></td>
+      <td><code>local_vllm_model</code></td>
+      <td>Custom conversation roles (<code>response_1</code>, <code>response_2</code>, <code>principle</code>) for pairwise reward modeling comparisons.</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>The inheritance chain is purposeful: each layer adds exactly one conceptual capability. The <code>local_vllm_model</code> is where things get operationally interesting — it handles HuggingFace token and cache management, polls for server health before accepting requests, and applies internal vLLM patches for compatibility. The <code>genrm_model</code> at the tip of the chain is the model server you use when your reward signal comes from comparing two outputs side by side.</p>
+
+<div class="divider"></div>
+
+<!-- ════════ RESOURCES SERVERS ════════ -->
+<h2><span class="section-label">03</span> Resources Servers: 34 Verifiers, One Interface</h2>
+
+<p>All 34 resources servers expose the same three endpoints: <code>POST /verify</code>, <code>POST /seed_session</code>, and <code>POST /&lt;tool_name&gt;</code>. They all return <code>BaseVerifyResponse { reward: float, info: dict }</code>. The reward types break into three families.</p>
+
+<!-- Reward types diagram -->
+<div class="diagram-wrap">
+<svg viewBox="0 0 800 310" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <defs>
+    <filter id="sh4" x="-3%" y="-6%" width="106%" height="120%">
+      <feDropShadow dx="0" dy="1" stdDeviation="3" flood-opacity="0.06"/>
+    </filter>
+  </defs>
+  <text x="400" y="22" text-anchor="middle" fill="#2c2420" font-family="Fraunces" font-weight="700" font-size="14">34 Resources Servers by Reward Type</text>
+
+  <!-- Binary -->
+  <g filter="url(#sh4)">
+    <rect x="14" y="38" width="234" height="258" rx="12" fill="#fff" stroke="#2a8f82" stroke-width="1.2"/>
+    <rect x="14" y="38" width="234" height="36" rx="12" fill="#2a8f82"/>
+    <rect x="14" y="62" width="234" height="12" fill="#2a8f82"/>
+    <text x="131" y="62" text-anchor="middle" fill="#fff" font-family="Fraunces" font-weight="700" font-size="13">Binary Reward</text>
+    <text x="131" y="76" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="JetBrains Mono" font-size="10">returns 0 or 1 · 18 servers</text>
+  </g>
+  <text x="30" y="104" fill="#2c2420" font-family="JetBrains Mono" font-size="10.5" font-weight="500">arc_agi</text>
+  <text x="30" y="120" fill="#6b6560" font-family="Source Sans 3" font-size="10">2D grid parse from \boxed{}</text>
+  <text x="30" y="140" fill="#2c2420" font-family="JetBrains Mono" font-size="10.5" font-weight="500">code_gen</text>
+  <text x="30" y="156" fill="#6b6560" font-family="Source Sans 3" font-size="10">Ray execution + unit tests</text>
+  <text x="30" y="176" fill="#2c2420" font-family="JetBrains Mono" font-size="10.5" font-weight="500">structured_outputs</text>
+  <text x="30" y="192" fill="#6b6560" font-family="Source Sans 3" font-size="10">JSON → OpenAPI schema validation</text>
+  <text x="30" y="212" fill="#2c2420" font-family="JetBrains Mono" font-size="10.5" font-weight="500">text_to_sql</text>
+  <text x="30" y="228" fill="#6b6560" font-family="Source Sans 3" font-size="10">MySQL, PostgreSQL, SQLite dialects</text>
+  <text x="30" y="248" fill="#2c2420" font-family="JetBrains Mono" font-size="10.5" font-weight="500">xlam_fc</text>
+  <text x="30" y="264" fill="#6b6560" font-family="Source Sans 3" font-size="10">Function call greedy match</text>
+  <text x="30" y="282" fill="#6b6560" font-family="Source Sans 3" font-size="10" font-style="italic">+ 13 more…</text>
+
+  <!-- Continuous -->
+  <g filter="url(#sh4)">
+    <rect x="260" y="38" width="234" height="258" rx="12" fill="#fff" stroke="#6b4c8a" stroke-width="1.2"/>
+    <rect x="260" y="38" width="234" height="36" rx="12" fill="#6b4c8a"/>
+    <rect x="260" y="62" width="234" height="12" fill="#6b4c8a"/>
+    <text x="377" y="62" text-anchor="middle" fill="#fff" font-family="Fraunces" font-weight="700" font-size="13">Continuous Reward</text>
+    <text x="377" y="76" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="JetBrains Mono" font-size="10">returns [0, 1] · 8 servers</text>
+  </g>
+  <text x="276" y="104" fill="#2c2420" font-family="JetBrains Mono" font-size="10.5" font-weight="500">genrm_compare</text>
+  <text x="276" y="120" fill="#6b6560" font-family="Source Sans 3" font-size="10">Pairwise GenRM + length bonus</text>
+  <text x="276" y="140" fill="#2c2420" font-family="JetBrains Mono" font-size="10.5" font-weight="500">math_formal_lean</text>
+  <text x="276" y="156" fill="#6b6560" font-family="Source Sans 3" font-size="10">0.3× symbolic + 0.7× Lean4 RMSLE</text>
+  <text x="276" y="176" fill="#2c2420" font-family="JetBrains Mono" font-size="10.5" font-weight="500">math_with_judge</text>
+  <text x="276" y="192" fill="#6b6560" font-family="Source Sans 3" font-size="10">math_verify → LLM judge fallback</text>
+  <text x="276" y="212" fill="#2c2420" font-family="JetBrains Mono" font-size="10.5" font-weight="500">multichallenge</text>
+  <text x="276" y="228" fill="#6b6560" font-family="Source Sans 3" font-size="10">Multi-rubric: mean/min/max/all/any</text>
+  <text x="276" y="248" fill="#2c2420" font-family="JetBrains Mono" font-size="10.5" font-weight="500">aviary</text>
+  <text x="276" y="264" fill="#6b6560" font-family="Source Sans 3" font-size="10">Cumulative env step rewards</text>
+  <text x="276" y="282" fill="#6b6560" font-family="Source Sans 3" font-size="10" font-style="italic">+ 3 more…</text>
+
+  <!-- Compound -->
+  <g filter="url(#sh4)">
+    <rect x="506" y="38" width="280" height="258" rx="12" fill="#fff" stroke="#c4553a" stroke-width="1.2"/>
+    <rect x="506" y="38" width="280" height="36" rx="12" fill="#c4553a"/>
+    <rect x="506" y="62" width="280" height="12" fill="#c4553a"/>
+    <text x="646" y="62" text-anchor="middle" fill="#fff" font-family="Fraunces" font-weight="700" font-size="13">Compound / Varied</text>
+    <text x="646" y="76" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="JetBrains Mono" font-size="10">mixed types · 8 servers</text>
+  </g>
+  <text x="522" y="104" fill="#2c2420" font-family="JetBrains Mono" font-size="10.5" font-weight="500">jailbreak_detection</text>
+  <text x="522" y="120" fill="#6b6560" font-family="Source Sans 3" font-size="10">Safety × quality compound score</text>
+  <text x="522" y="140" fill="#2c2420" font-family="JetBrains Mono" font-size="10.5" font-weight="500">instruction_following</text>
+  <text x="522" y="156" fill="#6b6560" font-family="Source Sans 3" font-size="10">Binary strict or fraction [0,1]</text>
+  <text x="522" y="176" fill="#2c2420" font-family="JetBrains Mono" font-size="10.5" font-weight="500">equivalence_llm_judge</text>
+  <text x="522" y="192" fill="#6b6560" font-family="Source Sans 3" font-size="10">0 / 0.5 / 1 with swap-check</text>
+  <text x="522" y="212" fill="#2c2420" font-family="JetBrains Mono" font-size="10.5" font-weight="500">over_refusal_detection</text>
+  <text x="522" y="228" fill="#6b6560" font-family="Source Sans 3" font-size="10">Safety + helpfulness balance</text>
+  <text x="522" y="248" fill="#2c2420" font-family="JetBrains Mono" font-size="10.5" font-weight="500">mcqa</text>
+  <text x="522" y="264" fill="#6b6560" font-family="Source Sans 3" font-size="10">3-mode letter extraction</text>
+  <text x="522" y="282" fill="#6b6560" font-family="Source Sans 3" font-size="10" font-style="italic">+ 3 more…</text>
+</svg>
+</div>
+<p class="diagram-caption">34 verifiers, three reward families. 13 use LLM judges, 5 use sandboxed Ray execution, 4 use session state.</p>
+
+<div class="callout info">
+  <div class="callout-title">Rewards as First-Class Design</div>
+  <p>With 34 verifiers spanning binary, continuous, and compound reward types, NeMo Gym treats reward computation as a rich design space rather than an afterthought. The fact that 13 of 34 verifiers use LLM judges reflects the reality that ground-truth verification is expensive or impossible for many tasks — and the system accommodates that complexity rather than pretending it doesn't exist.</p>
+</div>
+
+<p>Across all 34 servers, patterns repeat: session state flows through cookies (4 servers require <code>seed_session</code>), Ray handles sandboxed code execution (5 servers), and LLM judges step in wherever symbolic verification fails. The <code>math_formal_lean</code> verifier is the most sophisticated — a hybrid that weights Lean4 formal proof compilation at 70% and symbolic equivalence at 30%, with multi-turn error feedback injected back into the model conversation.</p>
+
+<div class="divider"></div>
+
+<!-- ════════ DATA FLOW ════════ -->
+<h2><span class="section-label">04</span> The Data Flow: JSONL to Reward Profiles</h2>
+
+<p>The end-to-end pipeline follows eight steps, from raw task input to aggregated pass@k metrics.</p>
+
+<!-- 8-Step Flow Diagram -->
+<div class="diagram-wrap">
+<svg viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <defs>
+    <filter id="sh5" x="-4%" y="-10%" width="108%" height="128%">
+      <feDropShadow dx="0" dy="1" stdDeviation="3" flood-opacity="0.07"/>
+    </filter>
+    <linearGradient id="flow-g1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3b6fa0"/>
+      <stop offset="100%" stop-color="#5a94c4"/>
+    </linearGradient>
+    <linearGradient id="flow-g2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2a8f82"/>
+      <stop offset="100%" stop-color="#3db5a5"/>
+    </linearGradient>
+    <linearGradient id="flow-g3" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6b4c8a"/>
+      <stop offset="100%" stop-color="#8b6caa"/>
+    </linearGradient>
+    <linearGradient id="flow-g4" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#c4553a"/>
+      <stop offset="100%" stop-color="#e8725a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Step labels -->
+  <text x="400" y="18" text-anchor="middle" fill="#2c2420" font-family="Fraunces" font-weight="700" font-size="13">8-Step Pipeline: JSONL → Reward Profile</text>
+
+  <!-- Steps as colored rounded rects with arrows -->
+  <!-- 01 Input -->
+  <g filter="url(#sh5)">
+    <rect x="8" y="34" width="82" height="56" rx="8" fill="url(#flow-g1)"/>
+    <text x="49" y="56" text-anchor="middle" fill="#fff" font-family="JetBrains Mono" font-size="9" font-weight="500">01</text>
+    <text x="49" y="70" text-anchor="middle" fill="#fff" font-family="Source Sans 3" font-weight="600" font-size="11">Input</text>
+    <text x="49" y="83" text-anchor="middle" fill="rgba(255,255,255,0.65)" font-family="Source Sans 3" font-size="9.5">JSONL tasks</text>
+  </g>
+  <path d="M92 62 L100 62" stroke="#bbb" stroke-width="1.2"/>
+
+  <!-- 02 Preprocess -->
+  <g filter="url(#sh5)">
+    <rect x="102" y="34" width="88" height="56" rx="8" fill="url(#flow-g1)"/>
+    <text x="146" y="56" text-anchor="middle" fill="#fff" font-family="JetBrains Mono" font-size="9" font-weight="500">02</text>
+    <text x="146" y="70" text-anchor="middle" fill="#fff" font-family="Source Sans 3" font-weight="600" font-size="11">Preprocess</text>
+    <text x="146" y="83" text-anchor="middle" fill="rgba(255,255,255,0.65)" font-family="Source Sans 3" font-size="9.5">task/rollout idx</text>
+  </g>
+  <path d="M192 62 L200 62" stroke="#bbb" stroke-width="1.2"/>
+
+  <!-- 03 Dispatch -->
+  <g filter="url(#sh5)">
+    <rect x="202" y="34" width="82" height="56" rx="8" fill="url(#flow-g2)"/>
+    <text x="243" y="56" text-anchor="middle" fill="#fff" font-family="JetBrains Mono" font-size="9" font-weight="500">03</text>
+    <text x="243" y="70" text-anchor="middle" fill="#fff" font-family="Source Sans 3" font-weight="600" font-size="11">Dispatch</text>
+    <text x="243" y="83" text-anchor="middle" fill="rgba(255,255,255,0.65)" font-family="Source Sans 3" font-size="9.5">POST /run</text>
+  </g>
+  <path d="M286 62 L294 62" stroke="#bbb" stroke-width="1.2"/>
+
+  <!-- 04 Model Call -->
+  <g filter="url(#sh5)">
+    <rect x="296" y="34" width="90" height="56" rx="8" fill="url(#flow-g3)"/>
+    <text x="341" y="56" text-anchor="middle" fill="#fff" font-family="JetBrains Mono" font-size="9" font-weight="500">04</text>
+    <text x="341" y="70" text-anchor="middle" fill="#fff" font-family="Source Sans 3" font-weight="600" font-size="11">Model Call</text>
+    <text x="341" y="83" text-anchor="middle" fill="rgba(255,255,255,0.65)" font-family="Source Sans 3" font-size="9.5">/v1/responses</text>
+  </g>
+  <path d="M388 62 L396 62" stroke="#bbb" stroke-width="1.2"/>
+
+  <!-- 05 Tool Exec -->
+  <g filter="url(#sh5)">
+    <rect x="398" y="34" width="86" height="56" rx="8" fill="url(#flow-g3)"/>
+    <text x="441" y="56" text-anchor="middle" fill="#fff" font-family="JetBrains Mono" font-size="9" font-weight="500">05</text>
+    <text x="441" y="70" text-anchor="middle" fill="#fff" font-family="Source Sans 3" font-weight="600" font-size="11">Tool Exec</text>
+    <text x="441" y="83" text-anchor="middle" fill="rgba(255,255,255,0.65)" font-family="Source Sans 3" font-size="9.5">POST /&lt;tool&gt;</text>
+  </g>
+
+  <!-- Loop arrow back -->
+  <path d="M441 92 L441 130 Q441 140 430 140 L310 140 Q299 140 299 130 L299 92" stroke="#6b4c8a" stroke-width="1.2" stroke-dasharray="5 3" fill="none" opacity="0.6"/>
+  <text x="370" y="156" text-anchor="middle" fill="#6b4c8a" font-family="Source Sans 3" font-size="10" font-style="italic">repeat until no more calls or max_steps</text>
+
+  <path d="M486 62 L494 62" stroke="#bbb" stroke-width="1.2"/>
+
+  <!-- 06 Verify -->
+  <g filter="url(#sh5)">
+    <rect x="496" y="34" width="82" height="56" rx="8" fill="url(#flow-g4)"/>
+    <text x="537" y="56" text-anchor="middle" fill="#fff" font-family="JetBrains Mono" font-size="9" font-weight="500">06</text>
+    <text x="537" y="70" text-anchor="middle" fill="#fff" font-family="Source Sans 3" font-weight="600" font-size="11">Verify</text>
+    <text x="537" y="83" text-anchor="middle" fill="rgba(255,255,255,0.65)" font-family="Source Sans 3" font-size="9.5">POST /verify</text>
+  </g>
+  <path d="M580 62 L588 62" stroke="#bbb" stroke-width="1.2"/>
+
+  <!-- 07 Write -->
+  <g filter="url(#sh5)">
+    <rect x="590" y="34" width="82" height="56" rx="8" fill="url(#flow-g4)"/>
+    <text x="631" y="56" text-anchor="middle" fill="#fff" font-family="JetBrains Mono" font-size="9" font-weight="500">07</text>
+    <text x="631" y="70" text-anchor="middle" fill="#fff" font-family="Source Sans 3" font-weight="600" font-size="11">Write</text>
+    <text x="631" y="83" text-anchor="middle" fill="rgba(255,255,255,0.65)" font-family="Source Sans 3" font-size="9.5">output JSONL</text>
+  </g>
+  <path d="M674 62 L682 62" stroke="#bbb" stroke-width="1.2"/>
+
+  <!-- 08 Profile -->
+  <g filter="url(#sh5)">
+    <rect x="684" y="34" width="108" height="56" rx="8" fill="url(#flow-g2)"/>
+    <text x="738" y="56" text-anchor="middle" fill="#fff" font-family="JetBrains Mono" font-size="9" font-weight="500">08</text>
+    <text x="738" y="70" text-anchor="middle" fill="#fff" font-family="Source Sans 3" font-weight="600" font-size="11">Reward Profile</text>
+    <text x="738" y="83" text-anchor="middle" fill="rgba(255,255,255,0.65)" font-family="Source Sans 3" font-size="9.5">pass@1/4/16 + stats</text>
+  </g>
+</svg>
+</div>
+<p class="diagram-caption">Steps 04–05 form the inner loop. The outer pipeline runs once per task. <code>RewardProfiler</code> computes pass@k at the end.</p>
+
+<p>The profiling step is worth dwelling on. <code>RewardProfiler</code> computes pass@k for k ∈ {1, 4, 16} along with mean, max, min, median, and standard deviation — both per-task and globally. This is not just a logging convenience; it directly measures the key quantity in RLVR: how often does the model produce a verifiably correct answer under multiple sample draws?</p>
+
+<div class="divider"></div>
+
+<!-- ════════ INFRASTRUCTURE ════════ -->
+<h2><span class="section-label">05</span> Infrastructure: The Parts That Make It Work</h2>
+
+<h3>ServerClient</h3>
+<p>All inter-server HTTP communication goes through <code>ServerClient</code>, an aiohttp wrapper with retry logic (3× exponential backoff), and connection pooling set to 100,000 total connections and 1,000 per host. These numbers are aggressive but intentional: when running thousands of parallel rollouts across a Ray cluster, you need the headroom before connection exhaustion becomes the bottleneck.</p>
+
+<h3>Session Middleware</h3>
+<p>Cookie-based session state with UUID-per-session is an unconventional choice for a distributed system, but it elegantly solves the routing problem. When an agent calls <code>POST /seed_session</code>, the server creates session state and returns a cookie. All subsequent calls from that agent carry the cookie, giving the server access to the right session. No centralized session store, no distributed cache to manage, no sticky session configuration at the load balancer level.</p>
+
+<div class="callout warn">
+  <div class="callout-title">Session State Is Local to Each Server</div>
+  <p>Because session state lives in server memory (keyed by cookie UUID), it means agent requests must reach the <em>same</em> resources server instance across all turns of a session. This is fine in the default single-instance configuration, but warrants attention if you scale resources servers horizontally behind a load balancer. You would need sticky sessions or session state externalization for that use case.</p>
+</div>
+
+<h3>Ray Cluster</h3>
+<p>Ray handles distributed job scheduling, multi-node GPU management (tensor, pipeline, and data parallelism), placement groups for co-locating related processes, and actor-based vLLM server management. The <code>local_vllm_model</code> launches its vLLM instance as a Ray actor, which means Ray handles placement, fault tolerance, and resource allocation. TP × PP × DP configurations are set in Hydra config and passed through to vLLM's CLI flags automatically.</p>
+
+<h3>Configuration</h3>
+<p>Hydra + OmegaConf provides the config system, merging YAML files, CLI overrides, and <code>env.yaml</code> environment-specific settings. Five CLI entry points — <code>ng_run</code>, <code>ng_collect_rollouts</code>, <code>ng_test</code>, <code>ng_reward_profile</code>, <code>ng_status</code> — each compose different Hydra config groups to set up the appropriate server topology. This means switching from a local single-node run to a multi-node Ray cluster is a config change, not a code change.</p>
+
+<div class="divider"></div>
+
+<!-- ════════ DESIGN LESSONS ════════ -->
+<h2><span class="section-label">06</span> Design Lessons</h2>
+
+<p>A few things stand out about NeMo Gym's architecture that generalize beyond this specific system.</p>
+
+<h3>HTTP as the Universal Connector</h3>
+<p>The decision to use plain HTTP everywhere could be seen as a performance compromise, but it buys enormous flexibility. You can test a resources server with curl. You can run the model server on a different machine, in a different cloud, or behind a load balancer. You can replace any component with a mock. The 100k connection pool and async I/O ensure that HTTP overhead is not the bottleneck — the model inference is.</p>
+
+<h3>Inheritance for Structure, Not Behavior</h3>
+<p>The class hierarchy (<code>BaseServer → SimpleServer → SimpleResourcesServer / SimpleResponsesAPIModel / SimpleResponsesAPIAgent</code>) provides shared infrastructure — endpoint registration, health checks, session middleware, config loading — but each leaf implementation defines its own behavior. This is a principled use of inheritance that avoids the deep hierarchy trap: base classes provide <em>capabilities</em>, not <em>defaults that get overridden</em>.</p>
+
+<h3>Verification Diversity Is a Feature</h3>
+<p>Having 34 different verifiers is not bloat — it reflects the genuine diversity of what "correctness" means across tasks. Grid comparison, SQL equivalence, Lean4 compilation, safety × quality scoring, and pairwise LLM preference are fundamentally different notions of reward. Collapsing them all into one verifier interface (<code>BaseVerifyResponse</code>) while keeping their implementations separate is the right abstraction boundary.</p>
+
+<div class="callout tip">
+  <div class="callout-title">The Deeper Pattern</div>
+  <p>NeMo Gym is a case study in how microservice decomposition, when done with discipline, can turn a complex ML systems problem into a collection of simple, composable pieces. The three-server-type design is easy to explain, easy to extend, and — critically for a research framework — easy to debug. Whether you are building your own RLVR pipeline or looking for architectural patterns that scale, there is a lot to learn from how this system was put together.</p>
+</div>
+
+</article>
+
+<footer>
+  <p>Lorenzo Xiao &middot; Language Technologies Institute &middot; Carnegie Mellon University</p>
+  <p style="margin-top:8px;"><a href="/blog/">← Back to blog</a> &nbsp;&middot;&nbsp; March 2026</p>
+</footer>
+
+</body>
+</html>]]></content><author><name>Lorenzo Xiao</name></author><category term="blog" /><category term="academic" /><category term="AI" /><category term="engineering" /><summary type="html"><![CDATA[A deep dive into NeMo Gym's three-server-type design, 34 reward verifiers, and the infrastructure decisions that make RLVR pipelines composable at scale.]]></summary></entry></feed>

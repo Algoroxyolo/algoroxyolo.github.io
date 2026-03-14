@@ -4,13 +4,80 @@ layout: default
 
 <!-- about.html -->
     <style>
-      .calendar-container {
+      /* ── Job-seeking banner ── */
+      .opportunity-banner {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
+        align-items: flex-start;
+        gap: 16px;
+        margin: 32px 0;
+        padding: 20px 24px;
+        border: 1px solid var(--global-theme-color);
+        border-left: 4px solid var(--global-theme-color);
+        border-radius: 8px;
+        background: var(--global-code-bg-color);
+        font-size: 0.92rem;
+        line-height: 1.6;
+      }
+      .opportunity-banner__icon {
+        color: var(--global-theme-color);
+        font-size: 1.2rem;
+        margin-top: 2px;
+        flex-shrink: 0;
+      }
+      .opportunity-banner strong {
+        color: var(--global-theme-color);
+      }
+
+      /* ── Calendar card ── */
+      .calendar-card {
+        margin: 40px 0;
+        border: 1px solid var(--global-divider-color);
+        border-radius: 10px;
+        overflow: hidden;
+        background: var(--global-card-bg-color, var(--global-bg-color));
+      }
+      .calendar-card__header {
+        padding: 16px 20px 0;
+      }
+      .calendar-card__header h2 {
+        margin: 0 0 4px;
+        font-size: 1.3rem;
+      }
+      .calendar-card__note {
+        font-size: 0.85rem;
+        color: var(--global-text-color-light);
+        margin: 0 0 12px;
+      }
+      .calendar-card__embed {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%; /* 16:9 */
+        height: 0;
+      }
+      .calendar-card__embed iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      /* ── Visit counter (subtle) ── */
+      .visit-note {
+        font-size: 0.82rem;
+        color: var(--global-text-color-light);
+        text-align: center;
+        margin: 32px 0 8px;
+        font-style: italic;
+      }
+      .visit-note span {
+        font-weight: 600;
+        color: var(--global-text-color);
+        font-style: normal;
       }
     </style>
+
       <div class="post">
         <header class="post-header">
           <h1 class="post-title">
@@ -31,8 +98,8 @@ layout: default
                 {%- assign profile_image_class = "img-fluid z-depth-1 rounded" -%}
               {% endif %}
 
-              {% include figure.html 
-              path=profile_image_path 
+              {% include figure.html
+              path=profile_image_path
               class=profile_image_class
               alt=page.profile.image -%}
             {% endif -%}
@@ -48,6 +115,19 @@ layout: default
             {{ content }}
           </div>
 
+          <!-- Open to opportunities -->
+          {% if page.open_to_work -%}
+          <div class="opportunity-banner">
+            <div class="opportunity-banner__icon">
+              <i class="fas fa-briefcase"></i>
+            </div>
+            <div>
+              <strong>Open to opportunities</strong> &mdash;
+              {{ page.open_to_work_text | default: "I am actively seeking research and industry positions. Let's connect!" }}
+            </div>
+          </div>
+          {%- endif %}
+
           <!-- News -->
           {% if page.news -%}
             <h2><a href="{{ '/news/' | relative_url }}" style="color: inherit;">news</a></h2>
@@ -59,104 +139,33 @@ layout: default
             <h2><a href="{{ '/publications/' | relative_url }}" style="color: inherit;">selected publications</a></h2>
             {%- include selected_papers.html %}
           {%- endif %}
-          <!-- calendar -->
-          <div class="calendar-container">
-            <iframe src="https://calendar.google.com/calendar/embed?src=yunzex%40andrew.cmu.edu&ctz=Asia%2FQatar" style="border:2px #ffffff solid;" name="myiFrame" scrolling="yes" frameborder="1" marginheight="0px" marginwidth="0px" height="55%" width="55%" allowfullscreen></iframe>
+
+          <!-- Calendar -->
+          <div class="calendar-card">
+            <div class="calendar-card__header">
+              <h2>my schedule</h2>
+              <p class="calendar-card__note">Feel free to check my availability. Times shown in Eastern Time (Pittsburgh).</p>
+            </div>
+            <div class="calendar-card__embed">
+              <iframe
+                src="https://calendar.google.com/calendar/embed?src=yunzex%40andrew.cmu.edu&ctz=America%2FNew_York&mode=WEEK"
+                scrolling="no"
+                title="Google Calendar"
+              ></iframe>
+            </div>
           </div>
 
           <!-- Visit counter -->
           {%- if site.goatcounter %}
-          <style>
-            .visit-counter {
-              display: flex;
-              align-items: center;
-              gap: 20px;
-              flex-wrap: wrap;
-              margin: 24px 0 8px;
-              padding: 16px 20px;
-              border: 1px solid var(--global-divider-color);
-              border-radius: 12px;
-              background: var(--global-code-bg-color);
-              font-size: 0.82rem;
-              color: var(--global-text-color-light);
-            }
-            .visit-counter__stat {
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              gap: 2px;
-              min-width: 60px;
-            }
-            .visit-counter__num {
-              font-size: 1.35rem;
-              font-weight: 700;
-              color: var(--global-text-color);
-              font-family: monospace;
-              line-height: 1;
-            }
-            .visit-counter__num--loading::after {
-              content: '…';
-            }
-            .visit-counter__label {
-              font-size: 0.7rem;
-              text-transform: uppercase;
-              letter-spacing: 0.8px;
-              color: var(--global-text-color-light);
-            }
-            .visit-counter__sep {
-              width: 1px;
-              height: 32px;
-              background: var(--global-divider-color);
-            }
-            .visit-counter__title {
-              font-size: 0.72rem;
-              text-transform: uppercase;
-              letter-spacing: 1px;
-              color: var(--global-text-color-light);
-              margin-right: auto;
-            }
-          </style>
-          <div class="visit-counter" id="visit-counter">
-            <span class="visit-counter__title">site stats</span>
-            <div class="visit-counter__stat">
-              <span class="visit-counter__num visit-counter__num--loading" id="gc-total"></span>
-              <span class="visit-counter__label">total views</span>
-            </div>
-            <div class="visit-counter__sep"></div>
-            <div class="visit-counter__stat">
-              <span class="visit-counter__num visit-counter__num--loading" id="gc-home"></span>
-              <span class="visit-counter__label">home views</span>
-            </div>
-            <div class="visit-counter__sep"></div>
-            <div class="visit-counter__stat">
-              <span class="visit-counter__num visit-counter__num--loading" id="gc-blog"></span>
-              <span class="visit-counter__label">blog views</span>
-            </div>
-          </div>
+          <p class="visit-note" id="visit-counter">
+            This site has been visited <span id="gc-total">…</span> times since March 2026.
+          </p>
           <script>
             (function() {
               var base = 'https://{{ site.goatcounter }}.goatcounter.com/counter/';
               function fmt(n) {
                 return n >= 1000 ? (n / 1000).toFixed(1) + 'k' : String(n);
               }
-              function load(path, elId) {
-                fetch(base + encodeURIComponent(path) + '.json')
-                  .then(function(r) { return r.json(); })
-                  .then(function(d) {
-                    var el = document.getElementById(elId);
-                    if (el) {
-                      el.textContent = fmt(Number(d.count_unique) || Number(d.count) || 0);
-                      el.classList.remove('visit-counter__num--loading');
-                    }
-                  })
-                  .catch(function() {
-                    var el = document.getElementById(elId);
-                    if (el) { el.textContent = '—'; el.classList.remove('visit-counter__num--loading'); }
-                  });
-              }
-              load('/', 'gc-home');
-              load('/blog/', 'gc-blog');
-              /* total: sum all known pages */
               var paths = ['/', '/blog/', '/people/', '/teaching/', '/publications/', '/cv/', '/projects/', '/repositories/'{% for post in site.posts %}, '{{ post.url }}'{% endfor %}];
               Promise.all(paths.map(function(p) {
                 return fetch(base + encodeURIComponent(p) + '.json')
@@ -166,7 +175,7 @@ layout: default
               })).then(function(counts) {
                 var total = counts.reduce(function(a, b) { return a + b; }, 0);
                 var el = document.getElementById('gc-total');
-                if (el) { el.textContent = fmt(total); el.classList.remove('visit-counter__num--loading'); }
+                if (el) el.textContent = fmt(total);
               });
             })();
           </script>
@@ -182,12 +191,12 @@ layout: default
               <div class="contact-note">
                 {{ site.contact_note }}
               </div>
-              
+
             </div>
           {%- endif %}
 
         </article>
 
-         
+
 
 </div>

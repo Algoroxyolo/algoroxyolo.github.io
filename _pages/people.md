@@ -3,7 +3,7 @@ layout: page
 permalink: /people/
 title: collaborators
 description: a list of amazing people I have worked with
-nav: true
+nav: false
 nav_order: 6
 ---
 

@@ -145,7 +145,7 @@ layout: default
                   .then(function(d) {
                     var el = document.getElementById(elId);
                     if (el) {
-                      el.textContent = fmt(d.count_unique || d.count || 0);
+                      el.textContent = fmt(Number(d.count_unique) || Number(d.count) || 0);
                       el.classList.remove('visit-counter__num--loading');
                     }
                   })
@@ -161,7 +161,7 @@ layout: default
                 fetch(base + encodeURIComponent('/') + '.json').then(function(r){return r.json();}),
                 fetch(base + encodeURIComponent('/blog/') + '.json').then(function(r){return r.json();})
               ]).then(function(results) {
-                var total = results.reduce(function(acc, d) { return acc + (d.count_unique || 0); }, 0);
+                var total = results.reduce(function(acc, d) { return acc + (Number(d.count_unique) || 0); }, 0);
                 var el = document.getElementById('gc-total');
                 if (el) { el.textContent = fmt(total); el.classList.remove('visit-counter__num--loading'); }
               }).catch(function() {

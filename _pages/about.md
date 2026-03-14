@@ -17,7 +17,12 @@ news: true  # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 open_to_work: true
-open_to_work_text: "I am completing my Master's at CMU LTI in May 2026 and actively seeking research scientist and applied NLP positions in both academia and industry. Feel free to reach out!"
+otw_role: "ML Engineer / Research Engineer — starting May 2026"
+otw_pitch: >
+  Seeking roles in applied AI research and engineering.
+  I'm a Carnegie Mellon NLP researcher focused on LLM agents, evaluation, and safety,
+  with experience building end-to-end prototypes in multi-agent systems, memory,
+  persona consistency, and emotion-aware modeling.
 ---
 
 I am an Master student in [Langugage Technology Institute](https://lti.cmu.edu) where I am advised by [Prof.Mona Diab](https://en.wikipedia.org/wiki/Mona_Diab). 

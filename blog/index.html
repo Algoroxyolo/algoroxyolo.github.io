@@ -122,181 +122,445 @@
 
     <!-- Content -->
     <div class="container mt-5">
-      <div class="post">
+      <style>
+/* ── Blog index redesign ── */
 
-  <div class="header-bar">
+.blog-index-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Hero header */
+.blog-hero {
+  text-align: center;
+  padding: 56px 0 40px;
+  margin-bottom: 8px;
+}
+.blog-hero h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 14px;
+  line-height: 1.1;
+}
+.blog-hero .blog-desc {
+  font-size: 1rem;
+  color: var(--global-text-color-light, #6b7280);
+  max-width: 480px;
+  margin: 0 auto 28px;
+  line-height: 1.65;
+  font-style: italic;
+}
+
+/* Tag pills row */
+.blog-tag-row {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.blog-tag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 14px;
+  border-radius: 100px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  background: var(--global-code-bg-color, #f3f4f6);
+  color: var(--global-text-color, #374151);
+  text-decoration: none;
+  border: 1px solid var(--global-divider-color, #e5e7eb);
+  transition: background 0.18s, color 0.18s, border-color 0.18s;
+}
+.blog-tag-pill:hover {
+  background: var(--global-theme-color, #c4553a);
+  color: #fff;
+  border-color: var(--global-theme-color, #c4553a);
+}
+
+/* Divider */
+.blog-divider {
+  height: 1px;
+  background: var(--global-divider-color, #e5e7eb);
+  margin: 36px 0 32px;
+}
+
+/* Post count label */
+.blog-post-count {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--global-text-color-light, #9ca3af);
+  margin-bottom: 20px;
+}
+
+/* Card list */
+.blog-card-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Base card */
+.blog-card {
+  background: var(--global-card-bg-color, #ffffff);
+  border: 1px solid var(--global-divider-color, #e5e7eb);
+  border-radius: 14px;
+  padding: 28px 32px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  position: relative;
+}
+.blog-card:hover {
+  box-shadow: 0 6px 24px rgba(0,0,0,0.09);
+  transform: translateY(-2px);
+}
+
+/* Featured (first) card */
+.blog-card--featured {
+  border-left: 3px solid var(--global-theme-color, #c4553a);
+  background: linear-gradient(
+    to bottom right,
+    var(--global-card-bg-color, #fff) 60%,
+    var(--global-code-bg-color, #fdf7f5) 100%
+  );
+}
+
+/* Featured badge */
+.blog-card__badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--global-theme-color, #c4553a);
+  background: transparent;
+  border: 1px solid var(--global-theme-color, #c4553a);
+  border-radius: 100px;
+  padding: 2px 10px;
+  margin-bottom: 12px;
+  font-family: monospace;
+}
+
+/* Card title */
+.blog-card__title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.35;
+  margin: 0 0 10px;
+  letter-spacing: -0.01em;
+}
+.blog-card--featured .blog-card__title {
+  font-size: 1.45rem;
+}
+.blog-card__title a {
+  color: var(--global-text-color, #111827);
+  text-decoration: none;
+}
+.blog-card__title a:hover {
+  color: var(--global-theme-color, #c4553a);
+}
+.blog-card__title .ext-icon {
+  font-size: 0.75em;
+  opacity: 0.5;
+  margin-left: 4px;
+}
+
+/* Card description */
+.blog-card__desc {
+  color: var(--global-text-color-light, #6b7280);
+  font-size: 0.92rem;
+  line-height: 1.62;
+  margin: 0 0 14px;
+}
+
+/* Meta row (date + read time) */
+.blog-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 0.78rem;
+  color: var(--global-text-color-light, #9ca3af);
+  margin-bottom: 12px;
+}
+.blog-card__meta .dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--global-divider-color, #d1d5db);
+  flex-shrink: 0;
+}
+
+/* Tag chips */
+.blog-card__tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+.blog-card__tag {
+  font-size: 0.7rem;
+  padding: 2px 10px;
+  border-radius: 100px;
+  background: var(--global-code-bg-color, #f3f4f6);
+  color: var(--global-text-color-light, #6b7280);
+  text-decoration: none;
+  border: 1px solid var(--global-divider-color, #e5e7eb);
+  transition: color 0.15s, border-color 0.15s;
+}
+.blog-card__tag:hover {
+  color: var(--global-theme-color, #c4553a);
+  border-color: var(--global-theme-color, #c4553a);
+}
+
+/* Pagination spacing */
+.blog-pagination {
+  margin-top: 40px;
+}
+
+@media (max-width: 600px) {
+  .blog-hero h1 { font-size: 1.8rem; }
+  .blog-card { padding: 22px 22px; }
+  .blog-card--featured .blog-card__title { font-size: 1.25rem; }
+}
+</style>
+
+<div class="blog-index-wrap">
+
+  <!-- Header -->
+  <div class="blog-hero">
     <h1>Lorenzo's pile of garbage</h1>
-    <h2>This is a pile of garbage. Your job is to find the gold.</h2>
+    <p class="blog-desc">This is a pile of garbage. Your job is to find the gold.</p>
+    
+    <div class="blog-tag-row">
+      
+        <a class="blog-tag-pill" href="/blog/tag/non-academic">
+          <i class="fas fa-hashtag fa-sm"></i>non-academic
+        </a>
+      
+        <a class="blog-tag-pill" href="/blog/tag/academic">
+          <i class="fas fa-hashtag fa-sm"></i>academic
+        </a>
+      
+        <a class="blog-tag-pill" href="/blog/tag/for-fun">
+          <i class="fas fa-hashtag fa-sm"></i>for fun
+        </a>
+      
+    </div>
+    
   </div>
 
-  
-  <div class="tag-list">
-    <ul class="p-0 m-0">
+  <div class="blog-divider"></div>
+
+  <p class="blog-post-count">5 posts</p>
+
+  <!-- Cards -->
+  <ul class="blog-card-list">
+    
+
       
-        <li>
-          <i class="fas fa-hashtag fa-sm"></i> <a href="/blog/tag/non-academic">non-academic</a>
-        </li>
-        
-          <p>&bull;</p>
-        
       
-        <li>
-          <i class="fas fa-hashtag fa-sm"></i> <a href="/blog/tag/academic">academic</a>
-        </li>
-        
-          <p>&bull;</p>
-        
       
-        <li>
-          <i class="fas fa-hashtag fa-sm"></i> <a href="/blog/tag/for-fun">for fun</a>
-        </li>
-        
       
-    </ul>
-  </div>
-  
 
-  <ul class="post-list">
-    
+      <li class="blog-card blog-card--featured">
 
-    
-    
-    
-    
-
-    <li>
-      <h3>
         
-          <a class="post-title" href="/blog/2024/reviewer/">Reviewing for CSCW and ICWSM</a>
+          <div class="blog-card__badge">Latest</div>
         
-      </h3>
-      <p>Reflections on being a reviewer for CSCW and ICWSM</p>
-      <p class="post-meta">
-        1 min read &nbsp; &middot; &nbsp;
-        September 28, 2024
-      </p>
-      <p class="post-tags">
-        <a href="/blog/2024">
-          <i class="fas fa-calendar fa-sm"></i> 2024 </a>
 
+        <h2 class="blog-card__title">
           
-
+            <a href="/blog/2026/llm-agents-blueprint/">The 7-Step Blueprint for Building LLM Agents That Actually Work</a>
           
-          &nbsp; &middot; &nbsp;
-            
-            <a href="/blog/category/academic">
-              <i class="fas fa-tag fa-sm"></i> academic</a> &nbsp;
-              
-          
-    </p>
-    </li>
+        </h2>
 
-    
-
-    
-    
-    
-    
-
-    <li>
-      <h3>
         
-          <a class="post-title" href="/blog/2023/research-questions/">Hello World!</a>
+          <p class="blog-card__desc">An engineering framework for building production-grade LLM agents — from requirements to monitoring. Because demos are easy; products are not.</p>
         
-      </h3>
-      <p>My very first post</p>
-      <p class="post-meta">
-        1 min read &nbsp; &middot; &nbsp;
-        March 26, 2023
-      </p>
-      <p class="post-tags">
-        <a href="/blog/2023">
-          <i class="fas fa-calendar fa-sm"></i> 2023 </a>
 
+        <div class="blog-card__meta">
+          <span><i class="fas fa-calendar fa-sm"></i>&nbsp;Mar 14, 2026</span>
+          <span class="dot"></span>
+          <span><i class="fas fa-clock fa-sm"></i>&nbsp;23 min read</span>
           
+        </div>
 
-          
-          &nbsp; &middot; &nbsp;
-            
-            <a href="/blog/category/non-academic">
-              <i class="fas fa-tag fa-sm"></i> non-academic</a> &nbsp;
-              
-          
-    </p>
-    </li>
-
-    
-
-    
-    
-    
-    
-
-    <li>
-      <h3>
         
-          <a class="post-title" href="/blog/2023/first-post/">Hello World!</a>
+        <div class="blog-card__tags">
+          
+            <a class="blog-card__tag" href="/blog/tag/academic">#academic</a>
+          
+            <a class="blog-card__tag" href="/blog/tag/ai">#AI</a>
+          
+            <a class="blog-card__tag" href="/blog/tag/engineering">#engineering</a>
+          
+          
+            <a class="blog-card__tag" href="/blog/category/blog">blog</a>
+          
+        </div>
         
-      </h3>
-      <p>My very first post</p>
-      <p class="post-meta">
-        1 min read &nbsp; &middot; &nbsp;
-        March 26, 2023
-      </p>
-      <p class="post-tags">
-        <a href="/blog/2023">
-          <i class="fas fa-calendar fa-sm"></i> 2023 </a>
 
-          
-
-          
-          &nbsp; &middot; &nbsp;
-            
-            <a href="/blog/category/non-academic">
-              <i class="fas fa-tag fa-sm"></i> non-academic</a> &nbsp;
-              
-          
-    </p>
-    </li>
-
+      </li>
     
 
-    
-    
-    
-    
+      
+      
+      
+      
 
-    <li>
-      <h3>
+      <li class="blog-card">
+
         
+
+        <h2 class="blog-card__title">
           
-            <a class="post-title" href="https://medium.com/@al-folio/displaying-external-posts-on-your-al-folio-blog-b60a1d241a0a?source=rss-17feae71c3c4------2" target="_blank">Displaying External Posts on Your al-folio Blog</a>
-            <svg width="2rem" height="2rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-              <path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path>
-            </svg>
+            <a href="/blog/2024/reviewer/">Reviewing for CSCW and ICWSM</a>
           
+        </h2>
+
         
-      </h3>
-      <p></p>
-      <p class="post-meta">
-        1 min read &nbsp; &middot; &nbsp;
-        April 23, 2022
-        &nbsp; &middot; &nbsp; medium.com
-      </p>
-      <p class="post-tags">
-        <a href="/blog/2022">
-          <i class="fas fa-calendar fa-sm"></i> 2022 </a>
+          <p class="blog-card__desc">Reflections on being a reviewer for CSCW and ICWSM</p>
+        
 
+        <div class="blog-card__meta">
+          <span><i class="fas fa-calendar fa-sm"></i>&nbsp;Sep 28, 2024</span>
+          <span class="dot"></span>
+          <span><i class="fas fa-clock fa-sm"></i>&nbsp;1 min read</span>
           
+        </div>
 
+        
+        <div class="blog-card__tags">
           
-    </p>
-    </li>
+          
+            <a class="blog-card__tag" href="/blog/category/academic">academic</a>
+          
+        </div>
+        
 
+      </li>
+    
+
+      
+      
+      
+      
+
+      <li class="blog-card">
+
+        
+
+        <h2 class="blog-card__title">
+          
+            <a href="/blog/2023/research-questions/">Hello World!</a>
+          
+        </h2>
+
+        
+          <p class="blog-card__desc">My very first post</p>
+        
+
+        <div class="blog-card__meta">
+          <span><i class="fas fa-calendar fa-sm"></i>&nbsp;Mar 26, 2023</span>
+          <span class="dot"></span>
+          <span><i class="fas fa-clock fa-sm"></i>&nbsp;1 min read</span>
+          
+        </div>
+
+        
+        <div class="blog-card__tags">
+          
+          
+            <a class="blog-card__tag" href="/blog/category/non-academic">non-academic</a>
+          
+        </div>
+        
+
+      </li>
+    
+
+      
+      
+      
+      
+
+      <li class="blog-card">
+
+        
+
+        <h2 class="blog-card__title">
+          
+            <a href="/blog/2023/first-post/">Hello World!</a>
+          
+        </h2>
+
+        
+          <p class="blog-card__desc">My very first post</p>
+        
+
+        <div class="blog-card__meta">
+          <span><i class="fas fa-calendar fa-sm"></i>&nbsp;Mar 26, 2023</span>
+          <span class="dot"></span>
+          <span><i class="fas fa-clock fa-sm"></i>&nbsp;1 min read</span>
+          
+        </div>
+
+        
+        <div class="blog-card__tags">
+          
+          
+            <a class="blog-card__tag" href="/blog/category/non-academic">non-academic</a>
+          
+        </div>
+        
+
+      </li>
+    
+
+      
+      
+      
+      
+
+      <li class="blog-card">
+
+        
+
+        <h2 class="blog-card__title">
+          
+            <a href="https://medium.com/@al-folio/displaying-external-posts-on-your-al-folio-blog-b60a1d241a0a?source=rss-17feae71c3c4------2" target="_blank">Displaying External Posts on Your al-folio Blog<span class="ext-icon">↗</span></a>
+          
+        </h2>
+
+        
+
+        <div class="blog-card__meta">
+          <span><i class="fas fa-calendar fa-sm"></i>&nbsp;Apr 23, 2022</span>
+          <span class="dot"></span>
+          <span><i class="fas fa-clock fa-sm"></i>&nbsp;1 min read</span>
+          
+            <span class="dot"></span>
+            <span>medium.com</span>
+          
+        </div>
+
+        
+
+      </li>
     
   </ul>
 
-  
+  <div class="blog-pagination">
+    
+  </div>
 
 </div>
 

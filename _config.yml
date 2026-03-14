@@ -109,6 +109,7 @@ contact_note: >
 
 google_analytics:  # your Google Analytics measurement ID (format: G-XXXXXXXXXX)
 panelbear_analytics:  # panelbear analytics site ID (format: XXXXXXXXX)
+goatcounter: algoroxyolo  # your GoatCounter site code (sign up free at goatcounter.com, then replace this)
 
 google_site_verification:  # your google-site-verification ID (Google Search Console)
 bing_site_verification:  # out your bing-site-verification ID (Bing Webmaster)

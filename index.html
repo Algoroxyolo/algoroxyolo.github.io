@@ -117,28 +117,83 @@
     <div class="container mt-5">
       <!-- about.html -->
     <style>
-      /* ── Job-seeking banner ── */
-      .opportunity-banner {
-        display: flex;
-        align-items: flex-start;
-        gap: 16px;
-        margin: 32px 0;
-        padding: 20px 24px;
-        border: 1px solid var(--global-theme-color);
+      /* ── Open to work card ── */
+      .otw-card {
+        margin: 36px 0;
+        border: 1px solid var(--global-divider-color);
         border-left: 4px solid var(--global-theme-color);
-        border-radius: 8px;
+        border-radius: 10px;
+        padding: 28px 28px 24px;
         background: var(--global-code-bg-color);
-        font-size: 0.92rem;
-        line-height: 1.6;
       }
-      .opportunity-banner__icon {
-        color: var(--global-theme-color);
-        font-size: 1.2rem;
-        margin-top: 2px;
+      .otw-card__header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+      .otw-card__dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #10b981;
         flex-shrink: 0;
+        animation: otw-pulse 2s ease-in-out infinite;
       }
-      .opportunity-banner strong {
+      @keyframes otw-pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.4; }
+      }
+      .otw-card__title {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--global-text-color);
+        margin: 0;
+        letter-spacing: -0.01em;
+      }
+      .otw-card__role {
+        font-size: 0.95rem;
+        font-weight: 600;
         color: var(--global-theme-color);
+        margin: 0 0 12px;
+      }
+      .otw-card__body {
+        font-size: 0.88rem;
+        line-height: 1.65;
+        color: var(--global-text-color-light);
+        margin-bottom: 18px;
+      }
+      .otw-card__body p {
+        margin: 0 0 8px;
+        color: var(--global-text-color-light);
+      }
+      .otw-card__body p:last-child { margin-bottom: 0; }
+      .otw-card__links {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .otw-card__link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        font-size: 0.78rem;
+        font-weight: 500;
+        border-radius: 6px;
+        text-decoration: none;
+        border: 1px solid var(--global-divider-color);
+        color: var(--global-text-color);
+        background: var(--global-bg-color);
+        transition: border-color 0.15s, color 0.15s;
+      }
+      .otw-card__link:hover {
+        border-color: var(--global-theme-color);
+        color: var(--global-theme-color);
+        text-decoration: none;
+      }
+      .otw-card__link i {
+        font-size: 0.9em;
       }
 
       /* ── Calendar card ── */
@@ -250,14 +305,23 @@
 
           </div>
 
-          <!-- Open to opportunities -->
-          <div class="opportunity-banner">
-            <div class="opportunity-banner__icon">
-              <i class="fas fa-briefcase"></i>
+          <!-- Open to work -->
+          <div class="otw-card">
+            <div class="otw-card__header">
+              <div class="otw-card__dot"></div>
+              <h3 class="otw-card__title">Open to opportunities</h3>
             </div>
-            <div>
-              <strong>Open to opportunities</strong> —
-              I am completing my Master's at CMU LTI in May 2026 and actively seeking research scientist and applied NLP positions in both academia and industry. Feel free to reach out!
+            <p class="otw-card__role">ML Engineer / Research Engineer — starting May 2026</p>
+            <div class="otw-card__body">
+              <p>Seeking roles in applied AI research and engineering. I’m a Carnegie Mellon NLP researcher focused on LLM agents, evaluation, and safety, with experience building end-to-end prototypes in multi-agent systems, memory, persona consistency, and emotion-aware modeling.</p>
+
+            </div>
+            <div class="otw-card__links">
+              <a class="otw-card__link" href="/assets/pdf/Yunze_Xiao.pdf"><i class="fas fa-file-alt"></i> CV / Resume</a>
+              <a class="otw-card__link" href="https://www.linkedin.com/in/yunzexiao" target="_blank" rel="external nofollow noopener"><i class="fab fa-linkedin"></i> LinkedIn</a>
+              
+              <a class="otw-card__link" href="mailto:yunzex@cs.cmu.edu"><i class="fas fa-envelope"></i> Email me</a>
+              <a class="otw-card__link" href="https://x.com/lrzneedresearch" target="_blank" rel="external nofollow noopener"><i class="fab fa-twitter"></i> DM me</a>
             </div>
           </div>
 

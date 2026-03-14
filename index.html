@@ -437,6 +437,112 @@
             <iframe src="https://calendar.google.com/calendar/embed?src=yunzex%40andrew.cmu.edu&amp;ctz=Asia%2FQatar" style="border:2px #ffffff solid;" name="myiFrame" scrolling="yes" frameborder="1" marginheight="0px" marginwidth="0px" height="55%" width="55%" allowfullscreen></iframe>
           </div>
 
+          <!-- Visit counter -->
+          <style>
+            .visit-counter {
+              display: flex;
+              align-items: center;
+              gap: 20px;
+              flex-wrap: wrap;
+              margin: 24px 0 8px;
+              padding: 16px 20px;
+              border: 1px solid var(--global-divider-color);
+              border-radius: 12px;
+              background: var(--global-code-bg-color);
+              font-size: 0.82rem;
+              color: var(--global-text-color-light);
+            }
+            .visit-counter__stat {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 2px;
+              min-width: 60px;
+            }
+            .visit-counter__num {
+              font-size: 1.35rem;
+              font-weight: 700;
+              color: var(--global-text-color);
+              font-family: monospace;
+              line-height: 1;
+            }
+            .visit-counter__num--loading::after {
+              content: '…';
+            }
+            .visit-counter__label {
+              font-size: 0.7rem;
+              text-transform: uppercase;
+              letter-spacing: 0.8px;
+              color: var(--global-text-color-light);
+            }
+            .visit-counter__sep {
+              width: 1px;
+              height: 32px;
+              background: var(--global-divider-color);
+            }
+            .visit-counter__title {
+              font-size: 0.72rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: var(--global-text-color-light);
+              margin-right: auto;
+            }
+          </style>
+          <div class="visit-counter" id="visit-counter">
+            <span class="visit-counter__title">site stats</span>
+            <div class="visit-counter__stat">
+              <span class="visit-counter__num visit-counter__num--loading" id="gc-total"></span>
+              <span class="visit-counter__label">total views</span>
+            </div>
+            <div class="visit-counter__sep"></div>
+            <div class="visit-counter__stat">
+              <span class="visit-counter__num visit-counter__num--loading" id="gc-home"></span>
+              <span class="visit-counter__label">home views</span>
+            </div>
+            <div class="visit-counter__sep"></div>
+            <div class="visit-counter__stat">
+              <span class="visit-counter__num visit-counter__num--loading" id="gc-blog"></span>
+              <span class="visit-counter__label">blog views</span>
+            </div>
+          </div>
+          <script>
+            (function() {
+              var base = 'https://algoroxyolo.goatcounter.com/counter/';
+              function fmt(n) {
+                return n >= 1000 ? (n / 1000).toFixed(1) + 'k' : String(n);
+              }
+              function load(path, elId) {
+                fetch(base + encodeURIComponent(path) + '.json')
+                  .then(function(r) { return r.json(); })
+                  .then(function(d) {
+                    var el = document.getElementById(elId);
+                    if (el) {
+                      el.textContent = fmt(d.count_unique || d.count || 0);
+                      el.classList.remove('visit-counter__num--loading');
+                    }
+                  })
+                  .catch(function() {
+                    var el = document.getElementById(elId);
+                    if (el) { el.textContent = '—'; el.classList.remove('visit-counter__num--loading'); }
+                  });
+              }
+              load('/', 'gc-home');
+              load('/blog/', 'gc-blog');
+              /* total: sum home + blog as a proxy; GoatCounter public API doesn't expose site-wide totals */
+              Promise.all([
+                fetch(base + encodeURIComponent('/') + '.json').then(function(r){return r.json();}),
+                fetch(base + encodeURIComponent('/blog/') + '.json').then(function(r){return r.json();})
+              ]).then(function(results) {
+                var total = results.reduce(function(acc, d) { return acc + (d.count_unique || 0); }, 0);
+                var el = document.getElementById('gc-total');
+                if (el) { el.textContent = fmt(total); el.classList.remove('visit-counter__num--loading'); }
+              }).catch(function() {
+                var el = document.getElementById('gc-total');
+                if (el) { el.textContent = '—'; el.classList.remove('visit-counter__num--loading'); }
+              });
+            })();
+          </script>
+
           <!-- Social -->
             <div class="social">
               <div class="contact-icons">
@@ -505,7 +611,7 @@
   <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
   <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 
-    
+    <script data-goatcounter="https://algoroxyolo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
     
 
 <!-- Scrolling Progress Bar -->

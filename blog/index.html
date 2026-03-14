@@ -9,92 +9,301 @@ pagination:
   sort_field: date
   sort_reverse: true
   trail:
-    before: 1 # The number of links before the current page
-    after: 3  # The number of links after the current page
+    before: 1
+    after: 3
 ---
 
-<div class="post">
+<style>
+/* ── Blog index redesign ── */
 
-  <div class="header-bar">
+.blog-index-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Hero header */
+.blog-hero {
+  text-align: center;
+  padding: 56px 0 40px;
+  margin-bottom: 8px;
+}
+.blog-hero h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 14px;
+  line-height: 1.1;
+}
+.blog-hero .blog-desc {
+  font-size: 1rem;
+  color: var(--global-text-color-light, #6b7280);
+  max-width: 480px;
+  margin: 0 auto 28px;
+  line-height: 1.65;
+  font-style: italic;
+}
+
+/* Tag pills row */
+.blog-tag-row {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.blog-tag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 14px;
+  border-radius: 100px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  background: var(--global-code-bg-color, #f3f4f6);
+  color: var(--global-text-color, #374151);
+  text-decoration: none;
+  border: 1px solid var(--global-divider-color, #e5e7eb);
+  transition: background 0.18s, color 0.18s, border-color 0.18s;
+}
+.blog-tag-pill:hover {
+  background: var(--global-theme-color, #c4553a);
+  color: #fff;
+  border-color: var(--global-theme-color, #c4553a);
+}
+
+/* Divider */
+.blog-divider {
+  height: 1px;
+  background: var(--global-divider-color, #e5e7eb);
+  margin: 36px 0 32px;
+}
+
+/* Post count label */
+.blog-post-count {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--global-text-color-light, #9ca3af);
+  margin-bottom: 20px;
+}
+
+/* Card list */
+.blog-card-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Base card */
+.blog-card {
+  background: var(--global-card-bg-color, #ffffff);
+  border: 1px solid var(--global-divider-color, #e5e7eb);
+  border-radius: 14px;
+  padding: 28px 32px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  position: relative;
+}
+.blog-card:hover {
+  box-shadow: 0 6px 24px rgba(0,0,0,0.09);
+  transform: translateY(-2px);
+}
+
+/* Featured (first) card */
+.blog-card--featured {
+  border-left: 3px solid var(--global-theme-color, #c4553a);
+  background: linear-gradient(
+    to bottom right,
+    var(--global-card-bg-color, #fff) 60%,
+    var(--global-code-bg-color, #fdf7f5) 100%
+  );
+}
+
+/* Featured badge */
+.blog-card__badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--global-theme-color, #c4553a);
+  background: transparent;
+  border: 1px solid var(--global-theme-color, #c4553a);
+  border-radius: 100px;
+  padding: 2px 10px;
+  margin-bottom: 12px;
+  font-family: monospace;
+}
+
+/* Card title */
+.blog-card__title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.35;
+  margin: 0 0 10px;
+  letter-spacing: -0.01em;
+}
+.blog-card--featured .blog-card__title {
+  font-size: 1.45rem;
+}
+.blog-card__title a {
+  color: var(--global-text-color, #111827);
+  text-decoration: none;
+}
+.blog-card__title a:hover {
+  color: var(--global-theme-color, #c4553a);
+}
+.blog-card__title .ext-icon {
+  font-size: 0.75em;
+  opacity: 0.5;
+  margin-left: 4px;
+}
+
+/* Card description */
+.blog-card__desc {
+  color: var(--global-text-color-light, #6b7280);
+  font-size: 0.92rem;
+  line-height: 1.62;
+  margin: 0 0 14px;
+}
+
+/* Meta row (date + read time) */
+.blog-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 0.78rem;
+  color: var(--global-text-color-light, #9ca3af);
+  margin-bottom: 12px;
+}
+.blog-card__meta .dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--global-divider-color, #d1d5db);
+  flex-shrink: 0;
+}
+
+/* Tag chips */
+.blog-card__tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+.blog-card__tag {
+  font-size: 0.7rem;
+  padding: 2px 10px;
+  border-radius: 100px;
+  background: var(--global-code-bg-color, #f3f4f6);
+  color: var(--global-text-color-light, #6b7280);
+  text-decoration: none;
+  border: 1px solid var(--global-divider-color, #e5e7eb);
+  transition: color 0.15s, border-color 0.15s;
+}
+.blog-card__tag:hover {
+  color: var(--global-theme-color, #c4553a);
+  border-color: var(--global-theme-color, #c4553a);
+}
+
+/* Pagination spacing */
+.blog-pagination {
+  margin-top: 40px;
+}
+
+@media (max-width: 600px) {
+  .blog-hero h1 { font-size: 1.8rem; }
+  .blog-card { padding: 22px 22px; }
+  .blog-card--featured .blog-card__title { font-size: 1.25rem; }
+}
+</style>
+
+<div class="blog-index-wrap">
+
+  <!-- Header -->
+  <div class="blog-hero">
     <h1>{{ site.blog_name }}</h1>
-    <h2>{{ site.blog_description }}</h2>
-  </div>
-
-  {% if site.display_tags %}
-  <div class="tag-list">
-    <ul class="p-0 m-0">
+    <p class="blog-desc">{{ site.blog_description }}</p>
+    {% if site.display_tags %}
+    <div class="blog-tag-row">
       {% for tag in site.display_tags %}
-        <li>
-          <i class="fas fa-hashtag fa-sm"></i> <a href="{{ tag | slugify | prepend: '/blog/tag/' | relative_url }}">{{ tag }}</a>
-        </li>
-        {% unless forloop.last %}
-          <p>&bull;</p>
-        {% endunless %}
+        <a class="blog-tag-pill" href="{{ tag | slugify | prepend: '/blog/tag/' | relative_url }}">
+          <i class="fas fa-hashtag fa-sm"></i>{{ tag }}
+        </a>
       {% endfor %}
-    </ul>
+    </div>
+    {% endif %}
   </div>
-  {% endif %}
 
-  <ul class="post-list">
+  <div class="blog-divider"></div>
+
+  <p class="blog-post-count">{{ paginator.total_posts }} posts</p>
+
+  <!-- Cards -->
+  <ul class="blog-card-list">
     {% for post in paginator.posts %}
 
-    {% if post.external_source == blank %}
-      {% assign read_time = post.content | number_of_words | divided_by: 180 | plus: 1 %}
-    {% else %}
-      {% assign read_time = post.feed_content | strip_html | number_of_words | divided_by: 180 | plus: 1 %}
-    {% endif %}
-    {% assign year = post.date | date: "%Y" %}
-    {% assign tags = post.tags | join: "" %}
-    {% assign categories = post.categories | join: "" %}
+      {% if post.external_source == blank %}
+        {% assign read_time = post.content | number_of_words | divided_by: 180 | plus: 1 %}
+      {% else %}
+        {% assign read_time = post.feed_content | strip_html | number_of_words | divided_by: 180 | plus: 1 %}
+      {% endif %}
+      {% assign year = post.date | date: "%Y" %}
+      {% assign tags = post.tags | join: "" %}
+      {% assign categories = post.categories | join: "" %}
 
-    <li>
-      <h3>
-        {% if post.redirect == blank %}
-          <a class="post-title" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        {% else %}
-          {% if post.redirect contains '://' %}
-            <a class="post-title" href="{{ post.redirect }}" target="_blank">{{ post.title }}</a>
-            <svg width="2rem" height="2rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-              <path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path>
-            </svg>
-          {% else %}
-            <a class="post-title" href="{{ post.redirect | relative_url }}">{{ post.title }}</a>
-          {% endif %}
+      <li class="blog-card{% if forloop.first %} blog-card--featured{% endif %}">
+
+        {% if forloop.first %}
+          <div class="blog-card__badge">Latest</div>
         {% endif %}
-      </h3>
-      <p>{{ post.description }}</p>
-      <p class="post-meta">
-        {{ read_time }} min read &nbsp; &middot; &nbsp;
-        {{ post.date | date: '%B %-d, %Y' }}
-        {%- if post.external_source %}
-        &nbsp; &middot; &nbsp; {{ post.external_source }}
-        {%- endif %}
-      </p>
-      <p class="post-tags">
-        <a href="{{ year | prepend: '/blog/' | prepend: site.baseurl}}">
-          <i class="fas fa-calendar fa-sm"></i> {{ year }} </a>
 
-          {% if tags != "" %}
-          &nbsp; &middot; &nbsp;
-            {% for tag in post.tags %}
-            <a href="{{ tag | slugify | prepend: '/blog/tag/' | prepend: site.baseurl}}">
-              <i class="fas fa-hashtag fa-sm"></i> {{ tag }}</a> &nbsp;
-              {% endfor %}
+        <h2 class="blog-card__title">
+          {% if post.redirect == blank %}
+            <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+          {% elsif post.redirect contains '://' %}
+            <a href="{{ post.redirect }}" target="_blank">{{ post.title }}<span class="ext-icon">↗</span></a>
+          {% else %}
+            <a href="{{ post.redirect | relative_url }}">{{ post.title }}</a>
           {% endif %}
+        </h2>
 
-          {% if categories != "" %}
-          &nbsp; &middot; &nbsp;
-            {% for category in post.categories %}
-            <a href="{{ category | slugify | prepend: '/blog/category/' | prepend: site.baseurl}}">
-              <i class="fas fa-tag fa-sm"></i> {{ category }}</a> &nbsp;
-              {% endfor %}
+        {% if post.description %}
+          <p class="blog-card__desc">{{ post.description }}</p>
+        {% endif %}
+
+        <div class="blog-card__meta">
+          <span><i class="fas fa-calendar fa-sm"></i>&nbsp;{{ post.date | date: '%b %-d, %Y' }}</span>
+          <span class="dot"></span>
+          <span><i class="fas fa-clock fa-sm"></i>&nbsp;{{ read_time }} min read</span>
+          {% if post.external_source %}
+            <span class="dot"></span>
+            <span>{{ post.external_source }}</span>
           {% endif %}
-    </p>
-    </li>
+        </div>
 
+        {% if tags != "" or categories != "" %}
+        <div class="blog-card__tags">
+          {% for tag in post.tags %}
+            <a class="blog-card__tag" href="{{ tag | slugify | prepend: '/blog/tag/' | prepend: site.baseurl}}">#{{ tag }}</a>
+          {% endfor %}
+          {% for category in post.categories %}
+            <a class="blog-card__tag" href="{{ category | slugify | prepend: '/blog/category/' | prepend: site.baseurl}}">{{ category }}</a>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+      </li>
     {% endfor %}
   </ul>
 
-  {% include pagination.html %}
+  <div class="blog-pagination">
+    {% include pagination.html %}
+  </div>
 
 </div>

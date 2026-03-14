@@ -1,0 +1,786 @@
+---
+layout: none
+title: "The 7-Step Blueprint for Building LLM Agents That Actually Work"
+date: 2026-03-14
+description: "An engineering framework for building production-grade LLM agents — from requirements to monitoring. Because demos are easy; products are not."
+tags: [academic, AI, engineering]
+categories: [blog]
+author: Lorenzo Xiao
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The 7-Step Blueprint for Building LLM Agents That Actually Work</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --paper: #faf8f5;
+    --accent: #c4553a;
+    --accent-light: #e8725a;
+    --accent-bg: #fdf0ed;
+    --muted: #6b6560;
+    --border: #e0dbd5;
+    --code-bg: #f0ece7;
+    --highlight: #fff3cd;
+    --card-bg: #ffffff;
+    --shadow: rgba(26, 26, 26, 0.06);
+    --deep: #2c2420;
+    --teal: #2a8f82;
+    --teal-bg: #e8f5f3;
+    --blue: #3b6fa0;
+    --blue-bg: #eaf1f7;
+    --purple: #6b4c8a;
+    --purple-bg: #f3eef8;
+    --orange: #d4843e;
+    --orange-bg: #fdf3e8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Source Sans 3', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.72;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Nav bar ── */
+  .site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(250,248,245,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .site-nav a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--muted);
+    text-decoration: none;
+    border: none;
+    letter-spacing: 0.3px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.15s;
+  }
+  .site-nav a:hover { color: var(--accent); border: none; }
+  .site-nav .sep { color: var(--border); }
+
+  /* ── Hero ── */
+  .hero {
+    position: relative;
+    padding: 100px 24px 80px;
+    text-align: center;
+    overflow: hidden;
+    background: linear-gradient(175deg, #2c2420 0%, #3d2f28 40%, #4a352a 100%);
+    color: #faf8f5;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 50%, rgba(196,85,58,0.25) 0%, transparent 50%),
+      radial-gradient(circle at 80% 30%, rgba(42,143,130,0.15) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    border: 1px solid rgba(232,114,90,0.4);
+    padding: 6px 18px;
+    border-radius: 100px;
+    margin-bottom: 32px;
+    position: relative;
+  }
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+    line-height: 1.15;
+    max-width: 780px;
+    margin: 0 auto 24px;
+    letter-spacing: -0.02em;
+    position: relative;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent-light);
+  }
+  .hero-sub {
+    font-size: 1.15rem;
+    color: rgba(250,248,245,0.7);
+    max-width: 560px;
+    margin: 0 auto 40px;
+    line-height: 1.65;
+  }
+  .hero-meta {
+    font-size: 0.85rem;
+    color: rgba(250,248,245,0.45);
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.5px;
+  }
+  .hero-meta a {
+    color: rgba(250,248,245,0.6);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(250,248,245,0.2);
+  }
+
+  /* ── Article ── */
+  article {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .lead {
+    font-size: 1.2rem;
+    color: var(--muted);
+    margin: 56px 0 48px;
+    padding-left: 20px;
+    border-left: 3px solid var(--accent);
+    line-height: 1.75;
+  }
+
+  p { margin-bottom: 1.5em; }
+
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 1.85rem;
+    margin: 64px 0 20px;
+    color: var(--deep);
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+  h2 .step-num {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7em;
+    color: var(--accent);
+    margin-right: 8px;
+    font-weight: 500;
+  }
+
+  h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 1.25rem;
+    margin: 36px 0 12px;
+    color: var(--deep);
+  }
+
+  strong { font-weight: 600; color: var(--deep); }
+
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(196,85,58,0.3); }
+  a:hover { border-bottom-color: var(--accent); }
+
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85em;
+    background: var(--code-bg);
+    padding: 2px 7px;
+    border-radius: 4px;
+  }
+
+  /* ── Diagrams ── */
+  .diagram-wrap {
+    margin: 40px -40px;
+    padding: 0;
+  }
+  @media (max-width: 800px) { .diagram-wrap { margin: 32px 0; } }
+
+  .diagram-wrap svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .diagram-caption {
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-top: 12px;
+    font-style: italic;
+  }
+
+  /* ── Callout cards ── */
+  .callout {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin: 32px 0;
+    box-shadow: 0 2px 12px var(--shadow);
+    position: relative;
+  }
+  .callout.tip {
+    border-left: 4px solid var(--teal);
+    background: var(--teal-bg);
+  }
+  .callout.tip::before {
+    content: '💡';
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    font-size: 1.3rem;
+    background: var(--teal-bg);
+    padding: 0 6px;
+  }
+  .callout.warn {
+    border-left: 4px solid var(--orange);
+    background: var(--orange-bg);
+  }
+  .callout.warn::before {
+    content: '⚠️';
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    font-size: 1.3rem;
+    background: var(--orange-bg);
+    padding: 0 6px;
+  }
+  .callout p:last-child { margin-bottom: 0; }
+  .callout-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 8px;
+    color: var(--deep);
+  }
+
+  /* ── Table ── */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 32px 0;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 12px var(--shadow);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+  }
+  thead {
+    background: var(--deep);
+    color: var(--paper);
+  }
+  th {
+    padding: 14px 18px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  td {
+    padding: 12px 18px;
+    border-top: 1px solid var(--border);
+  }
+  tbody tr:nth-child(even) { background: rgba(0,0,0,0.02); }
+  tbody tr:hover { background: var(--accent-bg); }
+
+  /* ── Flow tags ── */
+  .flow-tags {
+    display: flex;
+    gap: 0;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 24px 0;
+    justify-content: center;
+  }
+  .flow-tag {
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .flow-arrow {
+    font-size: 1.1rem;
+    color: var(--muted);
+    margin: 0 6px;
+  }
+
+  /* ── Section divider ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 56px 0;
+  }
+
+  /* ── Footer ── */
+  footer {
+    text-align: center;
+    padding: 60px 24px 48px;
+    color: var(--muted);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border);
+    margin-top: 80px;
+  }
+  footer a { color: var(--accent); }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-badge, .hero h1, .hero-sub, .hero-meta {
+    animation: fadeUp 0.7s ease-out both;
+  }
+  .hero h1 { animation-delay: 0.1s; }
+  .hero-sub { animation-delay: 0.2s; }
+  .hero-meta { animation-delay: 0.3s; }
+
+  /* ── Responsive ── */
+  @media (max-width: 600px) {
+    .hero { padding: 72px 20px 56px; }
+    article { padding: 0 18px; }
+    .callout { padding: 20px 22px; }
+    h2 { font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════ NAV ════════ -->
+<nav class="site-nav">
+  <a href="/">← Home</a>
+  <span class="sep">/</span>
+  <a href="/blog/">Blog</a>
+</nav>
+
+<!-- ════════ HERO ════════ -->
+<header class="hero">
+  <div class="hero-badge">Systems Design</div>
+  <h1>The 7-Step Blueprint for Building LLM Agents That <em>Actually</em> Work</h1>
+  <p class="hero-sub">Everyone's building agents. Most are held together with duct tape. Here's the engineering framework that treats agentic systems like real software.</p>
+  <p class="hero-meta">Lorenzo Xiao &middot; Language Technologies Institute, CMU &middot; March 2026</p>
+</header>
+
+<!-- ════════ ARTICLE ════════ -->
+<article>
+
+<p class="lead">The gap between "I built a demo agent in an afternoon" and "we have a production agent serving real users" is enormous. The demo works 70% of the time and feels magical. The production system needs to work 99% of the time, at scale, under adversarial conditions, and fail gracefully when it doesn't. This post distills a comprehensive design framework into its core ideas.</p>
+
+<p>Traditional ML has a well-worn lifecycle: define the problem, collect data, train a model, evaluate, deploy, monitor. LLM agents break this mold in subtle but important ways. You don't train the model (usually). You don't collect labeled datasets (often). Instead, you're doing architecture design, prompt engineering, tool integration, and guardrail construction. The work has shifted, but the need for rigor hasn't.</p>
+
+<p>The framework presented here covers the full lifecycle in seven steps, from requirements to monitoring, with each step adapted for the specific challenges that agentic systems introduce.</p>
+
+<!-- ── Lifecycle Diagram ── -->
+<div class="diagram-wrap">
+<svg viewBox="0 0 800 190" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <defs>
+    <filter id="ds" x="-4%" y="-4%" width="108%" height="116%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.08"/>
+    </filter>
+    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#c4553a"/>
+      <stop offset="100%" stop-color="#e8725a"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2a8f82"/>
+      <stop offset="100%" stop-color="#3db5a5"/>
+    </linearGradient>
+    <linearGradient id="g3" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3b6fa0"/>
+      <stop offset="100%" stop-color="#5a94c4"/>
+    </linearGradient>
+    <linearGradient id="g4" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#d4843e"/>
+      <stop offset="100%" stop-color="#e8a55a"/>
+    </linearGradient>
+    <linearGradient id="g5" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6b4c8a"/>
+      <stop offset="100%" stop-color="#8b6caa"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Boxes -->
+  <g filter="url(#ds)">
+    <rect x="12" y="32" width="96" height="64" rx="10" fill="url(#g1)"/>
+    <text x="60" y="58" text-anchor="middle" fill="#fff" font-family="Source Sans 3" font-weight="600" font-size="11">Requirements</text>
+    <text x="60" y="74" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-family="Source Sans 3" font-size="10">&amp; Framing</text>
+  </g>
+  <g filter="url(#ds)">
+    <rect x="126" y="32" width="96" height="64" rx="10" fill="url(#g2)"/>
+    <text x="174" y="58" text-anchor="middle" fill="#fff" font-family="Source Sans 3" font-weight="600" font-size="11">Agent</text>
+    <text x="174" y="74" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-family="Source Sans 3" font-size="10">Architecture</text>
+  </g>
+  <g filter="url(#ds)">
+    <rect x="240" y="32" width="96" height="64" rx="10" fill="url(#g3)"/>
+    <text x="288" y="58" text-anchor="middle" fill="#fff" font-family="Source Sans 3" font-weight="600" font-size="11">Knowledge</text>
+    <text x="288" y="74" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-family="Source Sans 3" font-size="10">&amp; Tools</text>
+  </g>
+  <g filter="url(#ds)">
+    <rect x="354" y="32" width="96" height="64" rx="10" fill="url(#g4)"/>
+    <text x="402" y="58" text-anchor="middle" fill="#fff" font-family="Source Sans 3" font-weight="600" font-size="11">Agent</text>
+    <text x="402" y="74" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-family="Source Sans 3" font-size="10">Development</text>
+  </g>
+  <g filter="url(#ds)">
+    <rect x="468" y="32" width="96" height="64" rx="10" fill="url(#g5)"/>
+    <text x="516" y="58" text-anchor="middle" fill="#fff" font-family="Source Sans 3" font-weight="600" font-size="11">Evaluation</text>
+    <text x="516" y="74" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-family="Source Sans 3" font-size="10">&nbsp;</text>
+  </g>
+  <g filter="url(#ds)">
+    <rect x="582" y="32" width="96" height="64" rx="10" fill="url(#g1)"/>
+    <text x="630" y="58" text-anchor="middle" fill="#fff" font-family="Source Sans 3" font-weight="600" font-size="11">Safety &amp;</text>
+    <text x="630" y="74" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-family="Source Sans 3" font-size="10">Deployment</text>
+  </g>
+  <g filter="url(#ds)">
+    <rect x="696" y="32" width="96" height="64" rx="10" fill="url(#g2)"/>
+    <text x="744" y="58" text-anchor="middle" fill="#fff" font-family="Source Sans 3" font-weight="600" font-size="11">Observe &amp;</text>
+    <text x="744" y="74" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-family="Source Sans 3" font-size="10">Monitor</text>
+  </g>
+
+  <!-- Step numbers -->
+  <text x="60" y="24" text-anchor="middle" fill="#c4553a" font-family="JetBrains Mono" font-size="11" font-weight="500">01</text>
+  <text x="174" y="24" text-anchor="middle" fill="#2a8f82" font-family="JetBrains Mono" font-size="11" font-weight="500">02</text>
+  <text x="288" y="24" text-anchor="middle" fill="#3b6fa0" font-family="JetBrains Mono" font-size="11" font-weight="500">03</text>
+  <text x="402" y="24" text-anchor="middle" fill="#d4843e" font-family="JetBrains Mono" font-size="11" font-weight="500">04</text>
+  <text x="516" y="24" text-anchor="middle" fill="#6b4c8a" font-family="JetBrains Mono" font-size="11" font-weight="500">05</text>
+  <text x="630" y="24" text-anchor="middle" fill="#c4553a" font-family="JetBrains Mono" font-size="11" font-weight="500">06</text>
+  <text x="744" y="24" text-anchor="middle" fill="#2a8f82" font-family="JetBrains Mono" font-size="11" font-weight="500">07</text>
+
+  <!-- Arrows -->
+  <path d="M110 64 L124 64" stroke="#bbb" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <path d="M224 64 L238 64" stroke="#bbb" stroke-width="1.5"/>
+  <path d="M338 64 L352 64" stroke="#bbb" stroke-width="1.5"/>
+  <path d="M452 64 L466 64" stroke="#bbb" stroke-width="1.5"/>
+  <path d="M566 64 L580 64" stroke="#bbb" stroke-width="1.5"/>
+  <path d="M680 64 L694 64" stroke="#bbb" stroke-width="1.5"/>
+
+  <!-- Feedback loop -->
+  <path d="M744 98 L744 145 Q744 155 734 155 L70 155 Q60 155 60 145 L60 98" stroke="#c4553a" stroke-width="1.5" stroke-dasharray="6 4" fill="none" opacity="0.5"/>
+  <text x="400" y="170" text-anchor="middle" fill="#c4553a" font-family="Source Sans 3" font-size="11" font-style="italic" opacity="0.7">Continuous feedback loop</text>
+</svg>
+</div>
+<p class="diagram-caption">The seven-step lifecycle. Each feeds forward; monitoring feeds back to every earlier stage.</p>
+
+<div class="divider"></div>
+
+<!-- ════════ STEP 1 ════════ -->
+<h2><span class="step-num">01</span> Start With the Right Question</h2>
+
+<p>In traditional ML, you separate "what's the business problem?" from "what model do we build?" For LLM agents, these are the same question. Choosing between a single LLM call, an agentic loop, or a multi-agent system is itself a core architectural decision that shapes everything downstream.</p>
+
+<div class="callout tip">
+  <div class="callout-title">The Golden Rule</div>
+  <p>Start simple. Single LLM call first. Escalate to an agentic loop only when you can prove it's needed. Go multi-agent only when a single agent demonstrably can't handle the task. Complexity is always a cost.</p>
+</div>
+
+<p>The key tensions to navigate early: <strong>speed vs. quality</strong> (more reasoning steps yield better outputs but compound latency), <strong>autonomy vs. control</strong> (full autonomy for low-risk, human-in-the-loop for high-risk), and <strong>specialization vs. generality</strong> (specialized agents excel narrowly but multiply system complexity).</p>
+
+<div class="divider"></div>
+
+<!-- ════════ STEP 2 ════════ -->
+<h2><span class="step-num">02</span> Design the Architecture</h2>
+
+<p>This is the step that simply doesn't exist in traditional ML. For agents, architecture design (topology, reasoning patterns, tool schemas, inter-agent protocols) is as important as model selection. Maybe more.</p>
+
+<!-- Architecture patterns diagram -->
+<div class="diagram-wrap">
+<svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <defs>
+    <filter id="ds2" x="-4%" y="-4%" width="108%" height="116%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.07"/>
+    </filter>
+  </defs>
+
+  <!-- Single Agent -->
+  <text x="130" y="24" text-anchor="middle" fill="#2c2420" font-family="Fraunces" font-weight="700" font-size="14">Single Agent</text>
+  <g filter="url(#ds2)">
+    <rect x="50" y="36" width="160" height="180" rx="12" fill="#fff" stroke="#e0dbd5" stroke-width="1"/>
+    <rect x="70" y="56" width="120" height="30" rx="6" fill="#e8f5f3" stroke="#2a8f82" stroke-width="0.8"/>
+    <text x="130" y="76" text-anchor="middle" fill="#2a8f82" font-family="Source Sans 3" font-size="12" font-weight="500">Memory</text>
+    <rect x="70" y="96" width="120" height="30" rx="6" fill="#eaf1f7" stroke="#3b6fa0" stroke-width="0.8"/>
+    <text x="130" y="116" text-anchor="middle" fill="#3b6fa0" font-family="Source Sans 3" font-size="12" font-weight="500">Tools / APIs</text>
+    <rect x="70" y="136" width="120" height="30" rx="6" fill="#f3eef8" stroke="#6b4c8a" stroke-width="0.8"/>
+    <text x="130" y="156" text-anchor="middle" fill="#6b4c8a" font-family="Source Sans 3" font-size="12" font-weight="500">Prompt / System</text>
+    <rect x="70" y="176" width="120" height="28" rx="6" fill="#fdf0ed" stroke="#c4553a" stroke-width="0.8"/>
+    <text x="130" y="195" text-anchor="middle" fill="#c4553a" font-family="Source Sans 3" font-size="12" font-weight="500">User Input</text>
+  </g>
+
+  <!-- Pipeline MAS -->
+  <text x="420" y="24" text-anchor="middle" fill="#2c2420" font-family="Fraunces" font-weight="700" font-size="14">Pipeline MAS</text>
+  <g filter="url(#ds2)">
+    <rect x="310" y="90" width="72" height="72" rx="36" fill="url(#g2)" />
+    <text x="346" y="124" text-anchor="middle" fill="#fff" font-family="Source Sans 3" font-weight="600" font-size="11">Planner</text>
+    <text x="346" y="138" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="JetBrains Mono" font-size="10">1</text>
+  </g>
+  <path d="M384 126 L404 126" stroke="#bbb" stroke-width="1.5"/>
+  <g filter="url(#ds2)">
+    <rect x="406" y="90" width="72" height="72" rx="36" fill="url(#g3)"/>
+    <text x="442" y="124" text-anchor="middle" fill="#fff" font-family="Source Sans 3" font-weight="600" font-size="11">Executor</text>
+    <text x="442" y="138" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="JetBrains Mono" font-size="10">2</text>
+  </g>
+  <path d="M480 126 L500 126" stroke="#bbb" stroke-width="1.5"/>
+  <g filter="url(#ds2)">
+    <rect x="502" y="90" width="72" height="72" rx="36" fill="url(#g5)"/>
+    <text x="538" y="124" text-anchor="middle" fill="#fff" font-family="Source Sans 3" font-weight="600" font-size="11">Reviewer</text>
+    <text x="538" y="138" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="JetBrains Mono" font-size="10">3</text>
+  </g>
+  <text x="424" y="195" text-anchor="middle" fill="#6b6560" font-family="Source Sans 3" font-size="11" font-style="italic">Sequential data flow</text>
+
+  <!-- Hierarchical MAS -->
+  <text x="700" y="24" text-anchor="middle" fill="#2c2420" font-family="Fraunces" font-weight="700" font-size="14">Hierarchical MAS</text>
+  <g filter="url(#ds2)">
+    <rect x="652" y="48" width="96" height="44" rx="10" fill="url(#g4)"/>
+    <text x="700" y="76" text-anchor="middle" fill="#fff" font-family="Source Sans 3" font-weight="600" font-size="12">Manager</text>
+  </g>
+  <!-- Lines to children -->
+  <line x1="672" y1="92" x2="636" y2="128" stroke="#d4843e" stroke-width="1.2" opacity="0.5"/>
+  <line x1="700" y1="92" x2="700" y2="128" stroke="#d4843e" stroke-width="1.2" opacity="0.5"/>
+  <line x1="728" y1="92" x2="764" y2="128" stroke="#d4843e" stroke-width="1.2" opacity="0.5"/>
+  <g filter="url(#ds2)">
+    <rect x="608" y="130" width="56" height="42" rx="8" fill="#fff" stroke="#d4843e" stroke-width="1"/>
+    <text x="636" y="156" text-anchor="middle" fill="#d4843e" font-family="Source Sans 3" font-size="11" font-weight="500">Agent A</text>
+  </g>
+  <g filter="url(#ds2)">
+    <rect x="672" y="130" width="56" height="42" rx="8" fill="#fff" stroke="#d4843e" stroke-width="1"/>
+    <text x="700" y="156" text-anchor="middle" fill="#d4843e" font-family="Source Sans 3" font-size="11" font-weight="500">Agent B</text>
+  </g>
+  <g filter="url(#ds2)">
+    <rect x="736" y="130" width="56" height="42" rx="8" fill="#fff" stroke="#d4843e" stroke-width="1"/>
+    <text x="764" y="156" text-anchor="middle" fill="#d4843e" font-family="Source Sans 3" font-size="11" font-weight="500">Agent C</text>
+  </g>
+  <text x="700" y="200" text-anchor="middle" fill="#6b6560" font-family="Source Sans 3" font-size="11" font-style="italic">Delegate and aggregate</text>
+
+  <!-- Bottom label line -->
+  <line x1="50" y1="260" x2="792" y2="260" stroke="#e0dbd5" stroke-width="1"/>
+  <text x="130" y="282" text-anchor="middle" fill="#6b6560" font-family="Source Sans 3" font-size="11">Simplest. Start here.</text>
+  <text x="424" y="282" text-anchor="middle" fill="#6b6560" font-family="Source Sans 3" font-size="11">Clear I/O contracts between stages.</text>
+  <text x="700" y="282" text-anchor="middle" fill="#6b6560" font-family="Source Sans 3" font-size="11">Best for complex delegation.</text>
+</svg>
+</div>
+<p class="diagram-caption">Three canonical patterns. Each trades simplicity for capability.</p>
+
+<h3>Choosing a Reasoning Pattern</h3>
+<p>The reasoning pattern determines how your agent thinks. <strong>ReAct</strong> interleaves thinking and acting in a loop: observe, reason, act, repeat. It's your default for tool-use tasks. <strong>Plan-then-Execute</strong> generates a full plan upfront, then executes step by step, yielding better reasoning quality but less adaptivity. <strong>Reflexion</strong> adds verbal self-critique after each attempt, letting the agent improve across trials without any weight updates. For long-horizon tasks with uncertainty, <strong>Plan-then-Execute with Re-planning</strong> combines planning quality with the ability to adapt when things go sideways.</p>
+
+<div class="flow-tags">
+  <span class="flow-tag" style="background:#e8f5f3;color:#2a8f82;">Simple tool-use → ReAct</span>
+  <span class="flow-arrow">·</span>
+  <span class="flow-tag" style="background:#eaf1f7;color:#3b6fa0;">Multi-step → Plan-Execute</span>
+  <span class="flow-arrow">·</span>
+  <span class="flow-tag" style="background:#f3eef8;color:#6b4c8a;">Iterative → Reflexion</span>
+  <span class="flow-arrow">·</span>
+  <span class="flow-tag" style="background:#fdf3e8;color:#d4843e;">Uncertain → Re-planning</span>
+</div>
+
+<h3>Don't Forget the Human</h3>
+<p>Architecture decisions shape the user's experience. Research shows that users build mental models of what agents can and cannot do, and misaligned mental models lead to over-reliance or under-trust. The practical implications: expose the agent's plan and uncertainty (progressive disclosure works well), always let users override or cancel, and communicate confidence calibration. An agent that cannot be stopped is an agent that cannot be trusted.</p>
+
+<div class="divider"></div>
+
+<!-- ════════ STEP 3 ════════ -->
+<h2><span class="step-num">03</span> Build the Knowledge and Tool Layer</h2>
+
+<p>In traditional ML, "data prep" means building training datasets. For LLM agents, it means building knowledge infrastructure: RAG pipelines, vector stores, tool schemas, memory systems, and feedback loops. This is where most of the unglamorous but critical engineering happens.</p>
+
+<p>Each tool needs a complete contract: name, description, typed parameters, return type, error types, timeout, and fallback behavior. Apply the principle of least privilege. Test that serialized results preserve the information your agent actually needs. On the prompt side, respect the instruction hierarchy (system > user > context) to guard against injection, version-control your prompts alongside code, and treat every prompt change as a deployment.</p>
+
+<div class="divider"></div>
+
+<!-- ════════ STEP 4 ════════ -->
+<h2><span class="step-num">04</span> Develop the Agent</h2>
+
+<p>In traditional ML, development means training. For LLM agents, you typically select a foundation model and then build around it. The real work is agent construction: memory architecture, persona design, MAS orchestration.</p>
+
+<p>Model adaptation spans a spectrum from in-context learning (lowest barrier, context-window limited) through SFT and RL (PPO, DPO, GRPO, DAPO) to full distillation. Memory architecture needs careful thought: context window management (sliding window vs. summarization), external memory (vector DB, key-value), episodic memory for self-reflection, and shared memory design for multi-agent setups.</p>
+
+<h3>Anthropomorphism as a Design Lever</h3>
+<p>LLM agents inevitably exhibit anthropomorphic characteristics. Rather than treating this purely as a risk, it can be treated as a controllable design dimension. There are four categories of cues designers can tune: <strong>perceptive</strong> (avatar, interface style), <strong>linguistic</strong> (word choice, formality, humor), <strong>behavioral</strong> (turn-taking, proactivity, error acknowledgment), and <strong>cognitive</strong> (reasoning style, memory references). The key principle: every anthropomorphic feature should be <em>function-oriented</em>, serving a specific user goal rather than just making the agent feel human for its own sake.</p>
+
+<div class="divider"></div>
+
+<!-- ════════ STEP 5 ════════ -->
+<h2><span class="step-num">05</span> Evaluate Rigorously</h2>
+
+<p>Agent evaluation is harder than model evaluation. You're dealing with multi-step trajectories where many paths are valid, behavior is path-dependent and stochastic, MAS can exhibit emergent dynamics, and key properties are often latent. A single metric will mislead you.</p>
+
+<!-- Eval diagram -->
+<div class="diagram-wrap">
+<svg viewBox="0 0 800 240" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <defs>
+    <filter id="ds3" x="-2%" y="-4%" width="104%" height="116%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.06"/>
+    </filter>
+  </defs>
+
+  <!-- Offline section -->
+  <rect x="20" y="42" width="370" height="180" rx="14" fill="#fff" stroke="#2a8f82" stroke-width="1.5" filter="url(#ds3)"/>
+  <rect x="20" y="42" width="370" height="36" rx="14" fill="#2a8f82"/>
+  <rect x="20" y="64" width="370" height="14" fill="#2a8f82"/>
+  <text x="205" y="66" text-anchor="middle" fill="#fff" font-family="Source Sans 3" font-weight="600" font-size="13">Offline Evaluation (Pre-deployment)</text>
+
+  <text x="46" y="106" fill="#2c2420" font-family="Source Sans 3" font-size="12" font-weight="500">Lexical</text>
+  <text x="46" y="122" fill="#6b6560" font-family="Source Sans 3" font-size="11">BLEU, ROUGE, WER</text>
+  <text x="210" y="106" fill="#2c2420" font-family="Source Sans 3" font-size="12" font-weight="500">Embedding</text>
+  <text x="210" y="122" fill="#6b6560" font-family="Source Sans 3" font-size="11">BERTScore, COMET</text>
+  <text x="46" y="152" fill="#2c2420" font-family="Source Sans 3" font-size="12" font-weight="500">LLM-Judge</text>
+  <text x="46" y="168" fill="#6b6560" font-family="Source Sans 3" font-size="11">Auto-rating w/ guidelines</text>
+  <text x="210" y="152" fill="#2c2420" font-family="Source Sans 3" font-size="12" font-weight="500">RAG Metrics</text>
+  <text x="210" y="168" fill="#6b6560" font-family="Source Sans 3" font-size="11">Faithfulness, Halluc.</text>
+  <text x="46" y="198" fill="#2c2420" font-family="Source Sans 3" font-size="12" font-weight="500">Agent Trajectory</text>
+  <text x="46" y="214" fill="#6b6560" font-family="Source Sans 3" font-size="11">Tool success, chain length</text>
+
+  <!-- Online section -->
+  <rect x="420" y="42" width="370" height="180" rx="14" fill="#fff" stroke="#c4553a" stroke-width="1.5" filter="url(#ds3)"/>
+  <rect x="420" y="42" width="370" height="36" rx="14" fill="#c4553a"/>
+  <rect x="420" y="64" width="370" height="14" fill="#c4553a"/>
+  <text x="605" y="66" text-anchor="middle" fill="#fff" font-family="Source Sans 3" font-weight="600" font-size="13">Online Evaluation (Post-deployment)</text>
+
+  <text x="446" y="106" fill="#2c2420" font-family="Source Sans 3" font-size="12" font-weight="500">Explicit</text>
+  <text x="446" y="122" fill="#6b6560" font-family="Source Sans 3" font-size="11">Thumbs, surveys</text>
+  <text x="610" y="106" fill="#2c2420" font-family="Source Sans 3" font-size="12" font-weight="500">Implicit</text>
+  <text x="610" y="122" fill="#6b6560" font-family="Source Sans 3" font-size="11">CTR, dwell time, edits</text>
+  <text x="446" y="152" fill="#2c2420" font-family="Source Sans 3" font-size="12" font-weight="500">Safety</text>
+  <text x="446" y="168" fill="#6b6560" font-family="Source Sans 3" font-size="11">Escalation, incidents</text>
+  <text x="610" y="152" fill="#2c2420" font-family="Source Sans 3" font-size="12" font-weight="500">Business</text>
+  <text x="610" y="168" fill="#6b6560" font-family="Source Sans 3" font-size="11">Transactions, retention</text>
+  <text x="446" y="198" fill="#2c2420" font-family="Source Sans 3" font-size="12" font-weight="500">Efficiency</text>
+  <text x="446" y="214" fill="#6b6560" font-family="Source Sans 3" font-size="11">Speed, task completion</text>
+
+  <!-- Validate arrow -->
+  <text x="405" y="138" text-anchor="middle" fill="#6b6560" font-family="Source Sans 3" font-size="10" font-style="italic" transform="rotate(-90 405 138)">validate</text>
+  <line x1="395" y1="110" x2="395" y2="165" stroke="#6b6560" stroke-width="1" stroke-dasharray="3 3"/>
+
+  <!-- Title -->
+  <text x="400" y="20" text-anchor="middle" fill="#2c2420" font-family="Fraunces" font-weight="700" font-size="14">Evaluation Framework</text>
+</svg>
+</div>
+<p class="diagram-caption">Offline metrics must correlate with online signals. If they don't, all optimization is wasted.</p>
+
+<div class="callout warn">
+  <div class="callout-title">Watch for Population-Level Blindspots</div>
+  <p>An increase in the average metric does not guarantee all users see improvement. The arithmetic mean prioritizes the largest subgroup, potentially at the expense of marginalized groups. Always disaggregate by user expertise, language, cultural context, and platform. An agent that works well for power users but fails for novices has a quality-of-service problem, even if average metrics look great.</p>
+</div>
+
+<h3>Key Benchmarks</h3>
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr><th>Benchmark</th><th>Domain</th><th>What It Tests</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>SWE-bench</strong></td><td>Coding</td><td>Fix real GitHub issues across 12 Python repos</td></tr>
+    <tr><td><strong>WebArena</strong></td><td>Web</td><td>Tasks on self-hosted realistic websites</td></tr>
+    <tr><td><strong>GAIA</strong></td><td>General</td><td>Real-world QA requiring reasoning + tools</td></tr>
+    <tr><td><strong>AgentBench</strong></td><td>Multi-env</td><td>8 environments testing reasoning and decisions</td></tr>
+    <tr><td><strong>ToolEmu</strong></td><td>Safety</td><td>36 high-stakes tools, sandboxed risky behavior</td></tr>
+    <tr><td><strong>BFCL</strong></td><td>Function call</td><td>4,441 tasks across Python, Java, JS, SQL, REST</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="divider"></div>
+
+<!-- ════════ STEP 6 ════════ -->
+<h2><span class="step-num">06</span> Safety, Guardrails, and Deployment</h2>
+
+<p>For agents that act autonomously, guardrail design is as important as the agent itself. The threat model covers prompt injection (direct and indirect), data leakage (PII, credentials), excessive agency (unauthorized actions), and system prompt leakage.</p>
+
+<p>Guardrails operate at three layers: <strong>input</strong> (validate, reject adversarial prompts, detect injection), <strong>system prompt</strong> (instruction hierarchy, constitutional rules, persona boundaries), and <strong>output</strong> (filter PII, toxicity, hallucination, unauthorized actions; trigger retry or fallback). For multi-agent systems, guardrails must also cover inter-agent messages, and tool scoping via least privilege limits the blast radius of any single failure.</p>
+
+<h3>Cost Engineering Matters</h3>
+<p>MAS cost adds up fast: sum all input and output tokens across every agent call, including inter-agent communication. In practice, this is often 3 to 5 times the user-facing token cost. Smart routing (cheap model for easy queries, expensive for hard), semantic caching, prompt compression, and per-query budget enforcement are not optimizations; they're requirements for production viability.</p>
+
+<div class="divider"></div>
+
+<!-- ════════ STEP 7 ════════ -->
+<h2><span class="step-num">07</span> Observe and Monitor</h2>
+
+<p>For agentic systems, observability is a distinct discipline. You need distributed tracing (every LLM call, tool call, and inter-agent message as spans), prompt versioning (correlate prompt changes with metric shifts), trajectory replay (store and replay failed trajectories, the LLM equivalent of a stack trace), and real-time cost dashboards.</p>
+
+<!-- Failure modes -->
+<div class="diagram-wrap">
+<svg viewBox="0 0 800 160" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <defs>
+    <filter id="ds4" x="-3%" y="-8%" width="106%" height="124%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.06"/>
+    </filter>
+  </defs>
+  <text x="400" y="22" text-anchor="middle" fill="#2c2420" font-family="Fraunces" font-weight="700" font-size="14">Agent Failure Modes to Monitor</text>
+
+  <g filter="url(#ds4)">
+    <rect x="16" y="40" width="170" height="50" rx="10" fill="#fdf0ed" stroke="#c4553a" stroke-width="1"/>
+    <text x="101" y="62" text-anchor="middle" fill="#c4553a" font-family="Source Sans 3" font-weight="600" font-size="12">Infinite Loops</text>
+    <text x="101" y="78" text-anchor="middle" fill="#6b6560" font-family="Source Sans 3" font-size="10.5">Agent stuck in cycle</text>
+  </g>
+  <g filter="url(#ds4)">
+    <rect x="202" y="40" width="170" height="50" rx="10" fill="#e8f5f3" stroke="#2a8f82" stroke-width="1"/>
+    <text x="287" y="62" text-anchor="middle" fill="#2a8f82" font-family="Source Sans 3" font-weight="600" font-size="12">Hallucinated Tool Calls</text>
+    <text x="287" y="78" text-anchor="middle" fill="#6b6560" font-family="Source Sans 3" font-size="10.5">Calling tools that don't exist</text>
+  </g>
+  <g filter="url(#ds4)">
+    <rect x="388" y="40" width="170" height="50" rx="10" fill="#eaf1f7" stroke="#3b6fa0" stroke-width="1"/>
+    <text x="473" y="62" text-anchor="middle" fill="#3b6fa0" font-family="Source Sans 3" font-weight="600" font-size="12">Context Exhaustion</text>
+    <text x="473" y="78" text-anchor="middle" fill="#6b6560" font-family="Source Sans 3" font-size="10.5">Exceeding context window</text>
+  </g>
+  <g filter="url(#ds4)">
+    <rect x="574" y="40" width="210" height="50" rx="10" fill="#f3eef8" stroke="#6b4c8a" stroke-width="1"/>
+    <text x="679" y="62" text-anchor="middle" fill="#6b4c8a" font-family="Source Sans 3" font-weight="600" font-size="12">Cascading MAS Errors</text>
+    <text x="679" y="78" text-anchor="middle" fill="#6b6560" font-family="Source Sans 3" font-size="10.5">One agent's failure propagates</text>
+  </g>
+
+  <g filter="url(#ds4)">
+    <rect x="16" y="102" width="170" height="50" rx="10" fill="#fdf3e8" stroke="#d4843e" stroke-width="1"/>
+    <text x="101" y="124" text-anchor="middle" fill="#d4843e" font-family="Source Sans 3" font-weight="600" font-size="12">Reward Hacking</text>
+    <text x="101" y="140" text-anchor="middle" fill="#6b6560" font-family="Source Sans 3" font-size="10.5">Gaming the objective</text>
+  </g>
+  <g filter="url(#ds4)">
+    <rect x="202" y="102" width="170" height="50" rx="10" fill="#fdf0ed" stroke="#c4553a" stroke-width="1"/>
+    <text x="287" y="124" text-anchor="middle" fill="#c4553a" font-family="Source Sans 3" font-weight="600" font-size="12">Goal Drift</text>
+    <text x="287" y="140" text-anchor="middle" fill="#6b6560" font-family="Source Sans 3" font-size="10.5">Wandering from objective</text>
+  </g>
+  <g filter="url(#ds4)">
+    <rect x="388" y="102" width="170" height="50" rx="10" fill="#e8f5f3" stroke="#2a8f82" stroke-width="1"/>
+    <text x="473" y="124" text-anchor="middle" fill="#2a8f82" font-family="Source Sans 3" font-weight="600" font-size="12">Distribution Shift</text>
+    <text x="473" y="140" text-anchor="middle" fill="#6b6560" font-family="Source Sans 3" font-size="10.5">Real inputs ≠ test inputs</text>
+  </g>
+  <g filter="url(#ds4)">
+    <rect x="574" y="102" width="210" height="50" rx="10" fill="#eaf1f7" stroke="#3b6fa0" stroke-width="1"/>
+    <text x="679" y="124" text-anchor="middle" fill="#3b6fa0" font-family="Source Sans 3" font-weight="600" font-size="12">Tool API Changes</text>
+    <text x="679" y="140" text-anchor="middle" fill="#6b6560" font-family="Source Sans 3" font-size="10.5">External deps break silently</text>
+  </g>
+</svg>
+</div>
+<p class="diagram-caption">Eight failure modes unique to (or amplified by) agentic systems. Each needs its own alert.</p>
+
+<p>Set up severity tiers: P0 for safety incidents (immediate rollback), P1 for major regressions (1-hour response), P2 for minor issues (1-day). Assign on-call owners. Run quarterly fire drills. A practical rule of thumb: if a single agent triggers more than 10 downstream calls, investigate.</p>
+
+<div class="divider"></div>
+
+<!-- ════════ CLOSING ════════ -->
+<h2>The Meta-Lesson</h2>
+
+<p>The most important insight from this framework isn't any single step. It's that building LLM agents requires the same engineering discipline as building any complex software system, just with different primitives. You're not training models; you're designing architectures, writing contracts, building guardrails, and instrumenting everything. The teams that treat this as "just prompting" will build demos. The teams that treat it as systems engineering will build products.</p>
+
+<p>The full framework, including formal metric definitions, case studies (personalized multi-turn agents), and an appendix of evaluation metrics, is available in the complete reference document.</p>
+
+</article>
+
+<footer>
+  <p>Lorenzo Xiao &middot; Language Technologies Institute &middot; Carnegie Mellon University</p>
+  <p style="margin-top:8px;"><a href="/blog/" style="color:var(--accent);border:none;">← Back to blog</a> &nbsp;&middot;&nbsp; March 2026</p>
+</footer>
+
+</body>
+</html>

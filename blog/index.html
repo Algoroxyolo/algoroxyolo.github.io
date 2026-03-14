@@ -211,11 +211,19 @@
 .blog-card {
   background: var(--global-card-bg-color, #ffffff);
   border: 1px solid var(--global-divider-color, #e5e7eb);
-  border-radius: 14px;
+  border-radius: 10px;
   padding: 28px 32px;
   transition: box-shadow 0.2s ease, transform 0.2s ease;
   box-shadow: 0 1px 4px rgba(0,0,0,0.04);
   position: relative;
+  overflow: hidden;
+}
+.blog-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--card-accent, transparent);
 }
 .blog-card:hover {
   box-shadow: 0 6px 24px rgba(0,0,0,0.09);
@@ -224,12 +232,14 @@
 
 /* Featured (first) card */
 .blog-card--featured {
-  border-left: 3px solid var(--global-theme-color, #c4553a);
   background: linear-gradient(
     to bottom right,
     var(--global-card-bg-color, #fff) 60%,
     var(--global-code-bg-color, #fdf7f5) 100%
   );
+}
+.blog-card--featured::before {
+  height: 4px;
 }
 
 /* Featured badge */
@@ -370,7 +380,7 @@
       
       
 
-      <li class="blog-card blog-card--featured">
+      <li class="blog-card blog-card--featured" style="--card-accent: #3b6fa0">
 
         
           <div class="blog-card__badge">Latest</div>
@@ -416,7 +426,7 @@
       
       
 
-      <li class="blog-card">
+      <li class="blog-card" style="--card-accent: #c4553a">
 
         
 

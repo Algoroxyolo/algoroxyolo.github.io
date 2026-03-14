@@ -528,17 +528,17 @@
               }
               load('/', 'gc-home');
               load('/blog/', 'gc-blog');
-              /* total: sum home + blog as a proxy; GoatCounter public API doesn't expose site-wide totals */
-              Promise.all([
-                fetch(base + encodeURIComponent('/') + '.json').then(function(r){return r.json();}),
-                fetch(base + encodeURIComponent('/blog/') + '.json').then(function(r){return r.json();})
-              ]).then(function(results) {
-                var total = results.reduce(function(acc, d) { return acc + (Number(d.count_unique) || 0); }, 0);
+              /* total: sum all known pages */
+              var paths = ['/', '/blog/', '/people/', '/teaching/', '/publications/', '/cv/', '/projects/', '/repositories/', '/blog/2026/nemo-gym-architecture/', '/blog/2026/llm-agents-blueprint/'];
+              Promise.all(paths.map(function(p) {
+                return fetch(base + encodeURIComponent(p) + '.json')
+                  .then(function(r) { return r.json(); })
+                  .then(function(d) { return Number(d.count_unique) || Number(d.count) || 0; })
+                  .catch(function() { return 0; });
+              })).then(function(counts) {
+                var total = counts.reduce(function(a, b) { return a + b; }, 0);
                 var el = document.getElementById('gc-total');
                 if (el) { el.textContent = fmt(total); el.classList.remove('visit-counter__num--loading'); }
-              }).catch(function() {
-                var el = document.getElementById('gc-total');
-                if (el) { el.textContent = '—'; el.classList.remove('visit-counter__num--loading'); }
               });
             })();
           </script>

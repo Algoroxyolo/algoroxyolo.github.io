@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang }}">
+
+  <!-- Head -->
+  <head>
+  {%- if page.redirect -%}
+    <meta http-equiv="refresh" content="3; url={{ site.baseurl }}/" />
+  {%- endif -%}
+  {% include head.html %}
+
+  <!-- Editorial fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  {% if page.head_extra %}{{ page.head_extra }}{% endif %}
+
+  <!-- Shared editorial styles -->
+  {% include editorial-post-styles.html %}
+
+  <!-- Post-specific styles -->
+  {% if page._styles %}
+  <style>{{ page._styles }}</style>
+  {% endif %}
+  </head>
+
+  <!-- Body -->
+  <body class="{% if site.navbar_fixed %}fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %}">
+
+    <!-- Site Header -->
+    {%- include header.html %}
+
+    <!-- Editorial Content (no Bootstrap container — hero goes full-width) -->
+    <div class="editorial-post">
+      {{ content }}
+    </div>
+
+    <!-- Site Footer -->
+    {%- include footer.html %}
+
+    <!-- JavaScripts -->
+    {% include scripts/jquery.html %}
+    {% include scripts/bootstrap.html %}
+    {% include scripts/masonry.html %}
+    {% include scripts/misc.html %}
+    {% include scripts/badges.html %}
+    {% include scripts/mathjax.html %}
+    {% include scripts/analytics.html %}
+    {% include scripts/progressBar.html %}
+  </body>
+</html>

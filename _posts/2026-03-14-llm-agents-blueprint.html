@@ -1,5 +1,5 @@
 ---
-layout: none
+layout: editorial
 title: "A Systems Engineering Approach to LLM Agents — Series Overview"
 date: 2026-03-14
 description: "Everyone's building agents. Almost nobody is engineering them. A 7-part series on the full lifecycle — from problem framing to production monitoring."
@@ -7,226 +7,24 @@ tags: [academic, AI, engineering]
 categories: [blog]
 author: Lorenzo Xiao
 read_time: 6
----
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A Systems Engineering Approach to LLM Agents — Series Overview</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --ink: #1a1a1a;
-    --paper: #faf8f5;
-    --accent: #c4553a;
-    --accent-light: #e8725a;
-    --accent-bg: #fdf0ed;
-    --muted: #6b6560;
-    --border: #e0dbd5;
-    --code-bg: #f0ece7;
-    --card-bg: #ffffff;
-    --shadow: rgba(26, 26, 26, 0.06);
-    --deep: #2c2420;
-    --teal: #2a8f82;
-    --teal-bg: #e8f5f3;
-    --blue: #3b6fa0;
-    --blue-bg: #eaf1f7;
-    --purple: #6b4c8a;
-    --purple-bg: #f3eef8;
-    --orange: #d4843e;
-    --orange-bg: #fdf3e8;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: 'Source Sans 3', Georgia, serif;
-    font-size: 18px;
-    line-height: 1.75;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  /* ── Nav ── */
-  .site-nav {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(250,248,245,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    padding: 14px 24px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-  .site-nav a {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78rem;
-    color: var(--muted);
-    text-decoration: none;
-    border: none;
-    letter-spacing: 0.3px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    transition: color 0.15s;
-  }
-  .site-nav a:hover { color: var(--accent); border: none; }
-  .site-nav .sep { color: var(--border); }
-
-  /* ── Hero ── */
-  .hero {
-    position: relative;
-    padding: 100px 24px 80px;
-    text-align: center;
-    overflow: hidden;
-    background: linear-gradient(175deg, #2c2420 0%, #3d2f28 40%, #4a352a 100%);
-    color: #faf8f5;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
+hero_accent: "#c4553a"
+_styles: >
+  /* ── Post accent: warm red ── */
+  .editorial-post {
+    --post-accent: #c4553a;
+    --post-accent-light: #e8725a;
+    --post-accent-bg: #fdf0ed;
+    --post-accent-bg-dark: rgba(196,85,58,0.15);
+    --post-hero-bg: linear-gradient(175deg, #2c2420 0%, #3d2f28 40%, #4a352a 100%);
+    --post-hero-overlay:
       radial-gradient(circle at 20% 50%, rgba(196,85,58,0.25) 0%, transparent 50%),
       radial-gradient(circle at 80% 30%, rgba(42,143,130,0.15) 0%, transparent 50%);
-    pointer-events: none;
-  }
-  .hero-badge {
-    display: inline-block;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--accent-light);
-    border: 1px solid rgba(232,114,90,0.4);
-    padding: 6px 18px;
-    border-radius: 100px;
-    margin-bottom: 32px;
-    position: relative;
-  }
-  .hero h1 {
-    font-family: 'Fraunces', serif;
-    font-weight: 900;
-    font-size: clamp(2.4rem, 5.5vw, 3.6rem);
-    line-height: 1.18;
-    max-width: 760px;
-    margin: 0 auto 24px;
-    letter-spacing: -0.02em;
-    position: relative;
-  }
-  .hero h1 em {
-    font-style: italic;
-    color: var(--accent-light);
-  }
-  .hero-sub {
-    font-size: 1.15rem;
-    color: rgba(250,248,245,0.7);
-    max-width: 580px;
-    margin: 0 auto 40px;
-    line-height: 1.65;
-  }
-  .hero-meta {
-    font-size: 0.85rem;
-    color: rgba(250,248,245,0.45);
-    font-family: 'JetBrains Mono', monospace;
-    letter-spacing: 0.5px;
+    --post-badge-color: #e8725a;
+    --post-badge-border: rgba(232,114,90,0.4);
+    --post-hero-em: #e8725a;
   }
 
-  /* ── Article ── */
-  article {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-
-  .lead {
-    font-size: 1.18rem;
-    color: var(--muted);
-    margin: 56px 0 48px;
-    padding-left: 20px;
-    border-left: 3px solid var(--accent);
-    line-height: 1.78;
-  }
-
-  p { margin-bottom: 1.5em; }
-
-  h2 {
-    font-family: 'Fraunces', serif;
-    font-weight: 700;
-    font-size: 1.75rem;
-    margin: 64px 0 20px;
-    color: var(--deep);
-    letter-spacing: -0.01em;
-    line-height: 1.25;
-  }
-
-  h3 {
-    font-family: 'Fraunces', serif;
-    font-weight: 500;
-    font-size: 1.2rem;
-    margin: 36px 0 12px;
-    color: var(--deep);
-  }
-
-  strong { font-weight: 600; color: var(--deep); }
-
-  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(196,85,58,0.3); }
-  a:hover { border-bottom-color: var(--accent); }
-
-  code {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.85em;
-    background: var(--code-bg);
-    padding: 2px 7px;
-    border-radius: 4px;
-  }
-
-  /* ── Diagrams ── */
-  .diagram-wrap {
-    margin: 40px -40px;
-    padding: 0;
-  }
-  @media (max-width: 800px) { .diagram-wrap { margin: 32px 0; } }
-  .diagram-wrap svg { width: 100%; height: auto; display: block; }
-  .diagram-caption {
-    text-align: center;
-    font-size: 0.82rem;
-    color: var(--muted);
-    margin-top: 12px;
-    font-style: italic;
-  }
-
-  /* ── Callout cards ── */
-  .callout {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 28px 32px;
-    margin: 32px 0;
-    box-shadow: 0 2px 12px var(--shadow);
-    position: relative;
-  }
-  .callout p:last-child { margin-bottom: 0; }
-  .callout-title {
-    font-family: 'Fraunces', serif;
-    font-weight: 700;
-    font-size: 1rem;
-    margin-bottom: 8px;
-    color: var(--deep);
-  }
-
-  /* ── Divider ── */
-  .divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--border), transparent);
-    margin: 56px 0;
-  }
-
-  /* ── Series roadmap cards ── */
+  /* ── Roadmap cards ── */
   .roadmap {
     display: flex;
     flex-direction: column;
@@ -238,12 +36,13 @@ read_time: 6
     grid-template-columns: 56px 1fr;
     gap: 20px;
     align-items: start;
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 14px;
+    background: var(--ep-card-bg);
+    border: 1px solid var(--ep-border);
+    border-radius: 10px;
     padding: 28px 30px;
-    box-shadow: 0 2px 12px var(--shadow);
-    transition: box-shadow 0.25s, transform 0.25s;
+    box-shadow: 0 2px 12px var(--ep-shadow);
+    transition: box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
     overflow: hidden;
   }
@@ -257,6 +56,9 @@ read_time: 6
     box-shadow: 0 6px 24px rgba(26,26,26,0.1);
     transform: translateY(-2px);
   }
+  html[data-theme="dark"] .roadmap-card:hover {
+    box-shadow: 0 6px 24px rgba(0,0,0,0.3);
+  }
   .roadmap-num {
     font-family: 'Fraunces', serif;
     font-weight: 900;
@@ -269,23 +71,23 @@ read_time: 6
     font-weight: 700;
     font-size: 1.12rem;
     margin: 0 0 8px;
-    color: var(--deep);
+    color: var(--ep-deep);
   }
   .roadmap-body p {
     font-size: 0.95rem;
     line-height: 1.65;
-    color: var(--muted);
+    color: var(--ep-muted);
     margin: 0 0 10px;
   }
   .roadmap-body p:last-child { margin-bottom: 0; }
   .roadmap-questions {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.78rem;
-    color: var(--accent);
+    color: var(--ep-accent);
     line-height: 1.7;
     margin-top: 10px;
     padding-top: 10px;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--ep-border);
   }
   .roadmap-tag {
     display: inline-block;
@@ -298,48 +100,48 @@ read_time: 6
     margin-top: 10px;
   }
 
-  .rc-1::before { background: var(--accent); }
-  .rc-1 .roadmap-num { color: var(--accent); }
-  .rc-1 .roadmap-tag { background: var(--accent-bg); color: var(--accent); }
+  .rc-1::before { background: var(--ep-accent); }
+  .rc-1 .roadmap-num { color: var(--ep-accent); }
+  .rc-1 .roadmap-tag { background: var(--ep-accent-bg); color: var(--ep-accent); }
 
-  .rc-2::before { background: var(--teal); }
-  .rc-2 .roadmap-num { color: var(--teal); }
-  .rc-2 .roadmap-tag { background: var(--teal-bg); color: var(--teal); }
+  .rc-2::before { background: var(--ep-teal); }
+  .rc-2 .roadmap-num { color: var(--ep-teal); }
+  .rc-2 .roadmap-tag { background: var(--ep-teal-bg); color: var(--ep-teal); }
 
-  .rc-3::before { background: var(--blue); }
-  .rc-3 .roadmap-num { color: var(--blue); }
-  .rc-3 .roadmap-tag { background: var(--blue-bg); color: var(--blue); }
+  .rc-3::before { background: var(--ep-blue); }
+  .rc-3 .roadmap-num { color: var(--ep-blue); }
+  .rc-3 .roadmap-tag { background: var(--ep-blue-bg); color: var(--ep-blue); }
 
-  .rc-4::before { background: var(--orange); }
-  .rc-4 .roadmap-num { color: var(--orange); }
-  .rc-4 .roadmap-tag { background: var(--orange-bg); color: var(--orange); }
+  .rc-4::before { background: var(--ep-orange); }
+  .rc-4 .roadmap-num { color: var(--ep-orange); }
+  .rc-4 .roadmap-tag { background: var(--ep-orange-bg); color: var(--ep-orange); }
 
-  .rc-5::before { background: var(--purple); }
-  .rc-5 .roadmap-num { color: var(--purple); }
-  .rc-5 .roadmap-tag { background: var(--purple-bg); color: var(--purple); }
+  .rc-5::before { background: var(--ep-purple); }
+  .rc-5 .roadmap-num { color: var(--ep-purple); }
+  .rc-5 .roadmap-tag { background: var(--ep-purple-bg); color: var(--ep-purple); }
 
-  .rc-6::before { background: var(--accent); }
-  .rc-6 .roadmap-num { color: var(--accent); }
-  .rc-6 .roadmap-tag { background: var(--accent-bg); color: var(--accent); }
+  .rc-6::before { background: var(--ep-accent); }
+  .rc-6 .roadmap-num { color: var(--ep-accent); }
+  .rc-6 .roadmap-tag { background: var(--ep-accent-bg); color: var(--ep-accent); }
 
-  .rc-7::before { background: var(--teal); }
-  .rc-7 .roadmap-num { color: var(--teal); }
-  .rc-7 .roadmap-tag { background: var(--teal-bg); color: var(--teal); }
+  .rc-7::before { background: var(--ep-teal); }
+  .rc-7 .roadmap-num { color: var(--ep-teal); }
+  .rc-7 .roadmap-tag { background: var(--ep-teal-bg); color: var(--ep-teal); }
 
   /* ── Series CTA ── */
   .series-cta {
     text-align: center;
     padding: 40px 32px;
-    background: linear-gradient(135deg, var(--deep), #3d2f28);
-    color: var(--paper);
-    border-radius: 16px;
+    background: linear-gradient(135deg, var(--ep-deep), color-mix(in srgb, var(--ep-deep) 80%, var(--ep-accent)));
+    color: var(--ep-paper);
+    border-radius: 10px;
     margin: 48px 0;
   }
   .series-cta h3 {
     font-family: 'Fraunces', serif;
     font-weight: 700;
     font-size: 1.3rem;
-    color: var(--paper);
+    color: #faf8f5;
     margin: 0 0 12px;
   }
   .series-cta p {
@@ -350,44 +152,10 @@ read_time: 6
     line-height: 1.65;
   }
 
-  /* ── Footer ── */
-  footer {
-    text-align: center;
-    padding: 60px 24px 48px;
-    color: var(--muted);
-    font-size: 0.85rem;
-    border-top: 1px solid var(--border);
-    margin-top: 80px;
-  }
-  footer a { color: var(--accent); border: none; }
-
-  /* ── Animations ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .hero-badge, .hero h1, .hero-sub, .hero-meta { animation: fadeUp 0.7s ease-out both; }
-  .hero h1 { animation-delay: 0.1s; }
-  .hero-sub { animation-delay: 0.2s; }
-  .hero-meta { animation-delay: 0.3s; }
-
   @media (max-width: 600px) {
-    .hero { padding: 72px 20px 56px; }
-    article { padding: 0 18px; }
-    .callout { padding: 20px 22px; }
     .roadmap-card { grid-template-columns: 40px 1fr; padding: 22px 20px; }
-    h2 { font-size: 1.5rem; }
   }
-</style>
-</head>
-<body>
-
-<!-- ════════ NAV ════════ -->
-<nav class="site-nav">
-  <a href="/">← Home</a>
-  <span class="sep">/</span>
-  <a href="/blog/">Blog</a>
-</nav>
+---
 
 <header class="hero">
   <div class="hero-badge">Series · Part 0 of 7</div>
@@ -577,10 +345,7 @@ read_time: 6
 
 </article>
 
-<footer>
-  <p>Lorenzo Xiao &middot; Language Technologies Institute &middot; Carnegie Mellon University</p>
-  <p style="margin-top:8px;"><a href="/blog/">← Back to blog</a> &nbsp;&middot;&nbsp; March 2026</p>
-</footer>
-
-</body>
-</html>
+<div class="post-end">
+  <p class="post-author">Lorenzo Xiao &middot; Language Technologies Institute &middot; Carnegie Mellon University</p>
+  <a href="/blog/">&larr; Back to blog</a>
+</div>

@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:algoroxyolo.goatcounter.com)"
+      "WebFetch(domain:algoroxyolo.goatcounter.com)",
+      "Bash(git mv:*)",
+      "Bash(git add:*)"
     ]
   }
 }

@@ -1,0 +1,398 @@
+<style>
+/* ═══════════════════════════════════════════════════ */
+/* Editorial Post — Shared Styles                      */
+/* Scoped under .editorial-post to avoid al-folio      */
+/* collisions. Posts override --post-* vars for accent. */
+/* ═══════════════════════════════════════════════════ */
+
+/* ── Design Tokens ── */
+.editorial-post {
+  --ep-ink: #1a1a1a;
+  --ep-paper: #faf8f5;
+  --ep-accent: var(--post-accent, #c4553a);
+  --ep-accent-light: var(--post-accent-light, #e8725a);
+  --ep-accent-bg: var(--post-accent-bg, #fdf0ed);
+  --ep-muted: #6b6560;
+  --ep-border: #e0dbd5;
+  --ep-code-bg: #f0ece7;
+  --ep-card-bg: #ffffff;
+  --ep-shadow: rgba(26,26,26,0.06);
+  --ep-deep: #2c2420;
+  --ep-teal: #2a8f82;
+  --ep-teal-bg: #e8f5f3;
+  --ep-blue: #3b6fa0;
+  --ep-blue-bg: #eaf1f7;
+  --ep-purple: #6b4c8a;
+  --ep-purple-bg: #f3eef8;
+  --ep-orange: #d4843e;
+  --ep-orange-bg: #fdf3e8;
+  --ep-green: #3a7d44;
+  --ep-green-bg: #eaf4ec;
+
+  font-family: 'Source Sans 3', Georgia, serif;
+  font-size: 18px;
+  line-height: 1.75;
+  color: var(--ep-ink);
+  background: var(--ep-paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Dark Mode ── */
+html[data-theme="dark"] .editorial-post {
+  --ep-ink: #d0cdc8;
+  --ep-paper: #1e1b18;
+  --ep-muted: #9a9590;
+  --ep-border: #3a3530;
+  --ep-code-bg: #2a2520;
+  --ep-card-bg: #252220;
+  --ep-shadow: rgba(0,0,0,0.2);
+  --ep-deep: #e8e4df;
+  --ep-teal-bg: rgba(42,143,130,0.15);
+  --ep-blue-bg: rgba(59,111,160,0.15);
+  --ep-purple-bg: rgba(107,76,138,0.15);
+  --ep-orange-bg: rgba(212,132,62,0.15);
+  --ep-green-bg: rgba(58,125,68,0.15);
+  --ep-accent-bg: var(--post-accent-bg-dark, rgba(196,85,58,0.15));
+}
+
+/* ── Hero ── */
+.editorial-post .hero {
+  position: relative;
+  padding: 80px 24px 72px;
+  text-align: center;
+  overflow: hidden;
+  background: var(--post-hero-bg, linear-gradient(175deg, #2c2420 0%, #3d2f28 40%, #4a352a 100%));
+  color: #faf8f5;
+}
+.editorial-post .hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--post-hero-overlay);
+  pointer-events: none;
+}
+.editorial-post .hero-badge {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--post-badge-color, var(--ep-accent-light));
+  border: 1px solid var(--post-badge-border, rgba(232,114,90,0.4));
+  padding: 6px 18px;
+  border-radius: 100px;
+  margin-bottom: 32px;
+  position: relative;
+}
+.editorial-post .hero h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 1.18;
+  max-width: 800px;
+  margin: 0 auto 24px;
+  letter-spacing: -0.02em;
+  position: relative;
+}
+.editorial-post .hero h1 em {
+  font-style: italic;
+  color: var(--post-hero-em, var(--ep-accent-light));
+}
+.editorial-post .hero-sub {
+  font-size: 1.1rem;
+  color: rgba(250,248,245,0.7);
+  max-width: 580px;
+  margin: 0 auto 40px;
+  line-height: 1.65;
+}
+.editorial-post .hero-meta {
+  font-size: 0.85rem;
+  color: rgba(250,248,245,0.45);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.5px;
+}
+
+/* ── Article Body ── */
+.editorial-post article {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.editorial-post .lead {
+  font-size: 1.18rem;
+  color: var(--ep-muted);
+  margin: 56px 0 48px;
+  padding-left: 20px;
+  border-left: 3px solid var(--ep-accent);
+  line-height: 1.78;
+}
+.editorial-post p { margin-bottom: 1.5em; }
+
+/* ── Headings ── */
+.editorial-post h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin: 64px 0 20px;
+  color: var(--ep-deep);
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+.editorial-post h2 .section-label {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65em;
+  color: var(--ep-accent);
+  margin-right: 8px;
+  font-weight: 500;
+  vertical-align: middle;
+}
+.editorial-post h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 1.22rem;
+  margin: 36px 0 12px;
+  color: var(--ep-deep);
+}
+.editorial-post h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--ep-accent);
+  margin: 28px 0 8px;
+  letter-spacing: 0.3px;
+}
+
+/* ── Inline Elements ── */
+.editorial-post strong { font-weight: 600; color: var(--ep-deep); }
+.editorial-post a {
+  color: var(--ep-accent);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--ep-accent) 30%, transparent);
+}
+.editorial-post a:hover { border-bottom-color: var(--ep-accent); }
+.editorial-post code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.83em;
+  background: var(--ep-code-bg);
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+/* ── Diagrams ── */
+.editorial-post .diagram-wrap {
+  margin: 40px -40px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.editorial-post .diagram-wrap svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.editorial-post .diagram-caption {
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--ep-muted);
+  margin-top: 12px;
+  font-style: italic;
+}
+
+/* ── Callouts ── */
+.editorial-post .callout {
+  background: var(--ep-card-bg);
+  border: 1px solid var(--ep-border);
+  border-radius: 10px;
+  padding: 28px 32px;
+  margin: 32px 0;
+  box-shadow: 0 2px 12px var(--ep-shadow);
+  position: relative;
+}
+.editorial-post .callout p:last-child { margin-bottom: 0; }
+.editorial-post .callout-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: var(--ep-deep);
+}
+.editorial-post .callout.tip {
+  border-left: 4px solid var(--ep-teal);
+  background: var(--ep-teal-bg);
+}
+.editorial-post .callout.tip::before {
+  content: '\1F4A1';
+  position: absolute;
+  top: -14px;
+  left: 20px;
+  font-size: 1.1rem;
+  background: var(--ep-teal-bg);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.editorial-post .callout.info {
+  border-left: 4px solid var(--ep-blue);
+  background: var(--ep-blue-bg);
+}
+.editorial-post .callout.info::before {
+  content: '\1F50D';
+  position: absolute;
+  top: -14px;
+  left: 20px;
+  font-size: 1.1rem;
+  background: var(--ep-blue-bg);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.editorial-post .callout.warn {
+  border-left: 4px solid var(--ep-orange);
+  background: var(--ep-orange-bg);
+}
+.editorial-post .callout.warn::before {
+  content: '\26A0\FE0F';
+  position: absolute;
+  top: -14px;
+  left: 20px;
+  font-size: 1.1rem;
+  background: var(--ep-orange-bg);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* ── Tables ── */
+.editorial-post .table-wrap {
+  overflow-x: auto;
+  margin: 32px 0;
+  border-radius: 10px;
+  border: 1px solid var(--ep-border);
+  box-shadow: 0 2px 12px var(--ep-shadow);
+}
+.editorial-post table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.editorial-post thead {
+  background: var(--ep-deep);
+  color: #faf8f5;
+}
+.editorial-post th {
+  padding: 13px 18px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.editorial-post td {
+  padding: 11px 18px;
+  border-top: 1px solid var(--ep-border);
+  vertical-align: top;
+}
+.editorial-post tbody tr:nth-child(even) {
+  background: color-mix(in srgb, var(--ep-ink) 2%, transparent);
+}
+.editorial-post tbody tr:hover {
+  background: var(--ep-blue-bg);
+}
+
+/* ── Divider ── */
+.editorial-post .divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--ep-border), transparent);
+  margin: 56px 0;
+}
+
+/* ── Count Badges ── */
+.editorial-post .count-badge {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 2px 9px;
+  border-radius: 100px;
+  margin-left: 8px;
+  vertical-align: middle;
+  background: var(--ep-accent-bg);
+  color: var(--ep-accent);
+  border: 1px solid color-mix(in srgb, var(--ep-accent) 25%, transparent);
+}
+
+/* ── Post Footer ── */
+.editorial-post .post-end {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 24px 60px;
+  text-align: center;
+  border-top: 1px solid var(--ep-border);
+  margin-top: 80px;
+}
+.editorial-post .post-end .post-author {
+  color: var(--ep-muted);
+  font-size: 0.85rem;
+  margin-bottom: 12px;
+}
+.editorial-post .post-end a {
+  color: var(--ep-accent);
+  border-bottom: 1px solid transparent;
+}
+.editorial-post .post-end a:hover {
+  border-bottom-color: var(--ep-accent);
+}
+
+/* ── Animations ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.editorial-post .hero-badge,
+.editorial-post .hero h1,
+.editorial-post .hero-sub,
+.editorial-post .hero-meta {
+  animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.editorial-post .hero h1 { animation-delay: 0.1s; }
+.editorial-post .hero-sub { animation-delay: 0.2s; }
+.editorial-post .hero-meta { animation-delay: 0.3s; }
+
+/* ── Dark Mode: SVG Text ── */
+html[data-theme="dark"] .editorial-post .diagram-wrap svg text[fill="#2c2420"],
+html[data-theme="dark"] .editorial-post .diagram-wrap svg text[fill="#1a1a1a"] {
+  fill: #d0cdc8;
+}
+html[data-theme="dark"] .editorial-post .diagram-wrap svg text[fill="#6b6560"] {
+  fill: #9a9590;
+}
+html[data-theme="dark"] .editorial-post .diagram-wrap svg rect[fill="#fff"],
+html[data-theme="dark"] .editorial-post .diagram-wrap svg rect[fill="#ffffff"] {
+  fill: #252220;
+}
+html[data-theme="dark"] .editorial-post .diagram-wrap svg rect[stroke="#e0dbd5"] {
+  stroke: #3a3530;
+}
+html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
+  stroke: #555;
+}
+
+/* ── Responsive ── */
+@media (max-width: 800px) {
+  .editorial-post .diagram-wrap { margin: 32px 0; }
+}
+@media (max-width: 600px) {
+  .editorial-post .hero { padding: 64px 20px 48px; }
+  .editorial-post article { padding: 0 18px; }
+  .editorial-post .callout { padding: 20px 22px; }
+  .editorial-post h2 { font-size: 1.5rem; }
+  .editorial-post .diagram-wrap {
+    margin: 24px -8px;
+    padding: 12px 8px;
+    border-radius: 8px;
+    background: var(--ep-card-bg);
+    border: 1px solid var(--ep-border);
+  }
+  .editorial-post .diagram-wrap svg {
+    min-width: 580px;
+  }
+  .editorial-post .post-end { padding: 36px 18px 48px; }
+}
+</style>

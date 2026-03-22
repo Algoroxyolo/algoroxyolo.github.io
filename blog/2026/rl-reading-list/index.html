@@ -12,7 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>RL for LLMs: The Reading List | Yunze (Lorenzo) Xiao</title>
     <meta name="author" content="Yunze (Lorenzo) Xiao">
-    <meta name="description" content="99 papers across algorithms, rewards, preferences, systems, and agents — organized into 5 categories with reading depth recommendations.">
+    <meta name="description" content="96 papers across algorithms, rewards, preferences, systems, and agents — organized into 5 categories with reading depth recommendations.">
     <meta name="keywords" content="Natrual Language Processing,Prompt Engineering,Computer Security, Social Engineering,">
 
 
@@ -105,7 +105,7 @@ html[data-theme="dark"] .editorial-post {
   --ep-accent-bg: var(--post-accent-bg-dark, rgba(196,85,58,0.15));
 }
 
-/* ── Hero ── */
+/* ── Hero (default: dramatic) ── */
 .editorial-post .hero {
   position: relative;
   padding: 80px 24px 72px;
@@ -160,6 +160,58 @@ html[data-theme="dark"] .editorial-post {
   color: rgba(250,248,245,0.45);
   font-family: 'JetBrains Mono', monospace;
   letter-spacing: 0.5px;
+}
+
+/* ── Hero variant: compact (for reference/catalog posts) ── */
+.editorial-post .hero--compact {
+  padding: 48px 24px 40px;
+}
+.editorial-post .hero--compact h1 {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  margin-bottom: 16px;
+}
+.editorial-post .hero--compact .hero-sub {
+  font-size: 0.95rem;
+  margin-bottom: 24px;
+}
+.editorial-post .hero--compact .hero-badge {
+  margin-bottom: 20px;
+  font-size: 10px;
+  padding: 4px 14px;
+}
+
+/* ── Hero variant: editorial (for essay/narrative posts) ── */
+.editorial-post .hero--editorial {
+  text-align: left;
+  padding: 72px 24px 64px;
+}
+.editorial-post .hero--editorial h1 {
+  margin: 0 0 20px;
+  max-width: 640px;
+}
+.editorial-post .hero--editorial .hero-sub {
+  margin: 0 0 32px;
+  max-width: 520px;
+}
+.editorial-post .hero--editorial .hero-badge {
+  margin-bottom: 24px;
+}
+.editorial-post .hero--editorial .hero-meta {
+  text-align: left;
+}
+
+/* ── Hero variant: technical (for systems/architecture posts) ── */
+.editorial-post .hero--technical {
+  background: var(--post-hero-bg, linear-gradient(175deg, #141820 0%, #1a2030 40%, #1e2840 100%));
+  padding: 64px 24px 56px;
+}
+.editorial-post .hero--technical .hero-badge {
+  border-radius: 4px;
+  letter-spacing: 3px;
+}
+.editorial-post .hero--technical h1 {
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 /* ── Article Body ── */
@@ -252,10 +304,10 @@ html[data-theme="dark"] .editorial-post {
 .editorial-post .callout {
   background: var(--ep-card-bg);
   border: 1px solid var(--ep-border);
-  border-radius: 10px;
+  border-left: none;
+  border-radius: 0 8px 8px 0;
   padding: 28px 32px;
   margin: 32px 0;
-  box-shadow: 0 2px 12px var(--ep-shadow);
   position: relative;
 }
 .editorial-post .callout p:last-child { margin-bottom: 0; }
@@ -267,7 +319,7 @@ html[data-theme="dark"] .editorial-post {
   color: var(--ep-deep);
 }
 .editorial-post .callout.tip {
-  border-left: 4px solid var(--ep-teal);
+  border-left: 5px solid var(--ep-teal);
   background: var(--ep-teal-bg);
 }
 .editorial-post .callout.tip::before {
@@ -281,7 +333,7 @@ html[data-theme="dark"] .editorial-post {
   border-radius: 4px;
 }
 .editorial-post .callout.info {
-  border-left: 4px solid var(--ep-blue);
+  border-left: 5px solid var(--ep-blue);
   background: var(--ep-blue-bg);
 }
 .editorial-post .callout.info::before {
@@ -295,7 +347,7 @@ html[data-theme="dark"] .editorial-post {
   border-radius: 4px;
 }
 .editorial-post .callout.warn {
-  border-left: 4px solid var(--ep-orange);
+  border-left: 5px solid var(--ep-orange);
   background: var(--ep-orange-bg);
 }
 .editorial-post .callout.warn::before {
@@ -499,6 +551,19 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
   letter-spacing: 0.02em;
   flex-shrink: 0;
 } .rl-ga  { background: #EEEDFE; color: #3C3489; } .rl-gam { background: #E6F1FB; color: #0C447C; } .rl-gbp { background: #FAEEDA; color: #633806; } .rl-gb  { background: #F1EFE8; color: #444441; } .rl-gc  { background: #EAF3DE; color: #27500A; } html[data-theme="dark"] .rl-ga  { background: #26215C; color: #CECBF6; } html[data-theme="dark"] .rl-gam { background: #042C53; color: #85B7EB; } html[data-theme="dark"] .rl-gbp { background: #412402; color: #FAC775; } html[data-theme="dark"] .rl-gb  { background: #2C2C2A; color: #B4B2A9; } html[data-theme="dark"] .rl-gc  { background: #173404; color: #C0DD97; }
+/* ── NVIDIA badge ── */ .rl-nv {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 1px 5px;
+  border-radius: 3px;
+  background: #76b900;
+  color: #fff;
+  vertical-align: middle;
+  margin-left: 4px;
+} html[data-theme="dark"] .rl-nv { background: #5a8f00; color: #e0f0c0; }
 /* ── Category sections ── */ .rl-cat {
   margin-bottom: 24px;
 } .rl-cat > summary {
@@ -574,6 +639,12 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
   background: rgba(0,0,0,0.025);
 } html[data-theme="dark"] .rl-p:hover {
   background: rgba(255,255,255,0.04);
+} /* A-rated papers get more visual weight */ .rl-p:has(.rl-ga) .rl-n a {
+  font-weight: 600;
+} .rl-p:has(.rl-ga) {
+  background: rgba(60,52,137,0.03);
+} html[data-theme="dark"] .rl-p:has(.rl-ga) {
+  background: rgba(206,203,246,0.04);
 } .rl-y {
   font-size: 0.72rem;
   color: var(--ep-border);
@@ -600,12 +671,41 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
   gap: 4px;
   align-items: center;
   flex-shrink: 0;
+  min-width: 28px;
 }
+/* ── Back to top ── */ .rl-top {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--ep-deep);
+  color: var(--ep-paper);
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.25s, transform 0.25s;
+  pointer-events: none;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+} .rl-top.visible {
+  opacity: 0.7;
+  transform: translateY(0);
+  pointer-events: auto;
+} .rl-top:hover { opacity: 1; }
 @media (max-width: 600px) {
   .rl-stats { gap: 10px; font-size: 0.75rem; }
   .rl-legend { gap: 8px; font-size: 0.72rem; }
   .rl-sub { margin-left: 8px; padding-left: 10px; }
   .rl-p { font-size: 0.78rem; gap: 6px; padding: 4px 6px; }
+  .rl-g { min-width: 28px; text-align: center; padding: 2px 5px; }
+  .rl-top { bottom: 16px; right: 16px; width: 36px; height: 36px; }
 }
 </style>
   
@@ -679,11 +779,11 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
 
     <!-- Editorial Content (no Bootstrap container — hero goes full-width) -->
     <div class="editorial-post">
-      <header class="hero">
-  <div class="hero-badge">Reference · 99 Papers</div>
+      <header class="hero hero--compact">
+  <div class="hero-badge">Reference · 96 Papers</div>
   <h1>RL for LLMs: <em>The Reading List</em>
 </h1>
-  <p class="hero-sub">A curated taxonomy of 99 papers across algorithms, rewards, preferences, systems, and agents — with reading depth recommendations.</p>
+  <p class="hero-sub">A curated taxonomy of 96 papers across algorithms, rewards, preferences, systems, and agents — with reading depth recommendations.</p>
   <p class="hero-meta">Lorenzo Xiao · v8 · Updated March 2026</p>
 </header>
 
@@ -695,10 +795,11 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
   <span class="rl-legend-item"><span class="rl-g rl-gbp">B+</span> Problem + conclusion</span>
   <span class="rl-legend-item"><span class="rl-g rl-gb">B</span> Skim</span>
   <span class="rl-legend-item"><span class="rl-g rl-gc">C</span> Core idea only</span>
+  <span class="rl-legend-item"><span class="rl-nv">NV</span> NVIDIA paper</span>
 </div>
 
 <div class="rl-stats">
-  <span><strong>99</strong> papers</span>
+  <span><strong>96</strong> papers</span>
   <span><strong>5</strong> categories</span>
   <span><strong>24</strong> sub-topics</span>
   <span style="flex:1"></span>
@@ -706,7 +807,7 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
   <span>2022: <strong>2</strong></span>
   <span>2023: <strong>1</strong></span>
   <span>2024: <strong>8</strong></span>
-  <span>2025: <strong>57</strong></span>
+  <span>2025: <strong>54</strong></span>
   <span>2026: <strong>30</strong></span>
 </div>
 
@@ -718,7 +819,7 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
 <summary>Core RL: PPO → GRPO → DAPO → CISPO → MaxRL → DPPO <span class="rl-sub-count">13</span></summary>
 <div class="rl-papers">
   <div class="rl-p">
-<span class="rl-y">2017</span><span class="rl-n"><a href="https://arxiv.org/abs/1707.06347" target="_blank" rel="external nofollow noopener">PPO</a><div class="rl-tip">Know ratio clipping + trust region</div></span><span class="rl-badges"><span class="rl-g rl-gc">C</span></span>
+<span class="rl-y">2017</span><span class="rl-n"><a href="https://arxiv.org/abs/1707.06347" target="_blank" rel="external nofollow noopener">PPO</a><div class="rl-tip">Know ratio clipping + trust region</div></span><span class="rl-badges"><span class="rl-g rl-gb">B</span></span>
 </div>
   <div class="rl-p">
 <span class="rl-y">2022</span><span class="rl-n"><a href="https://arxiv.org/abs/2203.02155" target="_blank" rel="external nofollow noopener">InstructGPT</a><div class="rl-tip">RM + PPO + KL penalty; shared with §3.1</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
@@ -742,7 +843,7 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
 <span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2511.20347" target="_blank" rel="external nofollow noopener">SAPO</a></span><span class="rl-badges"><span class="rl-g rl-gb">B</span></span>
 </div>
   <div class="rl-p">
-<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2506.13585" target="_blank" rel="external nofollow noopener">MiniMax-M1 / CISPO</a><div class="rl-tip">Changed clipping target — key interview talking point</div></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span>
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2506.13585" target="_blank" rel="external nofollow noopener">MiniMax-M1 / CISPO</a><div class="rl-tip">Changed clipping target — key interview talking point; also notable for long-context RL (see §4.3)</div></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span>
 </div>
   <div class="rl-p">
 <span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2503.01491" target="_blank" rel="external nofollow noopener">PPO Collapse in Long-CoT</a></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
@@ -760,8 +861,11 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
 </details>
 
 <details class="rl-sub">
-<summary>Scaling Laws &amp; Meta <span class="rl-sub-count">4</span></summary>
+<summary>Scaling Laws &amp; Meta <span class="rl-sub-count">5</span></summary>
 <div class="rl-papers">
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2505.09388" target="_blank" rel="external nofollow noopener">Qwen3 Technical Report</a><div class="rl-tip">Thinking/non-thinking unified framework + thinking budget + distillation recipe; source of Nemotron 3 reasoning budget control</div></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span>
+</div>
   <div class="rl-p">
 <span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2510.13786" target="_blank" rel="external nofollow noopener">ScaleRL / The Art of Scaling RL Compute</a></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span>
 </div>
@@ -769,31 +873,28 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
 <span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2509.25300" target="_blank" rel="external nofollow noopener">Scaling Behaviors of LLM RL Post-Training</a><div class="rl-tip">Power-law: model scale × data × compute; complements ScaleRL</div></span><span class="rl-badges"><span class="rl-g rl-gb">B</span></span>
 </div>
   <div class="rl-p">
-<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2505.24864" target="_blank" rel="external nofollow noopener">ProRL</a><div class="rl-tip">Steps scaling dimension; prerequisite to ScaleRL</div></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2505.24864" target="_blank" rel="external nofollow noopener">ProRL</a><div class="rl-tip">Steps scaling dimension; prerequisite to ScaleRL</div></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span><span class="rl-nv">NV</span></span>
 </div>
   <div class="rl-p">
-<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2510.01180" target="_blank" rel="external nofollow noopener">BroRL</a><div class="rl-tip">Rollouts scaling dimension; complementary to ProRL</div></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2510.01180" target="_blank" rel="external nofollow noopener">BroRL</a><div class="rl-tip">Rollouts scaling dimension; complementary to ProRL</div></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span><span class="rl-nv">NV</span></span>
 </div>
 </div>
 </details>
 
 <details class="rl-sub">
-<summary>Cascade &amp; Stage-wise RL (Nemotron) <span class="rl-sub-count">5</span></summary>
+<summary>Cascade &amp; Stage-wise RL (Nemotron) <span class="rl-sub-count">4</span></summary>
 <div class="rl-papers">
   <div class="rl-p">
-<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2505.16400" target="_blank" rel="external nofollow noopener">AceReason-Nemotron 1.1</a></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span>
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2505.16400" target="_blank" rel="external nofollow noopener">AceReason-Nemotron 1.1</a></span><span class="rl-badges"><span class="rl-g rl-ga">A</span><span class="rl-nv">NV</span></span>
 </div>
   <div class="rl-p">
-<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2512.13607" target="_blank" rel="external nofollow noopener">Nemotron-Cascade 1</a><div class="rl-tip">Foundational motivation for Cascade 2</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2512.13607" target="_blank" rel="external nofollow noopener">Nemotron-Cascade 1</a><div class="rl-tip">Foundational motivation for Cascade 2</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span><span class="rl-nv">NV</span></span>
 </div>
   <div class="rl-p">
-<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2508.06471" target="_blank" rel="external nofollow noopener">GLM-4.5 (stage-wise ARC)</a></span><span class="rl-badges"><span class="rl-g rl-gb">B</span></span>
+<span class="rl-y">2026</span><span class="rl-n"><a href="https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3-Super-Technical-Report.pdf" target="_blank" rel="external nofollow noopener">Nemotron 3 Super Technical Report</a><div class="rl-tip">LatentMoE + NVFP4 + multi-env simultaneous RL + reasoning budget control</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span><span class="rl-nv">NV</span></span>
 </div>
   <div class="rl-p">
-<span class="rl-y">2026</span><span class="rl-n"><a href="https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3-Super-Technical-Report.pdf" target="_blank" rel="external nofollow noopener">Nemotron 3 Super Technical Report</a><div class="rl-tip">LatentMoE + NVFP4 + multi-env simultaneous RL + reasoning budget control</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
-</div>
-  <div class="rl-p">
-<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2603.19220" target="_blank" rel="external nofollow noopener">Nemotron-Cascade 2</a><div class="rl-tip">IMO/IOI/ICPC gold medals; 30B MoE; on-policy distillation</div></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span>
+<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2603.19220" target="_blank" rel="external nofollow noopener">Nemotron-Cascade 2</a><div class="rl-tip">IMO/IOI/ICPC gold medals; 30B MoE; on-policy distillation</div></span><span class="rl-badges"><span class="rl-g rl-ga">A</span><span class="rl-nv">NV</span></span>
 </div>
 </div>
 </details>
@@ -829,7 +930,7 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
 <span class="rl-y">2024</span><span class="rl-n"><a href="https://arxiv.org/abs/2408.15240" target="_blank" rel="external nofollow noopener">Generative Verifiers: RM as Next-Token Prediction</a><div class="rl-tip">346 citations; GRM origin; yes/no token + majority vote</div></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span>
 </div>
   <div class="rl-p">
-<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2505.11475" target="_blank" rel="external nofollow noopener">HelpSteer3-Preference</a><div class="rl-tip">40k samples; NVIDIA latest; RM-Bench SOTA</div></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span>
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2505.11475" target="_blank" rel="external nofollow noopener">HelpSteer3-Preference</a><div class="rl-tip">40k samples; NVIDIA latest; RM-Bench SOTA</div></span><span class="rl-badges"><span class="rl-g rl-ga">A</span><span class="rl-nv">NV</span></span>
 </div>
   <div class="rl-p">
 <span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2504.02495" target="_blank" rel="external nofollow noopener">DeepSeek-GRM / SPCT</a><div class="rl-tip">SPCT online RL for GRM training; 193 citations</div></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span>
@@ -844,10 +945,13 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
 </details>
 
 <details class="rl-sub">
-<summary>Process Reward Models (PRM) <span class="rl-sub-count">6</span></summary>
+<summary>Process Reward Models (PRM) <span class="rl-sub-count">7</span></summary>
 <div class="rl-papers">
   <div class="rl-p">
 <span class="rl-y">2024</span><span class="rl-n"><a href="https://openreview.net/forum?id=A6Y7AqlzLW" target="_blank" rel="external nofollow noopener">PAV / Rewarding Progress</a><div class="rl-tip">ICLR; 225 citations; process reward = advantage</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2501.07301" target="_blank" rel="external nofollow noopener">Lessons of Developing PRMs</a><div class="rl-tip">Qwen/Tongyi; PRM training practice: what works, annotation, stability</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
 </div>
   <div class="rl-p">
 <span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2504.00125" target="_blank" rel="external nofollow noopener">ThinkPRM</a><div class="rl-tip">Long CoT verifier; 58 citations</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
@@ -856,7 +960,7 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
 <span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2504.15221" target="_blank" rel="external nofollow noopener">GenPRM</a><div class="rl-tip">PRM test-time generative reasoning; 21 citations</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
 </div>
   <div class="rl-p">
-<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2501.07301" target="_blank" rel="external nofollow noopener">ReasonFlux-PRM</a><div class="rl-tip">NeurIPS 2025 Spotlight</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2506.18896" target="_blank" rel="external nofollow noopener">ReasonFlux-PRM</a><div class="rl-tip">NeurIPS 2025 Spotlight; trajectory-aware step + trajectory dual supervision</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
 </div>
   <div class="rl-p">
 <span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2503.06266" target="_blank" rel="external nofollow noopener">R-PRM</a></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
@@ -880,28 +984,25 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
 <span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2602.01454" target="_blank" rel="external nofollow noopener">Rubric-ARM</a><div class="rl-tip">Alternating optimization of rubric generator + judge</div></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
 </div>
   <div class="rl-p">
-<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2601.22975" target="_blank" rel="external nofollow noopener">Golden Goose</a><div class="rl-tip">Non-verifiable → verifiable bridge; high value for research narrative</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2601.22975" target="_blank" rel="external nofollow noopener">Golden Goose</a><div class="rl-tip">Non-verifiable → verifiable bridge; high value for research narrative</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span><span class="rl-nv">NV</span></span>
 </div>
 </div>
 </details>
 
 <details class="rl-sub">
-<summary>RM Evaluation &amp; Benchmarks <span class="rl-sub-count">5</span></summary>
+<summary>RM Evaluation &amp; Benchmarks <span class="rl-sub-count">4</span></summary>
 <div class="rl-papers">
   <div class="rl-p">
 <span class="rl-y">2024</span><span class="rl-n"><a href="https://arxiv.org/abs/2410.14872" target="_blank" rel="external nofollow noopener">How to Evaluate RM for RLHF / PPE</a><div class="rl-tip">61 citations; offline-online gap</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
 </div>
   <div class="rl-p">
-<span class="rl-y">2024</span><span class="rl-n"><a href="https://arxiv.org/abs/2503.04378" target="_blank" rel="external nofollow noopener">HelpSteer3 dataset</a><div class="rl-tip">Feedback + edit; inference-time scaling</div></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
+<span class="rl-y">2024</span><span class="rl-n"><a href="https://arxiv.org/abs/2503.04378" target="_blank" rel="external nofollow noopener">HelpSteer3 dataset</a><div class="rl-tip">Feedback + edit; inference-time scaling</div></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span><span class="rl-nv">NV</span></span>
 </div>
   <div class="rl-p">
 <span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2506.01937" target="_blank" rel="external nofollow noopener">RewardBench 2</a><div class="rl-tip">63 citations; reward hacking</div></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
 </div>
   <div class="rl-p">
-<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2509.11347" target="_blank" rel="external nofollow noopener">ToolRM + FC-RewardBench</a></span><span class="rl-badges"><span class="rl-g rl-gc">C</span></span>
-</div>
-  <div class="rl-p">
-<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2603.12963" target="_blank" rel="external nofollow noopener">Long-form RewardBench</a></span><span class="rl-badges"><span class="rl-g rl-gc">C</span></span>
+<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2603.12963" target="_blank" rel="external nofollow noopener">Long-form RewardBench</a></span><span class="rl-badges"><span class="rl-g rl-gb">B</span></span>
 </div>
 </div>
 </details>
@@ -964,7 +1065,7 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
 <span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2602.03109" target="_blank" rel="external nofollow noopener">OMAR (One Model All Roles)</a></span><span class="rl-badges"><span class="rl-g rl-gb">B</span></span>
 </div>
   <div class="rl-p">
-<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2603.09249" target="_blank" rel="external nofollow noopener">Social-R1</a></span><span class="rl-badges"><span class="rl-g rl-gc">C</span></span>
+<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2603.09249" target="_blank" rel="external nofollow noopener">Social-R1</a></span><span class="rl-badges"><span class="rl-g rl-gb">B</span></span>
 </div>
 </div>
 </details>
@@ -973,7 +1074,7 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
 
 <!-- ═══════ 4. SYSTEMS ═══════ -->
 <details class="rl-cat rl-cat--teal" open>
-<summary>Systems <span class="rl-cat-count">18 papers</span></summary>
+<summary>Systems <span class="rl-cat-count">17 papers</span></summary>
 
 <details class="rl-sub">
 <summary>Sync vs Async Training <span class="rl-sub-count">6</span></summary>
@@ -1021,28 +1122,25 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
 <span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2510.26788" target="_blank" rel="external nofollow noopener">FP16 Mismatch</a><div class="rl-tip">Counter-intuitive: train/infer path consistency matters more</div></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
 </div>
   <div class="rl-p">
-<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2511.17826" target="_blank" rel="external nofollow noopener">TP Sizes Determinism</a></span><span class="rl-badges"><span class="rl-g rl-gc">C</span></span>
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2511.17826" target="_blank" rel="external nofollow noopener">TP Sizes Determinism</a></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
 </div>
   <div class="rl-p">
-<span class="rl-y">2025</span><span class="rl-n"><a href="https://lmsys.org/blog/2025-11-25-fp8-rl/" target="_blank" rel="external nofollow noopener">Unified FP8 (SGLang blog)</a></span><span class="rl-badges"><span class="rl-g rl-gc">C</span></span>
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://lmsys.org/blog/2025-11-25-fp8-rl/" target="_blank" rel="external nofollow noopener">Unified FP8 (SGLang blog)</a></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
 </div>
   <div class="rl-p">
-<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2512.02556" target="_blank" rel="external nofollow noopener">DeepSeek-V3.2</a></span><span class="rl-badges"><span class="rl-g rl-gc">C</span></span>
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2512.02556" target="_blank" rel="external nofollow noopener">DeepSeek-V3.2</a></span><span class="rl-badges"><span class="rl-g rl-gb">B</span></span>
 </div>
 </div>
 </details>
 
 <details class="rl-sub">
-<summary>Long-Context RL <span class="rl-sub-count">3</span></summary>
+<summary>Long-Context RL <span class="rl-sub-count">2</span></summary>
 <div class="rl-papers">
   <div class="rl-p">
-<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2505.17667" target="_blank" rel="external nofollow noopener">QwenLong-L1</a></span><span class="rl-badges"><span class="rl-g rl-gc">C</span></span>
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2510.11967" target="_blank" rel="external nofollow noopener">Context-Folding</a><div class="rl-tip">Long-horizon agent context compression/folding management</div></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
 </div>
   <div class="rl-p">
-<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2506.13585" target="_blank" rel="external nofollow noopener">MiniMax-M1 (long-context view)</a></span><span class="rl-badges"><span class="rl-g rl-gb">B</span></span>
-</div>
-  <div class="rl-p">
-<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2512.12967" target="_blank" rel="external nofollow noopener">QwenLong-L1.5</a></span><span class="rl-badges"><span class="rl-g rl-gc">C</span></span>
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2512.12967" target="_blank" rel="external nofollow noopener">QwenLong-L1.5</a></span><span class="rl-badges"><span class="rl-g rl-gb">B</span></span>
 </div>
 </div>
 </details>
@@ -1051,10 +1149,10 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
 
 <!-- ═══════ 5. TASKS & AGENTS ═══════ -->
 <details class="rl-cat rl-cat--amber" open>
-<summary>Tasks &amp; Agents <span class="rl-cat-count">23 papers</span></summary>
+<summary>Tasks &amp; Agents <span class="rl-cat-count">21 papers</span></summary>
 
 <details class="rl-sub">
-<summary>Coding Agents <span class="rl-sub-count">4</span></summary>
+<summary>Coding Agents <span class="rl-sub-count">2</span></summary>
 <div class="rl-papers">
   <div class="rl-p">
 <span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2603.00729" target="_blank" rel="external nofollow noopener">Qwen3-Coder-Next</a></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
@@ -1062,17 +1160,11 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
   <div class="rl-p">
 <span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2602.03411" target="_blank" rel="external nofollow noopener">SWE-Master</a></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
 </div>
-  <div class="rl-p">
-<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2506.11425" target="_blank" rel="external nofollow noopener">Agent-RLVR</a></span><span class="rl-badges"><span class="rl-g rl-gc">C</span></span>
-</div>
-  <div class="rl-p">
-<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2509.23045" target="_blank" rel="external nofollow noopener">Kimi-Dev</a></span><span class="rl-badges"><span class="rl-g rl-gc">C</span></span>
-</div>
 </div>
 </details>
 
 <details class="rl-sub">
-<summary>Deep Research &amp; Search Agents <span class="rl-sub-count">5</span></summary>
+<summary>Deep Research &amp; Search Agents <span class="rl-sub-count">4</span></summary>
 <div class="rl-papers">
   <div class="rl-p">
 <span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2503.09516" target="_blank" rel="external nofollow noopener">Search-R1</a><div class="rl-tip">790 citations</div></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span>
@@ -1085,9 +1177,6 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
 </div>
   <div class="rl-p">
 <span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2602.19526" target="_blank" rel="external nofollow noopener">How to Train DR Agent</a></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
-</div>
-  <div class="rl-p">
-<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2508.07976" target="_blank" rel="external nofollow noopener">Beyond Ten Turns</a></span><span class="rl-badges"><span class="rl-g rl-gb">B</span></span>
 </div>
 </div>
 </details>
@@ -1114,7 +1203,7 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
 <span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2504.13958" target="_blank" rel="external nofollow noopener">ToolRL</a><div class="rl-tip">191 citations; reward design textbook</div></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span>
 </div>
   <div class="rl-p">
-<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2505.00949" target="_blank" rel="external nofollow noopener">Nemotron-Tool-N1</a><div class="rl-tip">NVIDIA; binary reward; must-discuss in interviews</div></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span>
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2505.00949" target="_blank" rel="external nofollow noopener">Nemotron-Tool-N1</a><div class="rl-tip">NVIDIA; binary reward; must-discuss in interviews</div></span><span class="rl-badges"><span class="rl-g rl-ga">A</span><span class="rl-nv">NV</span></span>
 </div>
   <div class="rl-p">
 <span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2504.09442" target="_blank" rel="external nofollow noopener">ReTool</a><div class="rl-tip">231 citations; cold-start synthesis + outcome RL</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
@@ -1123,7 +1212,7 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
 </details>
 
 <details class="rl-sub">
-<summary>Generalist Agent RL Frameworks <span class="rl-sub-count">4</span></summary>
+<summary>Generalist Agent RL Frameworks <span class="rl-sub-count">5</span></summary>
 <div class="rl-papers">
   <div class="rl-p">
 <span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2602.02488" target="_blank" rel="external nofollow noopener">RLAnything</a><div class="rl-tip">Joint optimization of env + policy + RM</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
@@ -1132,10 +1221,13 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
 <span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2510.04206" target="_blank" rel="external nofollow noopener">AGENTRL</a><div class="rl-tip">Async + cross-policy sampling</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
 </div>
   <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://moonshotai.github.io/Kimi-K2.5/" target="_blank" rel="external nofollow noopener">Kimi K2.5 Agent Swarm</a><div class="rl-tip">Multi-agent orchestration for agentic tasks</div></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
+</div>
+  <div class="rl-p">
 <span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2505.16421" target="_blank" rel="external nofollow noopener">WebAgent-R1</a><div class="rl-tip">73 citations; end-to-end web-agent RL</div></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
 </div>
   <div class="rl-p">
-<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2603.18815" target="_blank" rel="external nofollow noopener">ProRL Agent</a><div class="rl-tip">NVIDIA; rollout-as-a-service for multi-turn agent RL</div></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
+<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2603.18815" target="_blank" rel="external nofollow noopener">ProRL Agent</a><div class="rl-tip">NVIDIA; rollout-as-a-service for multi-turn agent RL</div></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span><span class="rl-nv">NV</span></span>
 </div>
 </div>
 </details>
@@ -1164,12 +1256,32 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
 
 <p style="font-size: 0.82rem; color: var(--ep-muted); text-align: center;">Click subsection headers to expand. 5 categories · 24 sub-topics · Updated March 2026.</p>
 
+<div style="margin-top: 32px; padding: 16px 20px; border-left: 3px solid #76b900; background: rgba(118,185,0,0.04); border-radius: 0 6px 6px 0; font-size: 0.84rem; color: var(--ep-muted); line-height: 1.55;">
+  <strong style="color: var(--ep-ink);">Note on <span class="rl-nv">NV</span> papers.</strong>
+  The curator works at NVIDIA and is a big fan of the company’s RL research. Papers tagged <span class="rl-nv">NV</span> are from NVIDIA or NVIDIA-affiliated teams. While every paper here earned its spot on merit, readers should be aware of this affiliation and selectively choose what to read based on their own research interests — not the curator’s enthusiasm.
+</div>
+
 </article>
+
+<button class="rl-top" id="rl-top" aria-label="Back to top">↑</button>
 
 <div class="post-end">
   <p class="post-author">Lorenzo Xiao · Language Technologies Institute · Carnegie Mellon University</p>
   <a href="/blog/">← Back to blog</a>
 </div>
+
+<script>
+(function(){
+  var btn = document.getElementById('rl-top');
+  if (!btn) return;
+  window.addEventListener('scroll', function() {
+    btn.classList.toggle('visible', window.scrollY > 600);
+  }, {passive: true});
+  btn.addEventListener('click', function() {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
+})();
+</script>
 
     </div>
 

@@ -105,7 +105,7 @@ html[data-theme="dark"] .editorial-post {
   --ep-accent-bg: var(--post-accent-bg-dark, rgba(196,85,58,0.15));
 }
 
-/* ── Hero ── */
+/* ── Hero (default: dramatic) ── */
 .editorial-post .hero {
   position: relative;
   padding: 80px 24px 72px;
@@ -160,6 +160,58 @@ html[data-theme="dark"] .editorial-post {
   color: rgba(250,248,245,0.45);
   font-family: 'JetBrains Mono', monospace;
   letter-spacing: 0.5px;
+}
+
+/* ── Hero variant: compact (for reference/catalog posts) ── */
+.editorial-post .hero--compact {
+  padding: 48px 24px 40px;
+}
+.editorial-post .hero--compact h1 {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  margin-bottom: 16px;
+}
+.editorial-post .hero--compact .hero-sub {
+  font-size: 0.95rem;
+  margin-bottom: 24px;
+}
+.editorial-post .hero--compact .hero-badge {
+  margin-bottom: 20px;
+  font-size: 10px;
+  padding: 4px 14px;
+}
+
+/* ── Hero variant: editorial (for essay/narrative posts) ── */
+.editorial-post .hero--editorial {
+  text-align: left;
+  padding: 72px 24px 64px;
+}
+.editorial-post .hero--editorial h1 {
+  margin: 0 0 20px;
+  max-width: 640px;
+}
+.editorial-post .hero--editorial .hero-sub {
+  margin: 0 0 32px;
+  max-width: 520px;
+}
+.editorial-post .hero--editorial .hero-badge {
+  margin-bottom: 24px;
+}
+.editorial-post .hero--editorial .hero-meta {
+  text-align: left;
+}
+
+/* ── Hero variant: technical (for systems/architecture posts) ── */
+.editorial-post .hero--technical {
+  background: var(--post-hero-bg, linear-gradient(175deg, #141820 0%, #1a2030 40%, #1e2840 100%));
+  padding: 64px 24px 56px;
+}
+.editorial-post .hero--technical .hero-badge {
+  border-radius: 4px;
+  letter-spacing: 3px;
+}
+.editorial-post .hero--technical h1 {
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 /* ── Article Body ── */
@@ -252,10 +304,10 @@ html[data-theme="dark"] .editorial-post {
 .editorial-post .callout {
   background: var(--ep-card-bg);
   border: 1px solid var(--ep-border);
-  border-radius: 10px;
+  border-left: none;
+  border-radius: 0 8px 8px 0;
   padding: 28px 32px;
   margin: 32px 0;
-  box-shadow: 0 2px 12px var(--ep-shadow);
   position: relative;
 }
 .editorial-post .callout p:last-child { margin-bottom: 0; }
@@ -267,7 +319,7 @@ html[data-theme="dark"] .editorial-post {
   color: var(--ep-deep);
 }
 .editorial-post .callout.tip {
-  border-left: 4px solid var(--ep-teal);
+  border-left: 5px solid var(--ep-teal);
   background: var(--ep-teal-bg);
 }
 .editorial-post .callout.tip::before {
@@ -281,7 +333,7 @@ html[data-theme="dark"] .editorial-post {
   border-radius: 4px;
 }
 .editorial-post .callout.info {
-  border-left: 4px solid var(--ep-blue);
+  border-left: 5px solid var(--ep-blue);
   background: var(--ep-blue-bg);
 }
 .editorial-post .callout.info::before {
@@ -295,7 +347,7 @@ html[data-theme="dark"] .editorial-post {
   border-radius: 4px;
 }
 .editorial-post .callout.warn {
-  border-left: 4px solid var(--ep-orange);
+  border-left: 5px solid var(--ep-orange);
   background: var(--ep-orange-bg);
 }
 .editorial-post .callout.warn::before {
@@ -646,7 +698,7 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
 
     <!-- Editorial Content (no Bootstrap container — hero goes full-width) -->
     <div class="editorial-post">
-      <header class="hero">
+      <header class="hero hero--editorial">
   <div class="hero-badge">Series · Part 0 of 5</div>
   <h1>How I Learned <em>RL for LLMs</em>
 </h1>
@@ -760,7 +812,7 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
   <span class="depth-desc"><strong>Awareness only.</strong> Know it exists and what niche it fills.</span>
 </div>
 
-<p>There are <strong>99 papers</strong> across the five parts, <strong>16 rated A and 36 rated A−</strong>.</p>
+<p>There are <strong>96 papers</strong> across the five parts, <strong>17 rated A and 39 rated A−</strong>.</p>
 
 <div class="callout tip">
   <p class="callout-title">If you only have three hours</p>

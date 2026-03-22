@@ -1,0 +1,494 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<header class="hero">
+  <div class="hero-badge">Reference · 99 Papers</div>
+  <h1>RL for LLMs: <em>The Reading List</em>
+</h1>
+  <p class="hero-sub">A curated taxonomy of 99 papers across algorithms, rewards, preferences, systems, and agents — with reading depth recommendations.</p>
+  <p class="hero-meta">Lorenzo Xiao · v8 · Updated March 2026</p>
+</header>
+
+<article>
+
+<div class="rl-legend">
+  <span class="rl-legend-item"><span class="rl-g rl-ga">A</span> Deep read</span>
+  <span class="rl-legend-item"><span class="rl-g rl-gam">A−</span> Method + experiments</span>
+  <span class="rl-legend-item"><span class="rl-g rl-gbp">B+</span> Problem + conclusion</span>
+  <span class="rl-legend-item"><span class="rl-g rl-gb">B</span> Skim</span>
+  <span class="rl-legend-item"><span class="rl-g rl-gc">C</span> Core idea only</span>
+</div>
+
+<div class="rl-stats">
+  <span><strong>96</strong> papers</span>
+  <span><strong>5</strong> categories</span>
+  <span><strong>24</strong> sub-topics</span>
+  <span style="flex:1"></span>
+  <span>2017: <strong>1</strong></span>
+  <span>2022: <strong>2</strong></span>
+  <span>2023: <strong>1</strong></span>
+  <span>2024: <strong>8</strong></span>
+  <span>2025: <strong>55</strong></span>
+  <span>2026: <strong>29</strong></span>
+</div>
+
+<!-- ═══════ 1. ALGORITHMS ═══════ -->
+<details class="rl-cat rl-cat--purple" open>
+<summary>Algorithms <span class="rl-cat-count">26 papers</span></summary>
+
+<details class="rl-sub">
+<summary>Core RL: PPO → GRPO → DAPO → CISPO → MaxRL → DPPO <span class="rl-sub-count">13</span></summary>
+<div class="rl-papers">
+  <div class="rl-p">
+<span class="rl-y">2017</span><span class="rl-n"><a href="https://arxiv.org/abs/1707.06347" target="_blank" rel="external nofollow noopener">PPO</a><div class="rl-tip">Know ratio clipping + trust region</div></span><span class="rl-badges"><span class="rl-g rl-gc">C</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2022</span><span class="rl-n"><a href="https://arxiv.org/abs/2203.02155" target="_blank" rel="external nofollow noopener">InstructGPT</a><div class="rl-tip">RM + PPO + KL penalty; shared with §3.1</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2024</span><span class="rl-n"><a href="https://arxiv.org/abs/2402.14740" target="_blank" rel="external nofollow noopener">RLOO / Revisiting REINFORCE</a></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2024</span><span class="rl-n"><a href="https://arxiv.org/abs/2402.03300" target="_blank" rel="external nofollow noopener">DeepSeekMath (GRPO origin)</a><div class="rl-tip">Start your interview story here</div></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2501.12948" target="_blank" rel="external nofollow noopener">DeepSeek-R1</a></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2503.14476" target="_blank" rel="external nofollow noopener">DAPO</a><div class="rl-tip">Recipe + system-level scaling</div></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2507.18071" target="_blank" rel="external nofollow noopener">GSPO</a></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2511.20347" target="_blank" rel="external nofollow noopener">SAPO</a></span><span class="rl-badges"><span class="rl-g rl-gb">B</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2506.13585" target="_blank" rel="external nofollow noopener">MiniMax-M1 / CISPO</a><div class="rl-tip">Changed clipping target — key interview talking point</div></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2503.01491" target="_blank" rel="external nofollow noopener">PPO Collapse in Long-CoT</a></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://openreview.net/forum?id=5PAF7PAY2Y" target="_blank" rel="external nofollow noopener">Dr. GRPO</a><div class="rl-tip">Fixes length bias + std normalization</div></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2602.02710" target="_blank" rel="external nofollow noopener">MaxRL</a><div class="rl-tip">pass@k objective; RL–MLE continuum</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2602.04879" target="_blank" rel="external nofollow noopener">DPPO</a><div class="rl-tip">TV/KL divergence trust region</div></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
+</div>
+</div>
+</details>
+
+<details class="rl-sub">
+<summary>Scaling Laws &amp; Meta <span class="rl-sub-count">4</span></summary>
+<div class="rl-papers">
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2510.13786" target="_blank" rel="external nofollow noopener">ScaleRL / The Art of Scaling RL Compute</a></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2509.25300" target="_blank" rel="external nofollow noopener">Scaling Behaviors of LLM RL Post-Training</a><div class="rl-tip">Power-law: model scale × data × compute; complements ScaleRL</div></span><span class="rl-badges"><span class="rl-g rl-gb">B</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2505.24864" target="_blank" rel="external nofollow noopener">ProRL</a><div class="rl-tip">Steps scaling dimension; prerequisite to ScaleRL</div></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2510.01180" target="_blank" rel="external nofollow noopener">BroRL</a><div class="rl-tip">Rollouts scaling dimension; complementary to ProRL</div></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
+</div>
+</div>
+</details>
+
+<details class="rl-sub">
+<summary>Cascade &amp; Stage-wise RL (Nemotron) <span class="rl-sub-count">5</span></summary>
+<div class="rl-papers">
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2505.16400" target="_blank" rel="external nofollow noopener">AceReason-Nemotron 1.1</a></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2512.13607" target="_blank" rel="external nofollow noopener">Nemotron-Cascade 1</a><div class="rl-tip">Foundational motivation for Cascade 2</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2508.06471" target="_blank" rel="external nofollow noopener">GLM-4.5 (stage-wise ARC)</a></span><span class="rl-badges"><span class="rl-g rl-gb">B</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2026</span><span class="rl-n"><a href="https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3-Super-Technical-Report.pdf" target="_blank" rel="external nofollow noopener">Nemotron 3 Super Technical Report</a><div class="rl-tip">LatentMoE + NVFP4 + multi-env simultaneous RL + reasoning budget control</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2603.19220" target="_blank" rel="external nofollow noopener">Nemotron-Cascade 2</a><div class="rl-tip">IMO/IOI/ICPC gold medals; 30B MoE; on-policy distillation</div></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span>
+</div>
+</div>
+</details>
+
+<details class="rl-sub">
+<summary>Distillation (on-policy / self / context) <span class="rl-sub-count">4</span></summary>
+<div class="rl-papers">
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://thinkingmachines.ai/blog/on-policy-distillation/" target="_blank" rel="external nofollow noopener">On-Policy Distillation (Thinking Machines)</a><div class="rl-tip">Clearest explanation of compute tradeoffs</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2601.02780" target="_blank" rel="external nofollow noopener">MiMo-V2-Flash</a><div class="rl-tip">Multi-teacher on-policy distillation; core Cascade 2 technique</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2601.18734" target="_blank" rel="external nofollow noopener">Self-Distilled Reasoner</a><div class="rl-tip">Teacher = self with privileged information</div></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2602.12275" target="_blank" rel="external nofollow noopener">On-Policy Context Distillation</a></span><span class="rl-badges"><span class="rl-g rl-gb">B</span></span>
+</div>
+</div>
+</details>
+
+</details>
+
+<!-- ═══════ 2. REWARD MODELING ═══════ -->
+<details class="rl-cat rl-cat--coral" open>
+<summary>Reward Modeling <span class="rl-cat-count">20 papers</span></summary>
+
+<details class="rl-sub">
+<summary>Generative Reward Models <span class="rl-sub-count">5</span></summary>
+<div class="rl-papers">
+  <div class="rl-p">
+<span class="rl-y">2024</span><span class="rl-n"><a href="https://arxiv.org/abs/2408.15240" target="_blank" rel="external nofollow noopener">Generative Verifiers: RM as Next-Token Prediction</a><div class="rl-tip">346 citations; GRM origin; yes/no token + majority vote</div></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2505.11475" target="_blank" rel="external nofollow noopener">HelpSteer3-Preference</a><div class="rl-tip">40k samples; NVIDIA latest; RM-Bench SOTA</div></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2504.02495" target="_blank" rel="external nofollow noopener">DeepSeek-GRM / SPCT</a><div class="rl-tip">SPCT online RL for GRM training; 193 citations</div></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2505.02387" target="_blank" rel="external nofollow noopener">RM-R1: Reward Modeling as Reasoning</a><div class="rl-tip">Reason first, then score; 101 citations</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2602.12116" target="_blank" rel="external nofollow noopener">P-GenRM (ICLR 2026 Oral)</a><div class="rl-tip">Personalized GRM — directly relevant to persona research</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+</div>
+</details>
+
+<details class="rl-sub">
+<summary>Process Reward Models (PRM) <span class="rl-sub-count">6</span></summary>
+<div class="rl-papers">
+  <div class="rl-p">
+<span class="rl-y">2024</span><span class="rl-n"><a href="https://openreview.net/forum?id=A6Y7AqlzLW" target="_blank" rel="external nofollow noopener">PAV / Rewarding Progress</a><div class="rl-tip">ICLR; 225 citations; process reward = advantage</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2504.00125" target="_blank" rel="external nofollow noopener">ThinkPRM</a><div class="rl-tip">Long CoT verifier; 58 citations</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2504.15221" target="_blank" rel="external nofollow noopener">GenPRM</a><div class="rl-tip">PRM test-time generative reasoning; 21 citations</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2501.07301" target="_blank" rel="external nofollow noopener">ReasonFlux-PRM</a><div class="rl-tip">NeurIPS 2025 Spotlight</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2503.06266" target="_blank" rel="external nofollow noopener">R-PRM</a></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2603.02479" target="_blank" rel="external nofollow noopener">PRISM</a></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
+</div>
+</div>
+</details>
+
+<details class="rl-sub">
+<summary>Rubrics-as-Rewards <span class="rl-sub-count">4</span></summary>
+<div class="rl-papers">
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2503.11042" target="_blank" rel="external nofollow noopener">Rubrics as Rewards (RaR)</a><div class="rl-tip">111 citations; rubrics structure subjective preferences</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2504.00831" target="_blank" rel="external nofollow noopener">OpenRubrics</a></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2602.01454" target="_blank" rel="external nofollow noopener">Rubric-ARM</a><div class="rl-tip">Alternating optimization of rubric generator + judge</div></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2601.22975" target="_blank" rel="external nofollow noopener">Golden Goose</a><div class="rl-tip">Non-verifiable → verifiable bridge; high value for research narrative</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+</div>
+</details>
+
+<details class="rl-sub">
+<summary>RM Evaluation &amp; Benchmarks <span class="rl-sub-count">5</span></summary>
+<div class="rl-papers">
+  <div class="rl-p">
+<span class="rl-y">2024</span><span class="rl-n"><a href="https://arxiv.org/abs/2410.14872" target="_blank" rel="external nofollow noopener">How to Evaluate RM for RLHF / PPE</a><div class="rl-tip">61 citations; offline-online gap</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2024</span><span class="rl-n"><a href="https://arxiv.org/abs/2503.04378" target="_blank" rel="external nofollow noopener">HelpSteer3 dataset</a><div class="rl-tip">Feedback + edit; inference-time scaling</div></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2506.01937" target="_blank" rel="external nofollow noopener">RewardBench 2</a><div class="rl-tip">63 citations; reward hacking</div></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2509.11347" target="_blank" rel="external nofollow noopener">ToolRM + FC-RewardBench</a></span><span class="rl-badges"><span class="rl-g rl-gc">C</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2603.12963" target="_blank" rel="external nofollow noopener">Long-form RewardBench</a></span><span class="rl-badges"><span class="rl-g rl-gc">C</span></span>
+</div>
+</div>
+</details>
+
+</details>
+
+<!-- ═══════ 3. RLHF / PREFERENCE ═══════ -->
+<details class="rl-cat rl-cat--pink" open>
+<summary>RLHF &amp; Preference Optimization <span class="rl-cat-count">13 papers</span></summary>
+
+<details class="rl-sub">
+<summary>Foundations <span class="rl-sub-count">3</span></summary>
+<div class="rl-papers">
+  <div class="rl-p">
+<span class="rl-y">2022</span><span class="rl-n"><a href="https://arxiv.org/abs/2203.02155" target="_blank" rel="external nofollow noopener">InstructGPT</a><div class="rl-tip">Shared with §1.1</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2022</span><span class="rl-n"><a href="https://arxiv.org/abs/2204.05862" target="_blank" rel="external nofollow noopener">Bai et al. / HH-RLHF</a><div class="rl-tip">Safety alignment; HH-RLHF dataset</div></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2023</span><span class="rl-n"><a href="https://arxiv.org/abs/2305.18290" target="_blank" rel="external nofollow noopener">DPO</a><div class="rl-tip">Know why it eventually fell short</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+</div>
+</details>
+
+<details class="rl-sub">
+<summary>From Simplification to Online RL <span class="rl-sub-count">4</span></summary>
+<div class="rl-papers">
+  <div class="rl-p">
+<span class="rl-y">2024</span><span class="rl-n"><a href="https://arxiv.org/abs/2405.14734" target="_blank" rel="external nofollow noopener">SimPO</a><div class="rl-tip">DPO simplification endpoint</div></span><span class="rl-badges"><span class="rl-g rl-gb">B</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2024</span><span class="rl-n"><a href="https://arxiv.org/abs/2405.07863" target="_blank" rel="external nofollow noopener">Online Iterative RLHF</a><div class="rl-tip">Turning point: online &gt;&gt; offline DPO</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://openreview.net/forum?id=FhTAG591Ve" target="_blank" rel="external nofollow noopener">Asynchronous RLHF (ICLR 2025)</a></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2512.13961" target="_blank" rel="external nofollow noopener">OLMo 3 (SFT-DPO-RL-RL Zero)</a><div class="rl-tip">Fully transparent &amp; reproducible; all data/code/checkpoints</div></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span>
+</div>
+</div>
+</details>
+
+<details class="rl-sub">
+<summary>Multi-turn / Social / Creative RLHF <span class="rl-sub-count">6</span></summary>
+<div class="rl-papers">
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2511.02208" target="_blank" rel="external nofollow noopener">PPP: Proactive and Personalized Agents</a><div class="rl-tip">Three-objective RL; UserVille benchmark</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2509.25137" target="_blank" rel="external nofollow noopener">RL from User Conversations</a><div class="rl-tip">Persona-conditioned rewards</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2508.18642" target="_blank" rel="external nofollow noopener">RLMR: Mixed Rewards for Creative Writing</a><div class="rl-tip">Subjective aesthetic RM + objective constraint verifier</div></span><span class="rl-badges"><span class="rl-g rl-gb">B</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2601.21459" target="_blank" rel="external nofollow noopener">HER: RL for Role-playing</a><div class="rl-tip">Dual-layer thinking; relevant to InCharacter work</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2602.03109" target="_blank" rel="external nofollow noopener">OMAR (One Model All Roles)</a></span><span class="rl-badges"><span class="rl-g rl-gb">B</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2603.09249" target="_blank" rel="external nofollow noopener">Social-R1</a></span><span class="rl-badges"><span class="rl-g rl-gc">C</span></span>
+</div>
+</div>
+</details>
+
+</details>
+
+<!-- ═══════ 4. SYSTEMS ═══════ -->
+<details class="rl-cat rl-cat--teal" open>
+<summary>Systems <span class="rl-cat-count">18 papers</span></summary>
+
+<details class="rl-sub">
+<summary>Sync vs Async Training <span class="rl-sub-count">6</span></summary>
+<div class="rl-papers">
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2506.10910" target="_blank" rel="external nofollow noopener">Magistral</a></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2505.24298" target="_blank" rel="external nofollow noopener">AReaL</a></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://lmsys.org/blog/2025-07-09-slime/" target="_blank" rel="external nofollow noopener">slime (SGLang RL blog)</a></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2512.06547" target="_blank" rel="external nofollow noopener">A-3PO</a><div class="rl-tip">Decoupled PPO; independent dimension</div></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2601.12784" target="_blank" rel="external nofollow noopener">StaleFlow</a></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2603.01501" target="_blank" rel="external nofollow noopener">GAC</a></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
+</div>
+</div>
+</details>
+
+<details class="rl-sub">
+<summary>Train-Inference Mismatch &amp; RL Stability <span class="rl-sub-count">9</span></summary>
+<div class="rl-papers">
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2512.01374" target="_blank" rel="external nofollow noopener">Stabilizing RL with LLMs</a><div class="rl-tip">IS correction + Routing Replay theory</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2506.09501" target="_blank" rel="external nofollow noopener">Give Me FP32 or Give Me Death</a></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/" target="_blank" rel="external nofollow noopener">Defeating Nondeterminism (Thinking Machines)</a></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://lmsys.org/blog/2025-09-22-sglang-deterministic/" target="_blank" rel="external nofollow noopener">SGLang Deterministic Inference</a></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2510.11370" target="_blank" rel="external nofollow noopener">R3: MoE Routing Replay</a><div class="rl-tip">Theoretically explained by Stabilizing RL paper</div></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2510.26788" target="_blank" rel="external nofollow noopener">FP16 Mismatch</a><div class="rl-tip">Counter-intuitive: train/infer path consistency matters more</div></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2511.17826" target="_blank" rel="external nofollow noopener">TP Sizes Determinism</a></span><span class="rl-badges"><span class="rl-g rl-gc">C</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://lmsys.org/blog/2025-11-25-fp8-rl/" target="_blank" rel="external nofollow noopener">Unified FP8 (SGLang blog)</a></span><span class="rl-badges"><span class="rl-g rl-gc">C</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2512.02556" target="_blank" rel="external nofollow noopener">DeepSeek-V3.2</a></span><span class="rl-badges"><span class="rl-g rl-gc">C</span></span>
+</div>
+</div>
+</details>
+
+<details class="rl-sub">
+<summary>Long-Context RL <span class="rl-sub-count">3</span></summary>
+<div class="rl-papers">
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2505.17667" target="_blank" rel="external nofollow noopener">QwenLong-L1</a></span><span class="rl-badges"><span class="rl-g rl-gc">C</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2506.13585" target="_blank" rel="external nofollow noopener">MiniMax-M1 (long-context view)</a></span><span class="rl-badges"><span class="rl-g rl-gb">B</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2512.12967" target="_blank" rel="external nofollow noopener">QwenLong-L1.5</a></span><span class="rl-badges"><span class="rl-g rl-gc">C</span></span>
+</div>
+</div>
+</details>
+
+</details>
+
+<!-- ═══════ 5. TASKS & AGENTS ═══════ -->
+<details class="rl-cat rl-cat--amber" open>
+<summary>Tasks &amp; Agents <span class="rl-cat-count">23 papers</span></summary>
+
+<details class="rl-sub">
+<summary>Coding Agents <span class="rl-sub-count">4</span></summary>
+<div class="rl-papers">
+  <div class="rl-p">
+<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2603.00729" target="_blank" rel="external nofollow noopener">Qwen3-Coder-Next</a></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2602.03411" target="_blank" rel="external nofollow noopener">SWE-Master</a></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2506.11425" target="_blank" rel="external nofollow noopener">Agent-RLVR</a></span><span class="rl-badges"><span class="rl-g rl-gc">C</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2509.23045" target="_blank" rel="external nofollow noopener">Kimi-Dev</a></span><span class="rl-badges"><span class="rl-g rl-gc">C</span></span>
+</div>
+</div>
+</details>
+
+<details class="rl-sub">
+<summary>Deep Research &amp; Search Agents <span class="rl-sub-count">5</span></summary>
+<div class="rl-papers">
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2503.09516" target="_blank" rel="external nofollow noopener">Search-R1</a><div class="rl-tip">790 citations</div></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2510.24701" target="_blank" rel="external nofollow noopener">Tongyi DeepResearch</a></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2601.19578" target="_blank" rel="external nofollow noopener">Yunque DeepResearch</a></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2602.19526" target="_blank" rel="external nofollow noopener">How to Train DR Agent</a></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2508.07976" target="_blank" rel="external nofollow noopener">Beyond Ten Turns</a></span><span class="rl-badges"><span class="rl-g rl-gb">B</span></span>
+</div>
+</div>
+</details>
+
+<details class="rl-sub">
+<summary>Computer-Use &amp; GUI Agents <span class="rl-sub-count">3</span></summary>
+<div class="rl-papers">
+  <div class="rl-p">
+<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2601.20380" target="_blank" rel="external nofollow noopener">OmegaUse</a></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2602.22190" target="_blank" rel="external nofollow noopener">GUI-Libra</a></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2508.14040" target="_blank" rel="external nofollow noopener">ComputerRL</a></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
+</div>
+</div>
+</details>
+
+<details class="rl-sub">
+<summary>Tool-Use RL <span class="rl-sub-count">3</span></summary>
+<div class="rl-papers">
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2504.13958" target="_blank" rel="external nofollow noopener">ToolRL</a><div class="rl-tip">191 citations; reward design textbook</div></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2505.00949" target="_blank" rel="external nofollow noopener">Nemotron-Tool-N1</a><div class="rl-tip">NVIDIA; binary reward; must-discuss in interviews</div></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2504.09442" target="_blank" rel="external nofollow noopener">ReTool</a><div class="rl-tip">231 citations; cold-start synthesis + outcome RL</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+</div>
+</details>
+
+<details class="rl-sub">
+<summary>Generalist Agent RL Frameworks <span class="rl-sub-count">4</span></summary>
+<div class="rl-papers">
+  <div class="rl-p">
+<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2602.02488" target="_blank" rel="external nofollow noopener">RLAnything</a><div class="rl-tip">Joint optimization of env + policy + RM</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2510.04206" target="_blank" rel="external nofollow noopener">AGENTRL</a><div class="rl-tip">Async + cross-policy sampling</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2505.16421" target="_blank" rel="external nofollow noopener">WebAgent-R1</a><div class="rl-tip">73 citations; end-to-end web-agent RL</div></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2603.18815" target="_blank" rel="external nofollow noopener">ProRL Agent</a><div class="rl-tip">NVIDIA; rollout-as-a-service for multi-turn agent RL</div></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
+</div>
+</div>
+</details>
+
+<details class="rl-sub">
+<summary>Agent RL Challenges &amp; Self-Evolution <span class="rl-sub-count">4</span></summary>
+<div class="rl-papers">
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2504.20073" target="_blank" rel="external nofollow noopener">RAGEN</a><div class="rl-tip">148 citations; Echo Trap — why agent RL fails</div></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2601.15839" target="_blank" rel="external nofollow noopener">iStar</a><div class="rl-tip">ICLR 2026; implicit PRM for credit assignment</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2502.10325" target="_blank" rel="external nofollow noopener">AgentPRM</a><div class="rl-tip">MC rollout actor-critic; 29 citations</div></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span>
+</div>
+  <div class="rl-p">
+<span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2505.03335" target="_blank" rel="external nofollow noopener">Absolute Zero</a><div class="rl-tip">161 citations; zero-data self-play</div></span><span class="rl-badges"><span class="rl-g rl-gam">A−</span></span>
+</div>
+</div>
+</details>
+
+</details>
+
+<div class="divider"></div>
+
+<p style="font-size: 0.82rem; color: var(--ep-muted); text-align: center;">Click subsection headers to expand. 5 categories · 24 sub-topics · Updated March 2026.</p>
+
+</article>
+
+<div class="post-end">
+  <p class="post-author">Lorenzo Xiao · Language Technologies Institute · Carnegie Mellon University</p>
+  <a href="/blog/">← Back to blog</a>
+</div>
+</body></html>

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://algoroxyolo.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://algoroxyolo.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-03-22T18:44:12+00:00</updated><id>https://algoroxyolo.github.io/feed.xml</id><title type="html">blank</title><subtitle>A website of Lorenzo. What!!! you do not know Lorenzo! Go check it out!
-</subtitle><entry><title type="html"></title><link href="https://algoroxyolo.github.io/blog/2026/2026-03-22-rl-reading-list/" rel="alternate" type="text/html" title="" /><published>2026-03-22T18:44:12+00:00</published><updated>2026-03-22T18:44:12+00:00</updated><id>https://algoroxyolo.github.io/blog/2026/2026-03-22-rl-reading-list</id><content type="html" xml:base="https://algoroxyolo.github.io/blog/2026/2026-03-22-rl-reading-list/"><![CDATA[<header class="hero">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://algoroxyolo.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://algoroxyolo.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-03-22T18:49:29+00:00</updated><id>https://algoroxyolo.github.io/feed.xml</id><title type="html">blank</title><subtitle>A website of Lorenzo. What!!! you do not know Lorenzo! Go check it out!
+</subtitle><entry><title type="html"></title><link href="https://algoroxyolo.github.io/blog/2026/2026-03-22-rl-reading-list/" rel="alternate" type="text/html" title="" /><published>2026-03-22T18:49:29+00:00</published><updated>2026-03-22T18:49:29+00:00</updated><id>https://algoroxyolo.github.io/blog/2026/2026-03-22-rl-reading-list</id><content type="html" xml:base="https://algoroxyolo.github.io/blog/2026/2026-03-22-rl-reading-list/"><![CDATA[<header class="hero">
   <div class="hero-badge">Reference &middot; 99 Papers</div>
   <h1>RL for LLMs: <em>The Reading List</em></h1>
   <p class="hero-sub">A curated taxonomy of 99 papers across algorithms, rewards, preferences, systems, and agents &mdash; with reading depth recommendations.</p>
@@ -17,7 +17,7 @@
 </div>
 
 <div class="rl-stats">
-  <span><strong>96</strong> papers</span>
+  <span><strong>99</strong> papers</span>
   <span><strong>5</strong> categories</span>
   <span><strong>24</strong> sub-topics</span>
   <span style="flex:1"></span>
@@ -25,8 +25,8 @@
   <span>2022: <strong>2</strong></span>
   <span>2023: <strong>1</strong></span>
   <span>2024: <strong>8</strong></span>
-  <span>2025: <strong>55</strong></span>
-  <span>2026: <strong>29</strong></span>
+  <span>2025: <strong>57</strong></span>
+  <span>2026: <strong>30</strong></span>
 </div>
 
 <!-- ═══════ 1. ALGORITHMS ═══════ -->
@@ -355,7 +355,7 @@
     <div class="roadmap-num">03</div>
     <div class="roadmap-body">
       <h3>From Preferences to Alignment</h3>
-      <p>DPO simplifies RLHF by removing the reward model. It works well for single-turn preference alignment, and then it starts to plateau in settings that require multi-turn coherence, long-term persona consistency, or reward signals that are noisy and delayed. What I explore here: how do we bring modern RL techniques into the tasks I actually care about? Multi-turn dialogue where the reward is not "did you get the math right" but "did you maintain character across twenty turns." Creative writing where the failure mode is not incorrectness but blandness. REFUEL for multi-turn covariate shift, RLUF for noisy user feedback, OMAR for multi-role self-play&mdash;papers that point toward where the field is heading once the math-and-code gold rush settles.</p>
+      <p>DPO simplifies RLHF by removing the reward model. It works well for single-turn preference alignment, and then it starts to plateau in settings that require multi-turn coherence, long-term persona consistency, or reward signals that are noisy and delayed. What I explore here: how do we bring modern RL techniques into the tasks I actually care about? Multi-turn dialogue where the reward is not "did you get the math right" but "did you maintain character across twenty turns." Creative writing where the failure mode is not incorrectness but blandness. PPP for proactive personalized agents, HER for dual-layer role-playing thinking, OMAR for multi-role self-play&mdash;papers that point toward where the field is heading once the math-and-code gold rush settles.</p>
       <div class="roadmap-bridge">&darr; "We know what to optimize and how. But can any of this actually run at scale?"</div>
       <span class="roadmap-tag">Coming in Part 3</span>
     </div>
@@ -401,11 +401,11 @@
   <span class="depth-desc"><strong>Awareness only.</strong> Know it exists and what niche it fills.</span>
 </div>
 
-<p>There are <strong>95 papers</strong> across the five parts, <strong>37 of which are A-level</strong>.</p>
+<p>There are <strong>99 papers</strong> across the five parts, <strong>16 rated A and 36 rated A&minus;</strong>.</p>
 
 <div class="callout tip">
   <p class="callout-title">If you only have three hours</p>
-  <p>Read seven papers that cover the skeleton of the entire story: <strong>DeepSeekMath</strong> (Part 1), <strong>DeepSeek-R1</strong> (Part 1), <strong>DAPO</strong> (Part 1), <strong>DeepSeek-GRM</strong> (Part 2), <strong>Nemotron-Cascade 2</strong> (Part 2), <strong>Magistral</strong> (Part 4), and <strong>Search-R1</strong> (Part 5).</p>
+  <p>Read seven papers that cover the skeleton of the entire story: <strong>DeepSeekMath</strong> (Part 1), <strong>DeepSeek-R1</strong> (Part 1), <strong>DAPO</strong> (Part 1), <strong>DeepSeek-GRM</strong> (Part 2), <strong>OLMo 3</strong> (Part 3), <strong>Magistral</strong> (Part 4), and <strong>Search-R1</strong> (Part 5).</p>
 </div>
 
 <div class="divider"></div>

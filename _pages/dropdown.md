@@ -7,6 +7,4 @@ dropdown: true
 children:
     - title: teaching
       permalink: /teaching/
-    - title: collaborators
-      permalink: /people/
 ---

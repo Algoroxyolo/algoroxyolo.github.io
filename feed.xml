@@ -1,5 +1,433 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://algoroxyolo.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://algoroxyolo.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-03-14T23:44:39+00:00</updated><id>https://algoroxyolo.github.io/feed.xml</id><title type="html">blank</title><subtitle>A website of Lorenzo. What!!! you do not know Lorenzo! Go check it out!
-</subtitle><entry><title type="html">A Systems Engineering Approach to LLM Agents — Series Overview</title><link href="https://algoroxyolo.github.io/blog/2026/llm-agents-blueprint/" rel="alternate" type="text/html" title="A Systems Engineering Approach to LLM Agents — Series Overview" /><published>2026-03-14T00:00:00+00:00</published><updated>2026-03-14T00:00:00+00:00</updated><id>https://algoroxyolo.github.io/blog/2026/llm-agents-blueprint</id><content type="html" xml:base="https://algoroxyolo.github.io/blog/2026/llm-agents-blueprint/"><![CDATA[<header class="hero">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://algoroxyolo.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://algoroxyolo.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-03-22T18:33:29+00:00</updated><id>https://algoroxyolo.github.io/feed.xml</id><title type="html">blank</title><subtitle>A website of Lorenzo. What!!! you do not know Lorenzo! Go check it out!
+</subtitle><entry><title type="html">RL for LLMs: The Reading List</title><link href="https://algoroxyolo.github.io/blog/2026/rl-reading-list/" rel="alternate" type="text/html" title="RL for LLMs: The Reading List" /><published>2026-03-22T12:00:00+00:00</published><updated>2026-03-22T12:00:00+00:00</updated><id>https://algoroxyolo.github.io/blog/2026/rl-reading-list</id><content type="html" xml:base="https://algoroxyolo.github.io/blog/2026/rl-reading-list/"><![CDATA[<header class="hero">
+  <div class="hero-badge">Reference &middot; 96 Papers</div>
+  <h1>RL for LLMs: <em>The Reading List</em></h1>
+  <p class="hero-sub">A curated taxonomy of 96 papers across algorithms, rewards, preferences, systems, and agents &mdash; with reading depth recommendations.</p>
+  <p class="hero-meta">Lorenzo Xiao &middot; v8 &middot; Updated March 2026</p>
+</header>
+
+<article>
+
+<div class="rl-legend">
+  <span class="rl-legend-item"><span class="rl-g rl-ga">A</span> Deep read</span>
+  <span class="rl-legend-item"><span class="rl-g rl-gam">A&minus;</span> Method + experiments</span>
+  <span class="rl-legend-item"><span class="rl-g rl-gbp">B+</span> Problem + conclusion</span>
+  <span class="rl-legend-item"><span class="rl-g rl-gb">B</span> Skim</span>
+  <span class="rl-legend-item"><span class="rl-g rl-gc">C</span> Core idea only</span>
+  <span class="rl-legend-item"><span class="rl-new">NEW</span> Added this round</span>
+</div>
+
+<div class="rl-stats">
+  <span><strong>96</strong> papers</span>
+  <span><strong>5</strong> categories</span>
+  <span><strong>24</strong> sub-topics</span>
+  <span style="flex:1"></span>
+  <span>2017: <strong>1</strong></span>
+  <span>2022: <strong>2</strong></span>
+  <span>2023: <strong>1</strong></span>
+  <span>2024: <strong>8</strong></span>
+  <span>2025: <strong>55</strong></span>
+  <span>2026: <strong>29</strong></span>
+</div>
+
+<!-- ═══════ 1. ALGORITHMS ═══════ -->
+<details class="rl-cat rl-cat--purple" open>
+<summary>Algorithms <span class="rl-cat-count">24 papers</span></summary>
+
+<details class="rl-sub">
+<summary>Core RL: PPO &rarr; GRPO &rarr; DAPO &rarr; CISPO &rarr; MaxRL &rarr; DPPO <span class="rl-sub-count">13</span></summary>
+<div class="rl-papers">
+  <div class="rl-p"><span class="rl-y">2017</span><span class="rl-n"><a href="https://arxiv.org/abs/1707.06347" target="_blank">PPO</a><div class="rl-tip">Know ratio clipping + trust region</div></span><span class="rl-badges"><span class="rl-g rl-gc">C</span></span></div>
+  <div class="rl-p"><span class="rl-y">2022</span><span class="rl-n"><a href="https://arxiv.org/abs/2203.02155" target="_blank">InstructGPT</a><div class="rl-tip">RM + PPO + KL penalty; shared with &sect;3.1</div></span><span class="rl-badges"><span class="rl-g rl-gam">A&minus;</span></span></div>
+  <div class="rl-p"><span class="rl-y">2024</span><span class="rl-n"><a href="https://arxiv.org/abs/2402.14740" target="_blank">RLOO / Revisiting REINFORCE</a></span><span class="rl-badges"><span class="rl-g rl-gam">A&minus;</span></span></div>
+  <div class="rl-p"><span class="rl-y">2024</span><span class="rl-n"><a href="https://arxiv.org/abs/2402.03300" target="_blank">DeepSeekMath (GRPO origin)</a><div class="rl-tip">Start your interview story here</div></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2501.12948" target="_blank">DeepSeek-R1</a></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2503.14476" target="_blank">DAPO</a><div class="rl-tip">Recipe + system-level scaling</div></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2507.18071" target="_blank">GSPO</a></span><span class="rl-badges"><span class="rl-g rl-gam">A&minus;</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2511.20347" target="_blank">SAPO</a></span><span class="rl-badges"><span class="rl-g rl-gb">B</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2506.13585" target="_blank">MiniMax-M1 / CISPO</a><div class="rl-tip">Changed clipping target &mdash; key interview talking point</div></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2503.01491" target="_blank">PPO Collapse in Long-CoT</a></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://openreview.net/forum?id=5PAF7PAY2Y" target="_blank">Dr. GRPO</a><div class="rl-tip">Fixes length bias + std normalization</div></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-gbp">B+</span></span></div>
+  <div class="rl-p"><span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2602.02710" target="_blank">MaxRL</a><div class="rl-tip">pass@k objective; RL&ndash;MLE continuum</div></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-gam">A&minus;</span></span></div>
+  <div class="rl-p"><span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2602.04879" target="_blank">DPPO</a><div class="rl-tip">TV/KL divergence trust region</div></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-gbp">B+</span></span></div>
+</div>
+</details>
+
+<details class="rl-sub">
+<summary>Scaling Laws &amp; Meta <span class="rl-sub-count">2</span></summary>
+<div class="rl-papers">
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2510.13786" target="_blank">ScaleRL / The Art of Scaling RL Compute</a></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2509.25300" target="_blank">Scaling Behaviors of LLM RL Post-Training</a><div class="rl-tip">Power-law: model scale &times; data &times; compute; complements ScaleRL</div></span><span class="rl-badges"><span class="rl-g rl-gb">B</span></span></div>
+</div>
+</details>
+
+<details class="rl-sub">
+<summary>Cascade &amp; Stage-wise RL (Nemotron) <span class="rl-sub-count">5</span></summary>
+<div class="rl-papers">
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2505.16400" target="_blank">AceReason-Nemotron 1.1</a></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2512.13607" target="_blank">Nemotron-Cascade 1</a><div class="rl-tip">Foundational motivation for Cascade 2</div></span><span class="rl-badges"><span class="rl-g rl-gam">A&minus;</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2508.06471" target="_blank">GLM-4.5 (stage-wise ARC)</a></span><span class="rl-badges"><span class="rl-g rl-gb">B</span></span></div>
+  <div class="rl-p"><span class="rl-y">2026</span><span class="rl-n"><a href="https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3-Super-Technical-Report.pdf" target="_blank">Nemotron 3 Super Technical Report</a><div class="rl-tip">LatentMoE + NVFP4 + multi-env simultaneous RL + reasoning budget control</div></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-gam">A&minus;</span></span></div>
+  <div class="rl-p"><span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2603.19220" target="_blank">Nemotron-Cascade 2</a><div class="rl-tip">IMO/IOI/ICPC gold medals; 30B MoE; on-policy distillation</div></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-ga">A</span></span></div>
+</div>
+</details>
+
+<details class="rl-sub">
+<summary>Distillation (on-policy / self / context) <span class="rl-sub-count">4</span></summary>
+<div class="rl-papers">
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://thinkingmachines.ai/blog/on-policy-distillation/" target="_blank">On-Policy Distillation (Thinking Machines)</a><div class="rl-tip">Clearest explanation of compute tradeoffs</div></span><span class="rl-badges"><span class="rl-g rl-gam">A&minus;</span></span></div>
+  <div class="rl-p"><span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2601.02780" target="_blank">MiMo-V2-Flash</a><div class="rl-tip">Multi-teacher on-policy distillation; core Cascade 2 technique</div></span><span class="rl-badges"><span class="rl-g rl-gam">A&minus;</span></span></div>
+  <div class="rl-p"><span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2601.18734" target="_blank">Self-Distilled Reasoner</a><div class="rl-tip">Teacher = self with privileged information</div></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span></div>
+  <div class="rl-p"><span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2602.12275" target="_blank">On-Policy Context Distillation</a></span><span class="rl-badges"><span class="rl-g rl-gb">B</span></span></div>
+</div>
+</details>
+
+</details>
+
+<!-- ═══════ 2. REWARD MODELING ═══════ -->
+<details class="rl-cat rl-cat--coral" open>
+<summary>Reward Modeling <span class="rl-cat-count">19 papers</span></summary>
+
+<details class="rl-sub">
+<summary>Generative Reward Models <span class="rl-sub-count">5</span></summary>
+<div class="rl-papers">
+  <div class="rl-p"><span class="rl-y">2024</span><span class="rl-n"><a href="https://arxiv.org/abs/2408.15240" target="_blank">Generative Verifiers: RM as Next-Token Prediction</a><div class="rl-tip">346 citations; GRM origin; yes/no token + majority vote</div></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-ga">A</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2505.11475" target="_blank">HelpSteer3-Preference</a><div class="rl-tip">40k samples; NVIDIA latest; RM-Bench SOTA</div></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-ga">A</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2504.02495" target="_blank">DeepSeek-GRM / SPCT</a><div class="rl-tip">SPCT online RL for GRM training; 193 citations</div></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2505.02387" target="_blank">RM-R1: Reward Modeling as Reasoning</a><div class="rl-tip">Reason first, then score; 101 citations</div></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-gam">A&minus;</span></span></div>
+  <div class="rl-p"><span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2602.12116" target="_blank">P-GenRM (ICLR 2026 Oral)</a><div class="rl-tip">Personalized GRM &mdash; directly relevant to persona research</div></span><span class="rl-badges"><span class="rl-g rl-gam">A&minus;</span></span></div>
+</div>
+</details>
+
+<details class="rl-sub">
+<summary>Process Reward Models (PRM) <span class="rl-sub-count">6</span></summary>
+<div class="rl-papers">
+  <div class="rl-p"><span class="rl-y">2024</span><span class="rl-n"><a href="https://openreview.net/forum?id=A6Y7AqlzLW" target="_blank">PAV / Rewarding Progress</a><div class="rl-tip">ICLR; 225 citations; process reward = advantage</div></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-gam">A&minus;</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2504.00125" target="_blank">ThinkPRM</a><div class="rl-tip">Long CoT verifier; 58 citations</div></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-gam">A&minus;</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2504.15221" target="_blank">GenPRM</a><div class="rl-tip">PRM test-time generative reasoning; 21 citations</div></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-gam">A&minus;</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2501.07301" target="_blank">ReasonFlux-PRM</a><div class="rl-tip">NeurIPS 2025 Spotlight</div></span><span class="rl-badges"><span class="rl-g rl-gam">A&minus;</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2503.06266" target="_blank">R-PRM</a></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span></div>
+  <div class="rl-p"><span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2603.02479" target="_blank">PRISM</a></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span></div>
+</div>
+</details>
+
+<details class="rl-sub">
+<summary>Rubrics-as-Rewards <span class="rl-sub-count">3</span></summary>
+<div class="rl-papers">
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2503.11042" target="_blank">Rubrics as Rewards (RaR)</a><div class="rl-tip">111 citations; rubrics structure subjective preferences</div></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-gam">A&minus;</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2504.00831" target="_blank">OpenRubrics</a></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-gbp">B+</span></span></div>
+  <div class="rl-p"><span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2602.01454" target="_blank">Rubric-ARM</a><div class="rl-tip">Alternating optimization of rubric generator + judge</div></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-gbp">B+</span></span></div>
+</div>
+</details>
+
+<details class="rl-sub">
+<summary>RM Evaluation &amp; Benchmarks <span class="rl-sub-count">5</span></summary>
+<div class="rl-papers">
+  <div class="rl-p"><span class="rl-y">2024</span><span class="rl-n"><a href="https://arxiv.org/abs/2410.14872" target="_blank">How to Evaluate RM for RLHF / PPE</a><div class="rl-tip">61 citations; offline-online gap</div></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-gam">A&minus;</span></span></div>
+  <div class="rl-p"><span class="rl-y">2024</span><span class="rl-n"><a href="https://arxiv.org/abs/2503.04378" target="_blank">HelpSteer3 dataset</a><div class="rl-tip">Feedback + edit; inference-time scaling</div></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-gbp">B+</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2506.01937" target="_blank">RewardBench 2</a><div class="rl-tip">63 citations; reward hacking</div></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-gbp">B+</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2509.11347" target="_blank">ToolRM + FC-RewardBench</a></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-gc">C</span></span></div>
+  <div class="rl-p"><span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2603.12963" target="_blank">Long-form RewardBench</a></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-gc">C</span></span></div>
+</div>
+</details>
+
+</details>
+
+<!-- ═══════ 3. RLHF / PREFERENCE ═══════ -->
+<details class="rl-cat rl-cat--pink" open>
+<summary>RLHF &amp; Preference Optimization <span class="rl-cat-count">13 papers</span></summary>
+
+<details class="rl-sub">
+<summary>Foundations <span class="rl-sub-count">3</span></summary>
+<div class="rl-papers">
+  <div class="rl-p"><span class="rl-y">2022</span><span class="rl-n"><a href="https://arxiv.org/abs/2203.02155" target="_blank">InstructGPT</a><div class="rl-tip">Shared with &sect;1.1</div></span><span class="rl-badges"><span class="rl-g rl-gam">A&minus;</span></span></div>
+  <div class="rl-p"><span class="rl-y">2022</span><span class="rl-n"><a href="https://arxiv.org/abs/2204.05862" target="_blank">Bai et al. / HH-RLHF</a><div class="rl-tip">Safety alignment; HH-RLHF dataset</div></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-gbp">B+</span></span></div>
+  <div class="rl-p"><span class="rl-y">2023</span><span class="rl-n"><a href="https://arxiv.org/abs/2305.18290" target="_blank">DPO</a><div class="rl-tip">Know why it eventually fell short</div></span><span class="rl-badges"><span class="rl-g rl-gam">A&minus;</span></span></div>
+</div>
+</details>
+
+<details class="rl-sub">
+<summary>From Simplification to Online RL <span class="rl-sub-count">4</span></summary>
+<div class="rl-papers">
+  <div class="rl-p"><span class="rl-y">2024</span><span class="rl-n"><a href="https://arxiv.org/abs/2405.14734" target="_blank">SimPO</a><div class="rl-tip">DPO simplification endpoint</div></span><span class="rl-badges"><span class="rl-g rl-gb">B</span></span></div>
+  <div class="rl-p"><span class="rl-y">2024</span><span class="rl-n"><a href="https://arxiv.org/abs/2405.07863" target="_blank">Online Iterative RLHF</a><div class="rl-tip">Turning point: online >> offline DPO</div></span><span class="rl-badges"><span class="rl-g rl-gam">A&minus;</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://openreview.net/forum?id=FhTAG591Ve" target="_blank">Asynchronous RLHF (ICLR 2025)</a></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2512.13961" target="_blank">OLMo 3 (SFT-DPO-RL-RL Zero)</a><div class="rl-tip">Fully transparent &amp; reproducible; all data/code/checkpoints</div></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-ga">A</span></span></div>
+</div>
+</details>
+
+<details class="rl-sub">
+<summary>Multi-turn / Social / Creative RLHF <span class="rl-sub-count">6</span></summary>
+<div class="rl-papers">
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2511.02208" target="_blank">PPP: Proactive and Personalized Agents</a><div class="rl-tip">Three-objective RL; UserVille benchmark</div></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-gam">A&minus;</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2509.25137" target="_blank">RL from User Conversations</a><div class="rl-tip">Persona-conditioned rewards</div></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-gam">A&minus;</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2508.18642" target="_blank">RLMR: Mixed Rewards for Creative Writing</a><div class="rl-tip">Subjective aesthetic RM + objective constraint verifier</div></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-gb">B</span></span></div>
+  <div class="rl-p"><span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2601.21459" target="_blank">HER: RL for Role-playing</a><div class="rl-tip">Dual-layer thinking; relevant to InCharacter work</div></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-gam">A&minus;</span></span></div>
+  <div class="rl-p"><span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2602.03109" target="_blank">OMAR (One Model All Roles)</a></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-gb">B</span></span></div>
+  <div class="rl-p"><span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2603.09249" target="_blank">Social-R1</a></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-gc">C</span></span></div>
+</div>
+</details>
+
+</details>
+
+<!-- ═══════ 4. SYSTEMS ═══════ -->
+<details class="rl-cat rl-cat--teal" open>
+<summary>Systems <span class="rl-cat-count">18 papers</span></summary>
+
+<details class="rl-sub">
+<summary>Sync vs Async Training <span class="rl-sub-count">6</span></summary>
+<div class="rl-papers">
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2506.10910" target="_blank">Magistral</a></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2505.24298" target="_blank">AReaL</a></span><span class="rl-badges"><span class="rl-g rl-gam">A&minus;</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://lmsys.org/blog/2025-07-09-slime/" target="_blank">slime (SGLang RL blog)</a></span><span class="rl-badges"><span class="rl-g rl-gam">A&minus;</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2512.06547" target="_blank">A-3PO</a><div class="rl-tip">Decoupled PPO; independent dimension</div></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span></div>
+  <div class="rl-p"><span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2601.12784" target="_blank">StaleFlow</a></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span></div>
+  <div class="rl-p"><span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2603.01501" target="_blank">GAC</a></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span></div>
+</div>
+</details>
+
+<details class="rl-sub">
+<summary>Train-Inference Mismatch &amp; RL Stability <span class="rl-sub-count">9</span></summary>
+<div class="rl-papers">
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2512.01374" target="_blank">Stabilizing RL with LLMs</a><div class="rl-tip">IS correction + Routing Replay theory</div></span><span class="rl-badges"><span class="rl-g rl-gam">A&minus;</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2506.09501" target="_blank">Give Me FP32 or Give Me Death</a></span><span class="rl-badges"><span class="rl-g rl-gam">A&minus;</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/" target="_blank">Defeating Nondeterminism (Thinking Machines)</a></span><span class="rl-badges"><span class="rl-g rl-gam">A&minus;</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://lmsys.org/blog/2025-09-22-sglang-deterministic/" target="_blank">SGLang Deterministic Inference</a></span><span class="rl-badges"><span class="rl-g rl-gam">A&minus;</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2510.11370" target="_blank">R3: MoE Routing Replay</a><div class="rl-tip">Theoretically explained by Stabilizing RL paper</div></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2510.26788" target="_blank">FP16 Mismatch</a><div class="rl-tip">Counter-intuitive: train/infer path consistency matters more</div></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2511.17826" target="_blank">TP Sizes Determinism</a></span><span class="rl-badges"><span class="rl-g rl-gc">C</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://lmsys.org/blog/2025-11-25-fp8-rl/" target="_blank">Unified FP8 (SGLang blog)</a></span><span class="rl-badges"><span class="rl-g rl-gc">C</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2512.02556" target="_blank">DeepSeek-V3.2</a></span><span class="rl-badges"><span class="rl-g rl-gc">C</span></span></div>
+</div>
+</details>
+
+<details class="rl-sub">
+<summary>Long-Context RL <span class="rl-sub-count">3</span></summary>
+<div class="rl-papers">
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2505.17667" target="_blank">QwenLong-L1</a></span><span class="rl-badges"><span class="rl-g rl-gc">C</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2506.13585" target="_blank">MiniMax-M1 (long-context view)</a></span><span class="rl-badges"><span class="rl-g rl-gb">B</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2512.12967" target="_blank">QwenLong-L1.5</a></span><span class="rl-badges"><span class="rl-g rl-gc">C</span></span></div>
+</div>
+</details>
+
+</details>
+
+<!-- ═══════ 5. TASKS & AGENTS ═══════ -->
+<details class="rl-cat rl-cat--amber" open>
+<summary>Tasks &amp; Agents <span class="rl-cat-count">22 papers</span></summary>
+
+<details class="rl-sub">
+<summary>Coding Agents <span class="rl-sub-count">4</span></summary>
+<div class="rl-papers">
+  <div class="rl-p"><span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2603.00729" target="_blank">Qwen3-Coder-Next</a></span><span class="rl-badges"><span class="rl-g rl-gam">A&minus;</span></span></div>
+  <div class="rl-p"><span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2602.03411" target="_blank">SWE-Master</a></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2506.11425" target="_blank">Agent-RLVR</a></span><span class="rl-badges"><span class="rl-g rl-gc">C</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2509.23045" target="_blank">Kimi-Dev</a></span><span class="rl-badges"><span class="rl-g rl-gc">C</span></span></div>
+</div>
+</details>
+
+<details class="rl-sub">
+<summary>Deep Research &amp; Search Agents <span class="rl-sub-count">5</span></summary>
+<div class="rl-papers">
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2503.09516" target="_blank">Search-R1</a><div class="rl-tip">790 citations</div></span><span class="rl-badges"><span class="rl-g rl-ga">A</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2510.24701" target="_blank">Tongyi DeepResearch</a></span><span class="rl-badges"><span class="rl-g rl-gam">A&minus;</span></span></div>
+  <div class="rl-p"><span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2601.19578" target="_blank">Yunque DeepResearch</a></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span></div>
+  <div class="rl-p"><span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2602.19526" target="_blank">How to Train DR Agent</a></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2508.07976" target="_blank">Beyond Ten Turns</a></span><span class="rl-badges"><span class="rl-g rl-gb">B</span></span></div>
+</div>
+</details>
+
+<details class="rl-sub">
+<summary>Computer-Use &amp; GUI Agents <span class="rl-sub-count">3</span></summary>
+<div class="rl-papers">
+  <div class="rl-p"><span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2601.20380" target="_blank">OmegaUse</a></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span></div>
+  <div class="rl-p"><span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2602.22190" target="_blank">GUI-Libra</a></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2508.14040" target="_blank">ComputerRL</a></span><span class="rl-badges"><span class="rl-g rl-gbp">B+</span></span></div>
+</div>
+</details>
+
+<details class="rl-sub">
+<summary>Tool-Use RL <span class="rl-sub-count">3</span></summary>
+<div class="rl-papers">
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2504.13958" target="_blank">ToolRL</a><div class="rl-tip">191 citations; reward design textbook</div></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-ga">A</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2505.00949" target="_blank">Nemotron-Tool-N1</a><div class="rl-tip">NVIDIA; binary reward; must-discuss in interviews</div></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-ga">A</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2504.09442" target="_blank">ReTool</a><div class="rl-tip">231 citations; cold-start synthesis + outcome RL</div></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-gam">A&minus;</span></span></div>
+</div>
+</details>
+
+<details class="rl-sub">
+<summary>Generalist Agent RL Frameworks <span class="rl-sub-count">3</span></summary>
+<div class="rl-papers">
+  <div class="rl-p"><span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2602.02488" target="_blank">RLAnything</a><div class="rl-tip">Joint optimization of env + policy + RM</div></span><span class="rl-badges"><span class="rl-g rl-gam">A&minus;</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2510.04206" target="_blank">AGENTRL</a><div class="rl-tip">Async + cross-policy sampling</div></span><span class="rl-badges"><span class="rl-g rl-gam">A&minus;</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2505.16421" target="_blank">WebAgent-R1</a><div class="rl-tip">73 citations; end-to-end web-agent RL</div></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-gbp">B+</span></span></div>
+</div>
+</details>
+
+<details class="rl-sub">
+<summary>Agent RL Challenges &amp; Self-Evolution <span class="rl-sub-count">4</span></summary>
+<div class="rl-papers">
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2504.20073" target="_blank">RAGEN</a><div class="rl-tip">148 citations; Echo Trap &mdash; why agent RL fails</div></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-ga">A</span></span></div>
+  <div class="rl-p"><span class="rl-y">2026</span><span class="rl-n"><a href="https://arxiv.org/abs/2601.15839" target="_blank">iStar</a><div class="rl-tip">ICLR 2026; implicit PRM for credit assignment</div></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-gam">A&minus;</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2502.10325" target="_blank">AgentPRM</a><div class="rl-tip">MC rollout actor-critic; 29 citations</div></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-gbp">B+</span></span></div>
+  <div class="rl-p"><span class="rl-y">2025</span><span class="rl-n"><a href="https://arxiv.org/abs/2505.03335" target="_blank">Absolute Zero</a><div class="rl-tip">161 citations; zero-data self-play</div></span><span class="rl-badges"><span class="rl-new">NEW</span><span class="rl-g rl-gam">A&minus;</span></span></div>
+</div>
+</details>
+
+</details>
+
+<div class="divider"></div>
+
+<p style="font-size: 0.82rem; color: var(--ep-muted); text-align: center;">Click subsection headers to expand. 5 categories &middot; 24 sub-topics &middot; Updated March 2026.</p>
+
+</article>
+
+<div class="post-end">
+  <p class="post-author">Lorenzo Xiao &middot; Language Technologies Institute &middot; Carnegie Mellon University</p>
+  <a href="/blog/">&larr; Back to blog</a>
+</div>]]></content><author><name>Lorenzo Xiao</name></author><category term="blog" /><category term="academic" /><category term="AI" /><category term="reinforcement-learning" /><summary type="html"><![CDATA[96 papers across algorithms, rewards, preferences, systems, and agents — organized into 5 categories with reading depth recommendations.]]></summary></entry><entry><title type="html">How I Learned RL for LLMs: A Researcher’s Detour in Five Parts</title><link href="https://algoroxyolo.github.io/blog/2026/rl-for-llms-part0/" rel="alternate" type="text/html" title="How I Learned RL for LLMs: A Researcher’s Detour in Five Parts" /><published>2026-03-22T00:00:00+00:00</published><updated>2026-03-22T00:00:00+00:00</updated><id>https://algoroxyolo.github.io/blog/2026/rl-for-llms-part0</id><content type="html" xml:base="https://algoroxyolo.github.io/blog/2026/rl-for-llms-part0/"><![CDATA[<header class="hero">
+  <div class="hero-badge">Series &middot; Part 0 of 5</div>
+  <h1>How I Learned <em>RL for LLMs</em></h1>
+  <p class="hero-sub">An evaluation researcher's honest map through the algorithms, rewards, and systems of reinforcement learning for language models.</p>
+  <p class="hero-meta">Lorenzo Xiao &middot; Language Technologies Institute, CMU &middot; March 2026</p>
+</header>
+
+<article>
+
+<p class="lead">I will be honest about how this series started, because the origin story matters for understanding what it is and what it is not.</p>
+
+<h2>How This Started</h2>
+
+<p>I am an NLP researcher. My work has been on evaluation, specifically on non-verifiable tasks: persona consistency, cultural appropriateness, anthropomorphism&mdash;the kinds of things where "correctness" is not a number you can look up in the back of a textbook. I have spent the past few years building benchmarks, designing evaluation protocols, and thinking carefully about what it means to measure something that is inherently subjective. I thought this was my path. I intended to keep going.</p>
+
+<p>Then I did not get into any of the PhD programs I applied to.</p>
+
+<p>That was the moment I had to sit with an uncomfortable realization: most of the skills I had acquired in creating benchmarks do not transfer cleanly to industry. I knew how to design evaluation frameworks. I could tell you whether a benchmark was measuring what it claimed to measure. But I could not tell you how a post-training pipeline actually works end to end, how reward signals flow into policy updates, or why a training run that looks fine on paper collapses in practice. The evaluation side of the house was where I lived. The training side was a foreign country.</p>
+
+<p>So I made a decision. If I was going to be competitive for post-training teams in industry, I needed to learn reinforcement learning. Not the textbook version. The version that people are actually using right now, in 2025 and 2026, to make language models reason, use tools, write code, and hold conversations.</p>
+
+<p>This blog series is the documentation of that learning process.</p>
+
+<div class="divider"></div>
+
+<h2>What This Series Is</h2>
+
+<p>I want to be clear about two things.</p>
+
+<p>First, <strong>I am writing this to make sure I can clearly explain what I have learned.</strong> The act of writing forces a kind of precision that reading alone does not. If I cannot write a coherent paragraph about why DAPO's asymmetric clipping matters, I probably do not actually understand it yet. Some of what I write will contain mistakes. I am learning in public, and I sincerely welcome corrections. If you spot an error, please let me know. You will be doing me a genuine favor.</p>
+
+<p>Second, <strong>I am writing this for people from a similar background.</strong> If you are an NLP researcher who has spent more time on evaluation than on training, if you know what a good benchmark looks like but have never debugged a reward hacking failure, if you are pivoting toward post-training work and feeling the gap between what you know and what you need to know: this series is for you. I am not writing from a position of expertise. I am writing from a position of "I figured this out six months ago and here is how I organized it in my head."</p>
+
+<p>This series would not have existed without the help of <a href="https://x.com/sun_hanchi" target="_blank">Hanchi Sun</a>, who patiently walked me through the parts I could not figure out from papers alone.</p>
+
+<div class="divider"></div>
+
+<h2>The Five Parts</h2>
+
+<p>Each part ends with a question that the next part answers. This is deliberate. The series is meant to build, not to be a disconnected collection of literature reviews.</p>
+
+<div class="roadmap">
+
+  <div class="roadmap-card rc-1">
+    <div class="roadmap-num">01</div>
+    <div class="roadmap-body">
+      <h3>The Algorithm Zoo</h3>
+      <p>REINFORCE, PPO, GRPO, and the lineage of papers that fix what GRPO got wrong: Dr. GRPO, DAPO, CISPO, MaxRL, DPPO. The organizing question for the entire section: <em>how does each subsequent paper fix GRPO?</em> GRPO removed the critic, introduced group-relative baselines, and made large-scale reasoning RL tractable. But it also introduced subtle biases&mdash;length normalization, standard deviation weighting, symmetric clipping, token-level loss aggregation&mdash;that turned out to be consequential. Every paper that came after is asking the same question: what did GRPO get wrong, and how do we fix it without breaking what it got right?</p>
+      <div class="roadmap-bridge">&darr; "These algorithms all optimize a reward signal. But where does that signal come from?"</div>
+      <span class="roadmap-tag">Coming in Part 1</span>
+    </div>
+  </div>
+
+  <div class="roadmap-card rc-2">
+    <div class="roadmap-num">02</div>
+    <div class="roadmap-body">
+      <h3>The Reward Problem</h3>
+      <p>The current RL-for-LLM literature is dominated by tasks where reward is cheap and unambiguous: math problems with checkable answers, code with executable test suites. The moment you step outside those domains&mdash;into summarization, creative writing, open-ended dialogue, cultural sensitivity&mdash;the reward problem becomes the <em>hard</em> problem. This part covers generative reward models that reason before scoring (DeepSeek-GRM, RM-R1), process reward models that evaluate intermediate steps (PAV, ThinkPRM), rubrics-as-rewards for structuring subjective preferences, and the evaluation benchmarks (RewardBench and its successors) that make RM development iterative. This is the section closest to my original research, and honestly the one I found most intellectually exciting.</p>
+      <div class="roadmap-bridge">&darr; "Reward models approximate human judgment. But what if we could learn directly from preferences without an explicit reward model?"</div>
+      <span class="roadmap-tag">Coming in Part 2</span>
+    </div>
+  </div>
+
+  <div class="roadmap-card rc-3">
+    <div class="roadmap-num">03</div>
+    <div class="roadmap-body">
+      <h3>From Preferences to Alignment</h3>
+      <p>DPO simplifies RLHF by removing the reward model. It works well for single-turn preference alignment, and then it starts to plateau in settings that require multi-turn coherence, long-term persona consistency, or reward signals that are noisy and delayed. What I explore here: how do we bring modern RL techniques into the tasks I actually care about? Multi-turn dialogue where the reward is not "did you get the math right" but "did you maintain character across twenty turns." Creative writing where the failure mode is not incorrectness but blandness. REFUEL for multi-turn covariate shift, RLUF for noisy user feedback, OMAR for multi-role self-play&mdash;papers that point toward where the field is heading once the math-and-code gold rush settles.</p>
+      <div class="roadmap-bridge">&darr; "We know what to optimize and how. But can any of this actually run at scale?"</div>
+      <span class="roadmap-tag">Coming in Part 3</span>
+    </div>
+  </div>
+
+  <div class="roadmap-card rc-4">
+    <div class="roadmap-num">04</div>
+    <div class="roadmap-body">
+      <h3>Making It Work: Systems</h3>
+      <p>The section I was most tempted to skip and most glad I did not. A beautiful algorithm that requires synchronous rollout-then-update will lose to a mediocre algorithm running on async infrastructure that keeps GPUs utilized, if the wall-clock time difference is large enough. But this section is about more than async versus sync. Why does MoE routing behave differently during rollout than during training? Why can FP16 rounding in your inference kernel silently corrupt importance-sampling ratios? Why does deterministic inference across different tensor-parallel sizes require explicit engineering? These are the questions that separate "I read the GRPO paper" from "I could actually help debug a training run."</p>
+      <div class="roadmap-bridge">&darr; "With the full stack understood, where is RL for LLMs actually heading?"</div>
+      <span class="roadmap-tag">Coming in Part 4</span>
+    </div>
+  </div>
+
+  <div class="roadmap-card rc-5">
+    <div class="roadmap-num">05</div>
+    <div class="roadmap-body">
+      <h3>The Agent Frontier</h3>
+      <p>RL is no longer just for math and code. This part covers coding agents (Qwen3-Coder-Next, SWE-Master), deep research agents (Search-R1, Tongyi DeepResearch), computer-use agents (ComputerRL, GUI-Libra), and the emerging generalist agentic RL systems that attempt to unify all of these under one training framework (RLAnything, AGENTRL, iStar). A dedicated section covers NVIDIA's Nemotron-Tool-N1, which takes the minimalist approach of binary reward for tool-calling correctness and shows it works surprisingly well. Sometimes the answer to "how do we design reward for agentic tasks?" is "just check if the tool call was correct and let RL figure out the rest."</p>
+      <span class="roadmap-tag">Coming in Part 5</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="divider"></div>
+
+<h2>How to Read This Series</h2>
+
+<p>Each post is self-contained. You can read Part 2 (Rewards) without reading Part 1 (Algorithms), though I cross-reference when the same concept appears in multiple places.</p>
+
+<p>Within each post, every paper gets a reading-depth recommendation:</p>
+
+<div class="depth-legend">
+  <span class="depth-label da">A</span>
+  <span class="depth-desc"><strong>Deep read.</strong> Explain the method, the training pipeline, the failure modes, and why it was necessary.</span>
+  <span class="depth-label dam">A&minus;</span>
+  <span class="depth-desc"><strong>Focused read.</strong> Abstract, method figure, key tables, and ablation. Know the core contribution well enough to discuss it.</span>
+  <span class="depth-label db">B</span>
+  <span class="depth-desc"><strong>Skim.</strong> Know the problem setting, the main conclusion, and how it connects to the mainline.</span>
+  <span class="depth-label dc">C</span>
+  <span class="depth-desc"><strong>Awareness only.</strong> Know it exists and what niche it fills.</span>
+</div>
+
+<p>There are <strong>95 papers</strong> across the five parts, <strong>37 of which are A-level</strong>.</p>
+
+<div class="callout tip">
+  <p class="callout-title">If you only have three hours</p>
+  <p>Read seven papers that cover the skeleton of the entire story: <strong>DeepSeekMath</strong> (Part 1), <strong>DeepSeek-R1</strong> (Part 1), <strong>DAPO</strong> (Part 1), <strong>DeepSeek-GRM</strong> (Part 2), <strong>Nemotron-Cascade 2</strong> (Part 2), <strong>Magistral</strong> (Part 4), and <strong>Search-R1</strong> (Part 5).</p>
+</div>
+
+<div class="divider"></div>
+
+<h2>One Last Thing</h2>
+
+<p>I want to acknowledge something that I think more people should say out loud: getting rejected from every program you applied to is a specific kind of painful. It makes you question whether the work you have done matters, whether the skills you have built are real, whether the direction you chose was the right one.</p>
+
+<p>I do not have a neat resolution to that story yet. What I have is this: the process of learning RL for LLMs, of building this map from scratch, of forcing myself to understand systems and algorithms and reward design that were outside my comfort zone, has been the most intellectually alive I have felt in a long time.</p>
+
+<p>And somewhere along the way, I realized something that changed how I think about my own research: <strong>evaluation and training are not separate worlds.</strong> A good reward model <em>is</em> an evaluation. A good benchmark <em>is</em> a reward signal waiting to be operationalized. The skills transfer. They just transfer in directions I did not expect.</p>
+
+<p>Part 1 goes up next. We start with REINFORCE, because everything else is a footnote to REINFORCE, and end with MaxRL and DPPO, the two 2026 papers that suggest the algorithmic story is far from over.</p>
+
+<div class="series-cta">
+  <h3>This is Part 0 of a 5-part series.</h3>
+  <p>Each subsequent post takes one layer of the RL-for-LLMs stack and goes deep: algorithms, rewards, preferences, systems, and agents. The parts build on each other, but each can be read independently.</p>
+</div>
+
+</article>
+
+<div class="post-end">
+  <p class="post-author">Lorenzo Xiao &middot; Language Technologies Institute &middot; Carnegie Mellon University</p>
+  <a href="/blog/">&larr; Back to blog</a>
+</div>]]></content><author><name>Lorenzo Xiao</name></author><category term="blog" /><category term="academic" /><category term="AI" /><category term="reinforcement-learning" /><summary type="html"><![CDATA[An NLP evaluation researcher's honest map through the algorithmic, reward, and systems landscape of reinforcement learning for language models.]]></summary></entry><entry><title type="html">A Systems Engineering Approach to LLM Agents — Series Overview</title><link href="https://algoroxyolo.github.io/blog/2026/llm-agents-blueprint/" rel="alternate" type="text/html" title="A Systems Engineering Approach to LLM Agents — Series Overview" /><published>2026-03-14T00:00:00+00:00</published><updated>2026-03-14T00:00:00+00:00</updated><id>https://algoroxyolo.github.io/blog/2026/llm-agents-blueprint</id><content type="html" xml:base="https://algoroxyolo.github.io/blog/2026/llm-agents-blueprint/"><![CDATA[<header class="hero">
   <div class="hero-badge">Series · Part 0 of 7</div>
   <h1>A Systems Engineering Approach to <em>LLM Agents</em></h1>
   <p class="hero-sub">Everyone's building agents. Almost nobody is engineering them. This series is about closing that gap.</p>

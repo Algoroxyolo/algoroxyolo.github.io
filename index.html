@@ -88,7 +88,6 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">more</a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="/teaching/">teaching</a>
-                  <a class="dropdown-item" href="/people/">collaborators</a>
                 </div>
               </li>
 
@@ -589,7 +588,7 @@
               function fmt(n) {
                 return n >= 1000 ? (n / 1000).toFixed(1) + 'k' : String(n);
               }
-              var paths = ['/', '/blog/', '/people/', '/teaching/', '/publications/', '/cv/', '/projects/', '/repositories/', '/blog/2026/nemo-gym-architecture/', '/blog/2026/llm-agents-blueprint/'];
+              var paths = ['/', '/blog/', '/people/', '/teaching/', '/publications/', '/cv/', '/projects/', '/repositories/', '/blog/2026/rl-reading-list/', '/blog/2026/rl-for-llms-part0/', '/blog/2026/nemo-gym-architecture/', '/blog/2026/llm-agents-blueprint/'];
               Promise.all(paths.map(function(p) {
                 return fetch(base + encodeURIComponent(p) + '.json')
                   .then(function(r) { return r.json(); })

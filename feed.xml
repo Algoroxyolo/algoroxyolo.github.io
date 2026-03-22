@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://algoroxyolo.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://algoroxyolo.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-03-22T20:29:19+00:00</updated><id>https://algoroxyolo.github.io/feed.xml</id><title type="html">blank</title><subtitle>A website of Lorenzo. What!!! you do not know Lorenzo! Go check it out!
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://algoroxyolo.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://algoroxyolo.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-03-22T20:33:00+00:00</updated><id>https://algoroxyolo.github.io/feed.xml</id><title type="html">blank</title><subtitle>A website of Lorenzo. What!!! you do not know Lorenzo! Go check it out!
 </subtitle><entry><title type="html">RL for LLMs: The Reading List</title><link href="https://algoroxyolo.github.io/blog/2026/rl-reading-list/" rel="alternate" type="text/html" title="RL for LLMs: The Reading List" /><published>2026-03-22T12:00:00+00:00</published><updated>2026-03-22T12:00:00+00:00</updated><id>https://algoroxyolo.github.io/blog/2026/rl-reading-list</id><content type="html" xml:base="https://algoroxyolo.github.io/blog/2026/rl-reading-list/"><![CDATA[<header class="hero hero--compact">
   <div class="hero-badge">Reference &middot; 96 Papers</div>
   <h1>RL for LLMs: <em>The Reading List</em></h1>
@@ -283,7 +283,7 @@
 
 <div style="margin-top: 32px; padding: 16px 20px; border-left: 3px solid #76b900; background: rgba(118,185,0,0.04); border-radius: 0 6px 6px 0; font-size: 0.84rem; color: var(--ep-muted); line-height: 1.55;">
   <strong style="color: var(--ep-ink);">Note on <span class="rl-nv">NV</span> papers.</strong>
-  The curator works at NVIDIA and is a big fan of the company&rsquo;s RL research. Papers tagged <span class="rl-nv">NV</span> are from NVIDIA or NVIDIA-affiliated teams. While every paper here earned its spot on merit, readers should be aware of this affiliation and selectively choose what to read based on their own research interests &mdash; not the curator&rsquo;s enthusiasm.
+  The curator is a big fan of NVIDIA&rsquo;s RL research. Papers tagged <span class="rl-nv">NV</span> are from NVIDIA or NVIDIA-affiliated teams. While every paper here earned its spot on merit, readers should be aware of this bias and selectively choose what to read based on their own research interests &mdash; not the curator&rsquo;s enthusiasm.
 </div>
 
 </article>

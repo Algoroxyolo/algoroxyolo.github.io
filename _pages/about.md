@@ -17,12 +17,15 @@ news: true  # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 open_to_work: true
-otw_role: "ML Engineer / Research Engineer — starting May 2026"
+otw_role: "Full-time Machine Learning Engineer / Research Engineer — starting May 2026"
 otw_pitch: >
-  Seeking roles in applied AI research and engineering.
-  I'm a Carnegie Mellon NLP researcher focused on LLM agents, evaluation, and safety,
-  with experience building end-to-end prototypes in multi-agent systems, memory,
-  persona consistency, and emotion-aware modeling.
+  I'm a CS student and NLP researcher at Carnegie Mellon University. My work focuses on LLM agents,
+  evaluation, and safety — including multi-agent systems, persona consistency, long-horizon memory,
+  and emotion modeling.
+
+
+  I've shipped research prototypes end-to-end and I'm excited to bring that experience to an
+  engineering team. If your team is hiring (or you know someone who is), I'd love to chat.
 ---
 
 I am an Master student in [Langugage Technology Institute](https://lti.cmu.edu) where I am advised by [Prof.Mona Diab](https://en.wikipedia.org/wiki/Mona_Diab). 

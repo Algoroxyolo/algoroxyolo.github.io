@@ -352,7 +352,7 @@ pagination:
         <div class="blog-series-card__badge">{{ agent_overview.series_total | default: agent_posts.size }} Parts</div>
         <h3>Agentic System Design</h3>
         <p>Engineering LLM agents from problem framing to production monitoring.</p>
-        <span class="blog-series-card__status">{{ agent_posts.size }} of {{ agent_overview.series_total | default: "?" }} published</span>
+        <span class="blog-series-card__status">0 of {{ agent_overview.series_total | default: "?" }} published</span>
       </a>
     {% endif %}
     {% if rl_posts.size > 0 %}
@@ -361,7 +361,7 @@ pagination:
         <div class="blog-series-card__badge">{{ rl_overview.series_total | default: rl_posts.size }} Parts</div>
         <h3>How I Learned RL for LLMs</h3>
         <p>From REINFORCE to GRPO to agents &mdash; an eval researcher's map through RL.</p>
-        <span class="blog-series-card__status">{{ rl_posts.size }} of {{ rl_overview.series_total | default: "?" }} published</span>
+        <span class="blog-series-card__status">0 of {{ rl_overview.series_total | default: "?" }} published</span>
       </a>
     {% endif %}
   </div>

@@ -268,9 +268,9 @@ _styles: >
     <div class="roadmap-num">01</div>
     <div class="roadmap-body">
       <h3>Requirements and Problem Framing</h3>
-      <p>In traditional ML, requirements and problem framing are separate phases. For LLM agents, they are inseparable. How you frame the problem (single call vs. agentic loop vs. multi-agent system) is itself a core requirement decision, because it determines latency, cost, reliability, and the entire downstream architecture. This step forces you to articulate task-level objectives, system-level objectives, alignment boundaries, and the performance tradeoffs between speed and quality, autonomy and control, specialization and generality. The golden rule: start simple, escalate only when demonstrably needed.</p>
-      <div class="roadmap-questions">Deep-dive will cover: ML framing taxonomy · constraint analysis (latency, cost, privacy, safety) · Pareto tradeoff mapping · escalation decision tree</div>
-      <span class="roadmap-tag">Coming soon</span>
+      <p>The first design decision is not "how smart should it be?" but "where do uncertainty, agency, and accountability sit?" This step introduces four analytical lenses — error surface analysis (decision authority, error cost asymmetry, recoverability), I/O gap diagnosis (how many information-acquisition steps bridge input to output), constraint analysis (the four walls of latency, cost, privacy, and governance), and Pareto tradeoff mapping (quality vs. speed, autonomy vs. control, generality vs. reliability). Grounded throughout with Rufus, Uber's support bot, and code agents as worked examples.</p>
+      <div class="roadmap-questions">Deep-dive covers: error surface framing · I/O gap analysis · constraint feasibility wedges · Pareto tradeoff mapping · six forcing questions · adaptive routing as design pattern</div>
+      <span class="roadmap-tag">Published — Part 1</span>
     </div>
   </div>
 
@@ -280,7 +280,7 @@ _styles: >
       <h3>Agent Architecture Design</h3>
       <p>This step has no analog in traditional ML. For agents, architecture design (topology, reasoning patterns, tool schemas, inter-agent protocols) is as consequential as model selection. I'll walk through the four canonical topologies (pipeline, hierarchical, debate, collaborative), the four core reasoning patterns (ReAct, Plan-then-Execute, Reflexion, Re-planning), and a critical dimension that most guides ignore: human-centered design. Research on human-AI collaboration shows that users build mental models of what agents can and cannot do, and misaligned mental models lead to over-reliance or under-trust. Architecture choices shape those mental models, whether you design for it or not.</p>
       <div class="roadmap-questions">Deep-dive will cover: architecture pattern selection · reasoning pattern matching · structured output and function calling · the human-AI collaboration spectrum · transparency and override design</div>
-      <span class="roadmap-tag">Published — Part 1</span>
+      <span class="roadmap-tag">Coming in Part 2</span>
     </div>
   </div>
 
@@ -340,7 +340,7 @@ _styles: >
 
 <h2>What's Next</h2>
 
-<p>Part 1 goes deep on <strong>Architecture and System Decomposition</strong>: decomposition patterns, control flow options, memory strategies, and tool design principles — turning framing decisions into running code.</p>
+<p>Part 1 goes deep on <strong>Requirements and Problem Framing</strong>: how to choose where uncertainty, agency, and accountability live — error surface analysis, I/O gap diagnosis, constraint feasibility, and Pareto tradeoff mapping.</p>
 
 <div class="series-cta">
   <h3>This is Part 0 of a 7-part series.</h3>

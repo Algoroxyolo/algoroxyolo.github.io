@@ -642,8 +642,59 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
   margin: 0 auto;
   line-height: 1.65;
 }
+/* ── Risk matrix ── */ .risk-matrix {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 32px 0;
+  font-size: 0.9rem;
+} .risk-matrix th, .risk-matrix td {
+  padding: 14px 16px;
+  text-align: left;
+  vertical-align: top;
+} /* Column headers */ .rm-col-head {
+  background: var(--ep-deep);
+  border-bottom: 3px solid;
+} .rm-col-head.col-advisory  { border-color: var(--ep-teal); } .rm-col-head.col-bounded   { border-color: var(--ep-orange); } .rm-col-head.col-full      { border-color: var(--ep-accent); } .rm-col-head .col-label {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: block;
+  margin-bottom: 2px;
+} .rm-col-head.col-advisory  .col-label { color: #3db5a5; } .rm-col-head.col-bounded   .col-label { color: #e8a55a; } .rm-col-head.col-full      .col-label { color: #e8725a; } .rm-col-head .col-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: rgba(250,248,245,0.45);
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+} .rm-col-corner {
+  background: var(--ep-deep);
+} /* Row headers */ .rm-row-head {
+  background: var(--ep-card-bg);
+  border-right: 3px solid;
+  font-weight: 600;
+  white-space: nowrap;
+} .rm-row-head .row-label {
+  font-family: 'Fraunces', serif;
+  font-size: 0.88rem;
+  display: block;
+  margin-bottom: 2px;
+} .rm-row-head .row-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 400;
+  display: block;
+} .row-low    { border-color: var(--ep-teal); } .row-low    .row-label { color: var(--ep-teal); } .row-low    .row-sub   { color: var(--ep-teal); opacity: 0.7; } .row-mid    { border-color: var(--ep-orange); } .row-mid    .row-label { color: var(--ep-orange); } .row-mid    .row-sub   { color: var(--ep-orange); opacity: 0.7; } .row-high   { border-color: var(--ep-accent); } .row-high   .row-label { color: var(--ep-accent); } .row-high   .row-sub   { color: var(--ep-accent); opacity: 0.7; } /* Data cells — tinted by row risk */ .risk-matrix tbody tr td:not(.rm-row-head) {
+  border-top: 1px solid var(--ep-border);
+  color: var(--ep-muted);
+  font-size: 0.88rem;
+  line-height: 1.55;
+} .risk-matrix tbody tr.r-low  td:not(.rm-row-head) { background: color-mix(in srgb, var(--ep-teal)   4%, transparent); } .risk-matrix tbody tr.r-mid  td:not(.rm-row-head) { background: color-mix(in srgb, var(--ep-orange) 5%, transparent); } .risk-matrix tbody tr.r-high td:not(.rm-row-head) { background: color-mix(in srgb, var(--ep-accent) 5%, transparent); }
 @media (max-width: 600px) {
   .authority-grid { grid-template-columns: 1fr; }
+  .risk-matrix { font-size: 0.82rem; }
+  .risk-matrix th, .risk-matrix td { padding: 10px 10px; }
+  .rm-row-head { white-space: normal; }
 }
 </style>
   
@@ -785,30 +836,48 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
 </div>
 
 <div class="table-wrap">
-<table>
+<table class="risk-matrix">
   <thead>
     <tr>
-      <th></th>
-      <th>Advisory (system recommends, human acts)</th>
-      <th>Bounded autonomy (within guardrails)</th>
-      <th>Full autonomy</th>
+      <th class="rm-col-corner"></th>
+      <th class="rm-col-head col-advisory">
+        <span class="col-label">Advisory</span>
+        <span class="col-sub">system recommends, human acts</span>
+      </th>
+      <th class="rm-col-head col-bounded">
+        <span class="col-label">Bounded Autonomy</span>
+        <span class="col-sub">within guardrails</span>
+      </th>
+      <th class="rm-col-head col-full">
+        <span class="col-label">Full Autonomy</span>
+        <span class="col-sub">system decides and acts</span>
+      </th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td><strong>Error cost low, recoverable</strong></td>
+    <tr class="r-low">
+      <td class="rm-row-head row-low">
+        <span class="row-label">Low risk</span>
+        <span class="row-sub">recoverable instantly</span>
+      </td>
       <td>Rufus, Perplexity, NotebookLM</td>
       <td>Cursor tab-complete, auto-formatting</td>
       <td>Spam filter, auto-tagging</td>
     </tr>
-    <tr>
-      <td><strong>Error cost moderate, partially recoverable</strong></td>
+    <tr class="r-mid">
+      <td class="rm-row-head row-mid">
+        <span class="row-label">Moderate risk</span>
+        <span class="row-sub">partially recoverable</span>
+      </td>
       <td>Google AI Overviews, Copilot Chat</td>
       <td>Klarna refunds (capped), Cursor inline edit</td>
       <td>Automated code review merge</td>
     </tr>
-    <tr>
-      <td><strong>Error cost high, irreversible</strong></td>
+    <tr class="r-high">
+      <td class="rm-row-head row-high">
+        <span class="row-label">High risk</span>
+        <span class="row-sub">irreversible</span>
+      </td>
       <td>Medical Q&amp;A without disclaimer</td>
       <td>Autonomous trading within limits</td>
       <td>Autonomous deployment to prod</td>

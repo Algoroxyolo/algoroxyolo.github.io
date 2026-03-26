@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://algoroxyolo.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://algoroxyolo.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-03-26T20:54:45+00:00</updated><id>https://algoroxyolo.github.io/feed.xml</id><title type="html">blank</title><subtitle>A website of Lorenzo. What!!! you do not know Lorenzo! Go check it out!
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://algoroxyolo.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://algoroxyolo.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-03-26T21:06:57+00:00</updated><id>https://algoroxyolo.github.io/feed.xml</id><title type="html">blank</title><subtitle>A website of Lorenzo. What!!! you do not know Lorenzo! Go check it out!
 </subtitle><entry><title type="html">A Systems Engineering Approach to LLM Agents — Requirements and Problem Framing</title><link href="https://algoroxyolo.github.io/blog/2026/agentic-systems-part1/" rel="alternate" type="text/html" title="A Systems Engineering Approach to LLM Agents — Requirements and Problem Framing" /><published>2026-03-26T00:00:00+00:00</published><updated>2026-03-26T00:00:00+00:00</updated><id>https://algoroxyolo.github.io/blog/2026/agentic-systems-part1</id><content type="html" xml:base="https://algoroxyolo.github.io/blog/2026/agentic-systems-part1/"><![CDATA[<header class="hero hero--editorial">
   <div class="hero-badge">Series &middot; Part 1 of 7</div>
   <h1>Requirements and <em>Problem Framing</em></h1>
@@ -66,30 +66,48 @@
 </div>
 
 <div class="table-wrap">
-<table>
+<table class="risk-matrix">
   <thead>
     <tr>
-      <th></th>
-      <th>Advisory (system recommends, human acts)</th>
-      <th>Bounded autonomy (within guardrails)</th>
-      <th>Full autonomy</th>
+      <th class="rm-col-corner"></th>
+      <th class="rm-col-head col-advisory">
+        <span class="col-label">Advisory</span>
+        <span class="col-sub">system recommends, human acts</span>
+      </th>
+      <th class="rm-col-head col-bounded">
+        <span class="col-label">Bounded Autonomy</span>
+        <span class="col-sub">within guardrails</span>
+      </th>
+      <th class="rm-col-head col-full">
+        <span class="col-label">Full Autonomy</span>
+        <span class="col-sub">system decides and acts</span>
+      </th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td><strong>Error cost low, recoverable</strong></td>
+    <tr class="r-low">
+      <td class="rm-row-head row-low">
+        <span class="row-label">Low risk</span>
+        <span class="row-sub">recoverable instantly</span>
+      </td>
       <td>Rufus, Perplexity, NotebookLM</td>
       <td>Cursor tab-complete, auto-formatting</td>
       <td>Spam filter, auto-tagging</td>
     </tr>
-    <tr>
-      <td><strong>Error cost moderate, partially recoverable</strong></td>
+    <tr class="r-mid">
+      <td class="rm-row-head row-mid">
+        <span class="row-label">Moderate risk</span>
+        <span class="row-sub">partially recoverable</span>
+      </td>
       <td>Google AI Overviews, Copilot Chat</td>
       <td>Klarna refunds (capped), Cursor inline edit</td>
       <td>Automated code review merge</td>
     </tr>
-    <tr>
-      <td><strong>Error cost high, irreversible</strong></td>
+    <tr class="r-high">
+      <td class="rm-row-head row-high">
+        <span class="row-label">High risk</span>
+        <span class="row-sub">irreversible</span>
+      </td>
       <td>Medical Q&amp;A without disclaimer</td>
       <td>Autonomous trading within limits</td>
       <td>Autonomous deployment to prod</td>

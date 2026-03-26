@@ -1,5 +1,386 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://algoroxyolo.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://algoroxyolo.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-03-22T20:35:20+00:00</updated><id>https://algoroxyolo.github.io/feed.xml</id><title type="html">blank</title><subtitle>A website of Lorenzo. What!!! you do not know Lorenzo! Go check it out!
-</subtitle><entry><title type="html">RL for LLMs: The Reading List</title><link href="https://algoroxyolo.github.io/blog/2026/rl-reading-list/" rel="alternate" type="text/html" title="RL for LLMs: The Reading List" /><published>2026-03-22T12:00:00+00:00</published><updated>2026-03-22T12:00:00+00:00</updated><id>https://algoroxyolo.github.io/blog/2026/rl-reading-list</id><content type="html" xml:base="https://algoroxyolo.github.io/blog/2026/rl-reading-list/"><![CDATA[<header class="hero hero--compact">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://algoroxyolo.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://algoroxyolo.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-03-26T16:27:02+00:00</updated><id>https://algoroxyolo.github.io/feed.xml</id><title type="html">blank</title><subtitle>A website of Lorenzo. What!!! you do not know Lorenzo! Go check it out!
+</subtitle><entry><title type="html">Architecture and System Decomposition</title><link href="https://algoroxyolo.github.io/blog/2026/agentic-systems-part2/" rel="alternate" type="text/html" title="Architecture and System Decomposition" /><published>2026-03-26T00:00:00+00:00</published><updated>2026-03-26T00:00:00+00:00</updated><id>https://algoroxyolo.github.io/blog/2026/agentic-systems-part2</id><content type="html" xml:base="https://algoroxyolo.github.io/blog/2026/agentic-systems-part2/"><![CDATA[<header class="hero hero--editorial">
+  <div class="hero-badge">Series &middot; Part 2 of 7</div>
+  <h1>Architecture and <em>System Decomposition</em></h1>
+  <p class="hero-sub">Once you know where uncertainty lives, you can design a system to contain it. This post is about turning framing decisions into running code.</p>
+  <p class="hero-meta">Lorenzo Xiao &middot; Language Technologies Institute, CMU &middot; March 2026</p>
+</header>
+
+<article>
+
+<p class="lead">Part 1 argued that the first design decision for an LLM system is not "how smart should it be?" but "where do uncertainty, agency, and accountability sit?" That decision constrains your architecture to a narrow set of viable designs. This post is about making those designs explicit.</p>
+
+<p>The conventional wisdom in LLM system design is to "start simple and add complexity as needed." This is correct but incomplete. The harder question is: <em>what kind</em> of complexity do you add, and in what order? A system that adds retrieval is fundamentally different from one that adds tool use, which is fundamentally different from one that adds multi-step planning. Each escalation path creates different failure modes, different evaluation requirements, and different operational burdens.</p>
+
+<p>This post covers four layers of architectural decision-making: decomposition patterns (how to break a task into components), control flow (how those components coordinate), memory architecture (how state persists across steps), and tool integration (how the system acts on the world). For each layer, I will give you both the conceptual framework and the concrete decision criteria that let you choose among alternatives.</p>
+
+<div class="divider"></div>
+
+<h2>1. The Decomposition Decision: What Gets Its Own Box?</h2>
+
+<p>Every LLM system, no matter how simple, involves decomposition. Even a single API call decomposes into prompt construction, model invocation, and response parsing. The question is not whether to decompose, but where to draw the boundaries and what abstraction each component provides.</p>
+
+<h3>Three decomposition philosophies</h3>
+
+<p><strong>Monolithic.</strong> One LLM call does everything. The prompt contains all instructions, context, and constraints. The response is the final output. This is the baseline, and it is often underestimated. Modern frontier models can handle remarkably complex tasks in a single call if the prompt is well-constructed. The failure mode is not capability but controllability: when something goes wrong, you have no intermediate state to inspect.</p>
+
+<p><strong>Pipeline.</strong> Sequential stages, each with a single responsibility. Stage 1 extracts information, Stage 2 reasons over it, Stage 3 generates output. Each stage can be a different model, a different prompt, or a deterministic function. The failure mode is error propagation: a mistake in Stage 1 corrupts everything downstream, and you cannot recover without re-running from the beginning.</p>
+
+<p><strong>Graph.</strong> Components with conditional dependencies. The output of one component determines which other components run. This includes branching (if-then-else), looping (repeat until condition), and parallel execution (fan-out, fan-in). The failure mode is complexity explosion: as the graph grows, reasoning about all possible execution paths becomes intractable.</p>
+
+<h3>The decomposition heuristic</h3>
+
+<p>Decompose when any of the following are true:</p>
+
+<p><strong>Different components need different models.</strong> A classification step might use a small, fast model; a generation step might need a frontier model. If you need heterogeneous compute, you need decomposition.</p>
+
+<p><strong>You need intermediate observability.</strong> If debugging requires seeing what happened between input and output, you need explicit stages that emit inspectable state. This is the most common reason to decompose in practice.</p>
+
+<p><strong>Components have different reliability requirements.</strong> A retrieval step that returns wrong documents is recoverable (the generation step can ignore them). A generation step that hallucinates a tool call is not recoverable (the tool executes). If components have different error costs, they should be different components with different guardrails.</p>
+
+<p><strong>Components operate at different time scales.</strong> A slow, expensive reasoning step should not block a fast, cheap classification step. If you need to return partial results or handle timeouts gracefully, decomposition gives you the control points to do so.</p>
+
+<p>Do not decompose just because it "feels cleaner." Every boundary you introduce is a contract you must maintain, an interface you must version, and a failure mode you must handle. The cost of decomposition is coordination overhead, and that cost is non-zero.</p>
+
+<div class="callout tip">
+  <p class="callout-title">The debuggability test</p>
+  <p>When your system produces a wrong output, how many steps back do you need to trace to find the root cause? If the answer is "the whole thing," you have under-decomposed. If the answer is "I have to check twelve intermediate states," you have over-decomposed. The sweet spot is three to five checkpoints for a typical failure investigation.</p>
+</div>
+
+<div class="divider"></div>
+
+<h2>2. Control Flow: Who Decides What Happens Next?</h2>
+
+<p>Once you have components, something must orchestrate them. The control flow decision is: how much authority does the LLM have over its own execution path?</p>
+
+<h3>Four control flow patterns</h3>
+
+<div class="pattern-grid">
+
+  <div class="pattern-card p-teal">
+    <h4>Fixed Pipeline</h4>
+    <p>Execution order is hardcoded. Stage A always runs, then Stage B, then Stage C. The LLM has no say in what happens next. This is the simplest pattern and the easiest to reason about.</p>
+    <div class="pattern-use">Use when: task structure is predictable, all inputs require the same processing steps.</div>
+  </div>
+
+  <div class="pattern-card p-blue">
+    <h4>Router-Dispatched</h4>
+    <p>A classifier (often a small LLM or rule-based system) examines the input and routes to one of several fixed sub-pipelines. The routing decision is the only LLM-controlled branch; everything else is deterministic.</p>
+    <div class="pattern-use">Use when: inputs fall into distinct categories with different optimal handling.</div>
+  </div>
+
+  <div class="pattern-card p-orange">
+    <h4>ReAct Loop</h4>
+    <p>The LLM alternates between reasoning and acting. It decides what action to take, observes the result, and decides again. The loop continues until the LLM emits a terminal action or a budget is exhausted.</p>
+    <div class="pattern-use">Use when: the number of steps cannot be predicted in advance, each step depends on what was learned previously.</div>
+  </div>
+
+  <div class="pattern-card p-purple">
+    <h4>Plan-then-Execute</h4>
+    <p>The LLM generates a complete plan upfront, then a separate executor runs the plan step by step. The plan can be modified (re-planning) if execution reveals the plan is wrong, but generation and execution are distinct phases.</p>
+    <div class="pattern-use">Use when: you need to review the plan before execution, or when execution is expensive and you want to catch errors before committing.</div>
+  </div>
+
+</div>
+
+<h3>The control flow tradeoff</h3>
+
+<p>More LLM control means more flexibility and more risk. A fixed pipeline cannot handle novel inputs, but it also cannot get stuck in an infinite loop. A ReAct loop can solve problems the designer did not anticipate, but it can also burn through your token budget chasing a hallucinated goal.</p>
+
+<table class="compare-table">
+  <thead>
+    <tr>
+      <th>Pattern</th>
+      <th>Flexibility</th>
+      <th>Predictability</th>
+      <th>Failure Modes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Fixed Pipeline</td>
+      <td>None</td>
+      <td>Complete</td>
+      <td>Wrong output, but always terminates</td>
+    </tr>
+    <tr>
+      <td>Router-Dispatched</td>
+      <td>Low (discrete branches)</td>
+      <td>High</td>
+      <td>Misrouting, wrong branch selected</td>
+    </tr>
+    <tr>
+      <td>ReAct Loop</td>
+      <td>High</td>
+      <td>Low</td>
+      <td>Infinite loops, budget exhaustion, goal drift</td>
+    </tr>
+    <tr>
+      <td>Plan-then-Execute</td>
+      <td>Medium</td>
+      <td>Medium</td>
+      <td>Bad plans, re-planning thrash, plan-execution mismatch</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>The industrial pattern: layered control</h3>
+
+<p>The most robust production systems do not commit to a single control flow pattern. They layer them.</p>
+
+<p><strong>Outer layer: router-dispatched.</strong> A fast classifier examines the input and routes to one of several handling paths. Simple queries go to a fixed pipeline. Complex queries go to an agentic subsystem.</p>
+
+<p><strong>Middle layer: plan-then-execute with approval gates.</strong> For complex queries, the system generates a plan and pauses for review (human or automated). Only approved plans proceed to execution.</p>
+
+<p><strong>Inner layer: ReAct loops with strict budgets.</strong> Within each plan step, a ReAct loop handles the actual execution, but with hard limits on iterations and token spend.</p>
+
+<p>This layering captures the benefits of each pattern while containing their failure modes. The router prevents the agentic system from being invoked on simple queries (cost control). The plan-then-execute layer prevents commitment to bad plans (safety). The ReAct layer provides flexibility within bounded risk (capability with guardrails).</p>
+
+<p><strong>Cursor and Claude Code</strong> both implement variants of this pattern. Tab completion is a fixed pipeline (zero LLM control over execution). Inline edit is plan-then-execute (the diff is the plan; user approval is the gate). Agent mode is a ReAct loop with tool budgets and human checkpoints on high-risk operations.</p>
+
+<div class="divider"></div>
+
+<h2>3. Memory Architecture: What Does the System Remember?</h2>
+
+<p>Every LLM call is stateless. The model has no memory of previous calls unless you explicitly provide that memory in the prompt. Memory architecture is about what to remember, how to store it, and how to retrieve it when needed.</p>
+
+<h3>Four memory types</h3>
+
+<p><strong>Context window (working memory).</strong> Everything in the current prompt. This is the only memory the model can directly attend to. It is fast, reliable, and severely limited. The context window is your most precious resource; everything else in memory architecture is about using it efficiently.</p>
+
+<p><strong>Conversation history (episodic memory).</strong> Previous turns in the current session. The naive approach appends everything; the production approach summarizes, compresses, or selectively retrieves. The failure mode is context exhaustion: as the conversation grows, you either truncate (losing information) or summarize (losing fidelity).</p>
+
+<p><strong>Knowledge base (semantic memory).</strong> External documents, retrieved on demand. This is RAG. The failure mode is retrieval failure: the relevant information exists but is not retrieved, or irrelevant information is retrieved and misleads the model.</p>
+
+<p><strong>Scratchpad (procedural memory).</strong> Intermediate reasoning state that persists across steps within a single task. In a ReAct loop, this might be the history of actions taken and observations received. The failure mode is scratchpad pollution: as the task progresses, the scratchpad accumulates irrelevant or contradictory information that confuses subsequent reasoning.</p>
+
+<h3>The memory management problem</h3>
+
+<p>All four memory types compete for the same finite resource: context window tokens. Memory architecture is fundamentally about allocation: how many tokens go to conversation history versus retrieved documents versus scratchpad versus instructions?</p>
+
+<p>A common pattern:</p>
+
+<ul>
+  <li><strong>System prompt:</strong> 500-2000 tokens. Instructions, persona, constraints. This is fixed per session.</li>
+  <li><strong>Retrieved context:</strong> 2000-8000 tokens. Documents relevant to the current query. This varies per query.</li>
+  <li><strong>Conversation history:</strong> 1000-4000 tokens. Recent turns, possibly summarized older turns. This grows with the session.</li>
+  <li><strong>Scratchpad:</strong> 500-2000 tokens. For agentic systems, the action-observation history. This grows with task complexity.</li>
+  <li><strong>Current query:</strong> Variable. The user's actual input.</li>
+  <li><strong>Output budget:</strong> 500-4000 tokens. Reserved for the model's response.</li>
+</ul>
+
+<p>The sum must fit in the context window. When it does not, something must be evicted. The eviction policy is a design decision with quality implications.</p>
+
+<h3>Memory strategies for different system types</h3>
+
+<table class="compare-table">
+  <thead>
+    <tr>
+      <th>System Type</th>
+      <th>Primary Memory</th>
+      <th>Eviction Strategy</th>
+      <th>Failure Mode</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Single-turn Q&A</td>
+      <td>Knowledge base</td>
+      <td>None (no accumulation)</td>
+      <td>Retrieval failure</td>
+    </tr>
+    <tr>
+      <td>Multi-turn chat</td>
+      <td>Conversation history</td>
+      <td>Sliding window or summarization</td>
+      <td>Lost context from early turns</td>
+    </tr>
+    <tr>
+      <td>Agentic task</td>
+      <td>Scratchpad</td>
+      <td>Relevance-based pruning</td>
+      <td>Forgetting critical intermediate state</td>
+    </tr>
+    <tr>
+      <td>Long-running agent</td>
+      <td>All four</td>
+      <td>Hierarchical: recent in full, older summarized</td>
+      <td>Summary drift, compounding errors</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>The reflection pattern</h3>
+
+<p>One memory architecture deserves special attention: explicit reflection. Instead of just accumulating observations, the system periodically pauses to synthesize what it has learned.</p>
+
+<p>In <strong>Reflexion</strong> (Shinn et al., 2023), the agent maintains a "reflection" buffer that summarizes lessons learned from previous attempts. When the agent fails, it generates a reflection ("I tried X but it failed because Y; next time I should Z") that persists to the next attempt. This is not just memory; it is meta-memory&mdash;the system reasoning about its own reasoning.</p>
+
+<p>The production version of this pattern uses scheduled reflection points: after every N steps, or when the scratchpad exceeds a threshold, the system generates a summary that replaces the detailed history. This trades fidelity for longevity: you lose the details but retain the lessons.</p>
+
+<p><strong>Devin</strong> implements a variant where the agent maintains a "plan" document that it updates as it works. The plan is both a memory (what have I done?) and a guide (what should I do next?). When the context window fills, old execution details are evicted but the plan persists, providing continuity.</p>
+
+<div class="divider"></div>
+
+<h2>4. Tool Integration: How Does the System Act?</h2>
+
+<p>Tools are how LLM systems affect the world. A tool might read a file, query a database, send an email, or execute code. Tool design is where the abstract decisions from Part 1 (authority boundaries, error costs, reversibility) become concrete.</p>
+
+<h3>The tool schema contract</h3>
+
+<p>Every tool has an implicit contract with the LLM:</p>
+
+<p><strong>What it does.</strong> A natural language description that the model uses to decide when to invoke the tool. Ambiguous descriptions cause misuse. "Search the web" is ambiguous (search for what? return what?). "Search the web for the query and return the top 5 result titles and URLs" is precise.</p>
+
+<p><strong>What it accepts.</strong> A schema for the input parameters. The schema should be as constrained as possible. If a parameter can only take three values, enumerate them; do not accept a free-form string. The more constrained the schema, the fewer ways the model can misuse the tool.</p>
+
+<p><strong>What it returns.</strong> A schema for the output. The model needs to know what to expect so it can plan subsequent steps. If the tool can fail, the failure modes should be documented in the description.</p>
+
+<p><strong>What can go wrong.</strong> This is the most commonly omitted part of the contract. Does the tool timeout? Return partial results? Have rate limits? Cost money? Every undocumented failure mode is a debugging session waiting to happen.</p>
+
+<h3>The principle of least authority</h3>
+
+<p>A tool should have the minimum authority necessary to accomplish its purpose. This is not just a security principle; it is a reliability principle. The more a tool can do, the more ways it can fail, and the harder failures are to diagnose.</p>
+
+<p><strong>Read vs. write.</strong> If the task only requires reading, the tool should not have write access. A "file browser" tool that can also delete files is a liability, not a feature.</p>
+
+<p><strong>Scoped vs. global.</strong> If the task only requires access to a specific directory, the tool should not have access to the entire filesystem. Scope limits blast radius.</p>
+
+<p><strong>Reversible vs. irreversible.</strong> Prefer tools whose effects can be undone. A tool that appends to a log is safer than one that overwrites it. A tool that creates a draft is safer than one that sends an email.</p>
+
+<p><strong>Confirmation-gated vs. autonomous.</strong> High-stakes tools should require explicit confirmation before execution. This is the implementation of the "bounded autonomy" pattern from Part 1: let the LLM decide what to do, but gate the action on human approval.</p>
+
+<h3>Tool composition patterns</h3>
+
+<p>Real systems rarely use tools in isolation. They compose tools into workflows. Three composition patterns dominate:</p>
+
+<p><strong>Sequential.</strong> Tool A's output feeds Tool B's input. File read → parse → transform → file write. The failure mode is the same as pipeline decomposition: errors propagate forward.</p>
+
+<p><strong>Conditional.</strong> Tool A's output determines which tool runs next. Search → if results empty, try broader query; else, summarize results. The failure mode is incorrect branching: the condition is evaluated wrong, and the wrong branch executes.</p>
+
+<p><strong>Parallel.</strong> Multiple tools run simultaneously, and their outputs are aggregated. Search three databases in parallel, merge results. The failure mode is partial failure: one tool succeeds, another fails, and the aggregation logic must handle the inconsistency.</p>
+
+<h3>The tool design checklist</h3>
+
+<p>For every tool in your system, answer these questions:</p>
+
+<ol>
+  <li>What is the most dangerous thing this tool can do? (Blast radius assessment)</li>
+  <li>Can that dangerous thing be undone? (Reversibility)</li>
+  <li>What happens if this tool is called with malformed input? (Input validation)</li>
+  <li>What happens if this tool is called in a context where it should not be? (Authorization)</li>
+  <li>What does the model see if this tool fails? (Error messaging)</li>
+  <li>How will you know if this tool is being misused? (Observability)</li>
+</ol>
+
+<p>If you cannot answer all six questions for every tool, your system is not ready for production.</p>
+
+<div class="divider"></div>
+
+<h2>5. Putting It Together: Architecture Selection</h2>
+
+<p>The four layers (decomposition, control flow, memory, tools) interact. Choosing a control flow pattern constrains your memory architecture. Choosing a memory architecture constrains your tool design. The goal is coherence: a system where all the layers are aligned with each other and with the framing decisions from Part 1.</p>
+
+<h3>The architecture decision tree</h3>
+
+<div class="decision-tree">
+  <h4>Start here: What is the I/O gap?</h4>
+
+  <div class="decision-node">
+    <div class="decision-q">Can the task be completed in a single LLM call with retrieval?</div>
+    <div class="decision-a"><strong>Yes:</strong> Use a fixed pipeline. Retrieval → Generation. Memory is just the retrieved documents.</div>
+    <div class="decision-a"><strong>No:</strong> Continue below.</div>
+  </div>
+
+  <div class="decision-node">
+    <div class="decision-q">Can you enumerate the possible execution paths in advance?</div>
+    <div class="decision-a"><strong>Yes:</strong> Use router-dispatched with fixed sub-pipelines. Memory per branch as needed.</div>
+    <div class="decision-a"><strong>No:</strong> You need agentic control flow. Continue below.</div>
+  </div>
+
+  <div class="decision-node">
+    <div class="decision-q">Is the plan reviewable before execution?</div>
+    <div class="decision-a"><strong>Yes:</strong> Use plan-then-execute. Memory includes the plan as a persistent artifact.</div>
+    <div class="decision-a"><strong>No:</strong> Use ReAct loop with scratchpad memory. Add hard iteration limits.</div>
+  </div>
+
+  <div class="decision-node">
+    <div class="decision-q">Does the task require irreversible actions?</div>
+    <div class="decision-a"><strong>Yes:</strong> Add confirmation gates before irreversible tools. Consider plan-then-execute even if plan is not externally reviewed.</div>
+    <div class="decision-a"><strong>No:</strong> Proceed with selected control flow.</div>
+  </div>
+
+  <div class="decision-node">
+    <div class="decision-q">Does the task exceed the context window?</div>
+    <div class="decision-a"><strong>Yes:</strong> Add hierarchical memory with summarization. Consider scheduled reflection points.</div>
+    <div class="decision-a"><strong>No:</strong> Use simple conversation history.</div>
+  </div>
+</div>
+
+<h3>Three worked examples</h3>
+
+<p><strong>Example 1: Customer support bot (Part 1's Uber case).</strong></p>
+
+<ul>
+  <li><em>Decomposition:</em> Router → specialized handlers per issue type. Each handler is a short pipeline (retrieve records → apply policy → generate response).</li>
+  <li><em>Control flow:</em> Router-dispatched. Complex cases escalate to human; they do not get more agentic handling.</li>
+  <li><em>Memory:</em> Conversation history (full for current session). Retrieved records (customer and trip data). No scratchpad needed for simple cases.</li>
+  <li><em>Tools:</em> Read-only tools for data retrieval. Write tools (issue refund) gated on policy compliance checks. High-value actions require human confirmation.</li>
+</ul>
+
+<p><strong>Example 2: Code agent (Claude Code / Cursor).</strong></p>
+
+<ul>
+  <li><em>Decomposition:</em> Task understanding → planning → iterative execution. Execution decomposes into: read files, edit files, run commands, observe results.</li>
+  <li><em>Control flow:</em> Layered. Simple edits use fixed pipeline. Complex tasks use plan-then-execute with user review. Execution uses ReAct loop with iteration budget.</li>
+  <li><em>Memory:</em> Scratchpad (recent actions and observations). Semantic memory (codebase index, documentation). Plan as persistent artifact. Reflection at checkpoints.</li>
+  <li><em>Tools:</em> File read (safe). File write (medium risk, diff review). Terminal commands (high risk, sandboxed). Reversibility through git: all changes can be rolled back.</li>
+</ul>
+
+<p><strong>Example 3: Research agent (Deep Research / Perplexity Pro).</strong></p>
+
+<ul>
+  <li><em>Decomposition:</em> Query expansion → parallel search → source evaluation → synthesis → fact-checking → response generation.</li>
+  <li><em>Control flow:</em> Plan-then-execute for the overall research plan. ReAct loop within each search/evaluation step. No irreversible actions, so no confirmation gates.</li>
+  <li><em>Memory:</em> Hierarchical. Recent sources in full. Older sources as summaries with citations. Research plan as persistent artifact. Explicit contradiction tracking.</li>
+  <li><em>Tools:</em> Web search (safe). Page fetch (safe). Citation extraction (safe). No write tools. All tools are read-only; the only output is the generated report.</li>
+</ul>
+
+<div class="divider"></div>
+
+<h2>6. The Anti-Patterns</h2>
+
+<p>Architecture mistakes tend to cluster. Here are the patterns I see most often:</p>
+
+<p><strong>Premature multi-agent.</strong> Splitting a task across multiple agents when a single agent with good tools would suffice. Every agent boundary is a coordination overhead. Add agents when you have genuinely distinct competencies that cannot share a context, not because the architecture diagram looks more impressive.</p>
+
+<p><strong>Tool proliferation.</strong> Adding a new tool for every capability instead of composing existing tools. Ten narrow tools are harder to use correctly than three well-designed tools with composable outputs. The model must learn when to use each tool; more tools means more opportunities for misuse.</p>
+
+<p><strong>Memory as an afterthought.</strong> Building the control flow first, then discovering the context window is exhausted halfway through a task. Memory architecture should be designed alongside control flow, not retrofitted.</p>
+
+<p><strong>Optimistic error handling.</strong> Assuming tools will succeed and not designing for partial failure. In production, tools timeout, return errors, and produce malformed output. The architecture must handle these cases gracefully, not crash or produce garbage.</p>
+
+<p><strong>Observability debt.</strong> Building a complex agentic system without intermediate logging. When something goes wrong (and it will), you need to reconstruct what happened. If the only observable state is input and output, debugging is guesswork.</p>
+
+<div class="divider"></div>
+
+<h2>What Comes Next</h2>
+
+<p>This post gave you the structural vocabulary for LLM system architecture: decomposition patterns, control flow options, memory strategies, and tool design principles. But vocabulary is not enough. The next post is about the infrastructure that makes these architectures work: knowledge bases, RAG pipelines, tool registries, and prompt management. That is where most of the unglamorous engineering happens, and where most agent failures actually originate.</p>
+
+<p>Architecture is the skeleton. Part 3 is about the flesh and blood.</p>
+
+<div class="series-cta">
+  <h3>This is Part 2 of a 7-part series.</h3>
+  <p>Part 1 covered framing decisions: error surfaces, constraints, and tradeoffs. This part covered architecture: decomposition, control flow, memory, and tools. Next: the infrastructure that makes it all work.</p>
+</div>
+
+</article>
+
+<div class="post-end">
+  <p class="post-author">Lorenzo Xiao &middot; Language Technologies Institute &middot; Carnegie Mellon University</p>
+  <a href="/blog/">&larr; Back to blog</a>
+</div>]]></content><author><name>Lorenzo Xiao</name></author><category term="blog" /><category term="academic" /><category term="AI" /><category term="engineering" /><summary type="html"><![CDATA[Once you know where uncertainty lives, you can design a system to contain it. This post covers decomposition patterns, control flow, memory architecture, and the tool integration decisions that turn framing into running code.]]></summary></entry><entry><title type="html">RL for LLMs: The Reading List</title><link href="https://algoroxyolo.github.io/blog/2026/rl-reading-list/" rel="alternate" type="text/html" title="RL for LLMs: The Reading List" /><published>2026-03-22T12:00:00+00:00</published><updated>2026-03-22T12:00:00+00:00</updated><id>https://algoroxyolo.github.io/blog/2026/rl-reading-list</id><content type="html" xml:base="https://algoroxyolo.github.io/blog/2026/rl-reading-list/"><![CDATA[<header class="hero hero--compact">
   <div class="hero-badge">Reference &middot; 96 Papers</div>
   <h1>RL for LLMs: <em>The Reading List</em></h1>
   <p class="hero-sub">A curated taxonomy of 96 papers across algorithms, rewards, preferences, systems, and agents &mdash; with reading depth recommendations.</p>

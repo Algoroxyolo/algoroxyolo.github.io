@@ -590,7 +590,7 @@
               function fmt(n) {
                 return n >= 1000 ? (n / 1000).toFixed(1) + 'k' : String(n);
               }
-              var paths = ['/', '/blog/', '/people/', '/teaching/', '/publications/', '/cv/', '/projects/', '/repositories/', '/blog/2026/rl-reading-list/', '/blog/2026/rl-for-llms-part0/', '/blog/2026/nemo-gym-architecture/', '/blog/2026/llm-agents-blueprint/'];
+              var paths = ['/', '/blog/', '/people/', '/teaching/', '/publications/', '/cv/', '/projects/', '/repositories/', '/blog/2026/agentic-systems-part2/', '/blog/2026/rl-reading-list/', '/blog/2026/rl-for-llms-part0/', '/blog/2026/nemo-gym-architecture/', '/blog/2026/llm-agents-blueprint/'];
               Promise.all(paths.map(function(p) {
                 return fetch(base + encodeURIComponent(p) + '.json')
                   .then(function(r) { return r.json(); })

@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <!-- Head -->
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">    <!-- Metadata, OpenGraph and Schema.org -->
+    
+
+    <!-- Standard metadata -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Architecture and System Decomposition | Yunze (Lorenzo) Xiao</title>
+    <meta name="author" content="Yunze (Lorenzo) Xiao">
+    <meta name="description" content="Once you know where uncertainty lives, you can design a system to contain it. This post covers decomposition patterns, control flow, memory architecture, and the tool integration decisions that turn framing into running code.">
+    <meta name="keywords" content="Natrual Language Processing,Prompt Engineering,Computer Security, Social Engineering,">
+
+
+    <!-- Bootstrap & MDB -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-DF7Zhf293AJxJNTmh5zhoYYIMs2oXitRfBjY+9L//AY=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous">
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha256-i1+4qU2G2860dGGIOJscdC30s9beBXjFfzjWLjBRsBg=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400&amp;family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;family=Material+Icons&amp;display=swap">
+
+    <!-- Code Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/github.css" media="" id="highlight_theme_light">
+
+    <!-- Styles -->
+    
+    <link rel="shortcut icon" href="/assets/img/favicon.jpg">
+    
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="canonical" href="https://algoroxyolo.github.io/blog/2026/agentic-systems-part2/">
+    
+    <!-- Dark Mode -->
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/native.css" media="none" id="highlight_theme_dark">
+
+    <script src="/assets/js/theme.js"></script>
+    <script src="/assets/js/dark_mode.js"></script>
+    
+
+
+  <!-- Editorial fonts loaded globally via head.html -->
+  
+
+  <!-- Shared editorial styles -->
+  <style>
+/* ═══════════════════════════════════════════════════ */
+/* Editorial Post — Shared Styles                      */
+/* Scoped under .editorial-post to avoid al-folio      */
+/* collisions. Posts override --post-* vars for accent. */
+/* ═══════════════════════════════════════════════════ */
+
+/* ── Design Tokens ── */
+.editorial-post {
+  --ep-ink: #1a1a1a;
+  --ep-paper: #faf8f5;
+  --ep-accent: var(--post-accent, #c4553a);
+  --ep-accent-light: var(--post-accent-light, #e8725a);
+  --ep-accent-bg: var(--post-accent-bg, #fdf0ed);
+  --ep-muted: #6b6560;
+  --ep-border: #e0dbd5;
+  --ep-code-bg: #f0ece7;
+  --ep-card-bg: #ffffff;
+  --ep-shadow: rgba(26,26,26,0.06);
+  --ep-deep: #2c2420;
+  --ep-teal: #2a8f82;
+  --ep-teal-bg: #e8f5f3;
+  --ep-blue: #3b6fa0;
+  --ep-blue-bg: #eaf1f7;
+  --ep-purple: #6b4c8a;
+  --ep-purple-bg: #f3eef8;
+  --ep-orange: #d4843e;
+  --ep-orange-bg: #fdf3e8;
+  --ep-green: #3a7d44;
+  --ep-green-bg: #eaf4ec;
+
+  font-family: 'Source Sans 3', Georgia, serif;
+  font-size: 18px;
+  line-height: 1.75;
+  color: var(--ep-ink);
+  background: var(--ep-paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Dark Mode ── */
+html[data-theme="dark"] .editorial-post {
+  --ep-ink: #d0cdc8;
+  --ep-paper: #1e1b18;
+  --ep-muted: #9a9590;
+  --ep-border: #3a3530;
+  --ep-code-bg: #2a2520;
+  --ep-card-bg: #252220;
+  --ep-shadow: rgba(0,0,0,0.2);
+  --ep-deep: #e8e4df;
+  --ep-teal-bg: rgba(42,143,130,0.15);
+  --ep-blue-bg: rgba(59,111,160,0.15);
+  --ep-purple-bg: rgba(107,76,138,0.15);
+  --ep-orange-bg: rgba(212,132,62,0.15);
+  --ep-green-bg: rgba(58,125,68,0.15);
+  --ep-accent-bg: var(--post-accent-bg-dark, rgba(196,85,58,0.15));
+}
+
+/* ── Hero (default: dramatic) ── */
+.editorial-post .hero {
+  position: relative;
+  padding: 80px 24px 72px;
+  text-align: center;
+  overflow: hidden;
+  background: var(--post-hero-bg, linear-gradient(175deg, #2c2420 0%, #3d2f28 40%, #4a352a 100%));
+  color: #faf8f5;
+}
+.editorial-post .hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--post-hero-overlay);
+  pointer-events: none;
+}
+.editorial-post .hero-badge {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--post-badge-color, var(--ep-accent-light));
+  border: 1px solid var(--post-badge-border, rgba(232,114,90,0.4));
+  padding: 6px 18px;
+  border-radius: 100px;
+  margin-bottom: 32px;
+  position: relative;
+}
+.editorial-post .hero h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 1.18;
+  max-width: 800px;
+  margin: 0 auto 24px;
+  letter-spacing: -0.02em;
+  position: relative;
+}
+.editorial-post .hero h1 em {
+  font-style: italic;
+  color: var(--post-hero-em, var(--ep-accent-light));
+}
+.editorial-post .hero-sub {
+  font-size: 1.1rem;
+  color: rgba(250,248,245,0.7);
+  max-width: 580px;
+  margin: 0 auto 40px;
+  line-height: 1.65;
+}
+.editorial-post .hero-meta {
+  font-size: 0.85rem;
+  color: rgba(250,248,245,0.45);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.5px;
+}
+
+/* ── Hero variant: compact (for reference/catalog posts) ── */
+.editorial-post .hero--compact {
+  padding: 48px 24px 40px;
+}
+.editorial-post .hero--compact h1 {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  margin-bottom: 16px;
+}
+.editorial-post .hero--compact .hero-sub {
+  font-size: 0.95rem;
+  margin-bottom: 24px;
+}
+.editorial-post .hero--compact .hero-badge {
+  margin-bottom: 20px;
+  font-size: 10px;
+  padding: 4px 14px;
+}
+
+/* ── Hero variant: editorial (for essay/narrative posts) ── */
+.editorial-post .hero--editorial {
+  text-align: left;
+  padding: 72px 24px 64px;
+}
+.editorial-post .hero--editorial h1 {
+  margin: 0 0 20px;
+  max-width: 640px;
+}
+.editorial-post .hero--editorial .hero-sub {
+  margin: 0 0 32px;
+  max-width: 520px;
+}
+.editorial-post .hero--editorial .hero-badge {
+  margin-bottom: 24px;
+}
+.editorial-post .hero--editorial .hero-meta {
+  text-align: left;
+}
+
+/* ── Hero variant: technical (for systems/architecture posts) ── */
+.editorial-post .hero--technical {
+  background: var(--post-hero-bg, linear-gradient(175deg, #141820 0%, #1a2030 40%, #1e2840 100%));
+  padding: 64px 24px 56px;
+}
+.editorial-post .hero--technical .hero-badge {
+  border-radius: 4px;
+  letter-spacing: 3px;
+}
+.editorial-post .hero--technical h1 {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* ── Article Body ── */
+.editorial-post article {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.editorial-post .lead {
+  font-size: 1.18rem;
+  color: var(--ep-muted);
+  margin: 56px 0 48px;
+  padding-left: 20px;
+  border-left: 3px solid var(--ep-accent);
+  line-height: 1.78;
+}
+.editorial-post p { margin-bottom: 1.5em; }
+
+/* ── Headings ── */
+.editorial-post h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin: 64px 0 20px;
+  color: var(--ep-deep);
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+.editorial-post h2 .section-label {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65em;
+  color: var(--ep-accent);
+  margin-right: 8px;
+  font-weight: 500;
+  vertical-align: middle;
+}
+.editorial-post h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 1.22rem;
+  margin: 36px 0 12px;
+  color: var(--ep-deep);
+}
+.editorial-post h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--ep-accent);
+  margin: 28px 0 8px;
+  letter-spacing: 0.3px;
+}
+
+/* ── Inline Elements ── */
+.editorial-post strong { font-weight: 600; color: var(--ep-deep); }
+.editorial-post a {
+  color: var(--ep-accent);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--ep-accent) 30%, transparent);
+}
+.editorial-post a:hover { border-bottom-color: var(--ep-accent); }
+.editorial-post code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.83em;
+  background: var(--ep-code-bg);
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+/* ── Diagrams ── */
+.editorial-post .diagram-wrap {
+  margin: 40px -40px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.editorial-post .diagram-wrap svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.editorial-post .diagram-caption {
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--ep-muted);
+  margin-top: 12px;
+  font-style: italic;
+}
+
+/* ── Callouts ── */
+.editorial-post .callout {
+  background: var(--ep-card-bg);
+  border: 1px solid var(--ep-border);
+  border-left: none;
+  border-radius: 0 8px 8px 0;
+  padding: 28px 32px;
+  margin: 32px 0;
+  position: relative;
+}
+.editorial-post .callout p:last-child { margin-bottom: 0; }
+.editorial-post .callout-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: var(--ep-deep);
+}
+.editorial-post .callout.tip {
+  border-left: 5px solid var(--ep-teal);
+  background: var(--ep-teal-bg);
+}
+.editorial-post .callout.tip::before {
+  content: '\1F4A1';
+  position: absolute;
+  top: -14px;
+  left: 20px;
+  font-size: 1.1rem;
+  background: var(--ep-teal-bg);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.editorial-post .callout.info {
+  border-left: 5px solid var(--ep-blue);
+  background: var(--ep-blue-bg);
+}
+.editorial-post .callout.info::before {
+  content: '\1F50D';
+  position: absolute;
+  top: -14px;
+  left: 20px;
+  font-size: 1.1rem;
+  background: var(--ep-blue-bg);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.editorial-post .callout.warn {
+  border-left: 5px solid var(--ep-orange);
+  background: var(--ep-orange-bg);
+}
+.editorial-post .callout.warn::before {
+  content: '\26A0\FE0F';
+  position: absolute;
+  top: -14px;
+  left: 20px;
+  font-size: 1.1rem;
+  background: var(--ep-orange-bg);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* ── Tables ── */
+.editorial-post .table-wrap {
+  overflow-x: auto;
+  margin: 32px 0;
+  border-radius: 10px;
+  border: 1px solid var(--ep-border);
+  box-shadow: 0 2px 12px var(--ep-shadow);
+}
+.editorial-post table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.editorial-post thead {
+  background: var(--ep-deep);
+  color: #faf8f5;
+}
+.editorial-post th {
+  padding: 13px 18px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.editorial-post td {
+  padding: 11px 18px;
+  border-top: 1px solid var(--ep-border);
+  vertical-align: top;
+}
+.editorial-post tbody tr:nth-child(even) {
+  background: color-mix(in srgb, var(--ep-ink) 2%, transparent);
+}
+.editorial-post tbody tr:hover {
+  background: var(--ep-blue-bg);
+}
+
+/* ── Divider ── */
+.editorial-post .divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--ep-border), transparent);
+  margin: 56px 0;
+}
+
+/* ── Count Badges ── */
+.editorial-post .count-badge {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 2px 9px;
+  border-radius: 100px;
+  margin-left: 8px;
+  vertical-align: middle;
+  background: var(--ep-accent-bg);
+  color: var(--ep-accent);
+  border: 1px solid color-mix(in srgb, var(--ep-accent) 25%, transparent);
+}
+
+/* ── Post Footer ── */
+.editorial-post .post-end {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 24px 60px;
+  text-align: center;
+  border-top: 1px solid var(--ep-border);
+  margin-top: 80px;
+}
+.editorial-post .post-end .post-author {
+  color: var(--ep-muted);
+  font-size: 0.85rem;
+  margin-bottom: 12px;
+}
+.editorial-post .post-end a {
+  color: var(--ep-accent);
+  border-bottom: 1px solid transparent;
+}
+.editorial-post .post-end a:hover {
+  border-bottom-color: var(--ep-accent);
+}
+
+/* ── Animations ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.editorial-post .hero-badge,
+.editorial-post .hero h1,
+.editorial-post .hero-sub,
+.editorial-post .hero-meta {
+  animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.editorial-post .hero h1 { animation-delay: 0.1s; }
+.editorial-post .hero-sub { animation-delay: 0.2s; }
+.editorial-post .hero-meta { animation-delay: 0.3s; }
+
+/* ── Dark Mode: SVG Text ── */
+html[data-theme="dark"] .editorial-post .diagram-wrap svg text[fill="#2c2420"],
+html[data-theme="dark"] .editorial-post .diagram-wrap svg text[fill="#1a1a1a"] {
+  fill: #d0cdc8;
+}
+html[data-theme="dark"] .editorial-post .diagram-wrap svg text[fill="#6b6560"] {
+  fill: #9a9590;
+}
+html[data-theme="dark"] .editorial-post .diagram-wrap svg rect[fill="#fff"],
+html[data-theme="dark"] .editorial-post .diagram-wrap svg rect[fill="#ffffff"] {
+  fill: #252220;
+}
+html[data-theme="dark"] .editorial-post .diagram-wrap svg rect[stroke="#e0dbd5"] {
+  stroke: #3a3530;
+}
+html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
+  stroke: #555;
+}
+
+/* ── Responsive ── */
+@media (max-width: 800px) {
+  .editorial-post .diagram-wrap { margin: 32px 0; }
+}
+@media (max-width: 600px) {
+  .editorial-post .hero { padding: 64px 20px 48px; }
+  .editorial-post article { padding: 0 18px; }
+  .editorial-post .callout { padding: 20px 22px; }
+  .editorial-post h2 { font-size: 1.5rem; }
+  .editorial-post .diagram-wrap {
+    margin: 24px -8px;
+    padding: 12px 8px;
+    border-radius: 8px;
+    background: var(--ep-card-bg);
+    border: 1px solid var(--ep-border);
+  }
+  .editorial-post .diagram-wrap svg {
+    min-width: 580px;
+  }
+  .editorial-post .post-end { padding: 36px 18px 48px; }
+}
+</style>
+
+
+  <!-- Post-specific styles -->
+  
+  <style>.editorial-post {
+  --post-accent: #2a8f82;
+  --post-accent-light: #3db5a5;
+  --post-accent-bg: #e8f5f3;
+  --post-accent-bg-dark: rgba(42,143,130,0.15);
+  --post-hero-bg: linear-gradient(175deg, #1a2a28 0%, #1e3532 40%, #243d38 100%);
+  --post-hero-overlay:
+    radial-gradient(circle at 20% 50%, rgba(42,143,130,0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 30%, rgba(59,111,160,0.15) 0%, transparent 50%);
+  --post-badge-color: #5cc4b4;
+  --post-badge-border: rgba(92,196,180,0.4);
+  --post-hero-em: #5cc4b4;
+}
+/* ── Architecture diagram styles ── */ .arch-diagram {
+  background: var(--ep-card-bg);
+  border: 1px solid var(--ep-border);
+  border-radius: 10px;
+  padding: 24px;
+  margin: 32px 0;
+  overflow-x: auto;
+} .arch-diagram svg {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+/* ── Pattern cards ── */ .pattern-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin: 32px 0;
+} .pattern-card {
+  background: var(--ep-card-bg);
+  border: 1px solid var(--ep-border);
+  border-radius: 10px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+} .pattern-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+} .pattern-card.p-teal::before { background: var(--ep-teal); } .pattern-card.p-blue::before { background: var(--ep-blue); } .pattern-card.p-orange::before { background: var(--ep-orange); } .pattern-card.p-purple::before { background: var(--ep-purple); } .pattern-card h4 {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin: 0 0 8px;
+  color: var(--ep-deep);
+} .pattern-card p {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--ep-muted);
+  margin: 0 0 12px;
+} .pattern-card p:last-child { margin-bottom: 0; } .pattern-use {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--ep-accent);
+  padding-top: 12px;
+  border-top: 1px solid var(--ep-border);
+}
+/* ── Comparison tables ── */ .compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 28px 0;
+  font-size: 0.92rem;
+} .compare-table th {
+  background: var(--ep-card-bg);
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  text-align: left;
+  padding: 14px 16px;
+  border-bottom: 2px solid var(--ep-border);
+} .compare-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--ep-border);
+  vertical-align: top;
+} .compare-table tr:last-child td { border-bottom: none; } .compare-table code {
+  font-size: 0.85em;
+  background: var(--ep-card-bg);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+/* ── Decision tree ── */ .decision-tree {
+  background: var(--ep-card-bg);
+  border: 1px solid var(--ep-border);
+  border-radius: 10px;
+  padding: 28px;
+  margin: 32px 0;
+} .decision-tree h4 {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 1rem;
+  margin: 0 0 16px;
+  color: var(--ep-deep);
+} .decision-node {
+  margin: 12px 0;
+  padding-left: 20px;
+  border-left: 2px solid var(--ep-border);
+} .decision-q {
+  font-weight: 600;
+  color: var(--ep-deep);
+  margin-bottom: 6px;
+} .decision-a {
+  font-size: 0.92rem;
+  color: var(--ep-muted);
+  margin: 4px 0 4px 16px;
+} .decision-a::before {
+  content: '→';
+  margin-right: 8px;
+  color: var(--ep-accent);
+}
+/* ── Series CTA ── */ .series-cta {
+  text-align: center;
+  padding: 40px 32px;
+  background: linear-gradient(135deg, var(--ep-deep), color-mix(in srgb, var(--ep-deep) 80%, var(--ep-accent)));
+  color: var(--ep-paper);
+  border-radius: 10px;
+  margin: 48px 0;
+} .series-cta h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: #faf8f5;
+  margin: 0 0 12px;
+} .series-cta p {
+  color: rgba(250,248,245,0.65);
+  font-size: 0.95rem;
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+@media (max-width: 600px) {
+  .pattern-grid { grid-template-columns: 1fr; }
+  .compare-table { font-size: 0.85rem; }
+  .compare-table th, .compare-table td { padding: 10px 12px; }
+}
+</style>
+  
+  </head>
+
+  <!-- Body -->
+  <body class="fixed-top-nav ">
+
+    <!-- Site Header -->
+    <header>
+
+      <!-- Nav Bar -->
+      <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+        <div class="container">
+          <a class="navbar-brand title font-weight-lighter" href="/"><span class="font-weight-bold">Yunze </span>(Lorenzo) Xiao</a>
+          <!-- Navbar Toggle -->
+          <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar top-bar"></span>
+            <span class="icon-bar middle-bar"></span>
+            <span class="icon-bar bottom-bar"></span>
+          </button>
+
+          <div class="collapse navbar-collapse text-right" id="navbarNav">
+            <ul class="navbar-nav ml-auto flex-nowrap">
+
+              <!-- About -->
+              <li class="nav-item ">
+                <a class="nav-link" href="/">about</a>
+              </li>
+              
+              <!-- Blog -->
+              <li class="nav-item active">
+                <a class="nav-link" href="/blog/">blog<span class="sr-only">(current)</span></a>
+              </li>
+
+              <!-- Other pages -->
+              <li class="nav-item ">
+                <a class="nav-link" href="/publications/">publications</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/cv/">cv</a>
+              </li>
+              <li class="nav-item dropdown ">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">more</a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="/teaching/">teaching</a>
+                </div>
+              </li>
+
+              <!-- Toogle theme mode -->
+              <li class="toggle-container">
+                <button id="light-toggle" title="Change theme">
+                  <i class="fas fa-moon"></i>
+                  <i class="fas fa-sun"></i>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Scrolling Progress Bar -->
+      <progress id="progress" value="0">
+        <div class="progress-container">
+          <span class="progress-bar"></span>
+        </div>
+      </progress>
+    </header>
+
+
+    <!-- Editorial Content (no Bootstrap container — hero goes full-width) -->
+    <div class="editorial-post">
+      <header class="hero hero--editorial">
+  <div class="hero-badge">Series · Part 2 of 7</div>
+  <h1>Architecture and <em>System Decomposition</em>
+</h1>
+  <p class="hero-sub">Once you know where uncertainty lives, you can design a system to contain it. This post is about turning framing decisions into running code.</p>
+  <p class="hero-meta">Lorenzo Xiao · Language Technologies Institute, CMU · March 2026</p>
+</header>
+
+<article>
+
+<p class="lead">Part 1 argued that the first design decision for an LLM system is not "how smart should it be?" but "where do uncertainty, agency, and accountability sit?" That decision constrains your architecture to a narrow set of viable designs. This post is about making those designs explicit.</p>
+
+<p>The conventional wisdom in LLM system design is to "start simple and add complexity as needed." This is correct but incomplete. The harder question is: <em>what kind</em> of complexity do you add, and in what order? A system that adds retrieval is fundamentally different from one that adds tool use, which is fundamentally different from one that adds multi-step planning. Each escalation path creates different failure modes, different evaluation requirements, and different operational burdens.</p>
+
+<p>This post covers four layers of architectural decision-making: decomposition patterns (how to break a task into components), control flow (how those components coordinate), memory architecture (how state persists across steps), and tool integration (how the system acts on the world). For each layer, I will give you both the conceptual framework and the concrete decision criteria that let you choose among alternatives.</p>
+
+<div class="divider"></div>
+
+<h2>1. The Decomposition Decision: What Gets Its Own Box?</h2>
+
+<p>Every LLM system, no matter how simple, involves decomposition. Even a single API call decomposes into prompt construction, model invocation, and response parsing. The question is not whether to decompose, but where to draw the boundaries and what abstraction each component provides.</p>
+
+<h3>Three decomposition philosophies</h3>
+
+<p><strong>Monolithic.</strong> One LLM call does everything. The prompt contains all instructions, context, and constraints. The response is the final output. This is the baseline, and it is often underestimated. Modern frontier models can handle remarkably complex tasks in a single call if the prompt is well-constructed. The failure mode is not capability but controllability: when something goes wrong, you have no intermediate state to inspect.</p>
+
+<p><strong>Pipeline.</strong> Sequential stages, each with a single responsibility. Stage 1 extracts information, Stage 2 reasons over it, Stage 3 generates output. Each stage can be a different model, a different prompt, or a deterministic function. The failure mode is error propagation: a mistake in Stage 1 corrupts everything downstream, and you cannot recover without re-running from the beginning.</p>
+
+<p><strong>Graph.</strong> Components with conditional dependencies. The output of one component determines which other components run. This includes branching (if-then-else), looping (repeat until condition), and parallel execution (fan-out, fan-in). The failure mode is complexity explosion: as the graph grows, reasoning about all possible execution paths becomes intractable.</p>
+
+<h3>The decomposition heuristic</h3>
+
+<p>Decompose when any of the following are true:</p>
+
+<p><strong>Different components need different models.</strong> A classification step might use a small, fast model; a generation step might need a frontier model. If you need heterogeneous compute, you need decomposition.</p>
+
+<p><strong>You need intermediate observability.</strong> If debugging requires seeing what happened between input and output, you need explicit stages that emit inspectable state. This is the most common reason to decompose in practice.</p>
+
+<p><strong>Components have different reliability requirements.</strong> A retrieval step that returns wrong documents is recoverable (the generation step can ignore them). A generation step that hallucinates a tool call is not recoverable (the tool executes). If components have different error costs, they should be different components with different guardrails.</p>
+
+<p><strong>Components operate at different time scales.</strong> A slow, expensive reasoning step should not block a fast, cheap classification step. If you need to return partial results or handle timeouts gracefully, decomposition gives you the control points to do so.</p>
+
+<p>Do not decompose just because it "feels cleaner." Every boundary you introduce is a contract you must maintain, an interface you must version, and a failure mode you must handle. The cost of decomposition is coordination overhead, and that cost is non-zero.</p>
+
+<div class="callout tip">
+  <p class="callout-title">The debuggability test</p>
+  <p>When your system produces a wrong output, how many steps back do you need to trace to find the root cause? If the answer is "the whole thing," you have under-decomposed. If the answer is "I have to check twelve intermediate states," you have over-decomposed. The sweet spot is three to five checkpoints for a typical failure investigation.</p>
+</div>
+
+<div class="divider"></div>
+
+<h2>2. Control Flow: Who Decides What Happens Next?</h2>
+
+<p>Once you have components, something must orchestrate them. The control flow decision is: how much authority does the LLM have over its own execution path?</p>
+
+<h3>Four control flow patterns</h3>
+
+<div class="pattern-grid">
+
+  <div class="pattern-card p-teal">
+    <h4>Fixed Pipeline</h4>
+    <p>Execution order is hardcoded. Stage A always runs, then Stage B, then Stage C. The LLM has no say in what happens next. This is the simplest pattern and the easiest to reason about.</p>
+    <div class="pattern-use">Use when: task structure is predictable, all inputs require the same processing steps.</div>
+  </div>
+
+  <div class="pattern-card p-blue">
+    <h4>Router-Dispatched</h4>
+    <p>A classifier (often a small LLM or rule-based system) examines the input and routes to one of several fixed sub-pipelines. The routing decision is the only LLM-controlled branch; everything else is deterministic.</p>
+    <div class="pattern-use">Use when: inputs fall into distinct categories with different optimal handling.</div>
+  </div>
+
+  <div class="pattern-card p-orange">
+    <h4>ReAct Loop</h4>
+    <p>The LLM alternates between reasoning and acting. It decides what action to take, observes the result, and decides again. The loop continues until the LLM emits a terminal action or a budget is exhausted.</p>
+    <div class="pattern-use">Use when: the number of steps cannot be predicted in advance, each step depends on what was learned previously.</div>
+  </div>
+
+  <div class="pattern-card p-purple">
+    <h4>Plan-then-Execute</h4>
+    <p>The LLM generates a complete plan upfront, then a separate executor runs the plan step by step. The plan can be modified (re-planning) if execution reveals the plan is wrong, but generation and execution are distinct phases.</p>
+    <div class="pattern-use">Use when: you need to review the plan before execution, or when execution is expensive and you want to catch errors before committing.</div>
+  </div>
+
+</div>
+
+<h3>The control flow tradeoff</h3>
+
+<p>More LLM control means more flexibility and more risk. A fixed pipeline cannot handle novel inputs, but it also cannot get stuck in an infinite loop. A ReAct loop can solve problems the designer did not anticipate, but it can also burn through your token budget chasing a hallucinated goal.</p>
+
+<table class="compare-table">
+  <thead>
+    <tr>
+      <th>Pattern</th>
+      <th>Flexibility</th>
+      <th>Predictability</th>
+      <th>Failure Modes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Fixed Pipeline</td>
+      <td>None</td>
+      <td>Complete</td>
+      <td>Wrong output, but always terminates</td>
+    </tr>
+    <tr>
+      <td>Router-Dispatched</td>
+      <td>Low (discrete branches)</td>
+      <td>High</td>
+      <td>Misrouting, wrong branch selected</td>
+    </tr>
+    <tr>
+      <td>ReAct Loop</td>
+      <td>High</td>
+      <td>Low</td>
+      <td>Infinite loops, budget exhaustion, goal drift</td>
+    </tr>
+    <tr>
+      <td>Plan-then-Execute</td>
+      <td>Medium</td>
+      <td>Medium</td>
+      <td>Bad plans, re-planning thrash, plan-execution mismatch</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>The industrial pattern: layered control</h3>
+
+<p>The most robust production systems do not commit to a single control flow pattern. They layer them.</p>
+
+<p><strong>Outer layer: router-dispatched.</strong> A fast classifier examines the input and routes to one of several handling paths. Simple queries go to a fixed pipeline. Complex queries go to an agentic subsystem.</p>
+
+<p><strong>Middle layer: plan-then-execute with approval gates.</strong> For complex queries, the system generates a plan and pauses for review (human or automated). Only approved plans proceed to execution.</p>
+
+<p><strong>Inner layer: ReAct loops with strict budgets.</strong> Within each plan step, a ReAct loop handles the actual execution, but with hard limits on iterations and token spend.</p>
+
+<p>This layering captures the benefits of each pattern while containing their failure modes. The router prevents the agentic system from being invoked on simple queries (cost control). The plan-then-execute layer prevents commitment to bad plans (safety). The ReAct layer provides flexibility within bounded risk (capability with guardrails).</p>
+
+<p><strong>Cursor and Claude Code</strong> both implement variants of this pattern. Tab completion is a fixed pipeline (zero LLM control over execution). Inline edit is plan-then-execute (the diff is the plan; user approval is the gate). Agent mode is a ReAct loop with tool budgets and human checkpoints on high-risk operations.</p>
+
+<div class="divider"></div>
+
+<h2>3. Memory Architecture: What Does the System Remember?</h2>
+
+<p>Every LLM call is stateless. The model has no memory of previous calls unless you explicitly provide that memory in the prompt. Memory architecture is about what to remember, how to store it, and how to retrieve it when needed.</p>
+
+<h3>Four memory types</h3>
+
+<p><strong>Context window (working memory).</strong> Everything in the current prompt. This is the only memory the model can directly attend to. It is fast, reliable, and severely limited. The context window is your most precious resource; everything else in memory architecture is about using it efficiently.</p>
+
+<p><strong>Conversation history (episodic memory).</strong> Previous turns in the current session. The naive approach appends everything; the production approach summarizes, compresses, or selectively retrieves. The failure mode is context exhaustion: as the conversation grows, you either truncate (losing information) or summarize (losing fidelity).</p>
+
+<p><strong>Knowledge base (semantic memory).</strong> External documents, retrieved on demand. This is RAG. The failure mode is retrieval failure: the relevant information exists but is not retrieved, or irrelevant information is retrieved and misleads the model.</p>
+
+<p><strong>Scratchpad (procedural memory).</strong> Intermediate reasoning state that persists across steps within a single task. In a ReAct loop, this might be the history of actions taken and observations received. The failure mode is scratchpad pollution: as the task progresses, the scratchpad accumulates irrelevant or contradictory information that confuses subsequent reasoning.</p>
+
+<h3>The memory management problem</h3>
+
+<p>All four memory types compete for the same finite resource: context window tokens. Memory architecture is fundamentally about allocation: how many tokens go to conversation history versus retrieved documents versus scratchpad versus instructions?</p>
+
+<p>A common pattern:</p>
+
+<ul>
+  <li>
+<strong>System prompt:</strong> 500-2000 tokens. Instructions, persona, constraints. This is fixed per session.</li>
+  <li>
+<strong>Retrieved context:</strong> 2000-8000 tokens. Documents relevant to the current query. This varies per query.</li>
+  <li>
+<strong>Conversation history:</strong> 1000-4000 tokens. Recent turns, possibly summarized older turns. This grows with the session.</li>
+  <li>
+<strong>Scratchpad:</strong> 500-2000 tokens. For agentic systems, the action-observation history. This grows with task complexity.</li>
+  <li>
+<strong>Current query:</strong> Variable. The user's actual input.</li>
+  <li>
+<strong>Output budget:</strong> 500-4000 tokens. Reserved for the model's response.</li>
+</ul>
+
+<p>The sum must fit in the context window. When it does not, something must be evicted. The eviction policy is a design decision with quality implications.</p>
+
+<h3>Memory strategies for different system types</h3>
+
+<table class="compare-table">
+  <thead>
+    <tr>
+      <th>System Type</th>
+      <th>Primary Memory</th>
+      <th>Eviction Strategy</th>
+      <th>Failure Mode</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Single-turn Q&amp;A</td>
+      <td>Knowledge base</td>
+      <td>None (no accumulation)</td>
+      <td>Retrieval failure</td>
+    </tr>
+    <tr>
+      <td>Multi-turn chat</td>
+      <td>Conversation history</td>
+      <td>Sliding window or summarization</td>
+      <td>Lost context from early turns</td>
+    </tr>
+    <tr>
+      <td>Agentic task</td>
+      <td>Scratchpad</td>
+      <td>Relevance-based pruning</td>
+      <td>Forgetting critical intermediate state</td>
+    </tr>
+    <tr>
+      <td>Long-running agent</td>
+      <td>All four</td>
+      <td>Hierarchical: recent in full, older summarized</td>
+      <td>Summary drift, compounding errors</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>The reflection pattern</h3>
+
+<p>One memory architecture deserves special attention: explicit reflection. Instead of just accumulating observations, the system periodically pauses to synthesize what it has learned.</p>
+
+<p>In <strong>Reflexion</strong> (Shinn et al., 2023), the agent maintains a "reflection" buffer that summarizes lessons learned from previous attempts. When the agent fails, it generates a reflection ("I tried X but it failed because Y; next time I should Z") that persists to the next attempt. This is not just memory; it is meta-memory—the system reasoning about its own reasoning.</p>
+
+<p>The production version of this pattern uses scheduled reflection points: after every N steps, or when the scratchpad exceeds a threshold, the system generates a summary that replaces the detailed history. This trades fidelity for longevity: you lose the details but retain the lessons.</p>
+
+<p><strong>Devin</strong> implements a variant where the agent maintains a "plan" document that it updates as it works. The plan is both a memory (what have I done?) and a guide (what should I do next?). When the context window fills, old execution details are evicted but the plan persists, providing continuity.</p>
+
+<div class="divider"></div>
+
+<h2>4. Tool Integration: How Does the System Act?</h2>
+
+<p>Tools are how LLM systems affect the world. A tool might read a file, query a database, send an email, or execute code. Tool design is where the abstract decisions from Part 1 (authority boundaries, error costs, reversibility) become concrete.</p>
+
+<h3>The tool schema contract</h3>
+
+<p>Every tool has an implicit contract with the LLM:</p>
+
+<p><strong>What it does.</strong> A natural language description that the model uses to decide when to invoke the tool. Ambiguous descriptions cause misuse. "Search the web" is ambiguous (search for what? return what?). "Search the web for the query and return the top 5 result titles and URLs" is precise.</p>
+
+<p><strong>What it accepts.</strong> A schema for the input parameters. The schema should be as constrained as possible. If a parameter can only take three values, enumerate them; do not accept a free-form string. The more constrained the schema, the fewer ways the model can misuse the tool.</p>
+
+<p><strong>What it returns.</strong> A schema for the output. The model needs to know what to expect so it can plan subsequent steps. If the tool can fail, the failure modes should be documented in the description.</p>
+
+<p><strong>What can go wrong.</strong> This is the most commonly omitted part of the contract. Does the tool timeout? Return partial results? Have rate limits? Cost money? Every undocumented failure mode is a debugging session waiting to happen.</p>
+
+<h3>The principle of least authority</h3>
+
+<p>A tool should have the minimum authority necessary to accomplish its purpose. This is not just a security principle; it is a reliability principle. The more a tool can do, the more ways it can fail, and the harder failures are to diagnose.</p>
+
+<p><strong>Read vs. write.</strong> If the task only requires reading, the tool should not have write access. A "file browser" tool that can also delete files is a liability, not a feature.</p>
+
+<p><strong>Scoped vs. global.</strong> If the task only requires access to a specific directory, the tool should not have access to the entire filesystem. Scope limits blast radius.</p>
+
+<p><strong>Reversible vs. irreversible.</strong> Prefer tools whose effects can be undone. A tool that appends to a log is safer than one that overwrites it. A tool that creates a draft is safer than one that sends an email.</p>
+
+<p><strong>Confirmation-gated vs. autonomous.</strong> High-stakes tools should require explicit confirmation before execution. This is the implementation of the "bounded autonomy" pattern from Part 1: let the LLM decide what to do, but gate the action on human approval.</p>
+
+<h3>Tool composition patterns</h3>
+
+<p>Real systems rarely use tools in isolation. They compose tools into workflows. Three composition patterns dominate:</p>
+
+<p><strong>Sequential.</strong> Tool A's output feeds Tool B's input. File read → parse → transform → file write. The failure mode is the same as pipeline decomposition: errors propagate forward.</p>
+
+<p><strong>Conditional.</strong> Tool A's output determines which tool runs next. Search → if results empty, try broader query; else, summarize results. The failure mode is incorrect branching: the condition is evaluated wrong, and the wrong branch executes.</p>
+
+<p><strong>Parallel.</strong> Multiple tools run simultaneously, and their outputs are aggregated. Search three databases in parallel, merge results. The failure mode is partial failure: one tool succeeds, another fails, and the aggregation logic must handle the inconsistency.</p>
+
+<h3>The tool design checklist</h3>
+
+<p>For every tool in your system, answer these questions:</p>
+
+<ol>
+  <li>What is the most dangerous thing this tool can do? (Blast radius assessment)</li>
+  <li>Can that dangerous thing be undone? (Reversibility)</li>
+  <li>What happens if this tool is called with malformed input? (Input validation)</li>
+  <li>What happens if this tool is called in a context where it should not be? (Authorization)</li>
+  <li>What does the model see if this tool fails? (Error messaging)</li>
+  <li>How will you know if this tool is being misused? (Observability)</li>
+</ol>
+
+<p>If you cannot answer all six questions for every tool, your system is not ready for production.</p>
+
+<div class="divider"></div>
+
+<h2>5. Putting It Together: Architecture Selection</h2>
+
+<p>The four layers (decomposition, control flow, memory, tools) interact. Choosing a control flow pattern constrains your memory architecture. Choosing a memory architecture constrains your tool design. The goal is coherence: a system where all the layers are aligned with each other and with the framing decisions from Part 1.</p>
+
+<h3>The architecture decision tree</h3>
+
+<div class="decision-tree">
+  <h4>Start here: What is the I/O gap?</h4>
+
+  <div class="decision-node">
+    <div class="decision-q">Can the task be completed in a single LLM call with retrieval?</div>
+    <div class="decision-a">
+<strong>Yes:</strong> Use a fixed pipeline. Retrieval → Generation. Memory is just the retrieved documents.</div>
+    <div class="decision-a">
+<strong>No:</strong> Continue below.</div>
+  </div>
+
+  <div class="decision-node">
+    <div class="decision-q">Can you enumerate the possible execution paths in advance?</div>
+    <div class="decision-a">
+<strong>Yes:</strong> Use router-dispatched with fixed sub-pipelines. Memory per branch as needed.</div>
+    <div class="decision-a">
+<strong>No:</strong> You need agentic control flow. Continue below.</div>
+  </div>
+
+  <div class="decision-node">
+    <div class="decision-q">Is the plan reviewable before execution?</div>
+    <div class="decision-a">
+<strong>Yes:</strong> Use plan-then-execute. Memory includes the plan as a persistent artifact.</div>
+    <div class="decision-a">
+<strong>No:</strong> Use ReAct loop with scratchpad memory. Add hard iteration limits.</div>
+  </div>
+
+  <div class="decision-node">
+    <div class="decision-q">Does the task require irreversible actions?</div>
+    <div class="decision-a">
+<strong>Yes:</strong> Add confirmation gates before irreversible tools. Consider plan-then-execute even if plan is not externally reviewed.</div>
+    <div class="decision-a">
+<strong>No:</strong> Proceed with selected control flow.</div>
+  </div>
+
+  <div class="decision-node">
+    <div class="decision-q">Does the task exceed the context window?</div>
+    <div class="decision-a">
+<strong>Yes:</strong> Add hierarchical memory with summarization. Consider scheduled reflection points.</div>
+    <div class="decision-a">
+<strong>No:</strong> Use simple conversation history.</div>
+  </div>
+</div>
+
+<h3>Three worked examples</h3>
+
+<p><strong>Example 1: Customer support bot (Part 1's Uber case).</strong></p>
+
+<ul>
+  <li>
+<em>Decomposition:</em> Router → specialized handlers per issue type. Each handler is a short pipeline (retrieve records → apply policy → generate response).</li>
+  <li>
+<em>Control flow:</em> Router-dispatched. Complex cases escalate to human; they do not get more agentic handling.</li>
+  <li>
+<em>Memory:</em> Conversation history (full for current session). Retrieved records (customer and trip data). No scratchpad needed for simple cases.</li>
+  <li>
+<em>Tools:</em> Read-only tools for data retrieval. Write tools (issue refund) gated on policy compliance checks. High-value actions require human confirmation.</li>
+</ul>
+
+<p><strong>Example 2: Code agent (Claude Code / Cursor).</strong></p>
+
+<ul>
+  <li>
+<em>Decomposition:</em> Task understanding → planning → iterative execution. Execution decomposes into: read files, edit files, run commands, observe results.</li>
+  <li>
+<em>Control flow:</em> Layered. Simple edits use fixed pipeline. Complex tasks use plan-then-execute with user review. Execution uses ReAct loop with iteration budget.</li>
+  <li>
+<em>Memory:</em> Scratchpad (recent actions and observations). Semantic memory (codebase index, documentation). Plan as persistent artifact. Reflection at checkpoints.</li>
+  <li>
+<em>Tools:</em> File read (safe). File write (medium risk, diff review). Terminal commands (high risk, sandboxed). Reversibility through git: all changes can be rolled back.</li>
+</ul>
+
+<p><strong>Example 3: Research agent (Deep Research / Perplexity Pro).</strong></p>
+
+<ul>
+  <li>
+<em>Decomposition:</em> Query expansion → parallel search → source evaluation → synthesis → fact-checking → response generation.</li>
+  <li>
+<em>Control flow:</em> Plan-then-execute for the overall research plan. ReAct loop within each search/evaluation step. No irreversible actions, so no confirmation gates.</li>
+  <li>
+<em>Memory:</em> Hierarchical. Recent sources in full. Older sources as summaries with citations. Research plan as persistent artifact. Explicit contradiction tracking.</li>
+  <li>
+<em>Tools:</em> Web search (safe). Page fetch (safe). Citation extraction (safe). No write tools. All tools are read-only; the only output is the generated report.</li>
+</ul>
+
+<div class="divider"></div>
+
+<h2>6. The Anti-Patterns</h2>
+
+<p>Architecture mistakes tend to cluster. Here are the patterns I see most often:</p>
+
+<p><strong>Premature multi-agent.</strong> Splitting a task across multiple agents when a single agent with good tools would suffice. Every agent boundary is a coordination overhead. Add agents when you have genuinely distinct competencies that cannot share a context, not because the architecture diagram looks more impressive.</p>
+
+<p><strong>Tool proliferation.</strong> Adding a new tool for every capability instead of composing existing tools. Ten narrow tools are harder to use correctly than three well-designed tools with composable outputs. The model must learn when to use each tool; more tools means more opportunities for misuse.</p>
+
+<p><strong>Memory as an afterthought.</strong> Building the control flow first, then discovering the context window is exhausted halfway through a task. Memory architecture should be designed alongside control flow, not retrofitted.</p>
+
+<p><strong>Optimistic error handling.</strong> Assuming tools will succeed and not designing for partial failure. In production, tools timeout, return errors, and produce malformed output. The architecture must handle these cases gracefully, not crash or produce garbage.</p>
+
+<p><strong>Observability debt.</strong> Building a complex agentic system without intermediate logging. When something goes wrong (and it will), you need to reconstruct what happened. If the only observable state is input and output, debugging is guesswork.</p>
+
+<div class="divider"></div>
+
+<h2>What Comes Next</h2>
+
+<p>This post gave you the structural vocabulary for LLM system architecture: decomposition patterns, control flow options, memory strategies, and tool design principles. But vocabulary is not enough. The next post is about the infrastructure that makes these architectures work: knowledge bases, RAG pipelines, tool registries, and prompt management. That is where most of the unglamorous engineering happens, and where most agent failures actually originate.</p>
+
+<p>Architecture is the skeleton. Part 3 is about the flesh and blood.</p>
+
+<div class="series-cta">
+  <h3>This is Part 2 of a 7-part series.</h3>
+  <p>Part 1 covered framing decisions: error surfaces, constraints, and tradeoffs. This part covered architecture: decomposition, control flow, memory, and tools. Next: the infrastructure that makes it all work.</p>
+</div>
+
+</article>
+
+<div class="post-end">
+  <p class="post-author">Lorenzo Xiao · Language Technologies Institute · Carnegie Mellon University</p>
+  <a href="/blog/">← Back to blog</a>
+</div>
+
+    </div>
+
+    <!-- Site Footer -->    
+    <footer class="fixed-bottom">
+      <div class="container mt-0">
+        © Copyright 2026 Yunze (Lorenzo) Xiao. 
+      </div>
+    </footer>
+
+    <!-- JavaScripts -->
+    <!-- jQuery -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <!-- Bootsrap & MDB scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha256-fgLAgv7fyCGopR/gBNq2iW3ZKIdqIcyshnUULC4vex8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script>
+
+    <!-- Masonry & imagesLoaded -->
+  <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+  <script defer src="/assets/js/masonry.js" type="text/javascript"></script>
+    
+  <!-- Medium Zoom JS -->
+  <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.8/dist/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
+  <script defer src="/assets/js/zoom.js"></script><!-- Load Common JS -->
+  <script defer src="/assets/js/common.js"></script>
+  <script defer src="/assets/js/copy_code.js" type="text/javascript"></script>
+
+    
+  <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
+  <script async src="https://badge.dimensions.ai/badge.js"></script>
+
+    <!-- MathJax -->
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        tags: 'ams'
+      }
+    };
+  </script>
+  <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+  <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+    <script data-goatcounter="https://algoroxyolo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    
+
+<!-- Scrolling Progress Bar -->
+<script type="text/javascript">
+  /*
+   * This JavaScript code has been adapted from the article 
+   * https://css-tricks.com/reading-position-indicator/ authored by Pankaj Parashar, 
+   * published on the website https://css-tricks.com on the 7th of May, 2014.
+   * Couple of changes were made to the original code to make it compatible 
+   * with the `al-foio` theme.
+   */
+  const progressBar = $("#progress");
+  /*
+   * We set up the bar after all elements are done loading.
+   * In some cases, if the images in the page are larger than the intended
+   * size they'll have on the page, they'll be resized via CSS to accomodate
+   * the desired size. This mistake, however, breaks the computations as the
+   * scroll size is computed as soon as the elements finish loading.
+   * To account for this, a minimal delay was introduced before computing the
+   * values.
+   */
+  window.onload = function () {
+    setTimeout(progressBarSetup, 50);
+  };
+  /*
+   * We set up the bar according to the browser.
+   * If the browser supports the progress element we use that.
+   * Otherwise, we resize the bar thru CSS styling
+   */
+  function progressBarSetup() {
+    if ("max" in document.createElement("progress")) {
+      initializeProgressElement();
+      $(document).on("scroll", function() {
+        progressBar.attr({ value: getCurrentScrollPosition() });
+      });
+      $(window).on("resize", initializeProgressElement);
+    } else {
+      resizeProgressBar();
+      $(document).on("scroll", resizeProgressBar);
+      $(window).on("resize", resizeProgressBar);
+    }
+  }
+  /*
+   * The vertical scroll position is the same as the number of pixels that
+   * are hidden from view above the scrollable area. Thus, a value > 0 is
+   * how much the user has scrolled from the top
+   */
+  function getCurrentScrollPosition() {
+    return $(window).scrollTop();
+  }
+
+  function initializeProgressElement() {
+    let navbarHeight = $("#navbar").outerHeight(true);
+    $("body").css({ "padding-top": navbarHeight });
+    $("progress-container").css({ "padding-top": navbarHeight });
+    progressBar.css({ top: navbarHeight });
+    progressBar.attr({
+      max: getDistanceToScroll(),
+      value: getCurrentScrollPosition(),
+    });
+  }
+  /*
+   * The offset between the html document height and the browser viewport
+   * height will be greater than zero if vertical scroll is possible.
+   * This is the distance the user can scroll
+   */
+  function getDistanceToScroll() {
+    return $(document).height() - $(window).height();
+  }
+
+  function resizeProgressBar() {
+    progressBar.css({ width: getWidthPercentage() + "%" });
+  }
+  // The scroll ratio equals the percentage to resize the bar
+  function getWidthPercentage() {
+    return (getCurrentScrollPosition() / getDistanceToScroll()) * 100;
+  }
+</script>
+
+  </body>
+</html>

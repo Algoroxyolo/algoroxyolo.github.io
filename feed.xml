@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://algoroxyolo.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://algoroxyolo.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-03-26T16:27:02+00:00</updated><id>https://algoroxyolo.github.io/feed.xml</id><title type="html">blank</title><subtitle>A website of Lorenzo. What!!! you do not know Lorenzo! Go check it out!
-</subtitle><entry><title type="html">Architecture and System Decomposition</title><link href="https://algoroxyolo.github.io/blog/2026/agentic-systems-part2/" rel="alternate" type="text/html" title="Architecture and System Decomposition" /><published>2026-03-26T00:00:00+00:00</published><updated>2026-03-26T00:00:00+00:00</updated><id>https://algoroxyolo.github.io/blog/2026/agentic-systems-part2</id><content type="html" xml:base="https://algoroxyolo.github.io/blog/2026/agentic-systems-part2/"><![CDATA[<header class="hero hero--editorial">
-  <div class="hero-badge">Series &middot; Part 2 of 7</div>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://algoroxyolo.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://algoroxyolo.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-03-26T19:15:57+00:00</updated><id>https://algoroxyolo.github.io/feed.xml</id><title type="html">blank</title><subtitle>A website of Lorenzo. What!!! you do not know Lorenzo! Go check it out!
+</subtitle><entry><title type="html">Architecture and System Decomposition</title><link href="https://algoroxyolo.github.io/blog/2026/agentic-systems-part1/" rel="alternate" type="text/html" title="Architecture and System Decomposition" /><published>2026-03-26T00:00:00+00:00</published><updated>2026-03-26T00:00:00+00:00</updated><id>https://algoroxyolo.github.io/blog/2026/agentic-systems-part1</id><content type="html" xml:base="https://algoroxyolo.github.io/blog/2026/agentic-systems-part1/"><![CDATA[<header class="hero hero--editorial">
+  <div class="hero-badge">Series &middot; Part 1 of 7</div>
   <h1>Architecture and <em>System Decomposition</em></h1>
   <p class="hero-sub">Once you know where uncertainty lives, you can design a system to contain it. This post is about turning framing decisions into running code.</p>
   <p class="hero-meta">Lorenzo Xiao &middot; Language Technologies Institute, CMU &middot; March 2026</p>
@@ -8,7 +8,7 @@
 
 <article>
 
-<p class="lead">Part 1 argued that the first design decision for an LLM system is not "how smart should it be?" but "where do uncertainty, agency, and accountability sit?" That decision constrains your architecture to a narrow set of viable designs. This post is about making those designs explicit.</p>
+<p class="lead">The series overview argued that the first design decision for an LLM system is not "how smart should it be?" but "where do uncertainty, agency, and accountability sit?" That decision constrains your architecture to a narrow set of viable designs. This post is about making those designs explicit.</p>
 
 <p>The conventional wisdom in LLM system design is to "start simple and add complexity as needed." This is correct but incomplete. The harder question is: <em>what kind</em> of complexity do you add, and in what order? A system that adds retrieval is fundamentally different from one that adds tool use, which is fundamentally different from one that adds multi-step planning. Each escalation path creates different failure modes, different evaluation requirements, and different operational burdens.</p>
 
@@ -87,7 +87,8 @@
 
 <p>More LLM control means more flexibility and more risk. A fixed pipeline cannot handle novel inputs, but it also cannot get stuck in an infinite loop. A ReAct loop can solve problems the designer did not anticipate, but it can also burn through your token budget chasing a hallucinated goal.</p>
 
-<table class="compare-table">
+<div class="table-wrap">
+<table>
   <thead>
     <tr>
       <th>Pattern</th>
@@ -123,6 +124,7 @@
     </tr>
   </tbody>
 </table>
+</div>
 
 <h3>The industrial pattern: layered control</h3>
 
@@ -133,6 +135,67 @@
 <p><strong>Middle layer: plan-then-execute with approval gates.</strong> For complex queries, the system generates a plan and pauses for review (human or automated). Only approved plans proceed to execution.</p>
 
 <p><strong>Inner layer: ReAct loops with strict budgets.</strong> Within each plan step, a ReAct loop handles the actual execution, but with hard limits on iterations and token spend.</p>
+
+<div class="diagram-wrap">
+<svg viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <defs>
+    <filter id="ds2" x="-4%" y="-4%" width="108%" height="116%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+  <!-- Outer layer -->
+  <rect x="20" y="12" width="640" height="196" rx="12" fill="none" stroke="#3b6fa0" stroke-width="2" stroke-dasharray="6 3" opacity="0.5"/>
+  <text x="44" y="34" font-family="JetBrains Mono" font-size="10" font-weight="500" fill="#3b6fa0" letter-spacing="0.5">OUTER · ROUTER-DISPATCHED</text>
+  <!-- Simple path -->
+  <g filter="url(#ds2)">
+    <rect x="48" y="52" width="160" height="48" rx="8" fill="#3b6fa0"/>
+    <text x="128" y="80" text-anchor="middle" fill="#fff" font-family="Source Sans 3" font-weight="600" font-size="11">Simple query</text>
+  </g>
+  <path d="M210 76 L240 76" stroke="#bbb" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <g filter="url(#ds2)">
+    <rect x="242" y="52" width="140" height="48" rx="8" fill="#3b6fa0" opacity="0.6"/>
+    <text x="312" y="80" text-anchor="middle" fill="#fff" font-family="Source Sans 3" font-size="11">Fixed Pipeline</text>
+  </g>
+  <path d="M384 76 L414 76" stroke="#bbb" stroke-width="1.5"/>
+  <g filter="url(#ds2)">
+    <rect x="416" y="56" width="80" height="40" rx="8" fill="#2a8f82"/>
+    <text x="456" y="80" text-anchor="middle" fill="#fff" font-family="Source Sans 3" font-size="11">Response</text>
+  </g>
+  <!-- Complex path - middle layer -->
+  <rect x="48" y="114" width="540" height="82" rx="10" fill="none" stroke="#d4843e" stroke-width="1.5" stroke-dasharray="5 3" opacity="0.5"/>
+  <text x="72" y="132" font-family="JetBrains Mono" font-size="9" font-weight="500" fill="#d4843e" letter-spacing="0.5">MIDDLE · PLAN-THEN-EXECUTE</text>
+  <g filter="url(#ds2)">
+    <rect x="68" y="142" width="120" height="40" rx="8" fill="#d4843e"/>
+    <text x="128" y="166" text-anchor="middle" fill="#fff" font-family="Source Sans 3" font-size="11">Generate Plan</text>
+  </g>
+  <path d="M190 162 L210 162" stroke="#bbb" stroke-width="1.5"/>
+  <g filter="url(#ds2)">
+    <rect x="212" y="142" width="100" height="40" rx="8" fill="#c4553a"/>
+    <text x="262" y="166" text-anchor="middle" fill="#fff" font-family="Source Sans 3" font-size="10">Review Gate</text>
+  </g>
+  <path d="M314 162 L334 162" stroke="#bbb" stroke-width="1.5"/>
+  <!-- Inner layer - ReAct -->
+  <rect x="336" y="138" width="236" height="50" rx="8" fill="none" stroke="#6b4c8a" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.5"/>
+  <text x="350" y="152" font-family="JetBrains Mono" font-size="8" font-weight="500" fill="#6b4c8a" letter-spacing="0.5">INNER · REACT</text>
+  <g filter="url(#ds2)">
+    <rect x="350" y="158" width="72" height="26" rx="6" fill="#6b4c8a"/>
+    <text x="386" y="175" text-anchor="middle" fill="#fff" font-family="Source Sans 3" font-size="9">Reason</text>
+  </g>
+  <path d="M424 171 L434 171" stroke="#bbb" stroke-width="1"/>
+  <g filter="url(#ds2)">
+    <rect x="436" y="158" width="56" height="26" rx="6" fill="#6b4c8a"/>
+    <text x="464" y="175" text-anchor="middle" fill="#fff" font-family="Source Sans 3" font-size="9">Act</text>
+  </g>
+  <path d="M464 186 Q464 194 436 194 Q408 194 386 186" stroke="#6b4c8a" stroke-width="1" stroke-dasharray="3 2" fill="none" opacity="0.6"/>
+  <!-- Response arrow from inner -->
+  <path d="M574 162 L598 162" stroke="#bbb" stroke-width="1.5"/>
+  <g filter="url(#ds2)">
+    <rect x="600" y="142" width="80" height="40" rx="8" fill="#2a8f82"/>
+    <text x="640" y="166" text-anchor="middle" fill="#fff" font-family="Source Sans 3" font-size="11">Response</text>
+  </g>
+</svg>
+</div>
+<p class="diagram-caption">Layered control: the router handles simple queries cheaply; complex queries get a plan with a review gate; execution uses a bounded ReAct loop.</p>
 
 <p>This layering captures the benefits of each pattern while containing their failure modes. The router prevents the agentic system from being invoked on simple queries (cost control). The plan-then-execute layer prevents commitment to bad plans (safety). The ReAct layer provides flexibility within bounded risk (capability with guardrails).</p>
 
@@ -146,34 +209,66 @@
 
 <h3>Four memory types</h3>
 
-<p><strong>Context window (working memory).</strong> Everything in the current prompt. This is the only memory the model can directly attend to. It is fast, reliable, and severely limited. The context window is your most precious resource; everything else in memory architecture is about using it efficiently.</p>
+<div class="pattern-grid">
 
-<p><strong>Conversation history (episodic memory).</strong> Previous turns in the current session. The naive approach appends everything; the production approach summarizes, compresses, or selectively retrieves. The failure mode is context exhaustion: as the conversation grows, you either truncate (losing information) or summarize (losing fidelity).</p>
+  <div class="pattern-card p-teal">
+    <h4>Context Window (Working Memory)</h4>
+    <p>Everything in the current prompt. This is the only memory the model can directly attend to. It is fast, reliable, and severely limited. The context window is your most precious resource; everything else in memory architecture is about using it efficiently.</p>
+    <div class="pattern-use">Failure mode: none intrinsic — this is the ground truth the model sees.</div>
+  </div>
 
-<p><strong>Knowledge base (semantic memory).</strong> External documents, retrieved on demand. This is RAG. The failure mode is retrieval failure: the relevant information exists but is not retrieved, or irrelevant information is retrieved and misleads the model.</p>
+  <div class="pattern-card p-blue">
+    <h4>Conversation History (Episodic)</h4>
+    <p>Previous turns in the current session. The naive approach appends everything; the production approach summarizes, compresses, or selectively retrieves.</p>
+    <div class="pattern-use">Failure mode: context exhaustion — truncation loses information, summarization loses fidelity.</div>
+  </div>
 
-<p><strong>Scratchpad (procedural memory).</strong> Intermediate reasoning state that persists across steps within a single task. In a ReAct loop, this might be the history of actions taken and observations received. The failure mode is scratchpad pollution: as the task progresses, the scratchpad accumulates irrelevant or contradictory information that confuses subsequent reasoning.</p>
+  <div class="pattern-card p-orange">
+    <h4>Knowledge Base (Semantic)</h4>
+    <p>External documents, retrieved on demand. This is RAG. The relevant information may exist but not be retrieved, or irrelevant information may be retrieved and mislead the model.</p>
+    <div class="pattern-use">Failure mode: retrieval failure — wrong documents in, wrong answers out.</div>
+  </div>
+
+  <div class="pattern-card p-purple">
+    <h4>Scratchpad (Procedural)</h4>
+    <p>Intermediate reasoning state that persists across steps within a single task. In a ReAct loop, this is the history of actions and observations.</p>
+    <div class="pattern-use">Failure mode: scratchpad pollution — irrelevant or contradictory state confuses reasoning.</div>
+  </div>
+
+</div>
 
 <h3>The memory management problem</h3>
 
 <p>All four memory types compete for the same finite resource: context window tokens. Memory architecture is fundamentally about allocation: how many tokens go to conversation history versus retrieved documents versus scratchpad versus instructions?</p>
 
-<p>A common pattern:</p>
+<p>A common allocation for a 16k-token context window:</p>
 
-<ul>
-  <li><strong>System prompt:</strong> 500-2000 tokens. Instructions, persona, constraints. This is fixed per session.</li>
-  <li><strong>Retrieved context:</strong> 2000-8000 tokens. Documents relevant to the current query. This varies per query.</li>
-  <li><strong>Conversation history:</strong> 1000-4000 tokens. Recent turns, possibly summarized older turns. This grows with the session.</li>
-  <li><strong>Scratchpad:</strong> 500-2000 tokens. For agentic systems, the action-observation history. This grows with task complexity.</li>
-  <li><strong>Current query:</strong> Variable. The user's actual input.</li>
-  <li><strong>Output budget:</strong> 500-4000 tokens. Reserved for the model's response.</li>
-</ul>
+<div class="token-budget">
+  <div class="token-budget-label">Context window allocation (example: 16k tokens)</div>
+  <div class="token-bar">
+    <div class="token-seg ts-sys">System</div>
+    <div class="token-seg ts-rag">Retrieved context</div>
+    <div class="token-seg ts-hist">History</div>
+    <div class="token-seg ts-scratch">Scratch</div>
+    <div class="token-seg ts-query">Query</div>
+    <div class="token-seg ts-out">Output</div>
+  </div>
+  <div class="token-legend">
+    <span class="tl-sys">System prompt (500-2k)</span>
+    <span class="tl-rag">Retrieved docs (2-8k)</span>
+    <span class="tl-hist">Conversation history (1-4k)</span>
+    <span class="tl-scratch">Scratchpad (500-2k)</span>
+    <span class="tl-query">Current query (variable)</span>
+    <span class="tl-out">Output budget (500-4k)</span>
+  </div>
+</div>
 
 <p>The sum must fit in the context window. When it does not, something must be evicted. The eviction policy is a design decision with quality implications.</p>
 
 <h3>Memory strategies for different system types</h3>
 
-<table class="compare-table">
+<div class="table-wrap">
+<table>
   <thead>
     <tr>
       <th>System Type</th>
@@ -209,6 +304,7 @@
     </tr>
   </tbody>
 </table>
+</div>
 
 <h3>The reflection pattern</h3>
 
@@ -224,7 +320,7 @@
 
 <h2>4. Tool Integration: How Does the System Act?</h2>
 
-<p>Tools are how LLM systems affect the world. A tool might read a file, query a database, send an email, or execute code. Tool design is where the abstract decisions from Part 1 (authority boundaries, error costs, reversibility) become concrete.</p>
+<p>Tools are how LLM systems affect the world. A tool might read a file, query a database, send an email, or execute code. Tool design is where the abstract decisions from the series overview (authority boundaries, error costs, reversibility) become concrete.</p>
 
 <h3>The tool schema contract</h3>
 
@@ -248,7 +344,7 @@
 
 <p><strong>Reversible vs. irreversible.</strong> Prefer tools whose effects can be undone. A tool that appends to a log is safer than one that overwrites it. A tool that creates a draft is safer than one that sends an email.</p>
 
-<p><strong>Confirmation-gated vs. autonomous.</strong> High-stakes tools should require explicit confirmation before execution. This is the implementation of the "bounded autonomy" pattern from Part 1: let the LLM decide what to do, but gate the action on human approval.</p>
+<p><strong>Confirmation-gated vs. autonomous.</strong> High-stakes tools should require explicit confirmation before execution. This is the implementation of the "bounded autonomy" pattern from the series overview: let the LLM decide what to do, but gate the action on human approval.</p>
 
 <h3>Tool composition patterns</h3>
 
@@ -262,24 +358,25 @@
 
 <h3>The tool design checklist</h3>
 
-<p>For every tool in your system, answer these questions:</p>
-
-<ol>
-  <li>What is the most dangerous thing this tool can do? (Blast radius assessment)</li>
-  <li>Can that dangerous thing be undone? (Reversibility)</li>
-  <li>What happens if this tool is called with malformed input? (Input validation)</li>
-  <li>What happens if this tool is called in a context where it should not be? (Authorization)</li>
-  <li>What does the model see if this tool fails? (Error messaging)</li>
-  <li>How will you know if this tool is being misused? (Observability)</li>
-</ol>
-
-<p>If you cannot answer all six questions for every tool, your system is not ready for production.</p>
+<div class="callout info">
+  <p class="callout-title">Six questions for every tool</p>
+  <p>For every tool in your system, answer these before shipping:</p>
+  <ol>
+    <li>What is the most dangerous thing this tool can do? <em>(Blast radius)</em></li>
+    <li>Can that dangerous thing be undone? <em>(Reversibility)</em></li>
+    <li>What happens if this tool is called with malformed input? <em>(Input validation)</em></li>
+    <li>What happens if this tool is called in a context where it should not be? <em>(Authorization)</em></li>
+    <li>What does the model see if this tool fails? <em>(Error messaging)</em></li>
+    <li>How will you know if this tool is being misused? <em>(Observability)</em></li>
+  </ol>
+  <p>If you cannot answer all six for every tool, your system is not ready for production.</p>
+</div>
 
 <div class="divider"></div>
 
 <h2>5. Putting It Together: Architecture Selection</h2>
 
-<p>The four layers (decomposition, control flow, memory, tools) interact. Choosing a control flow pattern constrains your memory architecture. Choosing a memory architecture constrains your tool design. The goal is coherence: a system where all the layers are aligned with each other and with the framing decisions from Part 1.</p>
+<p>The four layers (decomposition, control flow, memory, tools) interact. Choosing a control flow pattern constrains your memory architecture. Choosing a memory architecture constrains your tool design. The goal is coherence: a system where all the layers are aligned with each other and with the framing decisions from the series overview.</p>
 
 <h3>The architecture decision tree</h3>
 
@@ -319,7 +416,7 @@
 
 <h3>Three worked examples</h3>
 
-<p><strong>Example 1: Customer support bot (Part 1's Uber case).</strong></p>
+<p><strong>Example 1: Customer support bot (the overview's Uber case).</strong></p>
 
 <ul>
   <li><em>Decomposition:</em> Router → specialized handlers per issue type. Each handler is a short pipeline (retrieve records → apply policy → generate response).</li>
@@ -352,7 +449,10 @@
 
 <p>Architecture mistakes tend to cluster. Here are the patterns I see most often:</p>
 
-<p><strong>Premature multi-agent.</strong> Splitting a task across multiple agents when a single agent with good tools would suffice. Every agent boundary is a coordination overhead. Add agents when you have genuinely distinct competencies that cannot share a context, not because the architecture diagram looks more impressive.</p>
+<div class="callout warn">
+  <p class="callout-title">The #1 architecture mistake</p>
+  <p><strong>Premature multi-agent.</strong> Splitting a task across multiple agents when a single agent with good tools would suffice. Every agent boundary is a coordination overhead. Add agents when you have genuinely distinct competencies that cannot share a context, not because the architecture diagram looks more impressive.</p>
+</div>
 
 <p><strong>Tool proliferation.</strong> Adding a new tool for every capability instead of composing existing tools. Ten narrow tools are harder to use correctly than three well-designed tools with composable outputs. The model must learn when to use each tool; more tools means more opportunities for misuse.</p>
 
@@ -368,11 +468,12 @@
 
 <p>This post gave you the structural vocabulary for LLM system architecture: decomposition patterns, control flow options, memory strategies, and tool design principles. But vocabulary is not enough. The next post is about the infrastructure that makes these architectures work: knowledge bases, RAG pipelines, tool registries, and prompt management. That is where most of the unglamorous engineering happens, and where most agent failures actually originate.</p>
 
-<p>Architecture is the skeleton. Part 3 is about the flesh and blood.</p>
+<p class="pull-quote">Architecture is the skeleton. Part 2 is about the flesh and blood.</p>
 
 <div class="series-cta">
-  <h3>This is Part 2 of a 7-part series.</h3>
-  <p>Part 1 covered framing decisions: error surfaces, constraints, and tradeoffs. This part covered architecture: decomposition, control flow, memory, and tools. Next: the infrastructure that makes it all work.</p>
+  <h3>This is Part 1 of a 7-part series.</h3>
+  <p>The series overview laid out the seven-step lifecycle. This part covered architecture: decomposition, control flow, memory, and tools. Next: the infrastructure that makes it all work.</p>
+  <p style="margin-top: 16px;"><a href="/blog/2026/llm-agents-blueprint/" style="color: rgba(250,248,245,0.8); border-bottom: 1px solid rgba(250,248,245,0.3);">&larr; Part 0: Series Overview</a></p>
 </div>
 
 </article>
@@ -933,7 +1034,7 @@
       <h3>Requirements and Problem Framing</h3>
       <p>In traditional ML, requirements and problem framing are separate phases. For LLM agents, they are inseparable. How you frame the problem (single call vs. agentic loop vs. multi-agent system) is itself a core requirement decision, because it determines latency, cost, reliability, and the entire downstream architecture. This step forces you to articulate task-level objectives, system-level objectives, alignment boundaries, and the performance tradeoffs between speed and quality, autonomy and control, specialization and generality. The golden rule: start simple, escalate only when demonstrably needed.</p>
       <div class="roadmap-questions">Deep-dive will cover: ML framing taxonomy · constraint analysis (latency, cost, privacy, safety) · Pareto tradeoff mapping · escalation decision tree</div>
-      <span class="roadmap-tag">Coming in Part 1</span>
+      <span class="roadmap-tag">Coming soon</span>
     </div>
   </div>
 
@@ -943,7 +1044,7 @@
       <h3>Agent Architecture Design</h3>
       <p>This step has no analog in traditional ML. For agents, architecture design (topology, reasoning patterns, tool schemas, inter-agent protocols) is as consequential as model selection. I'll walk through the four canonical topologies (pipeline, hierarchical, debate, collaborative), the four core reasoning patterns (ReAct, Plan-then-Execute, Reflexion, Re-planning), and a critical dimension that most guides ignore: human-centered design. Research on human-AI collaboration shows that users build mental models of what agents can and cannot do, and misaligned mental models lead to over-reliance or under-trust. Architecture choices shape those mental models, whether you design for it or not.</p>
       <div class="roadmap-questions">Deep-dive will cover: architecture pattern selection · reasoning pattern matching · structured output and function calling · the human-AI collaboration spectrum · transparency and override design</div>
-      <span class="roadmap-tag">Coming in Part 2</span>
+      <span class="roadmap-tag">Published — Part 1</span>
     </div>
   </div>
 
@@ -1003,7 +1104,7 @@
 
 <h2>What's Next</h2>
 
-<p>Part 1 will go deep on <strong>Requirements and Problem Framing</strong>: how to decide between a single call, an agentic loop, and a multi-agent system; how to map performance tradeoffs; and how to build a constraint analysis that prevents the most common architecture mistakes before you write a single line of code.</p>
+<p>Part 1 goes deep on <strong>Architecture and System Decomposition</strong>: decomposition patterns, control flow options, memory strategies, and tool design principles — turning framing decisions into running code.</p>
 
 <div class="series-cta">
   <h3>This is Part 0 of a 7-part series.</h3>

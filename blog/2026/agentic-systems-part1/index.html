@@ -663,7 +663,7 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
 } .rm-col-head.col-advisory  .col-label { color: #3db5a5; } .rm-col-head.col-bounded   .col-label { color: #e8a55a; } .rm-col-head.col-full      .col-label { color: #e8725a; } .rm-col-head .col-sub {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.72rem;
-  color: rgba(250,248,245,0.45);
+  color: rgba(250,248,245,0.72);
   font-weight: 400;
   text-transform: none;
   letter-spacing: 0;
@@ -684,12 +684,48 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
   font-size: 0.7rem;
   font-weight: 400;
   display: block;
-} .row-low    { border-color: var(--ep-teal); } .row-low    .row-label { color: var(--ep-teal); } .row-low    .row-sub   { color: var(--ep-teal); opacity: 0.7; } .row-mid    { border-color: var(--ep-orange); } .row-mid    .row-label { color: var(--ep-orange); } .row-mid    .row-sub   { color: var(--ep-orange); opacity: 0.7; } .row-high   { border-color: var(--ep-accent); } .row-high   .row-label { color: var(--ep-accent); } .row-high   .row-sub   { color: var(--ep-accent); opacity: 0.7; } /* Data cells — tinted by row risk */ .risk-matrix tbody tr td:not(.rm-row-head) {
+} .row-low    { border-color: var(--ep-teal); } .row-low    .row-label { color: var(--ep-teal); } .row-low    .row-sub   { color: color-mix(in srgb, var(--ep-teal) 80%, var(--ep-muted)); } .row-mid    { border-color: var(--ep-orange); } .row-mid    .row-label { color: var(--ep-orange); } .row-mid    .row-sub   { color: color-mix(in srgb, var(--ep-orange) 80%, var(--ep-muted)); } .row-high   { border-color: var(--ep-accent); } .row-high   .row-label { color: var(--ep-accent); } .row-high   .row-sub   { color: color-mix(in srgb, var(--ep-accent) 80%, var(--ep-muted)); } /* Data cells — tinted by row risk */ .risk-matrix tbody tr td:not(.rm-row-head) {
   border-top: 1px solid var(--ep-border);
   color: var(--ep-muted);
   font-size: 0.88rem;
   line-height: 1.55;
 } .risk-matrix tbody tr.r-low  td:not(.rm-row-head) { background: color-mix(in srgb, var(--ep-teal)   4%, transparent); } .risk-matrix tbody tr.r-mid  td:not(.rm-row-head) { background: color-mix(in srgb, var(--ep-orange) 5%, transparent); } .risk-matrix tbody tr.r-high td:not(.rm-row-head) { background: color-mix(in srgb, var(--ep-accent) 5%, transparent); }
+/* ── Ops table: colored operation-type badge ── */ .ops-badge {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 100px;
+  margin-bottom: 4px;
+  letter-spacing: 0.3px;
+} .ob-gen    { background: var(--ep-teal-bg);   color: var(--ep-teal);   } .ob-class  { background: var(--ep-blue-bg);   color: var(--ep-blue);   } .ob-ext    { background: var(--ep-orange-bg); color: var(--ep-orange); } .ob-trans  { background: var(--ep-purple-bg); color: var(--ep-purple); } .ob-action { background: color-mix(in srgb, var(--ep-accent) 12%, transparent);
+             color: var(--ep-accent); }
+
+/* ── Cost table: colored cost-tier cell ── */ .cost-tier {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 6px;
+  display: inline-block;
+} .ct-low  { background: var(--ep-teal-bg);   color: var(--ep-teal);   } .ct-mid  { background: var(--ep-orange-bg); color: var(--ep-orange); } .ct-high { background: color-mix(in srgb, var(--ep-accent) 12%, transparent); color: var(--ep-accent); } .ct-max  { background: var(--ep-accent);    color: #fff; }
+/* ── Pareto table: colored column headers ── */ .pareto-table thead th:nth-child(2) {
+  color: var(--ep-teal);
+  border-bottom: 3px solid var(--ep-teal);
+} .pareto-table thead th:nth-child(3) {
+  color: var(--ep-orange);
+  border-bottom: 3px solid var(--ep-orange);
+} .pareto-table tbody tr:last-child td {
+  background: var(--ep-deep);
+  color: rgba(250,248,245,0.85);
+  font-weight: 600;
+  border-top: 2px solid var(--ep-border);
+} .pareto-table tbody tr:last-child td:first-child {
+  color: rgba(250,248,245,0.6);
+  font-weight: 400;
+  font-style: italic;
+}
 @media (max-width: 600px) {
   .authority-grid { grid-template-columns: 1fr; }
   .risk-matrix { font-size: 0.82rem; }
@@ -910,27 +946,27 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
   </thead>
   <tbody>
     <tr>
-      <td><strong>Generation</strong></td>
+      <td><span class="ops-badge ob-gen">Generation</span></td>
       <td>Context and prompt → natural language</td>
       <td>Email drafting, creative writing, explanation</td>
     </tr>
     <tr>
-      <td><strong>Classification / Routing</strong></td>
+      <td><span class="ops-badge ob-class">Classification</span></td>
       <td>Text → label or routing decision</td>
       <td>Intent detection, triage, content moderation</td>
     </tr>
     <tr>
-      <td><strong>Extraction</strong></td>
+      <td><span class="ops-badge ob-ext">Extraction</span></td>
       <td>Document or conversation → structured fields</td>
       <td>Parsing trip details from a complaint, entity extraction</td>
     </tr>
     <tr>
-      <td><strong>Transformation</strong></td>
+      <td><span class="ops-badge ob-trans">Transformation</span></td>
       <td>Structured data + instructions → restructured data</td>
       <td>Summarization, translation, code refactoring</td>
     </tr>
     <tr>
-      <td><strong>Decision / Action</strong></td>
+      <td><span class="ops-badge ob-action">Decision / Action</span></td>
       <td>State + policy → action with real-world consequences</td>
       <td>Issue refund, merge PR, send notification</td>
     </tr>
@@ -1007,22 +1043,24 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
     <tr>
       <td>Single call</td>
       <td>1</td>
-      <td>1×</td>
+      <td><span class="cost-tier ct-low">1×</span></td>
     </tr>
     <tr>
       <td>Chain / pipeline</td>
       <td>2–5 + retrieval</td>
-      <td>3–5×</td>
+      <td><span class="cost-tier ct-mid">3–5×</span></td>
     </tr>
     <tr>
       <td>Agentic loop</td>
       <td>5–50 + tool executions</td>
-      <td>10–100× (highly variable)</td>
+      <td>
+<span class="cost-tier ct-high">10–100×</span> <small style="color:var(--ep-muted)">highly variable</small>
+</td>
     </tr>
     <tr>
       <td>Multi-agent</td>
       <td>Agentic × number of agents</td>
-      <td>Multiplies agentic cost</td>
+      <td><span class="cost-tier ct-max">Multiplied</span></td>
     </tr>
   </tbody>
 </table>
@@ -1123,7 +1161,7 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
 <h3>The combined Pareto map</h3>
 
 <div class="table-wrap">
-<table>
+<table class="pareto-table">
   <thead>
     <tr>
       <th>Tradeoff</th>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://algoroxyolo.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://algoroxyolo.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-03-26T21:06:57+00:00</updated><id>https://algoroxyolo.github.io/feed.xml</id><title type="html">blank</title><subtitle>A website of Lorenzo. What!!! you do not know Lorenzo! Go check it out!
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://algoroxyolo.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://algoroxyolo.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-03-27T00:16:12+00:00</updated><id>https://algoroxyolo.github.io/feed.xml</id><title type="html">blank</title><subtitle>A website of Lorenzo. What!!! you do not know Lorenzo! Go check it out!
 </subtitle><entry><title type="html">A Systems Engineering Approach to LLM Agents — Requirements and Problem Framing</title><link href="https://algoroxyolo.github.io/blog/2026/agentic-systems-part1/" rel="alternate" type="text/html" title="A Systems Engineering Approach to LLM Agents — Requirements and Problem Framing" /><published>2026-03-26T00:00:00+00:00</published><updated>2026-03-26T00:00:00+00:00</updated><id>https://algoroxyolo.github.io/blog/2026/agentic-systems-part1</id><content type="html" xml:base="https://algoroxyolo.github.io/blog/2026/agentic-systems-part1/"><![CDATA[<header class="hero hero--editorial">
   <div class="hero-badge">Series &middot; Part 1 of 7</div>
   <h1>Requirements and <em>Problem Framing</em></h1>
@@ -140,27 +140,27 @@
   </thead>
   <tbody>
     <tr>
-      <td><strong>Generation</strong></td>
+      <td><span class="ops-badge ob-gen">Generation</span></td>
       <td>Context and prompt → natural language</td>
       <td>Email drafting, creative writing, explanation</td>
     </tr>
     <tr>
-      <td><strong>Classification / Routing</strong></td>
+      <td><span class="ops-badge ob-class">Classification</span></td>
       <td>Text → label or routing decision</td>
       <td>Intent detection, triage, content moderation</td>
     </tr>
     <tr>
-      <td><strong>Extraction</strong></td>
+      <td><span class="ops-badge ob-ext">Extraction</span></td>
       <td>Document or conversation → structured fields</td>
       <td>Parsing trip details from a complaint, entity extraction</td>
     </tr>
     <tr>
-      <td><strong>Transformation</strong></td>
+      <td><span class="ops-badge ob-trans">Transformation</span></td>
       <td>Structured data + instructions → restructured data</td>
       <td>Summarization, translation, code refactoring</td>
     </tr>
     <tr>
-      <td><strong>Decision / Action</strong></td>
+      <td><span class="ops-badge ob-action">Decision / Action</span></td>
       <td>State + policy → action with real-world consequences</td>
       <td>Issue refund, merge PR, send notification</td>
     </tr>
@@ -235,22 +235,22 @@
     <tr>
       <td>Single call</td>
       <td>1</td>
-      <td>1×</td>
+      <td><span class="cost-tier ct-low">1×</span></td>
     </tr>
     <tr>
       <td>Chain / pipeline</td>
       <td>2–5 + retrieval</td>
-      <td>3–5×</td>
+      <td><span class="cost-tier ct-mid">3–5×</span></td>
     </tr>
     <tr>
       <td>Agentic loop</td>
       <td>5–50 + tool executions</td>
-      <td>10–100× (highly variable)</td>
+      <td><span class="cost-tier ct-high">10–100×</span> <small style="color:var(--ep-muted)">highly variable</small></td>
     </tr>
     <tr>
       <td>Multi-agent</td>
       <td>Agentic × number of agents</td>
-      <td>Multiplies agentic cost</td>
+      <td><span class="cost-tier ct-max">Multiplied</span></td>
     </tr>
   </tbody>
 </table>
@@ -349,7 +349,7 @@
 <h3>The combined Pareto map</h3>
 
 <div class="table-wrap">
-<table>
+<table class="pareto-table">
   <thead>
     <tr>
       <th>Tradeoff</th>
@@ -1099,6 +1099,7 @@
 <div class="series-cta">
   <h3>This is Part 0 of a 7-part series.</h3>
   <p>Each subsequent post will take one step of the framework and go deep: formal definitions, worked examples, checklists, and lessons from building these systems in practice.</p>
+  <p style="margin-top: 16px;"><a href="/blog/2026/agentic-systems-part1/" style="color: rgba(250,248,245,0.8); border-bottom: 1px solid rgba(250,248,245,0.3);">Part 1: Requirements and Problem Framing &rarr;</a></p>
 </div>
 
 </article>

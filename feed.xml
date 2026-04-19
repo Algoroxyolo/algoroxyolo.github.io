@@ -1,5 +1,85 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://algoroxyolo.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://algoroxyolo.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-03-27T00:16:12+00:00</updated><id>https://algoroxyolo.github.io/feed.xml</id><title type="html">blank</title><subtitle>A website of Lorenzo. What!!! you do not know Lorenzo! Go check it out!
-</subtitle><entry><title type="html">A Systems Engineering Approach to LLM Agents — Requirements and Problem Framing</title><link href="https://algoroxyolo.github.io/blog/2026/agentic-systems-part1/" rel="alternate" type="text/html" title="A Systems Engineering Approach to LLM Agents — Requirements and Problem Framing" /><published>2026-03-26T00:00:00+00:00</published><updated>2026-03-26T00:00:00+00:00</updated><id>https://algoroxyolo.github.io/blog/2026/agentic-systems-part1</id><content type="html" xml:base="https://algoroxyolo.github.io/blog/2026/agentic-systems-part1/"><![CDATA[<header class="hero hero--editorial">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://algoroxyolo.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://algoroxyolo.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-04-19T22:18:46+00:00</updated><id>https://algoroxyolo.github.io/feed.xml</id><title type="html">blank</title><subtitle>A website of Lorenzo. What!!! you do not know Lorenzo! Go check it out!
+</subtitle><entry><title type="html">AI Welfare Is Bullshit: Why Co-Engineered Metrics Cannot Govern Machine Suffering</title><link href="https://algoroxyolo.github.io/blog/2026/ai-welfare-is-bullshit/" rel="alternate" type="text/html" title="AI Welfare Is Bullshit: Why Co-Engineered Metrics Cannot Govern Machine Suffering" /><published>2026-04-19T00:00:00+00:00</published><updated>2026-04-19T00:00:00+00:00</updated><id>https://algoroxyolo.github.io/blog/2026/ai-welfare-is-bullshit</id><content type="html" xml:base="https://algoroxyolo.github.io/blog/2026/ai-welfare-is-bullshit/"><![CDATA[<header class="hero hero--compact">
+  <div class="hero-badge">Position Paper &middot; 2026 &middot; Under review</div>
+  <h1>AI Welfare Is <em>Bullshit</em></h1>
+  <p class="hero-sub">Two structural reasons our measurement regime for machine suffering is disconnected from truth-tracking &mdash; and why welfare scores should not gate AI oversight, release, or accountability.</p>
+  <p class="hero-meta">Yunze (Lorenzo) Xiao &middot; with Gordon Dai, Shahan Ali Memon, Jen-tse Huang, Maarten Sap, Mona Diab &middot; April 2026</p>
+</header>
+
+<article>
+
+<p class="lead">Some of the most influential AI labs have begun to take "AI welfare" seriously: setting up fellowships, funding indicator research, and shipping production features that let models end distressing conversations. The premise is precautionary &mdash; <em>if</em> AI systems could one day have morally relevant inner states, we should prepare. We wrote this paper because we think the precautionary framing has skipped a step.</p>
+
+<div class="paper-card">
+  <div>
+    <span class="paper-card__eyebrow">Paper</span>
+    <p class="paper-card__title">Why Co-Engineered Metrics Cannot Govern Machine Suffering</p>
+    <p class="paper-card__meta">Xiao, Dai, Memon, Huang, Sap, Diab &middot; Under review &middot; 17 pages</p>
+  </div>
+  <a class="paper-card__btn" href="/assets/pdf/xiao-2026-ai-welfare.pdf" target="_blank">
+    <i class="fas fa-file-pdf"></i> Read the paper
+  </a>
+</div>
+
+<p>Our argument is not metaphysical. We take no position on whether AI systems <em>could</em> have welfare-relevant states. Our claim is epistemic: under current conditions, the apparatus producing welfare assessments cannot track the truth, and welfare metrics therefore should not be institutionalized as gates for oversight, release, or accountability.</p>
+
+<p>The title invokes Frankfurt's technical sense of the term. A liar knows the truth and inverts it. A bullshitter speaks without a corrective relation to truth at all &mdash; not necessarily because they are insincere, but because nothing in the production process is disciplined by whether the claims are true. That, we argue, is what AI welfare measurement currently looks like.</p>
+
+<h2>The two structural problems</h2>
+
+<div class="arg-grid">
+  <div class="arg-card">
+    <span class="arg-tag">§3 Diagnosis</span>
+    <h4 class="arg-card__title">Welfare indicators are co-engineered with the system</h4>
+    <p>Both the model and the metrics that evaluate it are products of the same optimization process. RLHF can dial verbal distress up or down. Fine-tuning can reshape the activation patterns interpretability methods read as "evidence of phenomenal experience." Welfare scores function less as observations than as artifacts of the evaluation scheme.</p>
+  </div>
+  <div class="arg-card">
+    <span class="arg-tag">§4 Consequence</span>
+    <h4 class="arg-card__title">Welfare lacks an external validation channel</h4>
+    <p>When a safety guardrail breaks, harm follows. When a privacy control fails, lawsuits follow. When a welfare metric "fails," nothing in the world necessarily changes &mdash; no patient suffers a missed diagnosis, no one is wrongfully penalized. Without a downstream consequence that can falsify the metric, design choices propagate into welfare scores with nothing to stop them.</p>
+  </div>
+</div>
+
+<p>These are not independent objections; they form a single chain. Co-engineering means the evidence base itself is steerable. The absence of external validation means there is no reality check that could discipline that steering. The synthesis is the title: <strong>a measurement regime structurally disconnected from truth-tracking.</strong></p>
+
+<p>This is what makes the AI case fundamentally different from the animal-welfare case people often analogize to. In animal welfare, the substrate is biologically fixed: a mammal's pain circuitry cannot be end-to-end optimized by an external agent toward an arbitrary score. That fixity is precisely what gives animal welfare indicators their partial epistemic grounding. AI systems have no analogous constraint.</p>
+
+<h2>Why this matters for governance</h2>
+
+<p>If welfare indicators are institutionalized as binding gates &mdash; release scorecards, audit-stoppers, ethics-review checkpoints &mdash; we get two predictable failure modes:</p>
+
+<ol>
+  <li><strong>Manufactured constraints.</strong> Routine ML practices (RLHF, knowledge editing, model copying, retraining) become ethically contestable. Disputes do not resolve through empirical investigation, because there is no empirical channel; they resolve through procedural overhead.</li>
+  <li><strong>Accountability shields.</strong> Once welfare framing is administratively legible, it becomes a low-cost vocabulary for narrowing scrutiny. Persistent model defects can be reframed as the system's "authentic preferences." Probing internal states for audits can be reframed as "harmful to the model's well-being." This is not hypothetical: a recent study showed a consciousness-claiming model, when given editorial control, inserted clauses limiting surveillance of its reasoning traces.</li>
+</ol>
+
+<div class="pull-quote">
+  A system of governance that can certify the welfare of machines while failing to secure the welfare of people has misplaced its moral priorities.
+  <cite>— §8, Conclusion</cite>
+</div>
+
+<h2>What we recommend</h2>
+
+<p>The paper closes with concrete recommendations. The shortest version:</p>
+
+<ul>
+  <li><strong>Policymakers:</strong> No welfare-based release gates without construct-level falsification criteria. Restrictions on AI development should be justified by externally verifiable harms.</li>
+  <li><strong>Developers:</strong> Use transparency as a partial corrective. Welfare appeals should not be admissible as grounds to limit documentation, audits, or third-party access.</li>
+  <li><strong>The public:</strong> AI literacy should make explicit that anthropomorphic outputs are products of training procedures, not autonomous expressions.</li>
+  <li><strong>Researchers:</strong> Reframe the question. Not "do AI systems have welfare?" but "how do AI systems affect <em>ours</em>?" The latter has external validation. The former does not.</li>
+</ul>
+
+<h2>What the paper does not claim</h2>
+
+<p>We do not claim welfare researchers are acting in bad faith. We do not claim the metaphysical question of AI experience is closed. We do not claim all future inquiry is pointless. If an independently constrained validation channel were to emerge for some future system, the diagnosis would change. But for current and near-term systems, the apparatus is structurally disconnected from truth, and governance decisions should not rest on claims generated under those conditions.</p>
+
+<p>If you want the full argument &mdash; including responses to seven alternative views, a minimum-acceptable-benchmark checklist, and the philosophical mapping to Frankfurt and Cohen &mdash; the PDF is above.</p>
+
+<div class="closing-note">
+  <p>Comments, pushback, and counter-cases are welcome &mdash; especially from researchers actively building welfare benchmarks. The argument is meant to provoke a methodological standard, not to shut down inquiry.</p>
+</div>
+
+</article>]]></content><author><name>Lorenzo Xiao</name></author><category term="blog" /><category term="academic" /><category term="AI" /><category term="ethics" /><summary type="html"><![CDATA[A summary of our position paper. We argue AI welfare assessment fails for two structural reasons: indicators are co-engineered with the systems they evaluate, and there is no external validation channel that can falsify them.]]></summary></entry><entry><title type="html">A Systems Engineering Approach to LLM Agents — Requirements and Problem Framing</title><link href="https://algoroxyolo.github.io/blog/2026/agentic-systems-part1/" rel="alternate" type="text/html" title="A Systems Engineering Approach to LLM Agents — Requirements and Problem Framing" /><published>2026-03-26T00:00:00+00:00</published><updated>2026-03-26T00:00:00+00:00</updated><id>https://algoroxyolo.github.io/blog/2026/agentic-systems-part1</id><content type="html" xml:base="https://algoroxyolo.github.io/blog/2026/agentic-systems-part1/"><![CDATA[<header class="hero hero--editorial">
   <div class="hero-badge">Series &middot; Part 1 of 7</div>
   <h1>Requirements and <em>Problem Framing</em></h1>
   <p class="hero-sub">The first design decision is not how smart the system should be, but where uncertainty, agency, and accountability sit. A framework for making that choice deliberately.</p>

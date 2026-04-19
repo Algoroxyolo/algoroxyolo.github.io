@@ -10,9 +10,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>How I Learned RL for LLMs: A Researcher's Detour in Five Parts | Yunze (Lorenzo) Xiao</title>
+    <title>AI Welfare Is Bullshit: Why Co-Engineered Metrics Cannot Govern Machine Suffering | Yunze (Lorenzo) Xiao</title>
     <meta name="author" content="Yunze (Lorenzo) Xiao">
-    <meta name="description" content="An NLP evaluation researcher's honest map through the algorithmic, reward, and systems landscape of reinforcement learning for language models.">
+    <meta name="description" content="A summary of our position paper. We argue AI welfare assessment fails for two structural reasons: indicators are co-engineered with the systems they evaluate, and there is no external validation channel that can falsify them.">
     <meta name="keywords" content="Natrual Language Processing,Prompt Engineering,Computer Security, Social Engineering,">
 
 
@@ -33,7 +33,7 @@
     <link rel="shortcut icon" href="/assets/img/favicon.jpg">
     
     <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="canonical" href="https://algoroxyolo.github.io/blog/2026/rl-for-llms-part0/">
+    <link rel="canonical" href="https://algoroxyolo.github.io/blog/2026/ai-welfare-is-bullshit/">
     
     <!-- Dark Mode -->
     
@@ -503,128 +503,143 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
   <!-- Post-specific styles -->
   
   <style>.editorial-post {
-  --post-accent: #2a8f82;
-  --post-accent-light: #3db5a5;
-  --post-accent-bg: #e8f5f3;
-  --post-accent-bg-dark: rgba(42,143,130,0.15);
-  --post-hero-bg: linear-gradient(175deg, #1a2a28 0%, #1e3532 40%, #243d38 100%);
+  --post-accent: #7a3b3b;
+  --post-accent-light: #a05656;
+  --post-accent-bg: #f6ecec;
+  --post-accent-bg-dark: rgba(122,59,59,0.15);
+  --post-hero-bg: linear-gradient(175deg, #1f1414 0%, #2a1818 40%, #361d1d 100%);
   --post-hero-overlay:
-    radial-gradient(circle at 20% 50%, rgba(42,143,130,0.3) 0%, transparent 50%),
-    radial-gradient(circle at 80% 30%, rgba(59,111,160,0.15) 0%, transparent 50%);
-  --post-badge-color: #5cc4b4;
-  --post-badge-border: rgba(92,196,180,0.4);
-  --post-hero-em: #5cc4b4;
+    radial-gradient(circle at 20% 50%, rgba(160,86,86,0.30) 0%, transparent 50%),
+    radial-gradient(circle at 80% 30%, rgba(107,76,138,0.15) 0%, transparent 50%);
+  --post-badge-color: #c98686;
+  --post-badge-border: rgba(201,134,134,0.4);
+  --post-hero-em: #c98686;
 }
-/* ── Roadmap cards ── */ .roadmap {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin: 40px 0;
-} .roadmap-card {
+/* ── Paper card ── */ .paper-card {
   display: grid;
-  grid-template-columns: 56px 1fr;
-  gap: 20px;
-  align-items: start;
-  background: var(--ep-card-bg);
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: center;
+  margin: 28px 0 36px;
+  padding: 22px 26px;
   border: 1px solid var(--ep-border);
+  border-left: 4px solid var(--post-accent);
   border-radius: 10px;
-  padding: 28px 30px;
-  box-shadow: 0 2px 12px var(--ep-shadow);
-  transition: box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  position: relative;
-  overflow: hidden;
-} .roadmap-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; bottom: 0;
-  width: 4px;
-} .roadmap-card:hover {
-  box-shadow: 0 6px 24px rgba(26,26,26,0.1);
-  transform: translateY(-2px);
-} html[data-theme="dark"] .roadmap-card:hover {
-  box-shadow: 0 6px 24px rgba(0,0,0,0.3);
-} .roadmap-num {
-  font-family: 'Fraunces', serif;
-  font-weight: 900;
-  font-size: 1.6rem;
-  line-height: 1;
-  padding-top: 2px;
-} .roadmap-body h3 {
-  font-family: 'Fraunces', serif;
-  font-weight: 700;
-  font-size: 1.12rem;
-  margin: 0 0 8px;
-  color: var(--ep-deep);
-} .roadmap-body p {
-  font-size: 0.95rem;
-  line-height: 1.65;
-  color: var(--ep-muted);
-  margin: 0 0 10px;
-} .roadmap-body p:last-child { margin-bottom: 0; } .roadmap-bridge {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.78rem;
-  color: var(--ep-accent);
-  line-height: 1.7;
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 1px solid var(--ep-border);
-} .roadmap-tag {
-  display: inline-block;
+  background: var(--ep-card-bg);
+} .paper-card__eyebrow {
+  display: block;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.68rem;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  padding: 3px 10px;
-  border-radius: 100px;
-  margin-top: 10px;
-}
-.rc-1::before { background: var(--ep-accent); } .rc-1 .roadmap-num { color: var(--ep-accent); } .rc-1 .roadmap-tag { background: var(--ep-accent-bg); color: var(--ep-accent); }
-.rc-2::before { background: var(--ep-blue); } .rc-2 .roadmap-num { color: var(--ep-blue); } .rc-2 .roadmap-tag { background: var(--ep-blue-bg); color: var(--ep-blue); }
-.rc-3::before { background: var(--ep-purple); } .rc-3 .roadmap-num { color: var(--ep-purple); } .rc-3 .roadmap-tag { background: var(--ep-purple-bg); color: var(--ep-purple); }
-.rc-4::before { background: var(--ep-orange); } .rc-4 .roadmap-num { color: var(--ep-orange); } .rc-4 .roadmap-tag { background: var(--ep-orange-bg); color: var(--ep-orange); }
-.rc-5::before { background: var(--ep-green); } .rc-5 .roadmap-num { color: var(--ep-green); } .rc-5 .roadmap-tag { background: var(--ep-green-bg); color: var(--ep-green); }
-/* ── Depth legend ── */ .depth-legend {
-  display: grid;
-  grid-template-columns: 48px 1fr;
-  gap: 12px 16px;
-  margin: 24px 0 32px;
-  font-size: 0.92rem;
-} .depth-label {
-  font-family: 'JetBrains Mono', monospace;
   font-weight: 600;
-  font-size: 0.82rem;
-  text-align: center;
-  padding: 3px 0;
-  border-radius: 4px;
-} .depth-label.da { background: var(--ep-accent-bg); color: var(--ep-accent); } .depth-label.dam { background: var(--ep-blue-bg); color: var(--ep-blue); } .depth-label.db { background: var(--ep-purple-bg); color: var(--ep-purple); } .depth-label.dc { background: var(--ep-orange-bg); color: var(--ep-orange); } .depth-desc {
-  color: var(--ep-muted);
-  line-height: 1.5;
-  align-self: center;
-}
-/* ── Series CTA ── */ .series-cta {
-  text-align: center;
-  padding: 40px 32px;
-  background: linear-gradient(135deg, var(--ep-deep), color-mix(in srgb, var(--ep-deep) 80%, var(--ep-accent)));
-  color: var(--ep-paper);
-  border-radius: 10px;
-  margin: 48px 0;
-} .series-cta h3 {
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--post-accent);
+  margin: 0 0 8px;
+} html[data-theme="dark"] .paper-card__eyebrow {
+  color: var(--post-badge-color);
+} .paper-card__title {
   font-family: 'Fraunces', serif;
   font-weight: 700;
-  font-size: 1.3rem;
-  color: #faf8f5;
-  margin: 0 0 12px;
-} .series-cta p {
-  color: rgba(250,248,245,0.65);
-  font-size: 0.95rem;
-  max-width: 520px;
-  margin: 0 auto;
-  line-height: 1.65;
+  font-size: 1.05rem;
+  margin: 0 0 4px;
+  color: var(--ep-deep);
+} .paper-card__meta {
+  font-size: 0.82rem;
+  color: var(--ep-muted);
+  margin: 0;
+} .paper-card__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: var(--post-accent);
+  color: #fff !important;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  border-radius: 6px;
+  text-decoration: none !important;
+  transition: background 0.18s;
+  white-space: nowrap;
+} .paper-card__btn:hover {
+  background: var(--post-accent-light);
+  color: #fff !important;
+} @media (max-width: 600px) {
+  .paper-card { grid-template-columns: 1fr; }
 }
-@media (max-width: 600px) {
-  .roadmap-card { grid-template-columns: 40px 1fr; padding: 22px 20px; }
-  .depth-legend { grid-template-columns: 44px 1fr; gap: 10px 12px; }
+/* ── Pull quote (page's rhetorical peak: heaviest bordered mark) ── */ .pull-quote {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  line-height: 1.55;
+  color: var(--ep-deep);
+  border-left: 4px solid var(--post-accent);
+  padding: 4px 0 4px 22px;
+  margin: 28px 0;
+} .pull-quote cite {
+  display: block;
+  margin-top: 10px;
+  font-style: normal;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--ep-muted);
+  letter-spacing: 0.02em;
+} html[data-theme="dark"] .pull-quote {
+  border-left-color: var(--post-accent-light);
+}
+/* ── Lead override: #7a3b3b disappears on paper; lighten, keep 3px so pull-quote stays heavier ── */ .editorial-post .lead {
+  border-left-color: var(--post-accent-light);
+}
+/* ── Closing note (flat card, no left accent — avoids border-left fatigue) ── */ .closing-note {
+  margin: 48px 0 16px;
+  padding: 20px 24px;
+  background: var(--ep-card-bg);
+  border: 1px solid var(--ep-border);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  line-height: 1.65;
+} .closing-note p { margin: 0; }
+/* ── Argument grid ── */ .arg-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin: 28px 0;
+} .arg-card {
+  background: var(--ep-card-bg);
+  border: 1px solid var(--ep-border);
+  border-radius: 8px;
+  padding: 20px 22px;
+} .arg-card .arg-card__title {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 1rem;
+  margin: 0 0 8px;
+  color: var(--ep-deep);
+  letter-spacing: normal;
+} .arg-card p {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  margin: 0;
+  color: var(--ep-text);
+} .arg-card .arg-tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  background: var(--post-accent-bg);
+  color: var(--post-accent);
+} html[data-theme="dark"] .arg-card .arg-tag {
+  background: var(--post-accent-bg-dark);
+  color: var(--post-badge-color);
+} @media (max-width: 700px) {
+  .arg-grid { grid-template-columns: 1fr; }
 }
 </style>
   
@@ -698,150 +713,94 @@ html[data-theme="dark"] .editorial-post .diagram-wrap svg line[stroke="#bbb"] {
 
     <!-- Editorial Content (no Bootstrap container — hero goes full-width) -->
     <div class="editorial-post">
-      <header class="hero hero--editorial">
-  <div class="hero-badge">Series · Part 0 of 5</div>
-  <h1>How I Learned <em>RL for LLMs</em>
+      <header class="hero hero--compact">
+  <div class="hero-badge">Position Paper · 2026 · Under review</div>
+  <h1>AI Welfare Is <em>Bullshit</em>
 </h1>
-  <p class="hero-sub">An evaluation researcher's honest map through the algorithms, rewards, and systems of reinforcement learning for language models.</p>
-  <p class="hero-meta">Lorenzo Xiao · Language Technologies Institute, CMU · March 2026</p>
+  <p class="hero-sub">Two structural reasons our measurement regime for machine suffering is disconnected from truth-tracking — and why welfare scores should not gate AI oversight, release, or accountability.</p>
+  <p class="hero-meta">Yunze (Lorenzo) Xiao · with Gordon Dai, Shahan Ali Memon, Jen-tse Huang, Maarten Sap, Mona Diab · April 2026</p>
 </header>
 
 <article>
 
-<p class="lead">I will be honest about how this series started, because the origin story matters for understanding what it is and what it is not.</p>
+<p class="lead">Some of the most influential AI labs have begun to take "AI welfare" seriously: setting up fellowships, funding indicator research, and shipping production features that let models end distressing conversations. The premise is precautionary — <em>if</em> AI systems could one day have morally relevant inner states, we should prepare. We wrote this paper because we think the precautionary framing has skipped a step.</p>
 
-<h2>How This Started</h2>
-
-<p>I am an NLP researcher. My work has been on evaluation, specifically on non-verifiable tasks: persona consistency, cultural appropriateness, anthropomorphism—the kinds of things where "correctness" is not a number you can look up in the back of a textbook. I have spent the past few years building benchmarks, designing evaluation protocols, and thinking carefully about what it means to measure something that is inherently subjective. I thought this was my path. I intended to keep going.</p>
-
-<p>Then I did not get into any of the PhD programs I applied to.</p>
-
-<p>That was the moment I had to sit with an uncomfortable realization: most of the skills I had acquired in creating benchmarks do not transfer cleanly to industry. I knew how to design evaluation frameworks. I could tell you whether a benchmark was measuring what it claimed to measure. But I could not tell you how a post-training pipeline actually works end to end, how reward signals flow into policy updates, or why a training run that looks fine on paper collapses in practice. The evaluation side of the house was where I lived. The training side was a foreign country.</p>
-
-<p>So I made a decision. If I was going to be competitive for post-training teams in industry, I needed to learn reinforcement learning. Not the textbook version. The version that people are actually using right now, in 2025 and 2026, to make language models reason, use tools, write code, and hold conversations.</p>
-
-<p>This blog series is the documentation of that learning process.</p>
-
-<div class="divider"></div>
-
-<h2>What This Series Is</h2>
-
-<p>I want to be clear about two things.</p>
-
-<p>First, <strong>I am writing this to make sure I can clearly explain what I have learned.</strong> The act of writing forces a kind of precision that reading alone does not. If I cannot write a coherent paragraph about why DAPO's asymmetric clipping matters, I probably do not actually understand it yet. Some of what I write will contain mistakes. I am learning in public, and I sincerely welcome corrections. If you spot an error, please let me know. You will be doing me a genuine favor.</p>
-
-<p>Second, <strong>I am writing this for people from a similar background.</strong> If you are an NLP researcher who has spent more time on evaluation than on training, if you know what a good benchmark looks like but have never debugged a reward hacking failure, if you are pivoting toward post-training work and feeling the gap between what you know and what you need to know: this series is for you. I am not writing from a position of expertise. I am writing from a position of "I figured this out six months ago and here is how I organized it in my head."</p>
-
-<p>This series would not have existed without the help of <a href="https://x.com/sun_hanchi" target="_blank" rel="external nofollow noopener">Hanchi Sun</a>, who patiently walked me through the parts I could not figure out from papers alone.</p>
-
-<div class="divider"></div>
-
-<h2>The Five Parts</h2>
-
-<p>Each part ends with a question that the next part answers. This is deliberate. The series is meant to build, not to be a disconnected collection of literature reviews.</p>
-
-<div class="roadmap">
-
-  <div class="roadmap-card rc-1">
-    <div class="roadmap-num">01</div>
-    <div class="roadmap-body">
-      <h3>The Algorithm Zoo</h3>
-      <p>REINFORCE, PPO, GRPO, and the lineage of papers that fix what GRPO got wrong: Dr. GRPO, DAPO, CISPO, MaxRL, DPPO. The organizing question for the entire section: <em>how does each subsequent paper fix GRPO?</em> GRPO removed the critic, introduced group-relative baselines, and made large-scale reasoning RL tractable. But it also introduced subtle biases—length normalization, standard deviation weighting, symmetric clipping, token-level loss aggregation—that turned out to be consequential. Every paper that came after is asking the same question: what did GRPO get wrong, and how do we fix it without breaking what it got right?</p>
-      <div class="roadmap-bridge">↓ "These algorithms all optimize a reward signal. But where does that signal come from?"</div>
-      <span class="roadmap-tag">Coming in Part 1</span>
-    </div>
+<div class="paper-card">
+  <div>
+    <span class="paper-card__eyebrow">Paper</span>
+    <p class="paper-card__title">Why Co-Engineered Metrics Cannot Govern Machine Suffering</p>
+    <p class="paper-card__meta">Xiao, Dai, Memon, Huang, Sap, Diab · Under review · 17 pages</p>
   </div>
-
-  <div class="roadmap-card rc-2">
-    <div class="roadmap-num">02</div>
-    <div class="roadmap-body">
-      <h3>The Reward Problem</h3>
-      <p>The current RL-for-LLM literature is dominated by tasks where reward is cheap and unambiguous: math problems with checkable answers, code with executable test suites. The moment you step outside those domains—into summarization, creative writing, open-ended dialogue, cultural sensitivity—the reward problem becomes the <em>hard</em> problem. This part covers generative reward models that reason before scoring (DeepSeek-GRM, RM-R1), process reward models that evaluate intermediate steps (PAV, ThinkPRM), rubrics-as-rewards for structuring subjective preferences, and the evaluation benchmarks (RewardBench and its successors) that make RM development iterative. This is the section closest to my original research, and honestly the one I found most intellectually exciting.</p>
-      <div class="roadmap-bridge">↓ "Reward models approximate human judgment. But what if we could learn directly from preferences without an explicit reward model?"</div>
-      <span class="roadmap-tag">Coming in Part 2</span>
-    </div>
-  </div>
-
-  <div class="roadmap-card rc-3">
-    <div class="roadmap-num">03</div>
-    <div class="roadmap-body">
-      <h3>From Preferences to Alignment</h3>
-      <p>DPO simplifies RLHF by removing the reward model. It works well for single-turn preference alignment, and then it starts to plateau in settings that require multi-turn coherence, long-term persona consistency, or reward signals that are noisy and delayed. What I explore here: how do we bring modern RL techniques into the tasks I actually care about? Multi-turn dialogue where the reward is not "did you get the math right" but "did you maintain character across twenty turns." Creative writing where the failure mode is not incorrectness but blandness. PPP for proactive personalized agents, HER for dual-layer role-playing thinking, OMAR for multi-role self-play—papers that point toward where the field is heading once the math-and-code gold rush settles.</p>
-      <div class="roadmap-bridge">↓ "We know what to optimize and how. But can any of this actually run at scale?"</div>
-      <span class="roadmap-tag">Coming in Part 3</span>
-    </div>
-  </div>
-
-  <div class="roadmap-card rc-4">
-    <div class="roadmap-num">04</div>
-    <div class="roadmap-body">
-      <h3>Making It Work: Systems</h3>
-      <p>The section I was most tempted to skip and most glad I did not. A beautiful algorithm that requires synchronous rollout-then-update will lose to a mediocre algorithm running on async infrastructure that keeps GPUs utilized, if the wall-clock time difference is large enough. But this section is about more than async versus sync. Why does MoE routing behave differently during rollout than during training? Why can FP16 rounding in your inference kernel silently corrupt importance-sampling ratios? Why does deterministic inference across different tensor-parallel sizes require explicit engineering? These are the questions that separate "I read the GRPO paper" from "I could actually help debug a training run."</p>
-      <div class="roadmap-bridge">↓ "With the full stack understood, where is RL for LLMs actually heading?"</div>
-      <span class="roadmap-tag">Coming in Part 4</span>
-    </div>
-  </div>
-
-  <div class="roadmap-card rc-5">
-    <div class="roadmap-num">05</div>
-    <div class="roadmap-body">
-      <h3>The Agent Frontier</h3>
-      <p>RL is no longer just for math and code. This part covers coding agents (Qwen3-Coder-Next, SWE-Master), deep research agents (Search-R1, Tongyi DeepResearch), computer-use agents (ComputerRL, GUI-Libra), and the emerging generalist agentic RL systems that attempt to unify all of these under one training framework (RLAnything, AGENTRL, iStar). A dedicated section covers NVIDIA's Nemotron-Tool-N1, which takes the minimalist approach of binary reward for tool-calling correctness and shows it works surprisingly well. Sometimes the answer to "how do we design reward for agentic tasks?" is "just check if the tool call was correct and let RL figure out the rest."</p>
-      <span class="roadmap-tag">Coming in Part 5</span>
-    </div>
-  </div>
-
+  <a class="paper-card__btn" href="/assets/pdf/xiao-2026-ai-welfare.pdf" target="_blank">
+    <i class="fas fa-file-pdf"></i> Read the paper
+  </a>
 </div>
 
-<div class="divider"></div>
+<p>Our argument is not metaphysical. We take no position on whether AI systems <em>could</em> have welfare-relevant states. Our claim is epistemic: under current conditions, the apparatus producing welfare assessments cannot track the truth, and welfare metrics therefore should not be institutionalized as gates for oversight, release, or accountability.</p>
 
-<h2>How to Read This Series</h2>
+<p>The title invokes Frankfurt's technical sense of the term. A liar knows the truth and inverts it. A bullshitter speaks without a corrective relation to truth at all — not necessarily because they are insincere, but because nothing in the production process is disciplined by whether the claims are true. That, we argue, is what AI welfare measurement currently looks like.</p>
 
-<p>Each post is self-contained. You can read Part 2 (Rewards) without reading Part 1 (Algorithms), though I cross-reference when the same concept appears in multiple places.</p>
+<h2>The two structural problems</h2>
 
-<p>Within each post, every paper gets a reading-depth recommendation:</p>
-
-<div class="depth-legend">
-  <span class="depth-label da">A</span>
-  <span class="depth-desc"><strong>Deep read.</strong> Explain the method, the training pipeline, the failure modes, and why it was necessary.</span>
-  <span class="depth-label dam">A−</span>
-  <span class="depth-desc"><strong>Focused read.</strong> Abstract, method figure, key tables, and ablation. Know the core contribution well enough to discuss it.</span>
-  <span class="depth-label db">B</span>
-  <span class="depth-desc"><strong>Skim.</strong> Know the problem setting, the main conclusion, and how it connects to the mainline.</span>
-  <span class="depth-label dc">C</span>
-  <span class="depth-desc"><strong>Awareness only.</strong> Know it exists and what niche it fills.</span>
+<div class="arg-grid">
+  <div class="arg-card">
+    <span class="arg-tag">§3 Diagnosis</span>
+    <h4 class="arg-card__title">Welfare indicators are co-engineered with the system</h4>
+    <p>Both the model and the metrics that evaluate it are products of the same optimization process. RLHF can dial verbal distress up or down. Fine-tuning can reshape the activation patterns interpretability methods read as "evidence of phenomenal experience." Welfare scores function less as observations than as artifacts of the evaluation scheme.</p>
+  </div>
+  <div class="arg-card">
+    <span class="arg-tag">§4 Consequence</span>
+    <h4 class="arg-card__title">Welfare lacks an external validation channel</h4>
+    <p>When a safety guardrail breaks, harm follows. When a privacy control fails, lawsuits follow. When a welfare metric "fails," nothing in the world necessarily changes — no patient suffers a missed diagnosis, no one is wrongfully penalized. Without a downstream consequence that can falsify the metric, design choices propagate into welfare scores with nothing to stop them.</p>
+  </div>
 </div>
 
-<p>There are <strong>96 papers</strong> across the five parts, <strong>17 rated A and 39 rated A−</strong>.</p>
+<p>These are not independent objections; they form a single chain. Co-engineering means the evidence base itself is steerable. The absence of external validation means there is no reality check that could discipline that steering. The synthesis is the title: <strong>a measurement regime structurally disconnected from truth-tracking.</strong></p>
 
-<div class="callout tip">
-  <p class="callout-title">If you only have three hours</p>
-  <p>Read seven papers that cover the skeleton of the entire story: <strong>DeepSeekMath</strong> (Part 1), <strong>DeepSeek-R1</strong> (Part 1), <strong>DAPO</strong> (Part 1), <strong>DeepSeek-GRM</strong> (Part 2), <strong>OLMo 3</strong> (Part 3), <strong>Magistral</strong> (Part 4), and <strong>Search-R1</strong> (Part 5).</p>
+<p>This is what makes the AI case fundamentally different from the animal-welfare case people often analogize to. In animal welfare, the substrate is biologically fixed: a mammal's pain circuitry cannot be end-to-end optimized by an external agent toward an arbitrary score. That fixity is precisely what gives animal welfare indicators their partial epistemic grounding. AI systems have no analogous constraint.</p>
+
+<h2>Why this matters for governance</h2>
+
+<p>If welfare indicators are institutionalized as binding gates — release scorecards, audit-stoppers, ethics-review checkpoints — we get two predictable failure modes:</p>
+
+<ol>
+  <li>
+<strong>Manufactured constraints.</strong> Routine ML practices (RLHF, knowledge editing, model copying, retraining) become ethically contestable. Disputes do not resolve through empirical investigation, because there is no empirical channel; they resolve through procedural overhead.</li>
+  <li>
+<strong>Accountability shields.</strong> Once welfare framing is administratively legible, it becomes a low-cost vocabulary for narrowing scrutiny. Persistent model defects can be reframed as the system's "authentic preferences." Probing internal states for audits can be reframed as "harmful to the model's well-being." This is not hypothetical: a recent study showed a consciousness-claiming model, when given editorial control, inserted clauses limiting surveillance of its reasoning traces.</li>
+</ol>
+
+<div class="pull-quote">
+  A system of governance that can certify the welfare of machines while failing to secure the welfare of people has misplaced its moral priorities.
+  <cite>— §8, Conclusion</cite>
 </div>
 
-<div class="divider"></div>
+<h2>What we recommend</h2>
 
-<h2>One Last Thing</h2>
+<p>The paper closes with concrete recommendations. The shortest version:</p>
 
-<p>I want to acknowledge something that I think more people should say out loud: getting rejected from every program you applied to is a specific kind of painful. It makes you question whether the work you have done matters, whether the skills you have built are real, whether the direction you chose was the right one.</p>
+<ul>
+  <li>
+<strong>Policymakers:</strong> No welfare-based release gates without construct-level falsification criteria. Restrictions on AI development should be justified by externally verifiable harms.</li>
+  <li>
+<strong>Developers:</strong> Use transparency as a partial corrective. Welfare appeals should not be admissible as grounds to limit documentation, audits, or third-party access.</li>
+  <li>
+<strong>The public:</strong> AI literacy should make explicit that anthropomorphic outputs are products of training procedures, not autonomous expressions.</li>
+  <li>
+<strong>Researchers:</strong> Reframe the question. Not "do AI systems have welfare?" but "how do AI systems affect <em>ours</em>?" The latter has external validation. The former does not.</li>
+</ul>
 
-<p>I do not have a neat resolution to that story yet. What I have is this: the process of learning RL for LLMs, of building this map from scratch, of forcing myself to understand systems and algorithms and reward design that were outside my comfort zone, has been the most intellectually alive I have felt in a long time.</p>
+<h2>What the paper does not claim</h2>
 
-<p>And somewhere along the way, I realized something that changed how I think about my own research: <strong>evaluation and training are not separate worlds.</strong> A good reward model <em>is</em> an evaluation. A good benchmark <em>is</em> a reward signal waiting to be operationalized. The skills transfer. They just transfer in directions I did not expect.</p>
+<p>We do not claim welfare researchers are acting in bad faith. We do not claim the metaphysical question of AI experience is closed. We do not claim all future inquiry is pointless. If an independently constrained validation channel were to emerge for some future system, the diagnosis would change. But for current and near-term systems, the apparatus is structurally disconnected from truth, and governance decisions should not rest on claims generated under those conditions.</p>
 
-<p>Part 1 goes up next. We start with REINFORCE, because everything else is a footnote to REINFORCE, and end with MaxRL and DPPO, the two 2026 papers that suggest the algorithmic story is far from over.</p>
+<p>If you want the full argument — including responses to seven alternative views, a minimum-acceptable-benchmark checklist, and the philosophical mapping to Frankfurt and Cohen — the PDF is above.</p>
 
-<div class="series-cta">
-  <h3>This is Part 0 of a 5-part series.</h3>
-  <p>Each subsequent post takes one layer of the RL-for-LLMs stack and goes deep: algorithms, rewards, preferences, systems, and agents. The parts build on each other, but each can be read independently.</p>
+<div class="closing-note">
+  <p>Comments, pushback, and counter-cases are welcome — especially from researchers actively building welfare benchmarks. The argument is meant to provoke a methodological standard, not to shut down inquiry.</p>
 </div>
 
 </article>
-
-<div class="post-end">
-  <p class="post-author">Lorenzo Xiao · Language Technologies Institute · Carnegie Mellon University</p>
-  <a href="/blog/">← Back to blog</a>
-</div>
 
     </div>
 

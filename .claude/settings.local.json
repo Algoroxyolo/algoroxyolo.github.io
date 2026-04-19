@@ -3,7 +3,9 @@
     "allow": [
       "WebFetch(domain:algoroxyolo.goatcounter.com)",
       "Bash(git mv:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(npx --yes impeccable --json _posts/2026-04-19-ai-welfare-is-bullshit.html)",
+      "Bash(echo \"EXIT: $?\")"
     ]
   }
 }

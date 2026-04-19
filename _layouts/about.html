@@ -225,21 +225,18 @@ layout: default
           </p>
           <script>
             (function() {
-              var base = 'https://{{ site.goatcounter }}.goatcounter.com/counter/';
+              var url = 'https://{{ site.goatcounter }}.goatcounter.com/counter/TOTAL.json';
               function fmt(n) {
                 return n >= 1000 ? (n / 1000).toFixed(1) + 'k' : String(n);
               }
-              var paths = ['/', '/blog/', '/people/', '/teaching/', '/publications/', '/cv/', '/projects/', '/repositories/'{% for post in site.posts %}, '{{ post.url }}'{% endfor %}];
-              Promise.all(paths.map(function(p) {
-                return fetch(base + encodeURIComponent(p) + '.json')
-                  .then(function(r) { return r.json(); })
-                  .then(function(d) { return Number(d.count_unique) || Number(d.count) || 0; })
-                  .catch(function() { return 0; });
-              })).then(function(counts) {
-                var total = counts.reduce(function(a, b) { return a + b; }, 0);
-                var el = document.getElementById('gc-total');
-                if (el) el.textContent = fmt(total);
-              });
+              fetch(url)
+                .then(function(r) { return r.json(); })
+                .then(function(d) {
+                  var total = Number(d.count_unique) || Number(d.count) || 0;
+                  var el = document.getElementById('gc-total');
+                  if (el) el.textContent = fmt(total);
+                })
+                .catch(function() {});
             })();
           </script>
           {%- endif %}

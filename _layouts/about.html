@@ -232,7 +232,7 @@ layout: default
               fetch(url)
                 .then(function(r) { return r.json(); })
                 .then(function(d) {
-                  var total = Number(d.count_unique) || Number(d.count) || 0;
+                  var total = Number(String(d.count_unique || d.count || '0').replace(/\s/g, '')) || 0;
                   var el = document.getElementById('gc-total');
                   if (el) el.textContent = fmt(total);
                 })

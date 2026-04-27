@@ -1395,7 +1395,7 @@ a:hover { color: var(--coral); }
 .instruments li {
     font-size: 14px;
     color: var(--ink-soft);
-    padding-left: 64px;
+    padding-left: 110px;
     position: relative;
     line-height: 1.45;
 }
@@ -1408,6 +1408,9 @@ a:hover { color: var(--coral); }
     border-radius: 4px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    min-width: 96px;
+    box-sizing: border-box;
+    text-align: center;
 }
 .inst-tag-struct { background: var(--teal-light); color: var(--teal-deep); }
 .inst-tag-judge { background: #efe2f0; color: var(--violet); }

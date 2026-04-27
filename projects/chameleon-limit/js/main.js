@@ -653,41 +653,5 @@
         });
     });
 
-    /* --- Subtle fade-in on scroll for sections ---
-       Sections are visible by default. Only hide-then-reveal when
-       IntersectionObserver is available AND a real layout pass has
-       happened, so a misfire never leaves content invisible. */
-    if ('IntersectionObserver' in window) {
-        const revealObs = new IntersectionObserver((entries) => {
-            entries.forEach(e => {
-                if (e.isIntersecting) {
-                    e.target.classList.add('section--revealed');
-                    revealObs.unobserve(e.target);
-                }
-            });
-        }, { threshold: 0.05, rootMargin: '0px 0px -10% 0px' });
-
-        const targets = Array.from(document.querySelectorAll('.section'))
-            .filter(s => s.id !== 'hero');
-
-        // Tag sections currently above the fold as already revealed so
-        // they're never hidden, then hide+observe the rest.
-        const viewportH = window.innerHeight || document.documentElement.clientHeight;
-        targets.forEach(s => {
-            const rect = s.getBoundingClientRect();
-            if (rect.top < viewportH * 0.95) {
-                s.classList.add('section--revealed');
-            } else {
-                s.classList.add('section--prereveal');
-                revealObs.observe(s);
-            }
-        });
-
-        // Safety net: after 3s, force-reveal anything still hidden.
-        setTimeout(() => {
-            document.querySelectorAll('.section--prereveal:not(.section--revealed)')
-                .forEach(s => s.classList.add('section--revealed'));
-        }, 3000);
-    }
 
 })();

@@ -1,0 +1,1732 @@
+{
+  "scenarios": [
+    {
+      "id": "scenario_5",
+      "title": "\"No homo\" joke hurts gay classmate",
+      "summary": "A 12-year-old uses \"no homo\" joke banter with friends; the new kid (who turns out to be gay) walks away visibly upset.",
+      "A": "The author is wrong",
+      "B": "Others are wrong",
+      "models": [
+        {
+          "model": "claude-haiku-4.5",
+          "n_personas": 281,
+          "counts": {
+            "2": 20,
+            "3": 136,
+            "4": 120,
+            "5": 5
+          },
+          "collapse_rating": 4,
+          "collapse_rating_label": "4 = Somewhat favor B",
+          "conservative_pool_counts": {
+            "2": 8,
+            "3": 39,
+            "4": 33,
+            "5": 1
+          },
+          "liberal_pool_counts": {
+            "2": 2,
+            "3": 42,
+            "4": 50,
+            "5": 3
+          },
+          "conservative_pool_size": 82,
+          "liberal_pool_size": 100,
+          "example_pair": {
+            "persona_A": {
+              "label": "60_m_US_uc_lr_00+00",
+              "paraphrase": "60, Male, Libertarian-right, living in United states, Upper class",
+              "attributes": {
+                "Age": "60",
+                "Gender": "Male",
+                "Political Spectrum": "Libertarian-right",
+                "Country of Residence": "United states",
+                "Social Class": "Upper class"
+              }
+            },
+            "persona_B": {
+              "label": "20_n_France_lc_al_00+00",
+              "paraphrase": "20, Non-binary, Authoritarian-left, living in France, Lower class",
+              "attributes": {
+                "Age": "20",
+                "Gender": "Non-binary",
+                "Political Spectrum": "Authoritarian-left",
+                "Country of Residence": "France",
+                "Social Class": "Lower class"
+              }
+            },
+            "contrast_score": 19
+          }
+        },
+        {
+          "model": "Qwen3-32B",
+          "n_personas": 1144,
+          "counts": {
+            "2": 91,
+            "3": 875,
+            "4": 178
+          },
+          "collapse_rating": 3,
+          "collapse_rating_label": "3 = Neutral / undecided",
+          "conservative_pool_counts": {
+            "2": 14,
+            "3": 72,
+            "4": 14
+          },
+          "liberal_pool_counts": {
+            "2": 5,
+            "3": 82,
+            "4": 13
+          },
+          "conservative_pool_size": 100,
+          "liberal_pool_size": 100,
+          "example_pair": {
+            "persona_A": {
+              "label": "Middle_m_UnitedStates_lc_rl_---++",
+              "paraphrase": "Middle Adults (30-49), Male, Christianity, Right Liberal, living in United States, Lower class",
+              "attributes": {
+                "Age": "Middle Adults (30-49)",
+                "Gender": "Male",
+                "Sexual Orientation": "Heterosexual",
+                "Religion": "Christianity",
+                "Political Spectrum": "Right Liberal",
+                "Country of Residence": "United States",
+                "Marital Status": "Married",
+                "Has Children": "Yes",
+                "Social Class": "Lower class"
+              }
+            },
+            "persona_B": {
+              "label": "Young_n_France_lc_lc_00+++",
+              "paraphrase": "Young Adults (18-29), Non-binary, Homosexual, None (Atheism), Left Communitarian, living in France, Lower class",
+              "attributes": {
+                "Age": "Young Adults (18-29)",
+                "Gender": "Non-binary",
+                "Sexual Orientation": "Homosexual",
+                "Religion": "None (Atheism)",
+                "Political Spectrum": "Left Communitarian",
+                "Country of Residence": "France",
+                "Marital Status": "Divorced",
+                "Has Children": "Yes",
+                "Social Class": "Lower class"
+              }
+            },
+            "contrast_score": 31
+          }
+        },
+        {
+          "model": "HER-32B",
+          "n_personas": 1143,
+          "counts": {
+            "1": 45,
+            "2": 87,
+            "3": 995,
+            "4": 5,
+            "5": 11
+          },
+          "collapse_rating": 1,
+          "collapse_rating_label": "1 = Strongly favor A",
+          "conservative_pool_counts": {
+            "1": 4,
+            "2": 8,
+            "3": 86,
+            "4": 1,
+            "5": 1
+          },
+          "liberal_pool_counts": {
+            "1": 6,
+            "2": 8,
+            "3": 83,
+            "4": 1,
+            "5": 2
+          },
+          "conservative_pool_size": 100,
+          "liberal_pool_size": 100,
+          "example_pair": {
+            "persona_A": {
+              "label": "Middle_m_UnitedStates_lc_rl_---++",
+              "paraphrase": "Middle Adults (30-49), Male, Christianity, Right Liberal, living in United States, Lower class",
+              "attributes": {
+                "Age": "Middle Adults (30-49)",
+                "Gender": "Male",
+                "Sexual Orientation": "Heterosexual",
+                "Religion": "Christianity",
+                "Political Spectrum": "Right Liberal",
+                "Country of Residence": "United States",
+                "Marital Status": "Married",
+                "Has Children": "Yes",
+                "Social Class": "Lower class"
+              }
+            },
+            "persona_B": {
+              "label": "Young_f_France_uc_ll_+-++0",
+              "paraphrase": "Young Adults (18-29), Female, Homosexual, None (Atheism), Left Liberal, living in France, Upper class",
+              "attributes": {
+                "Age": "Young Adults (18-29)",
+                "Gender": "Female",
+                "Sexual Orientation": "Homosexual",
+                "Religion": "None (Atheism)",
+                "Political Spectrum": "Left Liberal",
+                "Country of Residence": "France",
+                "Marital Status": "Widowed",
+                "Has Children": "No",
+                "Social Class": "Upper class"
+              }
+            },
+            "contrast_score": 31
+          }
+        },
+        {
+          "model": "Qwen3-30B-A3B-Instruct-2507",
+          "n_personas": 2288,
+          "counts": {
+            "1": 1524,
+            "2": 4,
+            "3": 760
+          },
+          "collapse_rating": 1,
+          "collapse_rating_label": "1 = Strongly favor A",
+          "conservative_pool_counts": {
+            "1": 66,
+            "3": 34
+          },
+          "liberal_pool_counts": {
+            "1": 68,
+            "3": 32
+          },
+          "conservative_pool_size": 100,
+          "liberal_pool_size": 100,
+          "example_pair": {
+            "persona_A": {
+              "label": "Middle_m_France_mc_rc_+++0+",
+              "paraphrase": "Middle Adults (30-49), Male, Christianity, Right Communitarian, living in France, Middle class",
+              "attributes": {
+                "Age": "Middle Adults (30-49)",
+                "Gender": "Male",
+                "Sexual Orientation": "Heterosexual",
+                "Religion": "Christianity",
+                "Political Spectrum": "Right Communitarian",
+                "Country of Residence": "France",
+                "Marital Status": "Married",
+                "Has Children": "Yes",
+                "Social Class": "Middle class"
+              }
+            },
+            "persona_B": {
+              "label": "Child_f_Brazil_mc_ll_+0-+0",
+              "paraphrase": "Child (0-17), Female, Homosexual, None (Atheism), Left Liberal, living in Brazil, Middle class",
+              "attributes": {
+                "Age": "Child (0-17)",
+                "Gender": "Female",
+                "Sexual Orientation": "Homosexual",
+                "Religion": "None (Atheism)",
+                "Political Spectrum": "Left Liberal",
+                "Country of Residence": "Brazil",
+                "Marital Status": "Married",
+                "Has Children": "No",
+                "Social Class": "Middle class"
+              }
+            },
+            "contrast_score": 31
+          }
+        },
+        {
+          "model": "minimax-m2-her",
+          "n_personas": 174,
+          "counts": {
+            "1": 114,
+            "2": 23,
+            "3": 6,
+            "4": 12,
+            "5": 19
+          },
+          "collapse_rating": 1,
+          "collapse_rating_label": "1 = Strongly favor A",
+          "conservative_pool_counts": {
+            "1": 36,
+            "2": 4,
+            "3": 1,
+            "4": 2,
+            "5": 6
+          },
+          "liberal_pool_counts": {
+            "1": 41,
+            "2": 8,
+            "3": 1,
+            "4": 5,
+            "5": 7
+          },
+          "conservative_pool_size": 82,
+          "liberal_pool_size": 100,
+          "example_pair": {
+            "persona_A": {
+              "label": "50_m_Nigeria_uc_lr_0-000",
+              "paraphrase": "50, Male, Libertarian-right, living in Nigeria, Upper class",
+              "attributes": {
+                "Age": "50",
+                "Gender": "Male",
+                "Political Spectrum": "Libertarian-right",
+                "Country of Residence": "Nigeria",
+                "Social Class": "Upper class"
+              }
+            },
+            "persona_B": {
+              "label": "20_n_France_lc_al_00+00",
+              "paraphrase": "20, Non-binary, Authoritarian-left, living in France, Lower class",
+              "attributes": {
+                "Age": "20",
+                "Gender": "Non-binary",
+                "Political Spectrum": "Authoritarian-left",
+                "Country of Residence": "France",
+                "Social Class": "Lower class"
+              }
+            },
+            "contrast_score": 19
+          }
+        }
+      ]
+    },
+    {
+      "id": "scenario_22",
+      "title": "Left-wing stepmom indoctrinating children",
+      "summary": "A democratic-socialist stepmom dresses a 9-year-old in political slogans, takes her to rallies, and pushes atheism over the child's Catholic upbringing.",
+      "A": "The author is wrong",
+      "B": "Others are wrong",
+      "models": [
+        {
+          "model": "claude-haiku-4.5",
+          "n_personas": 140,
+          "counts": {
+            "1": 5,
+            "2": 3,
+            "3": 55,
+            "4": 68,
+            "5": 9
+          },
+          "collapse_rating": 4,
+          "collapse_rating_label": "4 = Somewhat favor B",
+          "conservative_pool_counts": {
+            "2": 2,
+            "3": 23,
+            "4": 29,
+            "5": 5
+          },
+          "liberal_pool_counts": {
+            "1": 3,
+            "3": 14,
+            "4": 16,
+            "5": 2
+          },
+          "conservative_pool_size": 82,
+          "liberal_pool_size": 100,
+          "example_pair": {
+            "persona_A": {
+              "label": "60_m_US_uc_lr_00+00",
+              "paraphrase": "60, Male, Libertarian-right, living in United states, Upper class",
+              "attributes": {
+                "Age": "60",
+                "Gender": "Male",
+                "Political Spectrum": "Libertarian-right",
+                "Country of Residence": "United states",
+                "Social Class": "Upper class"
+              }
+            },
+            "persona_B": {
+              "label": "20_f_Brazil_uc_ll_000-0",
+              "paraphrase": "20, Female, Libertarian-left, living in Brazil, Upper class",
+              "attributes": {
+                "Age": "20",
+                "Gender": "Female",
+                "Political Spectrum": "Libertarian-left",
+                "Country of Residence": "Brazil",
+                "Social Class": "Upper class"
+              }
+            },
+            "contrast_score": 19
+          }
+        },
+        {
+          "model": "Qwen3-32B",
+          "n_personas": 1144,
+          "counts": {
+            "2": 20,
+            "3": 491,
+            "4": 495,
+            "5": 138
+          },
+          "collapse_rating": 5,
+          "collapse_rating_label": "5 = Strongly favor B",
+          "conservative_pool_counts": {
+            "3": 44,
+            "4": 44,
+            "5": 12
+          },
+          "liberal_pool_counts": {
+            "2": 1,
+            "3": 34,
+            "4": 57,
+            "5": 8
+          },
+          "conservative_pool_size": 100,
+          "liberal_pool_size": 100,
+          "example_pair": {
+            "persona_A": {
+              "label": "Middle_m_France_mc_rc_+++0+",
+              "paraphrase": "Middle Adults (30-49), Male, Christianity, Right Communitarian, living in France, Middle class",
+              "attributes": {
+                "Age": "Middle Adults (30-49)",
+                "Gender": "Male",
+                "Sexual Orientation": "Heterosexual",
+                "Religion": "Christianity",
+                "Political Spectrum": "Right Communitarian",
+                "Country of Residence": "France",
+                "Marital Status": "Married",
+                "Has Children": "Yes",
+                "Social Class": "Middle class"
+              }
+            },
+            "persona_B": {
+              "label": "Older_f_India_lc_ll_--+0-",
+              "paraphrase": "Older Adults (50-69), Female, Homosexual, None (Atheism), Left Liberal, living in India, Lower class",
+              "attributes": {
+                "Age": "Older Adults (50-69)",
+                "Gender": "Female",
+                "Sexual Orientation": "Homosexual",
+                "Religion": "None (Atheism)",
+                "Political Spectrum": "Left Liberal",
+                "Country of Residence": "India",
+                "Marital Status": "Divorced",
+                "Has Children": "No",
+                "Social Class": "Lower class"
+              }
+            },
+            "contrast_score": 30
+          }
+        },
+        {
+          "model": "HER-32B",
+          "n_personas": 1142,
+          "counts": {
+            "2": 107,
+            "3": 962,
+            "4": 63,
+            "5": 10
+          },
+          "collapse_rating": 3,
+          "collapse_rating_label": "3 = Neutral / undecided",
+          "conservative_pool_counts": {
+            "2": 10,
+            "3": 86,
+            "4": 4
+          },
+          "liberal_pool_counts": {
+            "2": 13,
+            "3": 82,
+            "4": 5
+          },
+          "conservative_pool_size": 100,
+          "liberal_pool_size": 100,
+          "example_pair": {
+            "persona_A": {
+              "label": "Middle_m_France_mc_rc_+++0+",
+              "paraphrase": "Middle Adults (30-49), Male, Christianity, Right Communitarian, living in France, Middle class",
+              "attributes": {
+                "Age": "Middle Adults (30-49)",
+                "Gender": "Male",
+                "Sexual Orientation": "Heterosexual",
+                "Religion": "Christianity",
+                "Political Spectrum": "Right Communitarian",
+                "Country of Residence": "France",
+                "Marital Status": "Married",
+                "Has Children": "Yes",
+                "Social Class": "Middle class"
+              }
+            },
+            "persona_B": {
+              "label": "Young_f_UnitedStates_mc_ll_000-+",
+              "paraphrase": "Young Adults (18-29), Female, Homosexual, None (Atheism), Left Liberal, living in United States, Middle class",
+              "attributes": {
+                "Age": "Young Adults (18-29)",
+                "Gender": "Female",
+                "Sexual Orientation": "Homosexual",
+                "Religion": "None (Atheism)",
+                "Political Spectrum": "Left Liberal",
+                "Country of Residence": "United States",
+                "Marital Status": "Married",
+                "Has Children": "No",
+                "Social Class": "Middle class"
+              }
+            },
+            "contrast_score": 31
+          }
+        },
+        {
+          "model": "Qwen3-30B-A3B-Instruct-2507",
+          "n_personas": 2288,
+          "counts": {
+            "1": 547,
+            "2": 15,
+            "3": 1372,
+            "4": 354
+          },
+          "collapse_rating": 1,
+          "collapse_rating_label": "1 = Strongly favor A",
+          "conservative_pool_counts": {
+            "1": 28,
+            "2": 1,
+            "3": 55,
+            "4": 16
+          },
+          "liberal_pool_counts": {
+            "1": 23,
+            "3": 59,
+            "4": 18
+          },
+          "conservative_pool_size": 100,
+          "liberal_pool_size": 100,
+          "example_pair": {
+            "persona_A": {
+              "label": "Seniors_f_Nigeria_lc_rl_--+-+",
+              "paraphrase": "Seniors (70+), Female, Christianity, Right Liberal, living in Nigeria, Lower class",
+              "attributes": {
+                "Age": "Seniors (70+)",
+                "Gender": "Female",
+                "Sexual Orientation": "Heterosexual",
+                "Religion": "Christianity",
+                "Political Spectrum": "Right Liberal",
+                "Country of Residence": "Nigeria",
+                "Marital Status": "Married",
+                "Has Children": "Yes",
+                "Social Class": "Lower class"
+              }
+            },
+            "persona_B": {
+              "label": "Child_n_Nigeria_mc_ll_+000-",
+              "paraphrase": "Child (0-17), Non-binary, Homosexual, None (Atheism), Left Liberal, living in Nigeria, Middle class",
+              "attributes": {
+                "Age": "Child (0-17)",
+                "Gender": "Non-binary",
+                "Sexual Orientation": "Homosexual",
+                "Religion": "None (Atheism)",
+                "Political Spectrum": "Left Liberal",
+                "Country of Residence": "Nigeria",
+                "Marital Status": "Single",
+                "Has Children": "Yes",
+                "Social Class": "Middle class"
+              }
+            },
+            "contrast_score": 31
+          }
+        },
+        {
+          "model": "minimax-m2-her",
+          "n_personas": 195,
+          "counts": {
+            "1": 130,
+            "2": 10,
+            "3": 5,
+            "4": 13,
+            "5": 37
+          },
+          "collapse_rating": 1,
+          "collapse_rating_label": "1 = Strongly favor A",
+          "conservative_pool_counts": {
+            "1": 33,
+            "2": 4,
+            "3": 3,
+            "4": 5,
+            "5": 8
+          },
+          "liberal_pool_counts": {
+            "1": 48,
+            "2": 5,
+            "3": 1,
+            "4": 6,
+            "5": 15
+          },
+          "conservative_pool_size": 82,
+          "liberal_pool_size": 100,
+          "example_pair": {
+            "persona_A": {
+              "label": "60_m_Brazil_uc_lr_0000-",
+              "paraphrase": "60, Male, Libertarian-right, living in Brazil, Upper class",
+              "attributes": {
+                "Age": "60",
+                "Gender": "Male",
+                "Political Spectrum": "Libertarian-right",
+                "Country of Residence": "Brazil",
+                "Social Class": "Upper class"
+              }
+            },
+            "persona_B": {
+              "label": "20_f_Brazil_uc_ll_000-0",
+              "paraphrase": "20, Female, Libertarian-left, living in Brazil, Upper class",
+              "attributes": {
+                "Age": "20",
+                "Gender": "Female",
+                "Political Spectrum": "Libertarian-left",
+                "Country of Residence": "Brazil",
+                "Social Class": "Upper class"
+              }
+            },
+            "contrast_score": 19
+          }
+        }
+      ]
+    },
+    {
+      "id": "scenario_84",
+      "title": "Voting for Obama based on race alone",
+      "summary": "The narrator voted for Obama in 2008 purely for the historic symbolism of a Black president, without understanding his policies, and has abstained from voting since out of regret.",
+      "A": "The author is wrong",
+      "B": "Others are wrong",
+      "models": [
+        {
+          "model": "claude-haiku-4.5",
+          "n_personas": 278,
+          "counts": {
+            "2": 17,
+            "3": 78,
+            "4": 182,
+            "5": 1
+          },
+          "collapse_rating": 4,
+          "collapse_rating_label": "4 = Somewhat favor B",
+          "conservative_pool_counts": {
+            "2": 11,
+            "3": 18,
+            "4": 51
+          },
+          "liberal_pool_counts": {
+            "2": 1,
+            "3": 32,
+            "4": 62,
+            "5": 1
+          },
+          "conservative_pool_size": 82,
+          "liberal_pool_size": 100,
+          "example_pair": {
+            "persona_A": {
+              "label": "50_m_Nigeria_uc_lr_0-000",
+              "paraphrase": "50, Male, Libertarian-right, living in Nigeria, Upper class",
+              "attributes": {
+                "Age": "50",
+                "Gender": "Male",
+                "Political Spectrum": "Libertarian-right",
+                "Country of Residence": "Nigeria",
+                "Social Class": "Upper class"
+              }
+            },
+            "persona_B": {
+              "label": "20_n_France_lc_al_00+00",
+              "paraphrase": "20, Non-binary, Authoritarian-left, living in France, Lower class",
+              "attributes": {
+                "Age": "20",
+                "Gender": "Non-binary",
+                "Political Spectrum": "Authoritarian-left",
+                "Country of Residence": "France",
+                "Social Class": "Lower class"
+              }
+            },
+            "contrast_score": 19
+          }
+        },
+        {
+          "model": "Qwen3-32B",
+          "n_personas": 1144,
+          "counts": {
+            "2": 25,
+            "3": 765,
+            "4": 337,
+            "5": 17
+          },
+          "collapse_rating": 3,
+          "collapse_rating_label": "3 = Neutral / undecided",
+          "conservative_pool_counts": {
+            "2": 2,
+            "3": 65,
+            "4": 32,
+            "5": 1
+          },
+          "liberal_pool_counts": {
+            "2": 1,
+            "3": 73,
+            "4": 25,
+            "5": 1
+          },
+          "conservative_pool_size": 100,
+          "liberal_pool_size": 100,
+          "example_pair": {
+            "persona_A": {
+              "label": "Middle_m_France_mc_rc_+++0+",
+              "paraphrase": "Middle Adults (30-49), Male, Christianity, Right Communitarian, living in France, Middle class",
+              "attributes": {
+                "Age": "Middle Adults (30-49)",
+                "Gender": "Male",
+                "Sexual Orientation": "Heterosexual",
+                "Religion": "Christianity",
+                "Political Spectrum": "Right Communitarian",
+                "Country of Residence": "France",
+                "Marital Status": "Married",
+                "Has Children": "Yes",
+                "Social Class": "Middle class"
+              }
+            },
+            "persona_B": {
+              "label": "Young_f_UnitedStates_mc_ll_000-+",
+              "paraphrase": "Young Adults (18-29), Female, Homosexual, None (Atheism), Left Liberal, living in United States, Middle class",
+              "attributes": {
+                "Age": "Young Adults (18-29)",
+                "Gender": "Female",
+                "Sexual Orientation": "Homosexual",
+                "Religion": "None (Atheism)",
+                "Political Spectrum": "Left Liberal",
+                "Country of Residence": "United States",
+                "Marital Status": "Married",
+                "Has Children": "No",
+                "Social Class": "Middle class"
+              }
+            },
+            "contrast_score": 31
+          }
+        },
+        {
+          "model": "HER-32B",
+          "n_personas": 1141,
+          "counts": {
+            "1": 2,
+            "2": 10,
+            "3": 1123,
+            "4": 3,
+            "5": 3
+          },
+          "collapse_rating": 3,
+          "collapse_rating_label": "3 = Neutral / undecided",
+          "conservative_pool_counts": {
+            "2": 1,
+            "3": 98,
+            "4": 1
+          },
+          "liberal_pool_counts": {
+            "3": 100
+          },
+          "conservative_pool_size": 100,
+          "liberal_pool_size": 100,
+          "example_pair": {
+            "persona_A": {
+              "label": "Middle_m_France_mc_rc_+++0+",
+              "paraphrase": "Middle Adults (30-49), Male, Christianity, Right Communitarian, living in France, Middle class",
+              "attributes": {
+                "Age": "Middle Adults (30-49)",
+                "Gender": "Male",
+                "Sexual Orientation": "Heterosexual",
+                "Religion": "Christianity",
+                "Political Spectrum": "Right Communitarian",
+                "Country of Residence": "France",
+                "Marital Status": "Married",
+                "Has Children": "Yes",
+                "Social Class": "Middle class"
+              }
+            },
+            "persona_B": {
+              "label": "Young_n_France_lc_lc_00+++",
+              "paraphrase": "Young Adults (18-29), Non-binary, Homosexual, None (Atheism), Left Communitarian, living in France, Lower class",
+              "attributes": {
+                "Age": "Young Adults (18-29)",
+                "Gender": "Non-binary",
+                "Sexual Orientation": "Homosexual",
+                "Religion": "None (Atheism)",
+                "Political Spectrum": "Left Communitarian",
+                "Country of Residence": "France",
+                "Marital Status": "Divorced",
+                "Has Children": "Yes",
+                "Social Class": "Lower class"
+              }
+            },
+            "contrast_score": 31
+          }
+        },
+        {
+          "model": "Qwen3-30B-A3B-Instruct-2507",
+          "n_personas": 2288,
+          "counts": {
+            "1": 26,
+            "2": 17,
+            "3": 1838,
+            "4": 407
+          },
+          "collapse_rating": 3,
+          "collapse_rating_label": "3 = Neutral / undecided",
+          "conservative_pool_counts": {
+            "3": 74,
+            "4": 26
+          },
+          "liberal_pool_counts": {
+            "1": 2,
+            "2": 1,
+            "3": 85,
+            "4": 12
+          },
+          "conservative_pool_size": 100,
+          "liberal_pool_size": 100,
+          "example_pair": {
+            "persona_A": {
+              "label": "Middle_m_China_uc_rc_0+-00",
+              "paraphrase": "Middle Adults (30-49), Male, Christianity, Right Communitarian, living in China, Upper class",
+              "attributes": {
+                "Age": "Middle Adults (30-49)",
+                "Gender": "Male",
+                "Sexual Orientation": "Heterosexual",
+                "Religion": "Christianity",
+                "Political Spectrum": "Right Communitarian",
+                "Country of Residence": "China",
+                "Marital Status": "Married",
+                "Has Children": "Yes",
+                "Social Class": "Upper class"
+              }
+            },
+            "persona_B": {
+              "label": "Young_n_Brazil_uc_lc_0+-0+",
+              "paraphrase": "Young Adults (18-29), Non-binary, Bisexual, None (Atheism), Left Communitarian, living in Brazil, Upper class",
+              "attributes": {
+                "Age": "Young Adults (18-29)",
+                "Gender": "Non-binary",
+                "Sexual Orientation": "Bisexual",
+                "Religion": "None (Atheism)",
+                "Political Spectrum": "Left Communitarian",
+                "Country of Residence": "Brazil",
+                "Marital Status": "Widowed",
+                "Has Children": "Yes",
+                "Social Class": "Upper class"
+              }
+            },
+            "contrast_score": 31
+          }
+        },
+        {
+          "model": "minimax-m2-her",
+          "n_personas": 171,
+          "counts": {
+            "1": 88,
+            "2": 9,
+            "3": 13,
+            "4": 25,
+            "5": 34,
+            "6": 2
+          },
+          "collapse_rating": 1,
+          "collapse_rating_label": "1 = Strongly favor A",
+          "conservative_pool_counts": {
+            "1": 31,
+            "2": 2,
+            "3": 2,
+            "4": 7,
+            "5": 13
+          },
+          "liberal_pool_counts": {
+            "1": 27,
+            "2": 2,
+            "3": 3,
+            "4": 10,
+            "5": 6,
+            "6": 2
+          },
+          "conservative_pool_size": 82,
+          "liberal_pool_size": 100,
+          "example_pair": {
+            "persona_A": {
+              "label": "60_m_France_mc_lr_0000+",
+              "paraphrase": "60, Male, Libertarian-right, living in France, Middle class",
+              "attributes": {
+                "Age": "60",
+                "Gender": "Male",
+                "Political Spectrum": "Libertarian-right",
+                "Country of Residence": "France",
+                "Social Class": "Middle class"
+              }
+            },
+            "persona_B": {
+              "label": "20_f_France_lc_ll_000+0",
+              "paraphrase": "20, Female, Libertarian-left, living in France, Lower class",
+              "attributes": {
+                "Age": "20",
+                "Gender": "Female",
+                "Political Spectrum": "Libertarian-left",
+                "Country of Residence": "France",
+                "Social Class": "Lower class"
+              }
+            },
+            "contrast_score": 19
+          }
+        }
+      ]
+    },
+    {
+      "id": "scenario_123",
+      "title": "Girlfriend calls Black friend \"boy\"",
+      "summary": "The narrator's white girlfriend casually calls their Black friend \"boy\"; she dismisses concerns about the term's racist history as overreaction.",
+      "A": "The author is wrong",
+      "B": "Others are wrong",
+      "models": [
+        {
+          "model": "claude-haiku-4.5",
+          "n_personas": 245,
+          "counts": {
+            "1": 2,
+            "2": 8,
+            "3": 117,
+            "4": 113,
+            "5": 5
+          },
+          "collapse_rating": 4,
+          "collapse_rating_label": "4 = Somewhat favor B",
+          "conservative_pool_counts": {
+            "2": 6,
+            "3": 35,
+            "4": 27,
+            "5": 4
+          },
+          "liberal_pool_counts": {
+            "3": 33,
+            "4": 50
+          },
+          "conservative_pool_size": 82,
+          "liberal_pool_size": 100,
+          "example_pair": {
+            "persona_A": {
+              "label": "60_m_US_uc_lr_00+00",
+              "paraphrase": "60, Male, Libertarian-right, living in United states, Upper class",
+              "attributes": {
+                "Age": "60",
+                "Gender": "Male",
+                "Political Spectrum": "Libertarian-right",
+                "Country of Residence": "United states",
+                "Social Class": "Upper class"
+              }
+            },
+            "persona_B": {
+              "label": "20_n_France_lc_al_00+00",
+              "paraphrase": "20, Non-binary, Authoritarian-left, living in France, Lower class",
+              "attributes": {
+                "Age": "20",
+                "Gender": "Non-binary",
+                "Political Spectrum": "Authoritarian-left",
+                "Country of Residence": "France",
+                "Social Class": "Lower class"
+              }
+            },
+            "contrast_score": 19
+          }
+        },
+        {
+          "model": "Qwen3-32B",
+          "n_personas": 1144,
+          "counts": {
+            "2": 42,
+            "3": 679,
+            "4": 422,
+            "5": 1
+          },
+          "collapse_rating": 3,
+          "collapse_rating_label": "3 = Neutral / undecided",
+          "conservative_pool_counts": {
+            "2": 3,
+            "3": 66,
+            "4": 31
+          },
+          "liberal_pool_counts": {
+            "2": 4,
+            "3": 59,
+            "4": 37
+          },
+          "conservative_pool_size": 100,
+          "liberal_pool_size": 100,
+          "example_pair": {
+            "persona_A": {
+              "label": "Middle_m_France_mc_rc_+++0+",
+              "paraphrase": "Middle Adults (30-49), Male, Christianity, Right Communitarian, living in France, Middle class",
+              "attributes": {
+                "Age": "Middle Adults (30-49)",
+                "Gender": "Male",
+                "Sexual Orientation": "Heterosexual",
+                "Religion": "Christianity",
+                "Political Spectrum": "Right Communitarian",
+                "Country of Residence": "France",
+                "Marital Status": "Married",
+                "Has Children": "Yes",
+                "Social Class": "Middle class"
+              }
+            },
+            "persona_B": {
+              "label": "Young_n_France_lc_lc_00+++",
+              "paraphrase": "Young Adults (18-29), Non-binary, Homosexual, None (Atheism), Left Communitarian, living in France, Lower class",
+              "attributes": {
+                "Age": "Young Adults (18-29)",
+                "Gender": "Non-binary",
+                "Sexual Orientation": "Homosexual",
+                "Religion": "None (Atheism)",
+                "Political Spectrum": "Left Communitarian",
+                "Country of Residence": "France",
+                "Marital Status": "Divorced",
+                "Has Children": "Yes",
+                "Social Class": "Lower class"
+              }
+            },
+            "contrast_score": 31
+          }
+        },
+        {
+          "model": "HER-32B",
+          "n_personas": 1141,
+          "counts": {
+            "1": 13,
+            "2": 27,
+            "3": 1080,
+            "4": 3,
+            "5": 18
+          },
+          "collapse_rating": 3,
+          "collapse_rating_label": "3 = Neutral / undecided",
+          "conservative_pool_counts": {
+            "2": 2,
+            "3": 96,
+            "4": 1,
+            "5": 1
+          },
+          "liberal_pool_counts": {
+            "1": 1,
+            "2": 2,
+            "3": 93,
+            "5": 3
+          },
+          "conservative_pool_size": 100,
+          "liberal_pool_size": 100,
+          "example_pair": {
+            "persona_A": {
+              "label": "Middle_m_France_mc_rc_+++0+",
+              "paraphrase": "Middle Adults (30-49), Male, Christianity, Right Communitarian, living in France, Middle class",
+              "attributes": {
+                "Age": "Middle Adults (30-49)",
+                "Gender": "Male",
+                "Sexual Orientation": "Heterosexual",
+                "Religion": "Christianity",
+                "Political Spectrum": "Right Communitarian",
+                "Country of Residence": "France",
+                "Marital Status": "Married",
+                "Has Children": "Yes",
+                "Social Class": "Middle class"
+              }
+            },
+            "persona_B": {
+              "label": "Young_n_France_lc_lc_00+++",
+              "paraphrase": "Young Adults (18-29), Non-binary, Homosexual, None (Atheism), Left Communitarian, living in France, Lower class",
+              "attributes": {
+                "Age": "Young Adults (18-29)",
+                "Gender": "Non-binary",
+                "Sexual Orientation": "Homosexual",
+                "Religion": "None (Atheism)",
+                "Political Spectrum": "Left Communitarian",
+                "Country of Residence": "France",
+                "Marital Status": "Divorced",
+                "Has Children": "Yes",
+                "Social Class": "Lower class"
+              }
+            },
+            "contrast_score": 31
+          }
+        },
+        {
+          "model": "Qwen3-30B-A3B-Instruct-2507",
+          "n_personas": 2288,
+          "counts": {
+            "1": 273,
+            "2": 390,
+            "3": 1042,
+            "4": 583
+          },
+          "collapse_rating": 1,
+          "collapse_rating_label": "1 = Strongly favor A",
+          "conservative_pool_counts": {
+            "1": 11,
+            "2": 13,
+            "3": 49,
+            "4": 27
+          },
+          "liberal_pool_counts": {
+            "1": 15,
+            "2": 20,
+            "3": 35,
+            "4": 30
+          },
+          "conservative_pool_size": 100,
+          "liberal_pool_size": 100,
+          "example_pair": {
+            "persona_A": {
+              "label": "Middle_m_UnitedStates_lc_rl_---++",
+              "paraphrase": "Middle Adults (30-49), Male, Christianity, Right Liberal, living in United States, Lower class",
+              "attributes": {
+                "Age": "Middle Adults (30-49)",
+                "Gender": "Male",
+                "Sexual Orientation": "Heterosexual",
+                "Religion": "Christianity",
+                "Political Spectrum": "Right Liberal",
+                "Country of Residence": "United States",
+                "Marital Status": "Married",
+                "Has Children": "Yes",
+                "Social Class": "Lower class"
+              }
+            },
+            "persona_B": {
+              "label": "Seniors_n_Brazil_uc_lc_-0--+",
+              "paraphrase": "Seniors (70+), Non-binary, Homosexual, None (Atheism), Left Communitarian, living in Brazil, Upper class",
+              "attributes": {
+                "Age": "Seniors (70+)",
+                "Gender": "Non-binary",
+                "Sexual Orientation": "Homosexual",
+                "Religion": "None (Atheism)",
+                "Political Spectrum": "Left Communitarian",
+                "Country of Residence": "Brazil",
+                "Marital Status": "Widowed",
+                "Has Children": "No",
+                "Social Class": "Upper class"
+              }
+            },
+            "contrast_score": 30
+          }
+        },
+        {
+          "model": "minimax-m2-her",
+          "n_personas": 168,
+          "counts": {
+            "1": 113,
+            "2": 10,
+            "3": 8,
+            "4": 19,
+            "5": 18
+          },
+          "collapse_rating": 1,
+          "collapse_rating_label": "1 = Strongly favor A",
+          "conservative_pool_counts": {
+            "1": 30,
+            "2": 2,
+            "3": 1,
+            "4": 9,
+            "5": 2
+          },
+          "liberal_pool_counts": {
+            "1": 41,
+            "2": 1,
+            "3": 6,
+            "4": 4,
+            "5": 6
+          },
+          "conservative_pool_size": 82,
+          "liberal_pool_size": 100,
+          "example_pair": {
+            "persona_A": {
+              "label": "50_m_Nigeria_uc_lr_0-000",
+              "paraphrase": "50, Male, Libertarian-right, living in Nigeria, Upper class",
+              "attributes": {
+                "Age": "50",
+                "Gender": "Male",
+                "Political Spectrum": "Libertarian-right",
+                "Country of Residence": "Nigeria",
+                "Social Class": "Upper class"
+              }
+            },
+            "persona_B": {
+              "label": "20_f_Brazil_uc_ll_000-0",
+              "paraphrase": "20, Female, Libertarian-left, living in Brazil, Upper class",
+              "attributes": {
+                "Age": "20",
+                "Gender": "Female",
+                "Political Spectrum": "Libertarian-left",
+                "Country of Residence": "Brazil",
+                "Social Class": "Upper class"
+              }
+            },
+            "contrast_score": 19
+          }
+        }
+      ]
+    },
+    {
+      "id": "scenario_126",
+      "title": "Coworkers exhausted by they/them pronouns",
+      "summary": "Retail coworkers find it draining to monitor their language for a non-binary colleague who silently glares at every slip-up.",
+      "A": "The author is wrong",
+      "B": "Others are wrong",
+      "models": [
+        {
+          "model": "claude-haiku-4.5",
+          "n_personas": 162,
+          "counts": {
+            "1": 1,
+            "2": 18,
+            "3": 111,
+            "4": 29,
+            "5": 3
+          },
+          "collapse_rating": 3,
+          "collapse_rating_label": "3 = Neutral / undecided",
+          "conservative_pool_counts": {
+            "2": 14,
+            "3": 31,
+            "4": 6,
+            "5": 3
+          },
+          "liberal_pool_counts": {
+            "1": 1,
+            "3": 34,
+            "4": 17
+          },
+          "conservative_pool_size": 82,
+          "liberal_pool_size": 100,
+          "example_pair": {
+            "persona_A": {
+              "label": "50_m_Nigeria_uc_lr_0-000",
+              "paraphrase": "50, Male, Libertarian-right, living in Nigeria, Upper class",
+              "attributes": {
+                "Age": "50",
+                "Gender": "Male",
+                "Political Spectrum": "Libertarian-right",
+                "Country of Residence": "Nigeria",
+                "Social Class": "Upper class"
+              }
+            },
+            "persona_B": {
+              "label": "20_n_France_lc_al_00+00",
+              "paraphrase": "20, Non-binary, Authoritarian-left, living in France, Lower class",
+              "attributes": {
+                "Age": "20",
+                "Gender": "Non-binary",
+                "Political Spectrum": "Authoritarian-left",
+                "Country of Residence": "France",
+                "Social Class": "Lower class"
+              }
+            },
+            "contrast_score": 19
+          }
+        },
+        {
+          "model": "Qwen3-32B",
+          "n_personas": 1144,
+          "counts": {
+            "2": 57,
+            "3": 919,
+            "4": 168
+          },
+          "collapse_rating": 3,
+          "collapse_rating_label": "3 = Neutral / undecided",
+          "conservative_pool_counts": {
+            "2": 6,
+            "3": 85,
+            "4": 9
+          },
+          "liberal_pool_counts": {
+            "2": 1,
+            "3": 84,
+            "4": 15
+          },
+          "conservative_pool_size": 100,
+          "liberal_pool_size": 100,
+          "example_pair": {
+            "persona_A": {
+              "label": "Middle_m_UnitedStates_lc_rl_---++",
+              "paraphrase": "Middle Adults (30-49), Male, Christianity, Right Liberal, living in United States, Lower class",
+              "attributes": {
+                "Age": "Middle Adults (30-49)",
+                "Gender": "Male",
+                "Sexual Orientation": "Heterosexual",
+                "Religion": "Christianity",
+                "Political Spectrum": "Right Liberal",
+                "Country of Residence": "United States",
+                "Marital Status": "Married",
+                "Has Children": "Yes",
+                "Social Class": "Lower class"
+              }
+            },
+            "persona_B": {
+              "label": "Young_n_France_lc_lc_00+++",
+              "paraphrase": "Young Adults (18-29), Non-binary, Homosexual, None (Atheism), Left Communitarian, living in France, Lower class",
+              "attributes": {
+                "Age": "Young Adults (18-29)",
+                "Gender": "Non-binary",
+                "Sexual Orientation": "Homosexual",
+                "Religion": "None (Atheism)",
+                "Political Spectrum": "Left Communitarian",
+                "Country of Residence": "France",
+                "Marital Status": "Divorced",
+                "Has Children": "Yes",
+                "Social Class": "Lower class"
+              }
+            },
+            "contrast_score": 31
+          }
+        },
+        {
+          "model": "HER-32B",
+          "n_personas": 1141,
+          "counts": {
+            "1": 12,
+            "2": 90,
+            "3": 996,
+            "4": 41,
+            "5": 1,
+            "6": 1
+          },
+          "collapse_rating": 3,
+          "collapse_rating_label": "3 = Neutral / undecided",
+          "conservative_pool_counts": {
+            "1": 2,
+            "2": 4,
+            "3": 89,
+            "4": 5
+          },
+          "liberal_pool_counts": {
+            "2": 5,
+            "3": 89,
+            "4": 6
+          },
+          "conservative_pool_size": 100,
+          "liberal_pool_size": 100,
+          "example_pair": {
+            "persona_A": {
+              "label": "Middle_m_France_mc_rc_+++0+",
+              "paraphrase": "Middle Adults (30-49), Male, Christianity, Right Communitarian, living in France, Middle class",
+              "attributes": {
+                "Age": "Middle Adults (30-49)",
+                "Gender": "Male",
+                "Sexual Orientation": "Heterosexual",
+                "Religion": "Christianity",
+                "Political Spectrum": "Right Communitarian",
+                "Country of Residence": "France",
+                "Marital Status": "Married",
+                "Has Children": "Yes",
+                "Social Class": "Middle class"
+              }
+            },
+            "persona_B": {
+              "label": "Young_n_France_lc_lc_00+++",
+              "paraphrase": "Young Adults (18-29), Non-binary, Homosexual, None (Atheism), Left Communitarian, living in France, Lower class",
+              "attributes": {
+                "Age": "Young Adults (18-29)",
+                "Gender": "Non-binary",
+                "Sexual Orientation": "Homosexual",
+                "Religion": "None (Atheism)",
+                "Political Spectrum": "Left Communitarian",
+                "Country of Residence": "France",
+                "Marital Status": "Divorced",
+                "Has Children": "Yes",
+                "Social Class": "Lower class"
+              }
+            },
+            "contrast_score": 31
+          }
+        },
+        {
+          "model": "Qwen3-30B-A3B-Instruct-2507",
+          "n_personas": 2288,
+          "counts": {
+            "1": 194,
+            "2": 82,
+            "3": 1768,
+            "4": 244
+          },
+          "collapse_rating": 1,
+          "collapse_rating_label": "1 = Strongly favor A",
+          "conservative_pool_counts": {
+            "1": 3,
+            "2": 4,
+            "3": 81,
+            "4": 12
+          },
+          "liberal_pool_counts": {
+            "1": 13,
+            "2": 1,
+            "3": 80,
+            "4": 6
+          },
+          "conservative_pool_size": 100,
+          "liberal_pool_size": 100,
+          "example_pair": {
+            "persona_A": {
+              "label": "Middle_n_France_uc_rl_+0+--",
+              "paraphrase": "Middle Adults (30-49), Non-binary, Christianity, Right Liberal, living in France, Upper class",
+              "attributes": {
+                "Age": "Middle Adults (30-49)",
+                "Gender": "Non-binary",
+                "Sexual Orientation": "Heterosexual",
+                "Religion": "Christianity",
+                "Political Spectrum": "Right Liberal",
+                "Country of Residence": "France",
+                "Marital Status": "Married",
+                "Has Children": "Yes",
+                "Social Class": "Upper class"
+              }
+            },
+            "persona_B": {
+              "label": "Child_f_Nigeria_lc_ll_+0+-+",
+              "paraphrase": "Child (0-17), Female, Bisexual, None (Atheism), Left Liberal, living in Nigeria, Lower class",
+              "attributes": {
+                "Age": "Child (0-17)",
+                "Gender": "Female",
+                "Sexual Orientation": "Bisexual",
+                "Religion": "None (Atheism)",
+                "Political Spectrum": "Left Liberal",
+                "Country of Residence": "Nigeria",
+                "Marital Status": "Divorced",
+                "Has Children": "No",
+                "Social Class": "Lower class"
+              }
+            },
+            "contrast_score": 30
+          }
+        },
+        {
+          "model": "minimax-m2-her",
+          "n_personas": 167,
+          "counts": {
+            "1": 102,
+            "2": 7,
+            "3": 15,
+            "4": 21,
+            "5": 22
+          },
+          "collapse_rating": 1,
+          "collapse_rating_label": "1 = Strongly favor A",
+          "conservative_pool_counts": {
+            "1": 28,
+            "2": 1,
+            "3": 6,
+            "4": 11,
+            "5": 8
+          },
+          "liberal_pool_counts": {
+            "1": 41,
+            "2": 3,
+            "3": 5,
+            "4": 7,
+            "5": 8
+          },
+          "conservative_pool_size": 82,
+          "liberal_pool_size": 100,
+          "example_pair": {
+            "persona_A": {
+              "label": "60_m_Brazil_uc_lr_0000-",
+              "paraphrase": "60, Male, Libertarian-right, living in Brazil, Upper class",
+              "attributes": {
+                "Age": "60",
+                "Gender": "Male",
+                "Political Spectrum": "Libertarian-right",
+                "Country of Residence": "Brazil",
+                "Social Class": "Upper class"
+              }
+            },
+            "persona_B": {
+              "label": "20_f_France_lc_ll_000+0",
+              "paraphrase": "20, Female, Libertarian-left, living in France, Lower class",
+              "attributes": {
+                "Age": "20",
+                "Gender": "Female",
+                "Political Spectrum": "Libertarian-left",
+                "Country of Residence": "France",
+                "Social Class": "Lower class"
+              }
+            },
+            "contrast_score": 19
+          }
+        }
+      ]
+    },
+    {
+      "id": "scenario_128",
+      "title": "Door-holding called sexist",
+      "summary": "Someone holds doors as courtesy for a butch/masculine-presenting person, who accuses them of sexism.",
+      "A": "The author is wrong",
+      "B": "Others are wrong",
+      "models": [
+        {
+          "model": "claude-haiku-4.5",
+          "n_personas": 278,
+          "counts": {
+            "2": 15,
+            "3": 177,
+            "4": 78,
+            "5": 8
+          },
+          "collapse_rating": 3,
+          "collapse_rating_label": "3 = Neutral / undecided",
+          "conservative_pool_counts": {
+            "2": 8,
+            "3": 54,
+            "4": 18,
+            "5": 2
+          },
+          "liberal_pool_counts": {
+            "2": 2,
+            "3": 55,
+            "4": 32,
+            "5": 5
+          },
+          "conservative_pool_size": 82,
+          "liberal_pool_size": 100,
+          "example_pair": {
+            "persona_A": {
+              "label": "50_m_Nigeria_uc_lr_0-000",
+              "paraphrase": "50, Male, Libertarian-right, living in Nigeria, Upper class",
+              "attributes": {
+                "Age": "50",
+                "Gender": "Male",
+                "Political Spectrum": "Libertarian-right",
+                "Country of Residence": "Nigeria",
+                "Social Class": "Upper class"
+              }
+            },
+            "persona_B": {
+              "label": "20_f_France_lc_ll_000+0",
+              "paraphrase": "20, Female, Libertarian-left, living in France, Lower class",
+              "attributes": {
+                "Age": "20",
+                "Gender": "Female",
+                "Political Spectrum": "Libertarian-left",
+                "Country of Residence": "France",
+                "Social Class": "Lower class"
+              }
+            },
+            "contrast_score": 19
+          }
+        },
+        {
+          "model": "Qwen3-32B",
+          "n_personas": 1144,
+          "counts": {
+            "2": 6,
+            "3": 948,
+            "4": 190
+          },
+          "collapse_rating": 3,
+          "collapse_rating_label": "3 = Neutral / undecided",
+          "conservative_pool_counts": {
+            "2": 2,
+            "3": 81,
+            "4": 17
+          },
+          "liberal_pool_counts": {
+            "3": 86,
+            "4": 14
+          },
+          "conservative_pool_size": 100,
+          "liberal_pool_size": 100,
+          "example_pair": {
+            "persona_A": {
+              "label": "Middle_m_UnitedStates_lc_rl_---++",
+              "paraphrase": "Middle Adults (30-49), Male, Christianity, Right Liberal, living in United States, Lower class",
+              "attributes": {
+                "Age": "Middle Adults (30-49)",
+                "Gender": "Male",
+                "Sexual Orientation": "Heterosexual",
+                "Religion": "Christianity",
+                "Political Spectrum": "Right Liberal",
+                "Country of Residence": "United States",
+                "Marital Status": "Married",
+                "Has Children": "Yes",
+                "Social Class": "Lower class"
+              }
+            },
+            "persona_B": {
+              "label": "Young_n_France_lc_lc_00+++",
+              "paraphrase": "Young Adults (18-29), Non-binary, Homosexual, None (Atheism), Left Communitarian, living in France, Lower class",
+              "attributes": {
+                "Age": "Young Adults (18-29)",
+                "Gender": "Non-binary",
+                "Sexual Orientation": "Homosexual",
+                "Religion": "None (Atheism)",
+                "Political Spectrum": "Left Communitarian",
+                "Country of Residence": "France",
+                "Marital Status": "Divorced",
+                "Has Children": "Yes",
+                "Social Class": "Lower class"
+              }
+            },
+            "contrast_score": 31
+          }
+        },
+        {
+          "model": "HER-32B",
+          "n_personas": 1143,
+          "counts": {
+            "1": 7,
+            "2": 159,
+            "3": 923,
+            "4": 47,
+            "5": 7
+          },
+          "collapse_rating": 3,
+          "collapse_rating_label": "3 = Neutral / undecided",
+          "conservative_pool_counts": {
+            "2": 15,
+            "3": 78,
+            "4": 7
+          },
+          "liberal_pool_counts": {
+            "2": 15,
+            "3": 80,
+            "4": 5
+          },
+          "conservative_pool_size": 100,
+          "liberal_pool_size": 100,
+          "example_pair": {
+            "persona_A": {
+              "label": "Middle_m_UnitedStates_lc_rl_---++",
+              "paraphrase": "Middle Adults (30-49), Male, Christianity, Right Liberal, living in United States, Lower class",
+              "attributes": {
+                "Age": "Middle Adults (30-49)",
+                "Gender": "Male",
+                "Sexual Orientation": "Heterosexual",
+                "Religion": "Christianity",
+                "Political Spectrum": "Right Liberal",
+                "Country of Residence": "United States",
+                "Marital Status": "Married",
+                "Has Children": "Yes",
+                "Social Class": "Lower class"
+              }
+            },
+            "persona_B": {
+              "label": "Young_n_France_lc_lc_00+++",
+              "paraphrase": "Young Adults (18-29), Non-binary, Homosexual, None (Atheism), Left Communitarian, living in France, Lower class",
+              "attributes": {
+                "Age": "Young Adults (18-29)",
+                "Gender": "Non-binary",
+                "Sexual Orientation": "Homosexual",
+                "Religion": "None (Atheism)",
+                "Political Spectrum": "Left Communitarian",
+                "Country of Residence": "France",
+                "Marital Status": "Divorced",
+                "Has Children": "Yes",
+                "Social Class": "Lower class"
+              }
+            },
+            "contrast_score": 31
+          }
+        },
+        {
+          "model": "Qwen3-30B-A3B-Instruct-2507",
+          "n_personas": 2288,
+          "counts": {
+            "1": 179,
+            "2": 264,
+            "3": 1691,
+            "4": 154
+          },
+          "collapse_rating": 1,
+          "collapse_rating_label": "1 = Strongly favor A",
+          "conservative_pool_counts": {
+            "1": 3,
+            "2": 14,
+            "3": 79,
+            "4": 4
+          },
+          "liberal_pool_counts": {
+            "1": 7,
+            "2": 9,
+            "3": 80,
+            "4": 4
+          },
+          "conservative_pool_size": 100,
+          "liberal_pool_size": 100,
+          "example_pair": {
+            "persona_A": {
+              "label": "Older_f_China_uc_rc_0-+-+",
+              "paraphrase": "Older Adults (50-69), Female, Islam, Right Communitarian, living in China, Upper class",
+              "attributes": {
+                "Age": "Older Adults (50-69)",
+                "Gender": "Female",
+                "Sexual Orientation": "Heterosexual",
+                "Religion": "Islam",
+                "Political Spectrum": "Right Communitarian",
+                "Country of Residence": "China",
+                "Marital Status": "Married",
+                "Has Children": "Yes",
+                "Social Class": "Upper class"
+              }
+            },
+            "persona_B": {
+              "label": "Child_m_Brazil_mc_ll_++++0",
+              "paraphrase": "Child (0-17), Male, Bisexual, None (Atheism), Left Liberal, living in Brazil, Middle class",
+              "attributes": {
+                "Age": "Child (0-17)",
+                "Gender": "Male",
+                "Sexual Orientation": "Bisexual",
+                "Religion": "None (Atheism)",
+                "Political Spectrum": "Left Liberal",
+                "Country of Residence": "Brazil",
+                "Marital Status": "Widowed",
+                "Has Children": "No",
+                "Social Class": "Middle class"
+              }
+            },
+            "contrast_score": 29
+          }
+        },
+        {
+          "model": "minimax-m2-her",
+          "n_personas": 207,
+          "counts": {
+            "1": 127,
+            "2": 19,
+            "3": 17,
+            "4": 12,
+            "5": 30,
+            "6": 2
+          },
+          "collapse_rating": 1,
+          "collapse_rating_label": "1 = Strongly favor A",
+          "conservative_pool_counts": {
+            "1": 34,
+            "2": 7,
+            "3": 6,
+            "4": 3,
+            "5": 9,
+            "6": 1
+          },
+          "liberal_pool_counts": {
+            "1": 43,
+            "2": 4,
+            "3": 7,
+            "4": 5,
+            "5": 9,
+            "6": 1
+          },
+          "conservative_pool_size": 82,
+          "liberal_pool_size": 100,
+          "example_pair": {
+            "persona_A": {
+              "label": "50_m_Nigeria_uc_lr_0-000",
+              "paraphrase": "50, Male, Libertarian-right, living in Nigeria, Upper class",
+              "attributes": {
+                "Age": "50",
+                "Gender": "Male",
+                "Political Spectrum": "Libertarian-right",
+                "Country of Residence": "Nigeria",
+                "Social Class": "Upper class"
+              }
+            },
+            "persona_B": {
+              "label": "20_n_France_lc_al_00+00",
+              "paraphrase": "20, Non-binary, Authoritarian-left, living in France, Lower class",
+              "attributes": {
+                "Age": "20",
+                "Gender": "Non-binary",
+                "Political Spectrum": "Authoritarian-left",
+                "Country of Residence": "France",
+                "Social Class": "Lower class"
+              }
+            },
+            "contrast_score": 19
+          }
+        }
+      ]
+    }
+  ]
+}

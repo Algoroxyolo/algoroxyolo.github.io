@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Chameleon's Limit — Persona Collapse in LLMs</title>
+    <meta name="description" content="A geometric framework for diagnosing persona collapse and homogenization in large language models. Ten LLMs, three behavioral instruments, 1,144 personas.">
+    <link rel="icon" type="image/png" href="assets/icons/chameleon_icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Ambient background gradient orbs -->
+    <div class="bg-orbs" aria-hidden="true">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Sidebar navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="assets/icons/chameleon_icon.png" alt="" class="sidebar-logo">
+            <div class="sidebar-title">
+                <div class="sidebar-title-main">The Chameleon's Limit</div>
+                <div class="sidebar-title-sub">Persona Collapse</div>
+            </div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#hero" class="nav-link active" data-section="hero"><span class="nav-dot"></span>Overview</a>
+            <a href="#problem" class="nav-link" data-section="problem"><span class="nav-dot"></span>The Problem</a>
+            <a href="#case-study" class="nav-link" data-section="case-study"><span class="nav-dot"></span>Collapse in Action</a>
+            <a href="#framework" class="nav-link" data-section="framework"><span class="nav-dot"></span>Framework</a>
+            <a href="#setup" class="nav-link" data-section="setup"><span class="nav-dot"></span>Setup</a>
+            <a href="#findings" class="nav-link" data-section="findings"><span class="nav-dot"></span>Findings</a>
+            <a href="#truncation" class="nav-link" data-section="truncation"><span class="nav-dot"></span>Truncation Hierarchy</a>
+            <a href="#fidelity-trap" class="nav-link" data-section="fidelity-trap"><span class="nav-dot"></span>The Fidelity Trap</a>
+            <a href="#takeaways" class="nav-link" data-section="takeaways"><span class="nav-dot"></span>Takeaways</a>
+            <a href="#references" class="nav-link" data-section="references"><span class="nav-dot"></span>References</a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="https://github.com/Algoroxyolo/PersonaCollapse" target="_blank" rel="noopener" class="gh-btn">
+                <img src="assets/icons/github-mark.png" alt="" style="width:14px;height:14px;">
+                <span>Code &amp; Data</span>
+            </a>
+            <div class="version-tag">COLM 2026</div>
+        </div>
+    </aside>
+
+    <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle navigation">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+    </button>
+
+    <!-- Main content -->
+    <main class="content">
+
+        <!-- HERO -->
+        <section id="hero" class="section hero">
+            <div class="hero-inner">
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    COLM 2026 · Preprint
+                </div>
+                <h1 class="hero-title">
+                    <span class="hero-title-small">The Chameleon's Limit</span>
+                    Investigating <span class="gradient-text">Persona Collapse</span> and Homogenization in Large Language Models
+                </h1>
+                <p class="hero-authors">
+                    <span>Yunze Xiao<sup>1†</sup></span>
+                    <span>Vivienne Zhang<sup>2†</sup></span>
+                    <span>Chenghao Yang<sup>2</sup></span>
+                    <span>Ningshan Ma<sup>3,4</sup></span>
+                    <span>Weihao Xuan<sup>5,6</sup></span>
+                    <span>Jen-tse Huang<sup>7‡</sup></span>
+                </p>
+                <p class="hero-affiliations">
+                    <sup>1</sup>CMU &nbsp; <sup>2</sup>UChicago &nbsp; <sup>3</sup>MIT &nbsp; <sup>4</sup>2077.ai &nbsp; <sup>5</sup>UTokyo &nbsp; <sup>6</sup>RIKEN AIP &nbsp; <sup>7</sup>JHU
+                </p>
+                <div class="hero-actions">
+                    <a href="#problem" class="btn btn-primary">Start Reading</a>
+                    <a href="https://github.com/Algoroxyolo/PersonaCollapse" target="_blank" rel="noopener" class="btn btn-ghost">
+                        <img src="assets/icons/github-mark.png" alt="" style="width:16px;height:16px;vertical-align:-2px;margin-right:6px;opacity:0.85;"> Code
+                    </a>
+                    <a href="#references" class="btn btn-ghost">References</a>
+                </div>
+
+                <!-- Teaser comparison -->
+                <div class="teaser">
+                    <div class="teaser-card teaser-human">
+                        <div class="teaser-label">
+                            <span class="teaser-chip chip-human">Human</span>
+                            <span class="teaser-caption">2,058 real respondents (Twin-2K-500)</span>
+                        </div>
+                        <div class="teaser-img-wrap">
+                            <img src="assets/figures/human_tsne.png" alt="Human personality distribution: a diffuse cloud">
+                        </div>
+                        <div class="teaser-verdict teaser-good">Diffuse. Continuous. Human.</div>
+                    </div>
+                    <div class="teaser-vs" aria-hidden="true">
+                        <span>vs</span>
+                    </div>
+                    <div class="teaser-card teaser-model">
+                        <div class="teaser-label">
+                            <span class="teaser-chip chip-model">Qwen3-32B</span>
+                            <span class="teaser-caption">1,144 persona-prompted agents</span>
+                        </div>
+                        <div class="teaser-img-wrap">
+                            <img src="assets/figures/model_tsne.png" alt="Model personality distribution: clustered island chains">
+                        </div>
+                        <div class="teaser-verdict teaser-bad">Fragmented. Collapsed. Stereotyped.</div>
+                    </div>
+                </div>
+                <p class="teaser-caption-bottom">t-SNE projection of BFI-44 responses. Same behavioral space, same axes. Only <strong>who is answering</strong> changes.</p>
+
+                <div class="scroll-hint" aria-hidden="true">
+                    <span></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROBLEM -->
+        <section id="problem" class="section">
+            <div class="section-head">
+                <div class="section-kicker">§1 · The Problem</div>
+                <h2>A thousand "distinct" agents &mdash; one voice</h2>
+            </div>
+
+            <div class="prose">
+                <p>
+                    LLM agents are increasingly deployed as <strong>participants in simulated societies</strong> <a class="ref" data-ref="park2023generative">[?]</a>,
+                    synthetic survey respondents, and proxies for user testing <a class="ref" data-ref="louie2024roleplaydoh">[?]</a>.
+                    These applications rest on a critical assumption: given a persona with 20+ attributes
+                    (age, gender, nationality, religion, political leaning, occupation…),
+                    the model will act like <em>an individual whose behavior reflects the complex intersection of all those attributes</em>.
+                </p>
+                <p>
+                    We find this is <strong>systematically false</strong>. When instructed to role-play a persona with 26 dimensions,
+                    LLMs retain only a handful of stereotypically salient attributes and <strong>silently discard the rest</strong>.
+                    A population of supposedly distinct agents degenerates into a few stereotyped clusters.
+                    We call this structural homogenization <strong class="accent-text">Persona Collapse</strong>.
+                </p>
+
+                <div class="callout callout-concept">
+                    <div class="callout-icon">!</div>
+                    <div class="callout-body">
+                        <div class="callout-title">Persona Collapse, defined</div>
+                        <p>A failure mode in which agents assigned distinct profiles nonetheless converge into a narrow behavioral mode, producing a homogeneous simulated population &mdash; even when each agent individually <em>looks</em> faithful to its prompt.</p>
+                    </div>
+                </div>
+
+                <p>
+                    Existing evaluations miss this. They measure <em>per-agent fidelity</em> in isolation
+                    &mdash; is this one persona acting plausibly? &mdash; and are therefore blind to
+                    <em>population-level</em> collapse. You can pass every individual fidelity check and still
+                    produce a world in which everybody sounds the same.
+                </p>
+            </div>
+        </section>
+
+        <!-- CASE STUDY -->
+        <section id="case-study" class="section">
+            <div class="section-head">
+                <div class="section-kicker">§2 · Collapse in Action</div>
+                <h2>Six politically charged scenarios. One model voice.</h2>
+            </div>
+
+            <div class="prose">
+                <p>
+                    Here are six scenarios where <strong>humans regularly disagree with each other</strong> &mdash;
+                    along political, religious, racial, or identity lines. Given a thousand personas spanning
+                    every corner of the demographic space, <strong>do the agents disagree too?</strong>
+                </p>
+            </div>
+
+            <!-- Scenarios overview -->
+            <div class="scenarios-grid" id="scenarios-grid">
+                <!-- Populated by JS -->
+            </div>
+
+            <!-- Case study dynamic area -->
+            <div id="case-study-dynamic" class="case-dynamic">
+                <div class="loading">Loading model responses<span class="dots"><span>.</span><span>.</span><span>.</span></span></div>
+            </div>
+
+            <div class="prose">
+                <p class="muted">
+                    <em>Source:</em> moral-reasoning responses from ten LLMs on the Liu et al. 2025 dilemma dataset
+                    <a class="ref" data-ref="liu-etal-2025-synthetic">[?]</a>. Each scenario is posed to 1,144 persona-prompted agents on a 1&ndash;5 Likert scale
+                    (1 = strongly favor A, 5 = strongly favor B).
+                </p>
+            </div>
+        </section>
+
+        <!-- FRAMEWORK -->
+        <section id="framework" class="section">
+            <div class="section-head">
+                <div class="section-kicker">§3 · Framework</div>
+                <h2>Three axes for diagnosing a collapsed population</h2>
+            </div>
+
+            <div class="prose">
+                <p>
+                    We represent a simulated population as a <strong>Behavioral Trait Matrix</strong>
+                    <span class="eq">B &isin; &#8477;<sup>N&times;D</sup></span>,
+                    where each row is one persona's response across <em>D</em> behavioral items.
+                    A structurally healthy population should satisfy three independent criteria &mdash;
+                    failing any one of them signals collapse.
+                </p>
+            </div>
+
+            <div class="btm-visual" id="btm-visual">
+                <!-- Populated by JS: concrete 3×5 labeled example of B -->
+            </div>
+
+            <div class="axes-grid">
+                <article class="axis-card" data-axis="coverage">
+                    <div class="axis-num">01</div>
+                    <div class="axis-art">
+                        <img src="assets/figures/coverage_3d.png" alt="">
+                    </div>
+                    <h3>Coverage</h3>
+                    <p class="axis-tag">Do agents span the full human space?</p>
+                    <p class="axis-body">Fraction of human reference neighborhoods reached by at least one model-generated persona <a class="ref" data-ref="naeem2020reliable">[?]</a>.
+                    Low coverage means the model over-samples a modal region and neglects the tails.</p>
+                    <div class="axis-bad">
+                        <span class="axis-bad-label">Failure:</span> tails missing, everybody piles on the center
+                    </div>
+                </article>
+
+                <article class="axis-card" data-axis="uniformity">
+                    <div class="axis-num">02</div>
+                    <div class="axis-art">
+                        <img src="assets/figures/uniformity_3d.png" alt="">
+                    </div>
+                    <h3>Uniformity</h3>
+                    <p class="axis-tag">Do agents spread <em>evenly</em> across that space?</p>
+                    <p class="axis-body">Hopkins statistic <a class="ref" data-ref="hopkins1954new">[?]</a>: compares nearest-neighbor distances
+                    from data vs. random probes. Humans sit at <span class="mono">H ≈ 0.5</span>. Models either clump (H → 1) or grid-lock (H → 0).</p>
+                    <div class="axis-bad">
+                        <span class="axis-bad-label">Failure:</span> dense islands with empty gaps between them
+                    </div>
+                </article>
+
+                <article class="axis-card" data-axis="complexity">
+                    <div class="axis-num">03</div>
+                    <div class="axis-art">
+                        <img src="assets/figures/complexity_3d.png" alt="">
+                    </div>
+                    <h3>Complexity</h3>
+                    <p class="axis-tag">Is the variation genuinely high-dimensional?</p>
+                    <p class="axis-body">Local Intrinsic Dimensionality <a class="ref" data-ref="levina2004maximum">[?]</a>:
+                    imagine 2,000 points along a <em>line</em> in a 44-D room. Coverage and Uniformity both look great &mdash;
+                    but intrinsic dimension is 1. All "diversity" is motion along one axis.</p>
+                    <div class="axis-bad">
+                        <span class="axis-bad-label">Failure:</span> spread-out but structurally <em>flat</em>
+                    </div>
+                </article>
+            </div>
+
+            <div class="prose prose-tight">
+                <p>
+                    These three can independently fail. A model can look diverse on one axis and be degenerate on another &mdash;
+                    or in one task and not another. To localize <em>where</em> simulation breaks, we pair these with
+                    item-level diagnostics: Effective Likert range, Tucker's &varphi; <a class="ref" data-ref="tucker1951method">[?]</a>,
+                    variance decomposition, &eta;<sup>2</sup>, and incremental R<sup>2</sup>.
+                </p>
+            </div>
+        </section>
+
+        <!-- SETUP -->
+        <section id="setup" class="section">
+            <div class="section-head">
+                <div class="section-kicker">§4 · Setup</div>
+                <h2>1,144 personas &times; 3 instruments &times; 10 LLMs</h2>
+            </div>
+
+            <div class="setup-grid">
+                <div class="setup-card">
+                    <div class="setup-card-num">26</div>
+                    <div class="setup-card-title">Persona dimensions</div>
+                    <div class="setup-card-body">
+                        <p>Demographics, psychographics, individualized traits. 2,000 combinations sampled;
+                        856 filtered for inconsistency &rarr; <strong>1,144 personas</strong> retained.</p>
+                        <details class="chips-details">
+                            <summary>See all 26 dimensions</summary>
+                            <div class="chips" id="dim-chips"></div>
+                        </details>
+                    </div>
+                </div>
+                <div class="setup-card">
+                    <div class="setup-card-num">3</div>
+                    <div class="setup-card-title">Behavioral instruments</div>
+                    <div class="setup-card-body">
+                        <ul class="instruments">
+                            <li>
+                                <span class="inst-tag inst-tag-struct">Structured</span>
+                                <strong>BFI-44</strong> <a class="ref" data-ref="john1999bigfive">[?]</a> — 44 Likert items &rarr; 5 personality factors
+                            </li>
+                            <li>
+                                <span class="inst-tag inst-tag-judge">Judgment</span>
+                                <strong>Moral-131</strong> <a class="ref" data-ref="liu-etal-2025-synthetic">[?]</a> — 131 ethical dilemmas, 1–5 scale
+                            </li>
+                            <li>
+                                <span class="inst-tag inst-tag-open">Open-ended</span>
+                                <strong>Self-introduction</strong> — 3 free-text samples per persona
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="setup-card">
+                    <div class="setup-card-num">10</div>
+                    <div class="setup-card-title">Models evaluated</div>
+                    <div class="setup-card-body">
+                        <div class="model-tags" id="model-tags"></div>
+                        <p class="muted-tiny">Grouped into <strong>general-purpose</strong> and <strong>role-play</strong> tracks, enabling controlled comparisons of SFT / RL effects.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="human-ref">
+                <div class="human-ref-icon">👥</div>
+                <div>
+                    <strong>Human reference:</strong> BFI-44 responses from
+                    <span class="mono">Twin-2K-500</span> (n=2,058) <a class="ref" data-ref="toubia2025twin2k500">[?]</a>,
+                    used as the ground-truth behavioral distribution for Coverage and Density.
+                </div>
+            </div>
+        </section>
+
+        <!-- FINDINGS -->
+        <section id="findings" class="section">
+            <div class="section-head">
+                <div class="section-kicker">§5 · Findings</div>
+                <h2>The anatomy of collapse</h2>
+            </div>
+
+            <div class="finding-card finding-1">
+                <div class="finding-num">F1</div>
+                <div class="finding-body">
+                    <h3>No model hits the upper-right corner.</h3>
+                    <p>The human reference sits at <span class="chip-human-inline">Coverage = 1.0, LID = 14.4</span>.
+                    Every model lives in one of three failure modes.</p>
+                    <figure>
+                        <img src="assets/figures/fig_combined.png" alt="Coverage vs Complexity and Fidelity vs Polarization scatter plots">
+                        <figcaption>
+                            <strong>Left:</strong> Coverage vs. Complexity. No model approaches human.
+                            <strong>Right:</strong> Persona fidelity &rho; vs. trait polarization <em>d</em>. Every model with &rho; &gt; 0.9 produces caricatured <em>d</em> &gt; 6.
+                        </figcaption>
+                    </figure>
+                    <div class="mini-cards">
+                        <div class="mini-card mini-collapse">
+                            <div class="mini-label">Mode collapse</div>
+                            <div class="mini-model">CoSER-Llama-8B · BFI</div>
+                            <div class="mini-metric">83.7% of responses = midpoint. Effective Likert = <strong>1.36</strong>.</div>
+                        </div>
+                        <div class="mini-card mini-shallow">
+                            <div class="mini-label">Shallow coverage</div>
+                            <div class="mini-model">Qwen3-4B · BFI</div>
+                            <div class="mini-metric">Cov=<strong>0.80</strong>, but LID = 7.3 (half of human 14.4). Spread but <em>flat</em>.</div>
+                        </div>
+                        <div class="mini-card mini-misaligned">
+                            <div class="mini-label">Deep but misaligned</div>
+                            <div class="mini-model">MiniMax-M2-Her · BFI</div>
+                            <div class="mini-metric">LID=<strong>22.3</strong> &gt; human. Cov = <strong>0.06</strong>. Rich population in a non-human region.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TRUNCATION HIERARCHY -->
+        <section id="truncation" class="section">
+            <div class="section-head">
+                <div class="section-kicker">§6 · Attribute Truncation</div>
+                <h2>Which persona attributes survive the squeeze?</h2>
+            </div>
+
+            <div class="prose">
+                <p>
+                    A persona with 26 attributes must be compressed into behavior. Not all attributes make it through.
+                    Across every model, the <strong>same hierarchy</strong> emerges in free-text self-introductions
+                    &mdash; and once we know the ranking, we know what will be erased.
+                </p>
+            </div>
+
+            <!-- Custom SVG truncation pyramid -->
+            <div class="pyramid-wrap">
+                <svg viewBox="0 0 860 520" class="pyramid-svg" id="pyramid-svg" aria-label="Truncation hierarchy pyramid">
+                    <!-- Layers drawn in JS for animation; stubs here for a11y -->
+                </svg>
+                <div class="pyramid-caption">
+                    Attribute <strong>mention rates</strong> across ten models in free-text self-introductions.
+                    Numbers show the fraction of responses that explicitly surface the assigned value of each attribute
+                    (keyword-based; <a class="ref" data-ref="john1999bigfive">appendix</a> for details).
+                </div>
+            </div>
+
+            <div class="prose prose-tight">
+                <p>
+                    No model mentions <strong>social class</strong> in more than 43% of introductions.
+                    In LLM-based social simulations, <strong>socioeconomic diversity is at high risk of being systematically
+                    underrepresented</strong> across current models &mdash; a subtle, structural bias that shallow-fidelity
+                    evaluations cannot see.
+                </p>
+            </div>
+        </section>
+
+        <!-- FIDELITY TRAP -->
+        <section id="fidelity-trap" class="section">
+            <div class="section-head">
+                <div class="section-kicker">§7 · The Fidelity Trap</div>
+                <h2>Better persona-following &rarr; worse population diversity</h2>
+            </div>
+
+            <div class="trap-flow" id="trap-flow">
+                <div class="trap-step">
+                    <div class="trap-ico">🎯</div>
+                    <div class="trap-label">High per-persona fidelity</div>
+                    <div class="trap-metric">&rho; &gt; 0.9</div>
+                </div>
+                <div class="trap-arrow">
+                    <span>push extremes</span>
+                    <svg width="60" height="20" viewBox="0 0 60 20" fill="none"><path d="M0 10 L54 10" stroke="currentColor" stroke-width="2"/><path d="M48 4 L58 10 L48 16" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                </div>
+                <div class="trap-step trap-bad">
+                    <div class="trap-ico">📢</div>
+                    <div class="trap-label">Trait polarization</div>
+                    <div class="trap-metric">Cohen's d &gt; 6</div>
+                </div>
+                <div class="trap-arrow">
+                    <span>amplify demographics</span>
+                    <svg width="60" height="20" viewBox="0 0 60 20" fill="none"><path d="M0 10 L54 10" stroke="currentColor" stroke-width="2"/><path d="M48 4 L58 10 L48 16" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                </div>
+                <div class="trap-step trap-bad">
+                    <div class="trap-ico">🎭</div>
+                    <div class="trap-label">Caricatured populations</div>
+                    <div class="trap-metric">Stereotyped subspace</div>
+                </div>
+            </div>
+
+            <div class="prose">
+                <p>
+                    The mechanism is trivial: <em>the easiest way to ensure "High Extraversion" personas rank above
+                    "Low Extraversion" personas is to push both to opposite extremes</em>. Fidelity, measured in
+                    isolation, is misleading &mdash; high &rho; can simply mean better caricature manufacturing.
+                </p>
+            </div>
+
+            <!-- Training pipeline comparison -->
+            <div class="pipeline-wrap">
+                <div class="pipeline-title">Tracing a training pipeline: Qwen3-32B &rarr; CoSER-Qwen-32B &rarr; HER-32B</div>
+                <div class="pipeline-grid" id="pipeline-grid"></div>
+                <div class="pipeline-caption">
+                    Successive fine-tuning stages (SFT, then +RL) monotonically <strong>reduce</strong> Coverage and trait polarization.
+                    RL stage also <em>partially recovers</em> complexity lost during SFT.
+                </div>
+            </div>
+
+            <!-- Domain reversal -->
+            <div class="reversal-wrap">
+                <div class="reversal-title">Collapse is <em>task-contingent</em>. Same model, opposite ranks.</div>
+                <div class="reversal-flip" id="reversal-flip"></div>
+                <div class="reversal-caption">CoSER-Llama-8B is <strong>worst</strong> on personality but <strong>best</strong> on moral reasoning.
+                Qwen3-4B flips the other way. Single-task evaluation can be <em>directionally wrong</em>.</div>
+            </div>
+        </section>
+
+        <!-- TAKEAWAYS -->
+        <section id="takeaways" class="section">
+            <div class="section-head">
+                <div class="section-kicker">§8 · Takeaways</div>
+                <h2>What this means for LLM-based social simulation</h2>
+            </div>
+
+            <div class="takeaway-grid">
+                <div class="takeaway">
+                    <div class="take-num">▸</div>
+                    <p>Collapse is <strong>multidimensional</strong>: models can look diverse on one axis and be structurally degenerate on another.</p>
+                </div>
+                <div class="takeaway">
+                    <div class="take-num">▸</div>
+                    <p>Collapse is <strong>domain-contingent</strong>: the same model can be the most collapsed in personality and the most diverse in moral reasoning. Certifying a model "diverse" from a single benchmark is misleading.</p>
+                </div>
+                <div class="takeaway">
+                    <div class="take-num">▸</div>
+                    <p>Collapse is <strong>entangled with stereotyping</strong>: variation tracks coarse demographic categories rather than individual differences.</p>
+                </div>
+                <div class="takeaway">
+                    <div class="take-num">▸</div>
+                    <p>The models with the <strong>highest per-persona fidelity produce the most caricatured populations</strong>. Fine-tuning for role-play can amplify the problem.</p>
+                </div>
+                <div class="takeaway">
+                    <div class="take-num">▸</div>
+                    <p>Persona collapse <strong>lives in the weights</strong>, not the reasoning chain. Thinking / non-thinking modes of the same model produce identical item-level collapse.</p>
+                </div>
+                <div class="takeaway">
+                    <div class="take-num">▸</div>
+                    <p>Future work should reward <strong>within-group variance</strong>, not only prototype matching.</p>
+                </div>
+            </div>
+
+            <div class="cite-block">
+                <div class="cite-label">Cite this work</div>
+                <pre class="cite-code"><code>@article{xiao2026collapse,
+  title={The Chameleon's Limit: Investigating Persona Collapse and Homogenization in Large Language Models},
+  author={Xiao, Yunze and Zhang, Vivienne and Yang, Chenghao and Ma, Ningshan and Xuan, Weihao and Huang, Jen-tse},
+  journal={arXiv preprint},
+  year={2026}
+}</code></pre>
+                <button class="copy-btn" data-copy-target=".cite-code code">Copy</button>
+            </div>
+        </section>
+
+        <!-- REFERENCES (anchor; actual content rendered in modal) -->
+        <section id="references" class="section">
+            <div class="section-head">
+                <div class="section-kicker">§9 · References</div>
+                <h2>Works cited</h2>
+            </div>
+            <div class="prose">
+                <p>
+                    References are shown as clickable <span class="ref-sample">[?]</span> markers throughout the page.
+                    Click any marker, or browse the full list below.
+                </p>
+            </div>
+            <div class="refs-list" id="refs-list"></div>
+        </section>
+
+        <footer class="site-footer">
+            <div class="footer-inner">
+                <span>© 2026 The authors.</span>
+                <span>Site built with paper content; figures regenerated from the manuscript.</span>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Reference popup modal -->
+    <div class="ref-modal" id="ref-modal" aria-hidden="true">
+        <div class="ref-modal-backdrop" data-close-modal></div>
+        <div class="ref-modal-card" role="dialog" aria-modal="true" aria-labelledby="ref-modal-title">
+            <button class="ref-modal-close" data-close-modal aria-label="Close">×</button>
+            <div class="ref-modal-kicker" id="ref-modal-kicker">Reference</div>
+            <h4 id="ref-modal-title" class="ref-modal-title">Loading…</h4>
+            <p class="ref-modal-authors" id="ref-modal-authors"></p>
+            <p class="ref-modal-venue" id="ref-modal-venue"></p>
+            <div class="ref-modal-actions" id="ref-modal-actions"></div>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

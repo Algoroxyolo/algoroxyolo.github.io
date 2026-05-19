@@ -28,13 +28,13 @@ otw_pitch: >
 
 I recently graduated from the [Language Technology Institute](https://lti.cmu.edu) at Carnegie Mellon University (M.S., May 2026), where I was advised by [Prof. Mona Diab](https://en.wikipedia.org/wiki/Mona_Diab). Concurrently, I work as Enterprise Agent Lead at [Abaka AI](https://abaka.ai) and as a Visiting Research Scientist at the [2077AI Foundation](https://2077.ai).
 
-**Research.** My work centers on understanding the structural limits of LLMs as behavioral agents — to what degree can they authentically represent human diversity in personality, opinion, and moral reasoning?
-
-**Persona fidelity and population diversity.** My preprint [*The Chameleon's Limit*]({{ '/blog/2026/chameleon-limit/' | relative_url }}) measures persona collapse across 10 LLMs and 1,144 personas. We show that per-persona fidelity gains can *reduce* population diversity: better role-play sharpens which attractor the model lands on without enlarging the space of attractors — a structural ceiling on how faithfully synthetic populations can represent human populations.
-
-**LLM evaluation.** ρ-Bench formalizes metrics for behavioral distribution fidelity, going beyond aggregate alignment to capture within-group variance and coverage across demographic axes.
+**Research.** I aim to develop large language models that move beyond surface-level fluency toward genuine human-like intelligence — systems that can think, remember, feel, and interact in socially and cognitively coherent ways. This connects three intersecting directions across NLP, Computational Social Science, and HCI:
 
 **Anthropomorphism as a modeling dimension.** How do training objectives, architectural decisions, and interface design shape the emergence of human-like traits in LLMs? I study anthropomorphism not as a risk to mitigate but as a controllable, analyzable design space.
+
+**Anthropomorphism for applications.** How can human-like attributes — emotional resonance, persona consistency, contextual memory — improve LLM performance in real-world settings like education, therapy, and collaborative writing?
+
+**Architectures for synthetic human-likeness.** What design innovations (memory modules, affective simulation, multi-modal grounding) are needed to support truly interactive and situated AI agents that engage users as emotionally-aware collaborators?
 
 ---
 

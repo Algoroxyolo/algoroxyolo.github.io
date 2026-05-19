@@ -19,14 +19,14 @@ social: true
 open_to_work: true
 otw_role: "Research Engineer / Applied Scientist — full-time, open to remote"
 otw_pitch: >
-  I'm finishing my M.S. at CMU LTI this May and looking for my next role. I build end-to-end:
-  research (persona collapse, LLM evaluation, synthetic populations) and production (multi-agent
-  pipelines, agentic evaluation, enterprise agent systems). I'm most excited about teams working
-  on LLM evaluation, agent systems, or responsible AI — but I'm open to the right problem.
-  If that sounds like a fit, I'd love to talk.
+  I recently graduated from CMU LTI (M.S., May 2026) and am looking for my next role. I build
+  end-to-end: research (persona collapse, LLM evaluation, synthetic populations) and production
+  (multi-agent pipelines, agentic evaluation, enterprise agent systems). I'm most excited about
+  teams working on LLM evaluation, agent systems, or responsible AI — but I'm open to the right
+  problem. If that sounds like a fit, I'd love to talk.
 ---
 
-I am an M.S. student in the [Language Technology Institute](https://lti.cmu.edu) at Carnegie Mellon University, advised by [Prof. Mona Diab](https://en.wikipedia.org/wiki/Mona_Diab). Concurrently, I work as Enterprise Agent Lead at [Abaka AI](https://abaka.ai) and as a Visiting Research Scientist at the [2077AI Foundation](https://2077.ai).
+I recently graduated from the [Language Technology Institute](https://lti.cmu.edu) at Carnegie Mellon University (M.S., May 2026), where I was advised by [Prof. Mona Diab](https://en.wikipedia.org/wiki/Mona_Diab). Concurrently, I work as Enterprise Agent Lead at [Abaka AI](https://abaka.ai) and as a Visiting Research Scientist at the [2077AI Foundation](https://2077.ai).
 
 **Research.** My work centers on understanding the structural limits of LLMs as behavioral agents — to what degree can they authentically represent human diversity in personality, opinion, and moral reasoning?
 

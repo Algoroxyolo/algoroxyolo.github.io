@@ -2,49 +2,43 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='https://r3lit-lab.github.io/'>R3lit Lab @ LTI, CMU</a>.
+subtitle: >
+  Enterprise Agent Lead, <a href='https://abaka.ai'>Abaka AI</a> &middot;
+  Visiting Research Scientist, <a href='https://2077.ai'>2077AI Foundation</a> &middot;
+  Graduate Research Assistant, <a href='https://lti.cmu.edu'>LTI @ CMU</a>
 
 profile:
   align: right
   image: Yunze Xiao.jpg
-  image_circular: true # crops the image to make it circular
+  image_circular: true
   address: >
     <p>GHC 5418</p>
-    <p>4902 Forbes Ave, Pittsburgh,PA 15213</p>
-    <p>Pittsburgh,PA</p>
+    <p>4902 Forbes Ave</p>
+    <p>Pittsburgh, PA 15213</p>
 
-news: true  # includes a list of news items
-selected_papers: true # includes a list of papers marked as "selected={true}"
-social: true  # includes social icons at the bottom of the page
+news: true
+selected_papers: true
+social: true
 open_to_work: true
-otw_role: "Full-time Machine Learning Engineer / Research Engineer — starting May 2026"
+otw_role: "Research Engineer / Applied Scientist — full-time, open to remote"
 otw_pitch: >
-  I'm a CS student and NLP researcher at Carnegie Mellon University. My work focuses on LLM agents,
-  evaluation, and safety — including multi-agent systems, persona consistency, long-horizon memory,
-  and emotion modeling.
-
-
-  I've shipped research prototypes end-to-end and I'm excited to bring that experience to an
-  engineering team. If your team is hiring (or you know someone who is), I'd love to chat.
+  I'm finishing my M.S. at CMU LTI this May and looking for my next role. I build end-to-end:
+  research (persona collapse, LLM evaluation, synthetic populations) and production (multi-agent
+  pipelines, privacy-preserving data synthesis, FastAPI / gRPC / Kafka). I'm most excited about
+  teams working on LLM evaluation, agent systems, or responsible AI — but I'm open to the right
+  problem. If that sounds like a fit, I'd love to talk.
 ---
 
-I am an Master student in [Langugage Technology Institute](https://lti.cmu.edu) where I am advised by [Prof.Mona Diab](https://en.wikipedia.org/wiki/Mona_Diab). 
+I am an M.S. student in the [Language Technology Institute](https://lti.cmu.edu) at Carnegie Mellon University, advised by [Prof. Mona Diab](https://en.wikipedia.org/wiki/Mona_Diab). Concurrently, I work as Enterprise Agent Lead at [Abaka AI](https://abaka.ai) and as a Visiting Research Scientist at the [2077AI Foundation](https://2077.ai).
 
-Previously, I have been advised by [Prof. Houda Bouamor](https://www.andrew.cmu.edu/user/hbouamor/) and [Prof. Kemal Oflazer](https://www.andrew.cmu.edu/user/ko/) in Carengie Mellon University in Qatar. 
+My research asks: to what degree can LLMs authentically represent human diversity — in personality, opinion, and moral reasoning — and what are the structural limits on that representation?
 
-Broadly, I aim to develop large language models that move beyond surface-level fluency toward genuine human-like intelligence- systems that can think, remember, feel, and interact in socially and cognitively coherent ways. This goal connects three intersecting research directions across NLP, Computational Social Science, and HCI:
+**Persona fidelity and population diversity.** My preprint [*The Chameleon's Limit*]({{ '/blog/2026/chameleon-limit/' | relative_url }}) measures persona collapse across 10 LLMs and 1,144 personas. We show that per-persona fidelity gains can *reduce* population diversity: better role-play sharpens which attractor the model lands on without enlarging the space of attractors. The result is a structural ceiling — a chameleon's limit — on how faithfully synthetic populations can represent human populations.
 
-1. Anthropomorphism as a Modeling Dimension: How do training objectives, architectural decisions, and interface designs shape the emergence of human-like traits in LLMs? I study anthropomorphism not just as a risk or illusion, but as a controllable and analyzable design space.
+**LLM evaluation.** ρ-Bench formalizes metrics for measuring behavioral distribution fidelity in LLMs, going beyond aggregate alignment to capture within-group variance and coverage across demographic axes.
 
-2. Anthropomorphism for Applictaions: How can human-like attributes—such as emotional resonance, persona consistency, or contextual memory—be used to improve LLM performance in real-world applications like education, therapy, and collaborative writing?
+**Agentic systems.** At Abaka AI I architect enterprise agents end-to-end: multi-model reasoning pipelines, privacy-preserving schema synthesis (GDPR / CCPA / PIPL / ISO 27701 compliant), and production infrastructure with FastAPI, gRPC, and Kafka.
 
-3. Architectures for Synthetic Human-Likeness: What design innovations (e.g., memory modules, affective simulation, multi-modal grounding) are needed to support truly interactive and situated AI agents? I seek to build systems that engage users as intuitive, emotionally-aware collaborators.
+Previously I was advised by [Prof. Houda Bouamor](https://www.andrew.cmu.edu/user/hbouamor/) and [Prof. Kemal Oflazer](https://www.andrew.cmu.edu/user/ko/) at Carnegie Mellon University in Qatar.
 
-
-In the end, we are looking for applying these research for authentic AI companion as a potential solution to [the global lonliness and disconnection](https://en.wikipedia.org/wiki/Death_Stranding)
-
-
-
-Feel Free to reach out to me on [email](mailto:yunzex@andrew.cmu.edu) or [x](https://x.com/LrzNeedResearch)
-
-
+Feel free to reach out — [yunzex@andrew.cmu.edu](mailto:yunzex@andrew.cmu.edu) or [@LrzNeedResearch](https://x.com/LrzNeedResearch).

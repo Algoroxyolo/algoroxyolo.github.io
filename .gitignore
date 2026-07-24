@@ -9,3 +9,6 @@ _site
 Gemfile.lock
 vendor
 
+
+# Unencrypted source for /flywheel/ — never commit
+_flywheel_src/

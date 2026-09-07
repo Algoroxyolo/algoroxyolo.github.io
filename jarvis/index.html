@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="color-scheme" content="dark"><meta name="theme-color" content="#101512"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="JARVIS"><meta name="referrer" content="no-referrer"><title>JARVIS · 工作空间</title><link rel="icon" href="./favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="./icon-192.png"><link rel="manifest" href="./manifest.webmanifest"><link rel="stylesheet" href="./style.css"></head>
+<body>
+<a class="skip-link" href="#main">跳转到内容</a>
+<div class="shell">
+<aside class="sidebar">
+  <a href="#today" class="brand"><span class="brand-mark">J</span><span>JARVIS<small>PERSONAL WORKSPACE</small></span></a>
+  <button class="capture" data-action="new-task"><span>＋</span> 快速记录 <kbd>N</kbd></button>
+  <div class="nav-label">工作空间</div>
+  <nav aria-label="主导航" id="nav"></nav>
+  <div class="sidebar-note"><span class="signal"></span> 本地工作空间<p>有限的目标，持续的日常。<br>各自有序，一起向前。</p></div>
+  <a href="#settings" class="settings-link">⚙ <span>领域与数据</span></a>
+</aside>
+<div class="workspace"><header class="topbar"><span id="breadcrumb">工作空间 / 今日</span><span class="topbar-right"><span class="signal"></span> 本地保存 <span class="key-hint">N 快速记录</span></span></header>
+<main id="main" tabindex="-1"><div class="loading">正在打开工作空间…</div></main>
+<footer>JARVIS <span>让项目有终点，让日常有节奏。</span><span id="save-status">LOCAL FIRST</span></footer></div>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+<script type="module" src="./app.js"></script>
+</body></html>

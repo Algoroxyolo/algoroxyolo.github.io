@@ -1,11 +1,26 @@
 import {apiFetch, initializeConnection, remoteMode} from './connection.js';
+import {mobileViews, mobileNavigation} from './mobile.js';
+import {notificationView, loadNotifications, notificationAction} from './notifications.js';
 await initializeConnection();
+const phoneMedia=matchMedia('(max-width: 760px)');
+const phoneMode=()=>phoneMedia.matches&&sessionStorage.getItem('jarvis.layout')!=='full';
+const modeButton=document.createElement('button');modeButton.className='view-mode-toggle quiet small';
+document.querySelector('.topbar').append(modeButton);
+const phoneNav=document.createElement('nav');phoneNav.className='phone-nav';phoneNav.setAttribute('aria-label','手机导航');document.body.append(phoneNav);
+function updateLayout(){document.body.classList.toggle('phone-mode',phoneMode());modeButton.textContent=phoneMode()?'完整界面':'手机界面';modeButton.hidden=!phoneMedia.matches;}
+modeButton.onclick=()=>{sessionStorage.setItem('jarvis.layout',phoneMode()?'full':'phone');updateLayout();if(state&&!form)render();};
+document.addEventListener('click',e=>{if(e.target.closest('[data-phone-full]'))modeButton.click();});
+phoneMedia.addEventListener('change',()=>{updateLayout();if(state&&!form&&!document.activeElement?.closest('#chat-compose'))render();});
+updateLayout();
 const main = document.querySelector('#main');
+const phoneStatus=document.createElement('div');phoneStatus.className='phone-sync';phoneStatus.setAttribute('role','status');main.before(phoneStatus);
+function connectionStatus(message){document.querySelector('#save-status').textContent=message;phoneStatus.textContent=message;phoneStatus.classList.toggle('offline',message.includes('断开'));}
 const labels = {inbox:'待整理',backlog:'稍后',next:'下一步',in_progress:'进行中',waiting:'等待',done:'已完成',cancelled:'已取消',active:'进行中',planned:'计划中',paused:'已暂停',completed:'已完成',retired:'已停用',pending:'待执行',skipped:'已跳过',missed:'已错过',open:'未完成',resolved:'已解决'};
 const frequency = {daily:'每天',weekly:'每周',monthly:'每月',manual:'手动触发'};
 const kinds = {note:'笔记',decision:'决策',question:'开放问题',artifact:'资料'};
-const icons = {records:'≡',chat:'◎',today:'◷',projects:'▧',routines:'↻',inbox:'▱',calendar:'▦'};
+const icons = {notifications:'♧',records:'≡',chat:'◎',today:'◷',projects:'▧',routines:'↻',inbox:'▱',calendar:'▦'};
 let state, form = null, filter = 'active', expanded = new Set(), busy = false, boardMode = true, dragged = null, renderedDay = null, renderedMinute = null, initialRoute = true;
+let lastRenderedRoute='';
 function setBusy(value){
   busy=value;
   main.setAttribute('aria-busy',String(value));
@@ -45,7 +60,7 @@ function toast(text,error=false){
   const node = document.querySelector('#toast'); node.textContent=text; node.className='visible'+(error?' error':'');
   clearTimeout(toast.timer); toast.timer=setTimeout(()=>node.className='',5000);
 }
-async function refresh(){state=await api('/api/state');render();}
+async function refresh(){state=await api('/api/state');connectionStatus(remoteMode?'已同步到服务器':'已保存到本地');render();}
 async function routineCommand(id,operation,data={}){return api('/api/commands','POST',{request_id:crypto.randomUUID(),actor:'user:web',reason:'调整 Routine 的未来规则',operation,entity:'routines',id,expected_revision:byId('routines',id).revision,data});}
 function heading(tag,title,sub,actions=''){return `<div class="page-heading"><div><div class="eyebrow">${esc(tag)}</div><h1>${esc(title)}</h1><p>${esc(sub)}</p></div>${actions}</div>`;}
 function taskRow(t){
@@ -256,21 +271,27 @@ function formView(){
 
 function render(){
   renderedDay=localDate();renderedMinute=Math.floor(Date.now()/60000);
-  const [route,id]=path(), name={records:'记忆与运行',chat:'和 Agent 聊聊',today:'今日',projects:'项目',project:'项目详情',routines:'Routine',inbox:'待归属',settings:'领域与数据',calendar:'日历'}[route]||'今日';
+  const [route,id]=path(), name={more:'更多',notifications:'通知',records:'记忆与运行',chat:'和 Agent 聊聊',today:'今日',projects:'项目',project:'项目详情',routines:'Routine',inbox:'待归属',settings:'领域与数据',calendar:'日历'}[route]||'今日';
   document.title=`${name} · JARVIS`;
   document.querySelector('#breadcrumb').textContent='工作空间 / '+name;
-  document.querySelector('#nav').innerHTML=[['chat','和 Agent 聊聊'],['today','今日'],['projects','项目'],['routines','Routine'],['inbox','待归属'],['calendar','日历'],['records','记忆与运行']].map(([key,label])=>{
+  document.querySelector('#nav').innerHTML=[['chat','和 Agent 聊聊'],['today','今日'],['projects','项目'],['routines','Routine'],['inbox','待归属'],['calendar','日历'],['records','记忆与运行'],['notifications','通知']].map(([key,label])=>{
     const count=key==='projects'?state.projects.filter(p=>p.status==='active').length:key==='routines'?state.routines.filter(r=>r.status==='active').length:key==='inbox'?state.tasks.filter(t=>t.status==='inbox').length+(state.inbox_items||[]).filter(i=>!i.source_id&&i.status==='new').length+(state.conversation_windows||[]).filter(g=>!g.summary?.project_id&&g.summary?.signal!=='chatter').length:'';
     const selected=route===key||route==='project'&&key==='projects';
     return `<a href="#${key}" class="nav-item ${selected?'active':''}" ${selected?'aria-current="page"':''}><span class="nav-icon" aria-hidden="true">${icons[key]}</span><span>${label}</span><span class="nav-count">${count}</span></a>`;
   }).join('');
-  if(initialRoute){initialRoute=false;if(route==='calendar'&&id){const e=byId('calendar_events',id);if(e){form={type:'calendar-event',id};calendarAnchor=new Date(e.start);}}}
-  const views={records,chat,today,projects,routines,inbox,settings,calendar,project:()=>projectPage(id)};
+  if(initialRoute){initialRoute=false;if(route==='chat'&&/^\d{4}-\d{2}-\d{2}$/.test(id||''))chatDay=id;if(route==='calendar'&&id){const e=byId('calendar_events',id);if(e){form={type:'calendar-event',id};calendarAnchor=new Date(e.start);}}}
+  const views={notifications:notificationView,records,chat,today,projects,routines,inbox,settings,calendar,project:()=>projectPage(id)};
+  const mobile=mobileViews({state,esc,button,section,empty,taskRow,routineRow,calendarEditor,byId,localDate,dateText,activeProject,blocked,liveEvents,filter,tabs,projectPage,form,calendarAnchor,sourceStatus});
+  views.more=mobile.more;
+  if(phoneMode()){Object.assign(views,mobile);views.project=()=>mobile.project(id);}
+  phoneNav.innerHTML=mobileNavigation(['today','calendar','chat'].includes(route)?route:'more');
+  document.body.classList.toggle('mobile-editing',phoneMode()&&Boolean(form));
+  const opened=[...main.querySelectorAll('details[data-mobile-section][open]')].map(el=>el.dataset.mobileSection);
   const previousScroll=document.querySelector('.week-scroll');
   const scroll=previousScroll?{top:previousScroll.scrollTop,left:previousScroll.scrollLeft}:null;
   main.classList.toggle('calendar-main',route==='calendar');
-  main.innerHTML=formView()+(views[route]||today)();
-  document.querySelector('#save-status').textContent=remoteMode?'已同步到服务器':'已保存到本地';
+  main.innerHTML=formView()+(phoneMode()&&form&&form.type!=='calendar-event'?'':(views[route]||today)());
+  for(const el of main.querySelectorAll('details[data-mobile-section]'))if(opened.includes(el.dataset.mobileSection))el.open=true;
   for(const el of main.querySelectorAll('[data-y]')){
     el.style.top=el.dataset.y+'px';
     if(el.dataset.height)el.style.height=el.dataset.height+'px';
@@ -280,8 +301,16 @@ function render(){
   const weekScroll=document.querySelector('.week-scroll');
   if(weekScroll){weekScroll.scrollTop=scroll?.top??(8*56);weekScroll.scrollLeft=scroll?.left??0;}
   const editor=document.querySelector('#editor');if(editor)editor.addEventListener('submit',submitForm);
+  if(phoneMode()&&editor&&['task','project'].includes(form?.type)){
+    const grid=editor.querySelector('.form-grid'), primary=new Set(form.type==='task'?['title','project_id','planned_date','due_date','status']:['name']);
+    const extra=[...grid.children].filter(el=>el.querySelector('[name]')&&!primary.has(el.querySelector('[name]').name));
+    if(extra.length){const details=document.createElement('details');details.className='phone-fold';details.innerHTML='<summary>更多属性</summary><div class="form-grid"></div>';extra.forEach(el=>details.lastElementChild.append(el));grid.after(details);}
+  }
   setBusy(busy);
   bindChat();
+  const enteredNotifications=route==='notifications'&&lastRenderedRoute!==route;
+  lastRenderedRoute=route;
+  if(enteredNotifications)loadNotifications(api,()=>{if(path()[0]==='notifications'&&!form)render();});
 }
 function openForm(next){form=next;render();main.scrollIntoView({block:'start'});document.querySelector('#editor input, #editor select')?.focus();}
 async function submitForm(event){
@@ -309,6 +338,7 @@ document.addEventListener('click',async event=>{
   event.preventDefault(); const action=node.dataset.action,id=node.dataset.id;
   if(!state){if(action==='retry')refresh().catch(err=>toast(err.message,true));else toast('请先连接工作空间',true);return;}
   if(action==='confirm-candidate')return openForm({type:'confirm-candidate',id});
+  if(action==='phone-day-prev'||action==='phone-day-next'){calendarAnchor.setDate(calendarAnchor.getDate()+(action==='phone-day-next'?1:-1));return render();}
   if(action==='file-capture'){
     const candidate=state.inbox_candidates?.find(c=>c.inbox_item_id===id&&c.status==='proposed');
     if(candidate)return openForm({type:'confirm-candidate',id:candidate.id});
@@ -360,21 +390,27 @@ document.addEventListener('click',async event=>{
   }catch(err){toast(err.message,true);node.disabled=false;}
   finally{setBusy(false);}
 });
-window.addEventListener('hashchange',()=>{form=path()[0]==='calendar'&&path()[1]?{type:'calendar-event',id:path()[1]}:null;if(form){const e=byId('calendar_events',form.id);if(e)calendarAnchor=new Date(e.start);}filter='active';if(state)render();window.scrollTo(0,0);});
+window.addEventListener('hashchange',()=>{if(path()[0]==='chat'&&/^\d{4}-\d{2}-\d{2}$/.test(path()[1]||''))chatDay=path()[1];form=path()[0]==='calendar'&&path()[1]?{type:'calendar-event',id:path()[1]}:null;if(form){const e=byId('calendar_events',form.id);if(e)calendarAnchor=new Date(e.start);}filter='active';if(state)render();window.scrollTo(0,0);});
+document.addEventListener('click',async e=>{const target=e.target.closest('[data-push-action]');if(!target||busy)return;target.disabled=true;setBusy(true);try{const message=await notificationAction(target.dataset.pushAction,api);if(message)toast(message);}catch(err){toast(err.message,true);}finally{setBusy(false);if(path()[0]==='notifications')render();}});
 document.addEventListener('keydown',event=>{
   if(!state || document.querySelector('dialog[open]'))return;
   if(event.key==='Escape'&&form){form=null;render();return;}
   if(event.key.toLowerCase()==='n'&&!event.metaKey&&!event.ctrlKey&&!event.altKey&&!event.target.closest('input,textarea,select,[contenteditable]')){event.preventDefault();openForm({type:'task'});}
 });
 // Keep agent writes visible without wiping drafts or moving an active drag target.
+let lastStatePoll=0;
 setInterval(async()=>{
   if(!state||form||busy||dragged||document.hidden)return;
-  try{const latest=await api('/api/state');if(!form&&!busy&&!dragged&&(latest.change_seq!==state.change_seq||JSON.stringify(latest.capture_status)!==JSON.stringify(state.capture_status)||localDate()!==renderedDay||Math.floor(Date.now()/60000)!==renderedMinute)){state=latest;if(path()[0]!=='chat'||!document.activeElement?.closest('#chat-compose'))render();}document.querySelector('#save-status').textContent=remoteMode?'已同步到服务器':'已同步到本地';}
-  catch{document.querySelector('#save-status').textContent='连接已断开 · 暂时无法保存修改';}
+  if(phoneMode()&&Date.now()-lastStatePoll<10000)return;lastStatePoll=Date.now();
+  try{const latest=await api('/api/state');if(!form&&!busy&&!dragged&&(latest.change_seq!==state.change_seq||JSON.stringify(latest.capture_status)!==JSON.stringify(state.capture_status)||localDate()!==renderedDay||Math.floor(Date.now()/60000)!==renderedMinute)){state=latest;if(path()[0]!=='chat'||!document.activeElement?.closest('#chat-compose'))render();}connectionStatus(remoteMode?'已同步到服务器':'已同步到本地');}
+  catch{connectionStatus('连接已断开 · 暂时无法保存修改');}
 },2000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)lastStatePoll=0;});
+document.addEventListener('change',e=>{if(e.target.matches('[data-phone-date]')&&e.target.value){calendarAnchor=new Date(e.target.value+'T12:00:00');render();}});
 
 let chatDay=localDate(), chatTurns=[], chatDraft='', chatLoaded=false, chatSending=false, chatError='', chatRequest=null;
 function chat(){
+  if(phoneMode())return `<div class="phone-heading"><h1>和 Agent 聊聊</h1></div><section class="chat-room"><div class="chat-toolbar"><label>日期 <input id="chat-day" type="date" value="${chatDay}"></label></div><div id="chat-log" class="chat-log" role="log" aria-live="polite"></div><form id="chat-compose"><label class="sr-only" for="chat-message">给 Agent 的消息</label><textarea id="chat-message" rows="3" maxlength="12000" placeholder="记一件事，或一起理理今天…">${esc(chatDraft)}</textarea><div class="chat-compose-footer"><span class="muted">明确指令会更新工作空间</span><button class="primary" type="submit">发送 ↗</button></div><p id="chat-error" role="alert"></p></form></section>`;
   const selected=state.tasks.filter(t=>t.planned_date===chatDay&&!['done','cancelled'].includes(t.status));
   return heading('DAILY CONVERSATION','先聊聊，再开始。','一起决定重点，也给今天留一点余地。')+`<div class="chat-layout"><section class="chat-room" aria-label="与 Agent 聊天"><div class="chat-toolbar"><label>对话日期 <input id="chat-day" type="date" value="${chatDay}"></label><span class="muted">Codex · 当前登录账号</span></div><div id="chat-log" class="chat-log" role="log" aria-live="polite"></div><div class="chat-starters">${['早上好，结合项目和日历，讨论今天做什么','今天时间不够了，帮我重新排优先级','一起复盘今天，看看还有什么没收尾'].map((s,i)=>`<button type="button" data-chat-prompt="${esc(s)}">${['晨间规划','临时重排','晚间复盘'][i]}</button>`).join('')}</div><form id="chat-compose"><label class="sr-only" for="chat-message">给 Agent 的消息</label><textarea id="chat-message" rows="3" maxlength="12000" placeholder="今天我有大约两小时，想先把研究结果整理清楚…">${esc(chatDraft)}</textarea><div class="chat-compose-footer"><span class="muted">明确指令直接更新 · 建议先讨论</span><button class="primary" type="submit">发送 ↗</button></div><p id="chat-error" role="alert"></p></form></section><aside class="chat-context"><div id="daily-brief"></div>${reminderPanel()}${section(chatDay===localDate()?'今天要做':dateText(chatDay)+' 的安排',selected.length?selected.map(t=>`<div class="chat-plan-item"><a href="#project/${esc(t.project_id||'')}">${esc(t.title)}</a><div class="muted">${esc(byId('projects',t.project_id)?.name||'独立任务')} · ${esc(labels[t.status])}${t.minutes?' · '+t.minutes+' 分钟':''}</div></div>`).join(''):'<p class="muted">还没有安排。先和 Agent 聊聊。</p>','', '<a href="#today" class="small">打开今日 ↗</a>')}${calendarToday(chatDay)}<p class="muted small">${state.calendar_sources.map(s=>esc(s.name)+' · '+(s.synced_at?'上次同步 '+esc(new Date(s.synced_at).toLocaleString('zh-CN')):'尚未同步')).join('<br>')||'尚未连接日历，不能据此判断空闲。'}</p><p class="muted small">Agent 读取工作空间；回复前会尝试刷新过期的 Google 日历。聊天会发送给当前 Codex 使用的模型，并在本机保存。</p></aside></div>`;
 }
@@ -389,7 +425,7 @@ function paintChat(){
 }
 async function loadChat(){
   const day=chatDay;
-  try{const [result,brief]=await Promise.all([api('/api/chat?day='+day),api('/api/chat/brief?day='+day+'&timezone='+encodeURIComponent(Intl.DateTimeFormat().resolvedOptions().timeZone))]);if(day!==chatDay)return;const changed=JSON.stringify(result.turns)!==JSON.stringify(chatTurns)||!chatLoaded;chatTurns=result.turns;chatLoaded=true;if(changed)paintChat();paintBrief(brief);}
+  try{const [result,brief]=await Promise.all([api('/api/chat?day='+day),phoneMode()?Promise.resolve(null):api('/api/chat/brief?day='+day+'&timezone='+encodeURIComponent(Intl.DateTimeFormat().resolvedOptions().timeZone))]);if(day!==chatDay)return;const changed=JSON.stringify(result.turns)!==JSON.stringify(chatTurns)||!chatLoaded;chatTurns=result.turns;chatLoaded=true;if(changed)paintChat();paintBrief(brief);}
   catch(err){chatError=err.message;paintChat();}
 }
 function bindChat(){

@@ -16,6 +16,7 @@ const main = document.querySelector('#main');
 const phoneStatus=document.createElement('div');phoneStatus.className='phone-sync';phoneStatus.setAttribute('role','status');main.before(phoneStatus);
 function connectionStatus(message){document.querySelector('#save-status').textContent=message;phoneStatus.textContent=message;phoneStatus.classList.toggle('offline',message.includes('断开'));}
 const labels = {inbox:'待整理',backlog:'稍后',next:'下一步',in_progress:'进行中',waiting:'等待',done:'已完成',cancelled:'已取消',active:'进行中',planned:'计划中',paused:'已暂停',completed:'已完成',retired:'已停用',pending:'待执行',skipped:'已跳过',missed:'已错过',open:'未完成',resolved:'已解决'};
+const routineFrequency = r => r.frequency==='daily'&&r.interval_days>1 ? `每 ${r.interval_days} 天` : frequency[r.frequency];
 const frequency = {daily:'每天',weekly:'每周',monthly:'每月',manual:'手动触发'};
 const kinds = {note:'笔记',decision:'决策',question:'开放问题',artifact:'资料'};
 const icons = {notifications:'♧',records:'≡',chat:'◎',today:'◷',projects:'▧',routines:'↻',inbox:'▱',calendar:'▦'};
@@ -76,7 +77,7 @@ function taskBoard(tasks){
 }
 function ruleHistory(r){
   const rules=(state.routine_rules||[]).filter(rule=>rule.routine_id===r.id).slice().reverse(), pending=rules.find(x=>x.status==='pending');
-  return `${pending?`<div class="rule-pending"><strong>下周期将调整</strong><p>${frequency[pending.frequency]} ${pending.target} 次 · ${esc(pending.timezone)}<br>${new Date(pending.effective_at).toLocaleString('zh-CN')} 生效（浏览器本地时间）</p>${button('取消这次调整','cancel-rule','small',r.id)}</div>`:''}<details><summary>规则版本 · ${rules.length}</summary>${rules.map(rule=>`<div class="activity"><span>v${rule.version} · ${{active:'当前',pending:'待生效',superseded:'历史',cancelled:'已撤回'}[rule.status]}</span><span>${frequency[rule.frequency]} ${rule.target} 次 · ${esc(rule.timezone)}</span></div>`).join('')}</details>`;
+  return `${pending?`<div class="rule-pending"><strong>下周期将调整</strong><p>${routineFrequency(pending)} ${pending.target} 次 · ${esc(pending.timezone)}<br>${new Date(pending.effective_at).toLocaleString('zh-CN')} 生效（浏览器本地时间）</p>${button('取消这次调整','cancel-rule','small',r.id)}</div>`:''}<details><summary>规则版本 · ${rules.length}</summary>${rules.map(rule=>`<div class="activity"><span>v${rule.version} · ${{active:'当前',pending:'待生效',superseded:'历史',cancelled:'已撤回'}[rule.status]}</span><span>${routineFrequency(rule)} ${rule.target} 次 · ${esc(rule.timezone)}</span></div>`).join('')}</details>`;
 }
 function changeList(changes){
   return changes.filter(c=>!c.actor.startsWith('system:')).slice(0,15).map(c=>{
@@ -106,7 +107,7 @@ function pendingOccurrences(r){return state.occurrences.filter(o=>o.routine_id==
 function routineRow(r,full=false){
   const current=currentOccurrences(r), done=current.filter(o=>o.status==='done').length, pending=pendingOccurrences(r), next=pending[0];
   const project=byId('projects',r.project_id), open=expanded.has(r.id);
-  const progress = r.frequency==='manual'?'手动触发':`${frequency[r.frequency]} ${r.target} 次`;
+  const progress = r.frequency==='manual'?'手动触发':`${routineFrequency(r)} ${r.target} 次`;
   const controls=r.status==='active'?`${r.frequency==='manual'?button('＋ 触发一次','trigger','small',r.id):''}${next?button('✓ 完成一次','occ-done','small',next.id):r.frequency!=='manual'?pill(done>=r.target?'本期完成':current.some(o=>o.status==='pending')?'已安排稍后':'本期已处理',done>=r.target?'green':''):''}${next?button('跳过','occ-skip','quiet small',next.id):''}`:pill(labels[r.status]);
   return `<div class="routine-row"><div class="routine-symbol">↻</div><div class="routine-body"><h3>${button(esc(r.name),'expand-routine','task-title',r.id,`aria-expanded="${open}"`)}</h3><p>${progress}${project?' · '+esc(project.name):areaName(r)?' · '+esc(areaName(r)):''}${r.minutes?' · '+r.minutes+' 分钟':''}</p>${r.frequency!=='manual'?`<div class="progress-dots" aria-label="本周期完成 ${done}/${r.target}">${Array.from({length:r.target},(_,i)=>`<i class="${current[i]?.status==='done'?'done':current[i]?.status==='skipped'?'skipped':''}"></i>`).join('')}</div>`:''}</div><div class="routine-actions">${r.frequency!=='manual'?`<span class="count">${done}<span class="muted">/${r.target}</span></span>`:''}${controls}${full?button(open?'收起':'详情','expand-routine','quiet small',r.id):''}</div></div>${open?routineDetail(r):''}`;
 }
@@ -229,7 +230,7 @@ function formView(){
     fields=`<blockquote class="candidate-evidence">${esc(c.evidence)}</blockquote><p class="help">${esc(byId('capture_sources',i.source_id)?.name||'随手记')} · ${esc(i.sender)}</p>`+field('要跟进什么','title',c.title,'text',{required:true,full:true})+field('这件事属于','kind',c.kind==='clarify'?'':c.kind,'text',{required:true,choices:[['','请选择责任'],['request','别人找我办的事'],['commitment','我答应的事'],['waiting','等待对方']]})+field('所属项目','project_id',c.project_id,'text',{choices:projectChoices(c.project_id)})+field('计划日期','planned_date','','date')+field('截止日期','due_date','','date');
   }else if(type==='reminder-settings'){
     const p=state.reminders.preferences;title='提醒设置';description='在今日页和聊天旁显示提醒。静默期间收起提醒，稍后仍可查看。';
-    fields=field('提醒','enabled',String(p.enabled),'text',{choices:[['1','开启'],['0','关闭']]})+field('时区','timezone',p.timezone,'text',{required:true})+field('静默开始','quiet_start',p.quiet_start,'time')+field('静默结束','quiet_end',p.quiet_end,'time')+field('会议前多少分钟','meeting_lead_minutes',p.meeting_lead_minutes,'number',{min:1,max:1440})+field('等待多少天后跟进','waiting_days',p.waiting_days,'number',{min:1,max:365});
+    fields=field('晚间护理时间','routine_time',p.routine_time||'','time',{help:'只提醒已选护理项目；清空可关闭。'})+field('提醒','enabled',String(p.enabled),'text',{choices:[['1','开启'],['0','关闭']]})+field('时区','timezone',p.timezone,'text',{required:true})+field('静默开始','quiet_start',p.quiet_start,'time')+field('静默结束','quiet_end',p.quiet_end,'time')+field('会议前多少分钟','meeting_lead_minutes',p.meeting_lead_minutes,'number',{min:1,max:1440})+field('等待多少天后跟进','waiting_days',p.waiting_days,'number',{min:1,max:365});
   }else if(type==='file-capture'){
     const i=byId('inbox_items',id);title='整理为任务';description='确认这是你要做的事。原文和来源会保留。';
     fields=field('任务名称','title',i.title,'text',{required:true,full:true})+field('所属项目','project_id',i.project_id,'text',{choices:[['','独立任务'],...state.projects.filter(p=>p.status==='active').map(p=>[p.id,p.name])]});
@@ -246,13 +247,13 @@ function formView(){
   }else if(type==='rule'){
     const r=byId('routines',id), pending=state.routine_rules.find(x=>x.routine_id===id&&x.status==='pending'), value=pending||r;
     title='调整 Routine 周期';description='从当前规则的下个周期开始生效；当前实例与历史记录不变。已有待生效修改会被新版本替代。';submit='安排下周期规则';
-    fields=field('重复周期','frequency',value.frequency,'text',{choices:Object.entries(frequency)})+field('每周期次数','target',value.target,'number',{required:true,min:1,max:31})+field('时区','timezone',value.timezone,'text',{required:true,full:true})+`<label class="checkbox-field field full"><input type="checkbox" name="carry_over" ${value.carry_over?'checked':''}>保留旧周期未完成实例</label>`;
+    fields=field('重复周期','frequency',value.frequency,'text',{choices:Object.entries(frequency)})+field('天数间隔（按天重复）','interval_days',value.interval_days||1,'number',{required:true,min:1,max:365})+field('每周期次数','target',value.target,'number',{required:true,min:1,max:31})+field('时区','timezone',value.timezone,'text',{required:true,full:true})+`<label class="checkbox-field field full"><input type="checkbox" name="carry_over" ${value.carry_over?'checked':''}>保留旧周期未完成实例</label>`;
   }else if(type==='routine-edit'){
     const r=byId('routines',id);title='编辑 Routine';description='修改说明与预计时长；周期和历史执行记录保持不变。';
     fields=field('名称','name',r.name,'text',{required:true,full:true})+field('目的','purpose',r.purpose,'textarea',{full:true})+field('负责人','owner',r.owner)+field('预计每次分钟','minutes',r.minutes,'number',{min:1,max:1440});
   }else if(type==='routine'){
     title='创建 Routine';description='设定规则，分别记录每次执行。今天开始，不回填过去。';submit='创建 Routine';
-    fields=field('名称','name','','text',{required:true,full:true,placeholder:'例如：读论文、运动、每月整理材料'})+field('目的','purpose','','text',{full:true})+field('重复周期','frequency','weekly','text',{choices:Object.entries(frequency),help:'每周从周一开始，每月从 1 日开始。'})+field('每周期次数','target',1,'number',{required:true,min:1,max:31,help:'例如每周 3 次；手动触发每次生成一个实例。'})+field('关联项目（可选）','project_id',projectId,'text',{choices:projectChoices()})+field('领域','area_id','','text',{choices:areaChoices()})+field('负责人','owner')+field('预计每次分钟','minutes','','number',{min:1,max:1440})+field('时区','timezone',Intl.DateTimeFormat().resolvedOptions().timeZone,'text',{required:true,full:true})+`<label class="checkbox-field field full"><input type="checkbox" name="carry_over">保留旧周期的未完成实例（默认只显示当前周期）</label>`;
+    fields=field('名称','name','','text',{required:true,full:true,placeholder:'例如：读论文、运动、每月整理材料'})+field('目的','purpose','','text',{full:true})+field('重复周期','frequency','weekly','text',{choices:Object.entries(frequency),help:'每周从周一开始，每月从 1 日开始。'})+field('天数间隔（按天重复）','interval_days',1,'number',{required:true,min:1,max:365})+field('每周期次数','target',1,'number',{required:true,min:1,max:31,help:'例如每周 3 次；手动触发每次生成一个实例。'})+field('关联项目（可选）','project_id',projectId,'text',{choices:projectChoices()})+field('领域','area_id','','text',{choices:areaChoices()})+field('负责人','owner')+field('预计每次分钟','minutes','','number',{min:1,max:1440})+field('时区','timezone',Intl.DateTimeFormat().resolvedOptions().timeZone,'text',{required:true,full:true})+`<label class="checkbox-field field full"><input type="checkbox" name="carry_over">保留旧周期的未完成实例（默认只显示当前周期）</label>`;
   }else if(type==='entry'){
     title='添加项目记录';description='留下资料、判断与理由，方便以后回看。';
     fields=field('类型','kind','note','text',{choices:Object.entries(kinds)})+field('标题','title','','text',{required:true})+field('内容 / 决策理由','body','','textarea',{full:true})+field('资料链接或本地路径','url','','text',{full:true,placeholder:'https://… 或 /Users/…'});
@@ -275,7 +276,7 @@ function render(){
   document.title=`${name} · JARVIS`;
   document.querySelector('#breadcrumb').textContent='工作空间 / '+name;
   document.querySelector('#nav').innerHTML=[['chat','和 Agent 聊聊'],['today','今日'],['projects','项目'],['routines','Routine'],['inbox','待归属'],['calendar','日历'],['records','记忆与运行'],['notifications','通知']].map(([key,label])=>{
-    const count=key==='projects'?state.projects.filter(p=>p.status==='active').length:key==='routines'?state.routines.filter(r=>r.status==='active').length:key==='inbox'?state.tasks.filter(t=>t.status==='inbox').length+(state.inbox_items||[]).filter(i=>!i.source_id&&i.status==='new').length+(state.conversation_windows||[]).filter(g=>!g.summary?.project_id&&g.summary?.signal!=='chatter').length:'';
+    const count=key==='projects'?state.projects.filter(p=>p.status==='active').length:key==='routines'?state.routines.filter(r=>r.status==='active').length:key==='inbox'?state.tasks.filter(t=>t.status==='inbox').length+(state.inbox_items||[]).filter(i=>!i.source_id&&i.status==='new').length+(state.conversation_windows||[]).filter(g=>g.summary&&!g.ignored&&!g.summary.project_id&&g.summary.signal!=='chatter').length:'';
     const selected=route===key||route==='project'&&key==='projects';
     return `<a href="#${key}" class="nav-item ${selected?'active':''}" ${selected?'aria-current="page"':''}><span class="nav-icon" aria-hidden="true">${icons[key]}</span><span>${label}</span><span class="nav-count">${count}</span></a>`;
   }).join('');
@@ -337,6 +338,7 @@ document.addEventListener('click',async event=>{
   // All non-submit buttons have explicit action semantics.
   event.preventDefault(); const action=node.dataset.action,id=node.dataset.id;
   if(!state){if(action==='retry')refresh().catch(err=>toast(err.message,true));else toast('请先连接工作空间',true);return;}
+  if(action==='conversation-chatter')return; // Handled by the conversation command listener.
   if(action==='confirm-candidate')return openForm({type:'confirm-candidate',id});
   if(action==='phone-day-prev'||action==='phone-day-next'){calendarAnchor.setDate(calendarAnchor.getDate()+(action==='phone-day-next'?1:-1));return render();}
   if(action==='file-capture'){
@@ -474,11 +476,19 @@ function captureInbox(){
   return conversationInbox()+section('随手记',pending.filter(i=>!i.source_id).map(row).join('')||empty('还没有随手记。','你主动记录的事情留在这里。'))+`<details class="section"><summary>已整理的随手记</summary>${items.filter(i=>!i.source_id&&i.status!=='new').slice(-30).reverse().map(row).join('')}</details>`;
 }
 function conversationInbox(projectId=null){
-  const groups=(state.conversation_windows||[]).filter(g=>(g.summary?.project_id||null)===projectId);
-  const row=g=>{const s=g.summary;return `<article class="conversation-card"><div class="section-head"><h3>${esc(s?.title||g.source_name+' · 对话进行中')}</h3>${pill(s?({work:'工作讨论',mixed:'讨论与闲聊',chatter:'闲聊'}[s.signal]):'等待总结')}</div><p class="muted small">${esc(g.source_name)} · ${esc(new Date(g.start).toLocaleString('zh-CN'))} — ${esc(new Date(g.end).toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'}))} · ${g.message_count} 条消息</p><p class="conversation-text">${esc(s?.summary||'稍后从微信临时读取并总结。')}</p>${g.stale?'<p class="help">这段对话有新消息，摘要稍后更新。</p>':''}${g.attempt?.error&&(!s||g.stale)?`<p class="help overdue">${esc(g.attempt.error)}</p>`:''}${s?`<label class="help">所属项目 <select data-summary-project="${esc(s.id)}" aria-label="${esc(s.title)}的所属项目"><option value="">待归属</option>${state.projects.filter(p=>p.id===s.project_id||p.status==='active').map(p=>`<option value="${esc(p.id)}" ${s.project_id===p.id?'selected':''}>${esc(p.name)}</option>`).join('')}</select></label>`:''}</article>`;};
-  const chatter=groups.filter(g=>g.summary?.signal==='chatter'&&!g.stale),useful=groups.filter(g=>!chatter.includes(g));
-  return section(projectId?'最近讨论':'待归属摘要',`${useful.map(row).join('')||empty(projectId?'还没有关联讨论。':'没有待归属的讨论。',projectId?'与这个项目有关的会话摘要会留在这里。':'已明确归属的摘要直接出现在项目中。')}${chatter.length?`<details><summary>闲聊 · ${chatter.length} 段</summary>${chatter.map(row).join('')}</details>`:''}<p class="help">只保存摘要、来源时间和去重标识。原文留在微信。</p>`,String(useful.length),projectId?'':button('总结当前对话','summarize-conversations','quiet small'));
+  const groups=(state.conversation_windows||[]).filter(g=>g.summary&&!g.ignored&&g.summary.signal!=='chatter'&&(g.summary.project_id||null)===projectId);
+  const row=g=>{const s=g.summary;return `<article class="conversation-card"><div class="section-head"><h3>${esc(s?.title||g.source_name+' · 对话进行中')}</h3>${pill(s?({work:'工作讨论',mixed:'讨论与闲聊',chatter:'闲聊'}[s.signal]):'等待总结')}</div><p class="muted small">${esc(g.source_name)} · ${esc(new Date(g.start).toLocaleString('zh-CN'))} — ${esc(new Date(g.end).toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'}))} · ${g.message_count} 条消息</p><p class="conversation-text">${esc(s?.summary||'稍后从微信临时读取并总结。')}</p>${g.stale?'<p class="help">这段对话有新消息，摘要稍后更新。</p>':''}${g.attempt?.error&&(!s||g.stale)?`<p class="help overdue">${esc(g.attempt.error)}</p>`:''}${s?`<label class="help">所属项目 <select data-summary-project="${esc(s.id)}" aria-label="${esc(s.title)}的所属项目"><option value="">待归属</option>${state.projects.filter(p=>p.id===s.project_id||p.status==='active').map(p=>`<option value="${esc(p.id)}" ${s.project_id===p.id?'selected':''}>${esc(p.name)}</option>`).join('')}</select></label><div class="form-actions">${button('无关','conversation-chatter','quiet small',s.id,'title="这是闲聊，清除摘要并过滤"')}</div>`:''}</article>`;};
+  const useful=groups;
+  const analysisFailed=!projectId&&(state.conversation_windows||[]).some(g=>!g.summary&&!g.ignored&&g.attempt?.error);
+  return section(projectId?'最近讨论':'待归属摘要',`${useful.map(row).join('')||empty(projectId?'还没有关联讨论。':'没有待归属的讨论。',projectId?'与这个项目有关的会话摘要会留在这里。':'已明确归属的摘要直接出现在项目中。')}${analysisFailed?'<p class="help overdue">部分会话暂未分析成功，系统稍后重试。</p>':''}<p class="help">只保留有实质信息的摘要，闲聊自动略过。原文留在微信。</p>`,String(useful.length),projectId?'':button('总结当前对话','summarize-conversations','quiet small'));
 }
+document.addEventListener('click',async event=>{
+  const control=event.target.closest('[data-action="conversation-chatter"]');if(!control||busy)return;
+  const summary=byId('conversation_summaries',control.dataset.id);if(!summary)return;
+  setBusy(true);
+  try{await api('/api/commands','POST',{entity:'conversation_summaries',operation:'mark_chatter',id:summary.id,expected_revision:summary.revision,data:{},request_id:crypto.randomUUID(),actor:'user:web',reason:'用户点选无关：这段是闲聊，清除摘要并过滤'});await refresh();toast('已按闲聊过滤');}
+  catch(err){toast(err.message,true);await refresh();}finally{setBusy(false);}
+});
 document.addEventListener('change',async event=>{
   const input=event.target.closest('[data-summary-project]');if(!input||busy)return;
   setBusy(true);
@@ -488,7 +498,7 @@ document.addEventListener('change',async event=>{
 
 function reminderPanel(){
   const r=state.reminders;if(!r)return '';
-  const row=(i,suppressed=false)=>`<article class="reminder-item"><strong>${esc(i.title)}</strong><p class="muted small">${esc(i.detail)}${i.kind==='meeting'?' · '+esc(new Date(i.when).toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'})):''}</p>${i.entity==='tasks'?button('查看任务','edit-task','quiet small',i.entity_id):`<a class="small" href="#calendar/${esc(i.entity_id)}">查看日程</a>`}<div class="form-actions">${suppressed?(i.state?button('恢复提醒','restore-reminder','quiet small',i.key):''):button('一小时后','snooze-reminder','small',i.key)+button('本次不再提醒','dismiss-reminder','quiet small',i.key)}</div></article>`;
+  const row=(i,suppressed=false)=>`<article class="reminder-item"><strong>${esc(i.title)}</strong><p class="muted small">${esc(i.detail)}${i.kind==='meeting'?' · '+esc(new Date(i.when).toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'})):''}</p>${i.entity==='routines'?'<a class="small" href="#routines">查看护理清单</a>':i.entity==='tasks'?button('查看任务','edit-task','quiet small',i.entity_id):`<a class="small" href="#calendar/${esc(i.entity_id)}">查看日程</a>`}<div class="form-actions">${suppressed?(i.state?button('恢复提醒','restore-reminder','quiet small',i.key):''):button('一小时后','snooze-reminder','small',i.key)+button('本次不再提醒','dismiss-reminder','quiet small',i.key)}</div></article>`;
   return section('提醒与跟进',`${r.quiet_now?'<p class="muted">静默时段 · 提醒已收起</p>':!r.preferences.enabled?'<p class="muted">提醒已关闭</p>':''}${r.items.map(i=>row(i)).join('')||'<p class="muted small">目前没有需要提醒的事项。</p>'}${r.suppressed.length?`<details><summary>稍后或已收起 · ${r.suppressed.length}</summary>${r.suppressed.map(i=>row(i,true)).join('')}</details>`:''}<p class="help">本地页面提醒 · 不会向联系人发送消息</p>`,'',button('设置','reminder-settings','quiet small'));
 }
 function paintBrief(b){

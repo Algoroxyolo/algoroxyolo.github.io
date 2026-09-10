@@ -98,22 +98,9 @@ def enhance(r, outputs, biography, calendar):
         outputs['research/' + project['slug'] + '/index.html'] = r.page(project['name'], '/research/' + project['slug'] + '/', body, project['theme'])
 
     # Search/filter controls enhance an entirely static publication archive.
-    archive = outputs['publications/index.html']
-    archive = archive.replace('href="#published"', 'href="/publications/?status=published#published"').replace('href="#preprints"', 'href="/publications/?status=preprint#preprints"')
     filters = '<form id="publication-filters" class="publication-filters" role="search" hidden><div class="search-field"><label for="paper-search">Find a paper</label><input id="paper-search" name="q" type="search" placeholder="Title, author, or keyword" autocomplete="off"></div><div><label for="paper-topic">Research theme</label><select id="paper-topic" name="topic"><option value="">All themes</option>' + ''.join('<option value="' + q['slug'] + '">' + escape(q['label']) + '</option>' for q in questions) + '</select></div><div><label for="paper-status">Status</label><select id="paper-status" name="status"><option value="">All papers</option><option value="published">Published</option><option value="preprint">Preprints</option></select></div><button type="button" id="clear-filters" class="text-button">Clear filters</button></form><p id="paper-count" class="academic-note" role="status" aria-live="polite" hidden></p><p id="paper-empty" hidden>No papers match these filters. Try another term or clear the filters.</p>'
-    archive = archive.replace('<article class="academic-content">', '<article class="academic-content">' + filters)
-    for pub in d['publications']:
-        key = pub['key']; topics = [slug for slug, keys in web['paper_topics'].items() if key in keys]
-        data = ' data-topics="' + ' '.join(topics) + '" data-status="' + pub['group'] + '"'
-        old = 'id="' + r.anchor(key) + '" class="academic-publication"'
-        archive = archive.replace(old, old + data)
-        citation = plain(r.tex(pub['authors'])) + '. ' + str(pub['year']) + '. ' + plain(r.tex(pub['title'])) + '. ' + plain(r.tex(pub['venue'])) + ' ' + pub['url']
-        target = r.publication(key)
-        copy = '<div class="citation-tools" hidden><button type="button" class="text-button copy-citation" data-citation="' + escape(citation, quote=True) + '" aria-label="Copy citation for ' + escape(plain(r.tex(pub['title'])), quote=True) + '">Copy citation</button><span class="citation-feedback" role="status" aria-live="polite"></span><textarea class="citation-fallback" aria-label="Citation text to copy manually" readonly hidden>' + escape(citation) + '</textarea></div>'
-        # Insert before the final li closing tag, using the full entry to avoid neighboring papers.
-        decorated = target.replace(old, old + data)
-        archive = archive.replace(decorated, decorated.rsplit('</li>',1)[0] + copy + '</li>')
-    outputs['publications/index.html'] = archive
+    from publications_site import render
+    outputs['publications/index.html'] = render(r, filters)
 
     writing = '<p class="page-lead">Research ideas, explained through writing and interactive experiments.</p>'
     for post in web['writing']:

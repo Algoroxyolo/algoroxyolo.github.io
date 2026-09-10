@@ -32,19 +32,27 @@
       search.value = params.get('q') || '';
       topic.value = params.get('topic') || '';
       status.value = params.get('status') || '';
+      if (!status.value && ['#published', '#preprints'].includes(location.hash)) {
+        status.value = location.hash === '#published' ? 'published' : 'preprint';
+      }
+      const disclosure = document.querySelector('.portfolio-search');
+      if (disclosure && (search.value || topic.value || status.value)) disclosure.open = true;
     }
     function filter(mode) {
       const filters = {q: search.value, topic: topic.value, status: status.value};
       let visible = 0;
       papers.forEach(p => { p.el.hidden = !matchesPaper(p.text, p.topics, p.status, filters); if (!p.el.hidden) visible++; });
-      document.querySelectorAll('#published,#preprints').forEach(section => {
+      document.querySelectorAll('.publication-year').forEach(section => {
         section.hidden = !Array.from(section.querySelectorAll('.academic-publication')).some(p => !p.hidden);
+        const link = document.querySelector('.collection-link[href="#' + section.id + '"]');
+        if (link) link.hidden = section.hidden;
       });
       count.textContent = visible + ' of ' + papers.length + ' papers';
       count.hidden = false;
       document.getElementById('paper-empty').hidden = visible !== 0;
       if (mode) {
         const url = new URL(location.href);
+        if (['#published', '#preprints'].includes(url.hash)) url.hash = '#showcase-top';
         Object.entries(filters).forEach(([key, value]) => value ? url.searchParams.set(key, value) : url.searchParams.delete(key));
         if (url.href !== location.href) history[mode + 'State'](null, '', url);
       }
@@ -53,6 +61,12 @@
       let id;
       try { id = decodeURIComponent(location.hash.slice(1)); } catch (_) { return; }
       const target = document.getElementById(id);
+      if (id === 'published' || id === 'preprints') {
+        status.value = id === 'published' ? 'published' : 'preprint';
+        const disclosure = document.querySelector('.portfolio-search');
+        if (disclosure) disclosure.open = true;
+        filter();
+      }
       const paper = target && target.closest('.academic-publication');
       if (paper && paper.hidden) {
         search.value = topic.value = status.value = '';
@@ -70,6 +84,16 @@
     window.addEventListener('popstate', () => { fromURL(); filter(); revealAnchor(); });
     window.addEventListener('hashchange', revealAnchor);
     form.hidden = false; fromURL(); filter(); revealAnchor();
+    const collectionLinks = document.querySelectorAll('.collection-link');
+    collectionLinks.forEach(link => link.addEventListener('click', () => {
+      if (link.hash === '#showcase-top') {
+        search.value = topic.value = status.value = ''; filter('push');
+      }
+    }));
+    function markCollection() {
+      collectionLinks.forEach(link => link.setAttribute('aria-current', String(link.hash === (location.hash || '#showcase-top'))));
+    }
+    window.addEventListener('hashchange', markCollection); markCollection();
   }
 
   document.querySelectorAll('.citation-tools').forEach(tools => {

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Publications | {{DISPLAY_NAME}}</title>
+  <meta name="description" content="Publications by Yunze Xiao on human–AI interaction, evaluation, and multi-agent social simulation.">
+  <link rel="canonical" href="https://algoroxyolo.github.io/publications/">
+  <link rel="icon" href="/assets/img/favicon.jpg">
+  <link rel="stylesheet" href="/assets/css/publications.css?v={{PUBLICATION_STYLE_VERSION}}">
+  <style id="highlight_theme_light"></style><style id="highlight_theme_dark" media="none"></style>
+  <script src="/assets/js/theme.js"></script>
+  <script src="/assets/js/dark_mode.js"></script>
+  <script defer src="/assets/js/research.js?v={{SCRIPT_VERSION}}"></script>
+</head>
+<body class="publications-page">
+<a class="skip-link" href="#main-content">Skip to content</a>
+<header class="portfolio-masthead">
+  <nav class="portfolio-nav" aria-label="Main navigation">
+    <a class="portfolio-brand" href="/"><img src="/assets/img/Yunze%20Xiao.jpg" alt="" width="42" height="42"><span>{{NAME}}<small>AI RESEARCHER</small></span></a>
+    <ul>{{NAVIGATION}}</ul>
+    <button id="light-toggle" type="button" aria-label="Change theme" title="Change theme"><span aria-hidden="true">◐</span></button>
+  </nav>
+</header>
+<main class="portfolio-page" id="main-content">
+  <header class="portfolio-hero">
+    <div><p class="portfolio-eyebrow">Research portfolio</p><h1>Publications</h1><p class="portfolio-intro">Human–AI interaction, human-centered evaluation, and multi-agent social simulation.</p><a class="portfolio-primary" href="/assets/pdf/Yunze_Xiao.pdf">Academic CV <span aria-hidden="true">↗</span></a></div>
+    <img class="portfolio-hero-art" src="/assets/img/publications/hero.png" alt="" width="1536" height="1024" fetchpriority="high">
+  </header>
+  <div class="portfolio-shell" id="showcase-top">
+    <aside class="portfolio-rail">
+      <nav class="portfolio-collections" aria-label="Publication years"><h2>Collections</h2>{{COLLECTIONS}}</nav>
+      <section class="portfolio-metrics" aria-labelledby="metrics-title"><h2 id="metrics-title">At a glance</h2>{{METRICS}}</section>
+      <details class="portfolio-search"><summary>Search &amp; filter</summary>{{FILTERS}}</details>
+    </aside>
+    <div class="portfolio-content"><span id="published" class="status-anchor"></span><span id="preprints" class="status-anchor"></span><p class="contribution-note">* Equal contribution. All authors are listed in full.</p>{{BODY}}</div>
+  </div>
+</main>
+<footer class="portfolio-footer"><p>© 2026 {{DISPLAY_NAME}} · <a href="mailto:{{EMAIL}}">Contact</a> · <a href="/cv/">CV</a></p><p class="design-credit">Layout and header illustration adapted from <a href="https://charliedreemur.github.io/publications/">Weijia (Charlie) Zhang</a>.</p></footer>
+</body>
+</html>

@@ -14,6 +14,18 @@ colors:
   rule-dark: "#49434c"
   card-light: "#ffffff"
   card-dark: "#212529"
+  publications-background-light: "#fff"
+  publications-background-dark: "#20282d"
+  publications-ink-light: "#494e52"
+  publications-ink-dark: "#e1e6e8"
+  publications-muted-light: "#65747c"
+  publications-muted-dark: "#abbac2"
+  publications-accent-light: "#2f7f93"
+  publications-accent-dark: "#88ccdc"
+  publications-tint-light: "#edf6f8"
+  publications-tint-dark: "#293d45"
+  publications-line-light: "#e9edef"
+  publications-line-dark: "#3b484f"
 typography:
   display:
     fontFamily: "Fraunces, Georgia, serif"
@@ -62,11 +74,33 @@ typography:
     lineHeight: 1.5
   code:
     fontFamily: 'JetBrains Mono, "SFMono-Regular", Consolas, monospace'
+  publications-display:
+    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+    fontSize: "64px"
+    fontWeight: 700
+    lineHeight: 1.12
+    letterSpacing: "-1.8px"
+  publications-body:
+    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+    fontSize: "19px"
+    lineHeight: 1.5
+  publications-title:
+    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+    fontSize: "19.6px"
+    fontWeight: 700
+    lineHeight: 1.45
 rounded:
+  publications-hero: "18px"
+  publications-card: "14px"
+  publications-pill: "999px"
   control: "4px"
   calendar: "10px"
   portrait: "50%"
 spacing:
+  publications-rail-gap: "51px"
+  publications-card-gap: "24px"
+  publications-card-inset: "25px"
+  publications-hero-inset: "38px"
   compact: ".5rem"
   related: "1rem"
   group: "1.5rem"
@@ -74,6 +108,29 @@ spacing:
   section: "2.5rem"
   major-section: "3.5rem"
 components:
+  publications-surface:
+    backgroundColor: "{colors.publications-background-light}"
+    textColor: "{colors.publications-ink-light}"
+    typography: "{typography.publications-body}"
+    width: "1280px"
+  publications-surface-dark:
+    backgroundColor: "{colors.publications-background-dark}"
+    textColor: "{colors.publications-ink-dark}"
+  publications-hero:
+    rounded: "{rounded.publications-hero}"
+    padding: "{spacing.publications-hero-inset}"
+    height: "414px"
+  publications-rail:
+    width: "285px"
+  publications-card:
+    backgroundColor: "{colors.publications-background-light}"
+    rounded: "{rounded.publications-card}"
+    padding: "{spacing.publications-card-inset}"
+  publications-resource:
+    backgroundColor: "{colors.publications-tint-light}"
+    textColor: "{colors.publications-accent-light}"
+    rounded: "{rounded.publications-pill}"
+    padding: "7px 12px"
   preset:
     backgroundColor: "transparent"
     textColor: "{colors.text-light}"
@@ -124,6 +181,10 @@ This phrase records the approved signature; it does not introduce a new branded 
 - Theme-specific accent, generous section spacing, and thin rules.
 - Optional experiments with native controls and explicit illustrative labeling.
 
+### Approved Publications exception
+
+Only `/publications/` adopts the user-approved same design as [the supplied reference](https://charliedreemur.github.io/publications/): system sans typography, white/teal light and dark themes, an illustrated hero, sticky year rail, and bordered paper cards. All `publications-` tokens are scoped exceptions; incumbent homepage and other-page tokens and rules remain authoritative. The independent stylesheet `assets/css/publications.css`, template `templates/publications.html`, and renderer `scripts/publications_site.py` are the implementation authority. Existing publication-row and filter guidance below describes incumbent components, not the replacement portfolio.
+
 ## Colors
 
 A magenta accent on white changes to cyan on charcoal in dark mode; reading text, secondary text, and separators follow the same theme switch.
@@ -141,6 +202,8 @@ A magenta accent on white changes to cyan on charcoal in dark mode; reading text
 - **Card:** the incumbent calendar surface; it is not the default container for research.
 
 Frontmatter component defaults describe light mode unless named otherwise. Runtime components resolve colors through the global CSS variables; dark mode changes foregrounds as well as backgrounds.
+
+Publications pairs its own background, ink, muted, accent, tint, and line tokens. Light mode uses white, muted teal links, and pale cyan surfaces; dark mode uses charcoal, pale text, and brighter teal. The CV pill retains its authored cyan fill and dark foreground in both themes. This palette does not replace the homepage palette.
 
 ## Typography
 
@@ -161,6 +224,8 @@ The serif supplies the academic voice; the sans serif handles dense information 
 
 **The Reading Hierarchy Rule.** Use the serif for page and section headings; use the sans serif for publication titles, labels, and controls.
 
+Publications uses the system sans stack throughout. Its display reduces to (54px) at the compact breakpoint and (42px) on phones. Complete author lists wrap with a desktop size (14.4px) and line height (1.62).
+
 ## Layout
 
 A centered container has a maximum width (880px), with horizontal padding (24px); phone padding is narrower (22px). The fixed navigation has a divider and an anchor offset below it. Main content has a minimum height (`calc(100vh - 220px)`).
@@ -171,15 +236,23 @@ Publication filters use three columns (1.3fr / 1fr / .7fr), then two with search
 
 Evidence inspected: `.impeccable/review/desktop.png`, `publications-mobile.png`, `experiment-desktop.png`, and `experiment-mobile-dark.png`. These are viewport captures, including scrolled experiment views, not full-page captures; they corroborate only the visible compositions. Source inspection supplies behavior and offscreen layout details.
 
+Publications uses the scoped surface maximum width, rail width, and gutter tokens. The sticky masthead has a minimum height (74px). The hero height token records a desktop minimum, not a fixed height; the hero grid is (1.35fr / 1fr). Cards with media use (1.22fr / 1fr). At (1050px) and below, the rail narrows to (210px), the gutter to (28px), and card media stacks. At (720px) and below, navigation wraps, the hero stacks with automatic height, collections precede papers, the rail becomes static, metrics use three columns, and cards use padding (18px). At (1450px) and above, page and navigation maximum width expands to (1320px); the footer retains the base width.
+
+Publications finish review disposition supplied to this documentation pass: **SHIP — no material findings**. Evidence is in `.impeccable/review/publications/`: `desktop.png`, `desktop-card.png`, `mobile.png`, `mobile-card.png`, `dark.png`, `reference-desktop.png`, and `reference-card.png`. Configured viewports were (1280×720) and (390×844); encoded images are (1265×712) and (375×812). These are viewport captures, not full-page verification. This documentation pass extracts source values and does not claim a fresh browser inspection.
+
 ## Elevation & Depth
 
 The shared research and publication surfaces are flat. Separation comes from spacing and one-pixel rules. Navigation explicitly has no shadow. The existing calendar uses a border and a tonal surface; no additional elevation token is established here.
 
 **The Ruled Surface Rule.** Separate research and publication groups with space and thin rules; the inline experiment shares that same surface.
 
+Publications is the scoped exception to flat shared surfaces: the hero uses cyan radial/linear gradients and an ambient shadow, while cards have subtle theme-aware shadows and thin borders. Exact gradient and shadow values belong to the sidecar.
+
 ## Shapes
 
 Controls have small rounded corners, while the portrait is circular. The inherited calendar is a softly rounded, clipped container. Native range controls retain browser geometry with an accent color. Plot geometry is functional: hollow target circles, filled simulated circles, thin connectors, and axes. These are data marks, not illustrations.
+
+Publications uses the scoped hero and card radii, pill resource actions, rounded venue badges, and a faint vertical timeline with circular year markers. The portrait remains circular; research figures retain their white image surface in both themes.
 
 ## Components
 
@@ -201,6 +274,12 @@ Publication rows pair a sans-serif title with complete authors, muted venue meta
 
 The calendar is an incumbent disclosure container, not a research-card template. Its header and embedded content stay within a rounded border.
 
+### Publications portfolio
+
+Each card retains complete authors, publication status, venue, available research themes, and verified paper figures. Resources, citation actions, and abstract disclosures use compact tinted pills. Search and filters live in a native rail disclosure. Preserve all stable and legacy anchors, readable paper content without JavaScript, citation feedback and fallback, and filter count updates. Focus uses an accent outline (3px) with offset (4px); reduced-motion preference removes transitions.
+
+The reference header illustration is credited in the footer. Six Publications PNG sources are recorded in `assets/img/publications/README.md`; the supplied provenance scan checked six with zero missing. Chameleon reuses its existing project figure. Papers without a verified figure use text cards.
+
 ### Interactive population illustration
 
 Two independent native ranges and three presets update actual marks for 24 deterministic synthetic people. Neutral hollow targets and accent-filled simulated marks distinguish roles without relying only on color. A second plot shows an additional response dimension. A live reading, reset action, assumptions disclosure, static conclusion, and research links accompany the plots. URL parameters preserve settings.
@@ -211,13 +290,13 @@ The enhancement is optional: controls are initially hidden, while the explanatio
 
 ### Do:
 
-- Do retain the established fonts, portrait, and light/dark theme pairing.
+- Do retain the established fonts, portrait, and light/dark theme pairing outside the approved Publications exception.
 - Do use visible focus, native controls, wrapping action rows, and readable static content alongside enhancements.
 - Do label illustrative plots and keep their readable conclusion and research links.
 
 ### Don't:
 
-- Don't add decorative project cards or additional branding motifs to this approved extension.
+- Don't add decorative project cards or additional branding motifs to incumbent academic surfaces; the approved Publications paper cards are a scoped exception.
 - Don't present synthetic plot values as paper results or a live model.
 - Don't make the legacy theme-wide transition or icon-font implementation a default for new components.
 

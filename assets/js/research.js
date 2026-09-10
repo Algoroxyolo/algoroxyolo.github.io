@@ -24,7 +24,7 @@
     const status = document.getElementById('paper-status');
     const count = document.getElementById('paper-count');
     const papers = Array.from(document.querySelectorAll('.academic-publication')).map(el => ({el,
-      text: Array.from(el.querySelectorAll('h3,.paper-authors,.paper-venue,.paper-takeaway,.paper-abstract')).map(x => x.textContent).join(' '),
+      text: Array.from(el.querySelectorAll('h3,.paper-authors,.paper-venue,.paper-takeaway,.paper-abstract,.paper-tags')).map(x => x.textContent).join(' '),
       topics: el.dataset.topics.split(' '), status: el.dataset.status}));
     let searchSession = false;
     function fromURL() {

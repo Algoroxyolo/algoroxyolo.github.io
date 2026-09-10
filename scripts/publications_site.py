@@ -14,6 +14,27 @@ def plain(value):
     return unescape(re.sub(r'<[^>]+>', '', value))
 
 
+def publication_tags(r):
+    data = json.loads((ROOT / 'data/publication-tags.json').read_text(encoding='utf-8'))
+    slugs = [tag['slug'] for tag in data['tags']]
+    if len(slugs) != len(set(slugs)): raise ValueError('Duplicate publication tag')
+    for key, tags in data['papers'].items():
+        if key not in r.pubs: raise ValueError('Unknown tagged publication: ' + key)
+        if any(tag not in slugs for tag in tags): raise ValueError('Unknown publication tag: ' + key)
+        if len(tags) != len(set(tags)): raise ValueError('Duplicate tag on publication: ' + key)
+    return data
+
+
+def topic_options(r):
+    data = publication_tags(r)
+    def options(items):
+        return ''.join('<option value="' + escape(t['slug'], quote=True) + '">' + escape(t['label']) + '</option>' for t in items)
+    result = '<optgroup label="Research themes">' + options(r.d['website']['questions']) + '</optgroup>'
+    for group in ['Applications', 'Topics & methods']:
+        result += '<optgroup label="' + escape(group, quote=True) + '">' + options(sorted((t for t in data['tags'] if t['group'] == group and t['slug'] not in r.d['website']['paper_topics']), key=lambda t: t['label'])) + '</optgroup>'
+    return result
+
+
 def bibtex(r, p):
     def tex(value):
         return re.sub(r'([&%_#])', r'\\\1', value).replace('{', r'\{').replace('}', r'\}')
@@ -30,7 +51,8 @@ def render(r, filters, outputs):
     pubs = r.d['publications']
     years = sorted({p['year'] for p in pubs}, reverse=True)
     counts = Counter(p['group'] for p in pubs)
-    themes = {q['slug']: q['label'] for q in r.d['website']['questions']}
+    taxonomy = publication_tags(r)
+    tag_labels = {t['slug']: t['label'] for t in taxonomy['tags']}
     nav = '<a class="collection-link" href="#showcase-top">All publications</a>'
     nav += ''.join(f'<a class="collection-link" href="#year-{year}"><span aria-hidden="true">▦</span> {year}</a>' for year in years)
     snapshot = json.loads((ROOT / 'data/citations.json').read_text(encoding='utf-8'))
@@ -48,6 +70,8 @@ def render(r, filters, outputs):
         for p in group:
             key = p['key']; title = r.tex(p['title']); authors = r.tex(p['authors'])
             topics = [slug for slug, keys in r.d['website']['paper_topics'].items() if key in keys]
+            tags = taxonomy['papers'].get(key, [])
+            topics = list(dict.fromkeys(topics + tags))
             aliases = f'<span class="paper-anchor" id="pub-{r.labels[key]}"></span>'
             if p.get('legacy_anchor'):
                 aliases += f'<span class="paper-anchor" id="{escape(p["legacy_anchor"])}"></span>'
@@ -71,8 +95,8 @@ def render(r, filters, outputs):
                 body += '<p class="paper-citations">' + r.link(record['source_url'], f'{record["count"]:,}' + record.get('scholar_marker', '') + ' citations · Google Scholar') + ' <span>(' + escape(record.get('updated', snapshot['updated'])) + ')</span></p>'
             else:
                 body += '<p class="paper-citations">Citations unavailable · Google Scholar</p>'
-            if topics:
-                body += '<ul class="paper-tags" aria-label="Research themes">' + ''.join('<li>' + escape(themes[t]) + '</li>' for t in topics) + '</ul>'
+            if tags:
+                body += '<ul class="paper-tags" aria-label="Research topics and applications">' + ''.join('<li>' + r.link('/publications/?topic=' + t + '#showcase-top', tag_labels[t]) + '</li>' for t in tags) + '</ul>'
             body += '</div>'
             if media:
                 width, height = struct.unpack('>II', (ROOT / media.lstrip('/')).read_bytes()[16:24])

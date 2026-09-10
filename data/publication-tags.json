@@ -1,0 +1,308 @@
+{
+  "tags": [
+    {
+      "slug": "responsible-ai",
+      "label": "Responsible AI",
+      "group": "Topics & methods"
+    },
+    {
+      "slug": "mental-health",
+      "label": "Mental Health",
+      "group": "Applications"
+    },
+    {
+      "slug": "social-media",
+      "label": "Social Media",
+      "group": "Applications"
+    },
+    {
+      "slug": "education",
+      "label": "Education",
+      "group": "Applications"
+    },
+    {
+      "slug": "healthcare",
+      "label": "Healthcare",
+      "group": "Applications"
+    },
+    {
+      "slug": "ai-companions",
+      "label": "AI Companions",
+      "group": "Applications"
+    },
+    {
+      "slug": "sustainability",
+      "label": "Sustainability",
+      "group": "Applications"
+    },
+    {
+      "slug": "human-ai-interaction",
+      "label": "Human–AI Interaction",
+      "group": "Topics & methods"
+    },
+    {
+      "slug": "anthropomorphism",
+      "label": "Anthropomorphism",
+      "group": "Topics & methods"
+    },
+    {
+      "slug": "ai-welfare",
+      "label": "AI Welfare",
+      "group": "Topics & methods"
+    },
+    {
+      "slug": "persona-modeling",
+      "label": "Persona Modeling",
+      "group": "Topics & methods"
+    },
+    {
+      "slug": "social-simulation-methods",
+      "label": "Social Simulation",
+      "group": "Topics & methods"
+    },
+    {
+      "slug": "multi-agent-systems",
+      "label": "Multi-Agent Systems",
+      "group": "Topics & methods"
+    },
+    {
+      "slug": "emotion-modeling",
+      "label": "Emotion Modeling",
+      "group": "Topics & methods"
+    },
+    {
+      "slug": "student-simulation",
+      "label": "Student Simulation",
+      "group": "Topics & methods"
+    },
+    {
+      "slug": "cultural-evaluation",
+      "label": "Cultural Evaluation",
+      "group": "Topics & methods"
+    },
+    {
+      "slug": "multilingual-nlp",
+      "label": "Multilingual NLP",
+      "group": "Topics & methods"
+    },
+    {
+      "slug": "llm-evaluation",
+      "label": "LLM Evaluation",
+      "group": "Topics & methods"
+    },
+    {
+      "slug": "agent-evaluation",
+      "label": "Agent Evaluation",
+      "group": "Topics & methods"
+    },
+    {
+      "slug": "calibration",
+      "label": "Calibration",
+      "group": "Topics & methods"
+    },
+    {
+      "slug": "tool-use",
+      "label": "Tool Use",
+      "group": "Topics & methods"
+    },
+    {
+      "slug": "reasoning",
+      "label": "Reasoning",
+      "group": "Topics & methods"
+    },
+    {
+      "slug": "alignment",
+      "label": "Alignment",
+      "group": "Topics & methods"
+    },
+    {
+      "slug": "moral-reasoning",
+      "label": "Moral Reasoning",
+      "group": "Topics & methods"
+    },
+    {
+      "slug": "persuasion",
+      "label": "Persuasion",
+      "group": "Topics & methods"
+    },
+    {
+      "slug": "privacy",
+      "label": "Privacy",
+      "group": "Topics & methods"
+    },
+    {
+      "slug": "content-moderation",
+      "label": "Content Moderation",
+      "group": "Topics & methods"
+    },
+    {
+      "slug": "robustness",
+      "label": "Robustness",
+      "group": "Topics & methods"
+    },
+    {
+      "slug": "disinformation",
+      "label": "Disinformation",
+      "group": "Topics & methods"
+    },
+    {
+      "slug": "linguistics",
+      "label": "Linguistics",
+      "group": "Topics & methods"
+    },
+    {
+      "slug": "question-answering",
+      "label": "Question Answering",
+      "group": "Topics & methods"
+    },
+    {
+      "slug": "collective-intelligence",
+      "label": "Collective Intelligence",
+      "group": "Topics & methods"
+    }
+  ],
+  "papers": {
+    "2026.acl-long.520": [
+      "agent-evaluation",
+      "calibration",
+      "tool-use",
+      "responsible-ai"
+    ],
+    "2026.findings-acl.368": [
+      "social-simulation-methods",
+      "multi-agent-systems",
+      "emotion-modeling"
+    ],
+    "2026.findings-acl.1270": [
+      "education",
+      "student-simulation",
+      "llm-evaluation"
+    ],
+    "2026.acl-demo.83": [
+      "education",
+      "multi-agent-systems",
+      "human-ai-interaction"
+    ],
+    "ai-welfare": [
+      "responsible-ai",
+      "ai-welfare"
+    ],
+    "2026.eacl-long.23": [
+      "mental-health",
+      "social-media",
+      "content-moderation",
+      "multilingual-nlp"
+    ],
+    "culture": [
+      "cultural-evaluation",
+      "llm-evaluation",
+      "responsible-ai"
+    ],
+    "2607.13924": [
+      "social-media",
+      "ai-companions",
+      "anthropomorphism",
+      "cultural-evaluation"
+    ],
+    "2504.02956": [
+      "reasoning",
+      "llm-evaluation"
+    ],
+    "10.1038/s41586-025-09962-4": [
+      "llm-evaluation",
+      "reasoning"
+    ],
+    "humanizing": [
+      "human-ai-interaction",
+      "anthropomorphism",
+      "responsible-ai"
+    ],
+    "2025.emnlp-main.79": [
+      "multilingual-nlp",
+      "llm-evaluation",
+      "reasoning"
+    ],
+    "2025.emnlp-main.831": [
+      "persona-modeling",
+      "multi-agent-systems",
+      "moral-reasoning",
+      "persuasion"
+    ],
+    "2505.18139": [
+      "responsible-ai"
+    ],
+    "toxicloak": [
+      "content-moderation",
+      "robustness",
+      "social-media"
+    ],
+    "2024.acl-long.102": [
+      "persona-modeling",
+      "human-ai-interaction",
+      "agent-evaluation"
+    ],
+    "2024.lrec-main.1508": [
+      "linguistics",
+      "llm-evaluation"
+    ],
+    "nexus": [
+      "disinformation",
+      "social-media",
+      "content-moderation"
+    ],
+    "10.1109/ICCRD54409.2022.9730454": [
+      "question-answering"
+    ],
+    "2608.11528": [
+      "alignment",
+      "responsible-ai",
+      "llm-evaluation"
+    ],
+    "2607.02032": [
+      "agent-evaluation",
+      "tool-use"
+    ],
+    "2606.11232": [
+      "moral-reasoning",
+      "alignment",
+      "responsible-ai"
+    ],
+    "chameleon": [
+      "persona-modeling",
+      "social-simulation-methods",
+      "agent-evaluation"
+    ],
+    "2604.22452": [
+      "multi-agent-systems",
+      "collective-intelligence",
+      "agent-evaluation"
+    ],
+    "2604.06409": [
+      "privacy",
+      "responsible-ai"
+    ],
+    "2602.00685": [
+      "social-simulation-methods",
+      "agent-evaluation"
+    ],
+    "student": [
+      "education",
+      "student-simulation",
+      "agent-evaluation"
+    ],
+    "2601.02186": [
+      "healthcare",
+      "multilingual-nlp",
+      "responsible-ai"
+    ],
+    "2404.13885": [
+      "alignment",
+      "sustainability",
+      "responsible-ai"
+    ],
+    "survey": [
+      "content-moderation",
+      "social-media"
+    ]
+  }
+}

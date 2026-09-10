@@ -147,6 +147,7 @@ class Renderer:
         display = self.d['profile']['display_name'].split(' ', 1)
         heading = '<span class="font-weight-bold">' + escape(display[0]) + '</span>' + (' ' + escape(display[1]) if len(display) > 1 else '')
         values = {'DISPLAY_NAME': escape(self.d['profile']['display_name']), 'NAME': escape(self.d['profile']['name']), 'NAME_HEADING': heading, 'EMAIL': escape(self.d['profile']['email']), **values}
+        values['STYLE_VERSION'] = digest(read(ROOT / 'assets/css/academic.css').encode('utf-8'))[:12]
         for k, v in values.items(): s = s.replace('{{' + k + '}}', v)
         remaining = re.findall(r'\{\{[A-Z_]+\}\}', s)
         if remaining: raise ValueError('Missing template values: ' + str(remaining))
@@ -186,9 +187,9 @@ class Renderer:
         outputs['teaching/index.html'] = self.page('teaching &amp; mentoring', '/teaching/', body)
         outputs['news/index.html'] = self.page('news', '/news/', self.news())
         body = '<p>Evaluating simulated people, studying collective dynamics, and designing collaboration among AI agents.</p><div class="research-projects">'
-        for i, project in enumerate(d['projects'], 1):
+        for project in d['projects']:
             pub = self.pubs[project['publication']]
-            body += '<section class="research-project" id="' + project['slug'] + '"><p class="project-theme">' + f'{i:02d} / ' + escape(project['theme']) + '</p><h2>' + escape(project['name']) + '</h2><p class="project-question">' + escape(project['question']) + '</p><p class="paper-takeaway">' + escape(project['finding']) + '</p><p>' + escape(project['method']) + '</p><p class="project-role"><strong>My role:</strong> ' + escape(project['role']) + '</p><p class="paper-venue">' + str(pub['year']) + '. ' + self.tex(pub['venue']) + '</p>' + self.resources(pub) + '</section>'
+            body += '<section class="research-project" id="' + project['slug'] + '"><h2>' + escape(project['name']) + '</h2><p class="project-theme">' + escape(project['theme']) + '</p><p class="project-question">' + escape(project['question']) + '</p><p class="paper-takeaway">' + escape(project['finding']) + '</p><p>' + escape(project['method']) + '</p><p class="project-role"><strong>My role:</strong> ' + escape(project['role']) + '</p><p class="paper-venue">' + str(pub['year']) + '. ' + self.tex(pub['venue']) + '</p>' + self.resources(pub) + '</section>'
         body += '</div><details class="project-archive"><summary>Earlier projects</summary><ul><li>' + self.link('/projects/2_project/', 'Early coursework: Auto Question Generator') + '</li><li>' + self.link('/projects/1_project/', 'Earlier study notes: ethical hacking certification preparation') + '</li></ul></details>'
         outputs['projects/index.html'] = self.page('research projects', '/projects/', body)
         return outputs

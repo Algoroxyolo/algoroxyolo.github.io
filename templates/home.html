@@ -43,7 +43,7 @@
     <script src="/assets/js/dark_mode.js"></script>
 
 
-  <link rel="stylesheet" href="/assets/css/academic.css">
+  <link rel="stylesheet" href="/assets/css/academic.css?v={{STYLE_VERSION}}">
   </head>
 
   <!-- Body -->
@@ -53,7 +53,7 @@
     <header>
 
       <!-- Nav Bar -->
-      <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+      <nav id="navbar" class="navbar navbar-light navbar-expand-md fixed-top">
         <div class="container">
 
           <!-- Navbar Toggle -->
@@ -94,7 +94,7 @@
 
               <!-- Toogle theme mode -->
               <li class="toggle-container">
-                <button id="light-toggle" title="Change theme">
+                <button id="light-toggle" title="Change theme" aria-label="Change theme">
                   <i class="fas fa-moon"></i>
                   <i class="fas fa-sun"></i>
                 </button>
@@ -184,7 +184,7 @@
 
 
     <!-- Fallback to the original file -->
-    <img src="/assets/img/Yunze%20Xiao.jpg" class="img-fluid z-depth-1 rounded-circle"  alt="Portrait of {{NAME}}">
+    <img src="/assets/img/Yunze%20Xiao.jpg" class="img-fluid z-depth-1 rounded-circle" width="480" height="480" alt="Portrait of {{NAME}}">
 
   </picture>
 
@@ -204,7 +204,7 @@
 {{SELECTED}}
 {{CALENDAR}}
           <!-- Visit counter -->
-          <p class="visit-note" id="visit-counter">
+          <p class="visit-note" id="visit-counter" hidden>
             This site has been visited <span id="gc-total">…</span> times since March 2026.
           </p>
           <script>
@@ -214,11 +214,12 @@
                 return n >= 1000 ? (n / 1000).toFixed(1) + 'k' : String(n);
               }
               fetch(url)
-                .then(function(r) { return r.json(); })
+                .then(function(r) { if (!r.ok) throw new Error('Counter unavailable'); return r.json(); })
                 .then(function(d) {
-                  var total = Number(String(d.count_unique || d.count || '0').replace(/\s/g, '')) || 0;
+                  var total = Number(String(d.count_unique ?? d.count ?? '').replace(/[\s,]/g, ''));
+                  if (!Number.isFinite(total) || total <= 0) return;
                   var el = document.getElementById('gc-total');
-                  if (el) el.textContent = fmt(total);
+                  if (el) { el.textContent = fmt(total); document.getElementById('visit-counter').hidden = false; }
                 })
                 .catch(function() {});
             })();
@@ -227,11 +228,11 @@
           <!-- Social -->
             <div class="social">
               <div class="contact-icons">
-                <a href="mailto:{{EMAIL}}" title="email"><i class="fas fa-envelope"></i></a>
-            <a href="https://github.com/Algoroxyolo" title="GitHub" rel="external nofollow noopener" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/yunzexiao" title="LinkedIn" rel="external nofollow noopener" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a href="https://twitter.com/lrzneedresearch" title="Twitter" rel="external nofollow noopener" target="_blank"><i class="fab fa-twitter"></i></a>
-            <a href="/feed.xml" title="RSS Feed"><i class="fas fa-rss-square"></i></a>
+                <a href="mailto:{{EMAIL}}" title="email" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
+            <a href="https://github.com/Algoroxyolo" title="GitHub" aria-label="GitHub" rel="external nofollow noopener" target="_blank"><i class="fab fa-github" aria-hidden="true"></i></a>
+            <a href="https://www.linkedin.com/in/yunzexiao" title="LinkedIn" aria-label="LinkedIn" rel="external nofollow noopener" target="_blank"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+            <a href="https://twitter.com/lrzneedresearch" title="Twitter" aria-label="Twitter" rel="external nofollow noopener" target="_blank"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+            <a href="/feed.xml" title="RSS Feed" aria-label="RSS Feed"><i class="fas fa-rss-square" aria-hidden="true"></i></a>
 
 
               </div>
@@ -251,7 +252,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="fixed-bottom">
+    <footer class="academic-footer">
       <div class="container mt-0">
         © Copyright 2026 {{DISPLAY_NAME}}.
       </div>

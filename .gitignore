@@ -1,3 +1,6 @@
 __pycache__/
 *.pyc
 .sites-runtime/
+.agents/
+.codex/
+.impeccable/

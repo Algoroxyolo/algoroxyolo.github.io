@@ -48,6 +48,17 @@ def enhance(r, outputs, biography, calendar):
 
     def named_interests():
         text = r.tex(d['research_interests'])
+        def linked(phrase, key):
+            return r.link('/publications/#' + r.anchor(key), phrase)
+        text = text.replace(
+            'anthropomorphism and human-centered evaluation ' + r.ref('humanizing') + ', ' + r.ref('culture'),
+            linked('anthropomorphism', 'humanizing') + ' and ' + linked('human-centered evaluation', 'culture'))
+        text = text.replace(
+            'persona and multi-agent social simulation ' + r.ref('chameleon') + ', ' + r.ref('2026.findings-acl.368'),
+            linked('persona', 'chameleon') + ' and ' + linked('multi-agent social simulation', '2026.findings-acl.368'))
+        text = text.replace(
+            'the evidential foundations of AI welfare claims ' + r.ref('ai-welfare'),
+            'the evidential foundations of ' + linked('AI welfare claims', 'ai-welfare'))
         for key in r.pubs:
             text = text.replace(r.ref(key), '[' + r.link('/publications/#' + r.anchor(key), title(key)) + ']')
         return text

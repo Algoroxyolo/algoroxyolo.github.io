@@ -34,12 +34,13 @@ def render(r, filters, outputs):
     nav = '<a class="collection-link" href="#showcase-top">All publications</a>'
     nav += ''.join(f'<a class="collection-link" href="#year-{year}"><span aria-hidden="true">▦</span> {year}</a>' for year in years)
     snapshot = json.loads((ROOT / 'data/citations.json').read_text(encoding='utf-8'))
+    if snapshot['source'] != 'Google Scholar':
+        raise ValueError('Publication citation counts must come from Google Scholar')
     records = snapshot['papers']
-    indexed = {records[p['key']]['source_url']: records[p['key']]['count'] for p in pubs if records.get(p['key'], {}).get('count') is not None}
-    total = sum(indexed.values())
+    total = snapshot['profile_total']
     coverage = sum(records.get(p['key'], {}).get('count') is not None for p in pubs)
-    metrics = f'<p class="publication-summary"><strong>{len(pubs)}</strong> papers · {counts["published"]} published · {counts["preprint"]} preprints · <strong>{total}</strong> OpenAlex citations</p>'
-    metrics += f'<p class="citation-source">Counts for {coverage}/{len(pubs)} listed papers · Updated {escape(snapshot["updated"])} · {r.link("https://openalex.org/", "OpenAlex")} coverage differs from Google Scholar.</p>'
+    metrics = f'<p class="publication-summary"><strong>{len(pubs)}</strong> papers · {counts["published"]} published · {counts["preprint"]} preprints · ' + r.link(snapshot['profile_url'], f'{total:,} citations · Google Scholar') + '</p>'
+    metrics += f'<p class="citation-source">Google Scholar profile total · Updated {escape(snapshot["updated"])} · Individual counts verified for {coverage}/{len(pubs)} listed papers.</p>'
     body = ''
     for year in years:
         group = [p for p in pubs if p['year'] == year]
@@ -67,9 +68,9 @@ def render(r, filters, outputs):
             body += '<p class="paper-venue">' + str(year) + ' · ' + r.tex(p['venue']) + ' <span class="pub-label">[' + r.labels[key] + ']</span></p>'
             record = records.get(key, {})
             if record.get('count') is not None:
-                body += '<p class="paper-citations">' + r.link(record['source_url'], str(record['count']) + ' citations · OpenAlex') + ' <span>(' + escape(record.get('updated', snapshot['updated'])) + (' · cached' if record.get('stale') else '') + ')</span></p>'
+                body += '<p class="paper-citations">' + r.link(record['source_url'], f'{record["count"]:,}' + record.get('scholar_marker', '') + ' citations · Google Scholar') + ' <span>(' + escape(record.get('updated', snapshot['updated'])) + ')</span></p>'
             else:
-                body += '<p class="paper-citations">Citations unavailable · OpenAlex</p>'
+                body += '<p class="paper-citations">Citations unavailable · Google Scholar</p>'
             if topics:
                 body += '<ul class="paper-tags" aria-label="Research themes">' + ''.join('<li>' + escape(themes[t]) + '</li>' for t in topics) + '</ul>'
             body += '</div>'
@@ -86,7 +87,7 @@ def render(r, filters, outputs):
     css = (ROOT / 'assets/css/publications.css').read_text(encoding='utf-8')
     outputs['assets/bib/yunze-xiao.bib'] = '\n'.join(bibtex(r, p) for p in pubs)
     content = metrics + '<p class="publication-downloads"><a download href="/assets/bib/yunze-xiao.bib">Download all BibTeX</a> · ' + r.link('/assets/pdf/Yunze_Xiao.pdf', 'CV (PDF)') + '</p><details class="portfolio-search"><summary>Search &amp; filter papers</summary>' + filters + '</details>'
-    content += '<div class="portfolio-shell" id="showcase-top"><nav class="portfolio-rail" aria-label="Publication years">' + nav + '</nav><div class="portfolio-content"><span id="published"></span><span id="preprints"></span><p class="contribution-note">* Equal contribution.</p>' + body + '</div></div>'
+    content += '<div class="portfolio-shell" id="showcase-top"><nav class="portfolio-rail" aria-label="Publication years">' + nav + '</nav><div class="portfolio-content"><span id="published"></span><span id="preprints"></span><p class="contribution-note">* Equal contribution in author lists. Citation counts retain Google Scholar’s own * markers.</p>' + body + '</div></div>'
     page = r.page('Publications', '/publications/', content, 'Human–AI interaction, human-centered evaluation, and multi-agent social simulation.')
     page = page.replace('class="fixed-top-nav "', 'class="fixed-top-nav publications-page"')
     page = page.replace('</head>', '<link rel="stylesheet" href="/assets/css/publications.css?v=' + sha256(css.encode()).hexdigest()[:12] + '">\n</head>')

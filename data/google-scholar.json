@@ -1,0 +1,250 @@
+{
+  "end": true,
+  "profile_name": "Yunze Xiao",
+  "profile_total": 1616,
+  "profile_url": "https://scholar.google.com/citations?hl=en&user=95n7XTkAAAAJ",
+  "rows": [
+    {
+      "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:qUcmZB5y_30C",
+      "citation_text": "869*",
+      "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=7259718440450810100,6239537948684441362,1274537797459527807,2590536447730340670,5400841999944501731,1422367768388967541",
+      "title": "A benchmark of expert-level academic questions to assess AI capabilities",
+      "year": "2026"
+    },
+    {
+      "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:Se3iqnhoufwC",
+      "citation_text": "308*",
+      "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=8274712073914849629,16027786210079608892,15219304991136172931,5855761006248069697,17264804492840743435",
+      "title": "Incharacter: Evaluating personality fidelity in role-playing agents through psychological interviews",
+      "year": "2024"
+    },
+    {
+      "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:MXK_kJrjxJIC",
+      "citation_text": "134",
+      "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=12766815193302589343,8687862630080986201",
+      "title": "Mmlu-prox: A multilingual benchmark for advanced large language model evaluation",
+      "year": "2025"
+    },
+    {
+      "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:Tyk-4Ss8FVUC",
+      "citation_text": "59",
+      "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=16662407705167816187",
+      "title": "Toxicloakcn: Evaluating robustness of offensive language detection in chinese with cloaking perturbations",
+      "year": "2024"
+    },
+    {
+      "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:LkGwnXOMwfcC",
+      "citation_text": "47",
+      "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=10345380000042201421",
+      "title": "Understanding aha moments: from external observations to internal mechanisms",
+      "year": "2025"
+    },
+    {
+      "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:8k81kl-MbHgC",
+      "citation_text": "35",
+      "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=10487343159960108718",
+      "title": "Humanizing Machines: Rethinking LLM Anthropomorphism Through a Multi-Level Framework of Design",
+      "year": "2025"
+    },
+    {
+      "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:UebtZRa9Y70C",
+      "citation_text": "28",
+      "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=12233962316560853893,11442745151232705008",
+      "title": "Synthetic Socratic Debates: Examining Persona Effects on Moral Decision and Persuasion Dynamics",
+      "year": "2025"
+    },
+    {
+      "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:zYLM7Y9cAGgC",
+      "citation_text": "22",
+      "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=416467282502272117",
+      "title": "Surveying attitudinal alignment between large language models vs. humans towards 17 sustainable development goals",
+      "year": "2024"
+    },
+    {
+      "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:UeHWp8X0CEIC",
+      "citation_text": "17",
+      "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=7306988241024104192",
+      "title": "Chinese offensive language detection: Current status and future directions",
+      "year": "2024"
+    },
+    {
+      "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:7PzlFSSx8tAC",
+      "citation_text": "13",
+      "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=2904386111941060719,12833164339773482304",
+      "title": "Towards Valid Student Simulation with Large Language Models",
+      "year": "2026"
+    },
+    {
+      "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:L8Ckcad2t8MC",
+      "citation_text": "12",
+      "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=10865585850865414653",
+      "title": "The Confidence Dichotomy: Analyzing and Mitigating Miscalibration in Tool-Use Agents",
+      "year": "2026"
+    },
+    {
+      "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:QIV2ME_5wuYC",
+      "citation_text": "12",
+      "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=14854778054547167310",
+      "title": "Can LLMs Estimate Student Struggles? Human-AI Difficulty Alignment with Proficiency Simulation for Item Difficulty Prediction",
+      "year": "2025"
+    },
+    {
+      "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:4JMBOYKVnBMC",
+      "citation_text": "9",
+      "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=11485114674120824496",
+      "title": "Hire your anthropologist! rethinking culture benchmarks through an anthropological lens",
+      "year": "2026"
+    },
+    {
+      "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:roLk4NBRz8UC",
+      "citation_text": "9",
+      "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=1458543247881926854",
+      "title": "Embracing Contradiction: Theoretical Inconsistency Will Not Impede the Road of Building Responsible AI Systems",
+      "year": "2025"
+    },
+    {
+      "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:u5HHmVD_uO8C",
+      "citation_text": "7",
+      "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=9184244781417711217",
+      "title": "A transformer-based attention flow model for intelligent question and answering chatbot",
+      "year": "2022"
+    },
+    {
+      "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:RHpTSmoSYBkC",
+      "citation_text": "6",
+      "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=10124818816952861511",
+      "title": "JiraiBench: A Bilingual Benchmark for Evaluating Large Language Models’ Detection of Human risky health behavior Content in Jirai Community",
+      "year": "2026"
+    },
+    {
+      "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:IjCSPb-OGe4C",
+      "citation_text": "6",
+      "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=2464989318365801209",
+      "title": "Verbing weirds language (models): evaluation of english zero-derivation in five LLMs",
+      "year": "2024"
+    },
+    {
+      "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:dhFuZR0502QC",
+      "citation_text": "5",
+      "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=9500332365097437949",
+      "title": "Toward global large language models in medicine",
+      "year": "2026"
+    },
+    {
+      "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:maZDTaKrznsC",
+      "citation_text": "4*",
+      "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=17867900210323412634,5206195562652950994",
+      "title": "Validated Hypotheses as a Lens for Human-Likeness Evaluation in AI Agents",
+      "year": "2026"
+    },
+    {
+      "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:2osOgNQ5qMEC",
+      "citation_text": "4",
+      "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=11748846282973836871",
+      "title": "Nexus at araieval shared task: Fine-tuning arabic language models for propaganda and disinformation detection",
+      "year": "2023"
+    },
+    {
+      "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&cstart=20&pagesize=80&citation_for_view=95n7XTkAAAAJ:TFP_iSt0sucC",
+      "citation_text": "3",
+      "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=9891165623914163694",
+      "title": "The Chameleon's Limit: Investigating Persona Collapse and Homogenization in Large Language Models",
+      "year": "2026"
+    },
+    {
+      "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&cstart=20&pagesize=80&citation_for_view=95n7XTkAAAAJ:isC4tDSrTZIC",
+      "citation_text": "2",
+      "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=16748152569865275845",
+      "title": "Superminds Test: Actively Evaluating Collective Intelligence of Agent Society via Probing Agents",
+      "year": "2026"
+    },
+    {
+      "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&cstart=20&pagesize=80&citation_for_view=95n7XTkAAAAJ:ZeXyd9-uunAC",
+      "citation_text": "2",
+      "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=13138361893130647649",
+      "title": "Sentipolis: Emotion-Aware Agents for Social Simulations",
+      "year": "2026"
+    },
+    {
+      "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&cstart=20&pagesize=80&citation_for_view=95n7XTkAAAAJ:YFjsv_pBGBYC",
+      "citation_text": "1",
+      "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=67177841241031117",
+      "title": "Every Act Has Its Price: Compressed Moral Composition in Frontier LLMs",
+      "year": "2026"
+    },
+    {
+      "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&cstart=20&pagesize=80&citation_for_view=95n7XTkAAAAJ:k_IJM867U9cC",
+      "citation_text": "1",
+      "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=8183039733276419965,1839136466085976954",
+      "title": "Position: AI Welfare Is Bullshit",
+      "year": "2026"
+    },
+    {
+      "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&cstart=20&pagesize=80&citation_for_view=95n7XTkAAAAJ:-f6ydRqryjwC",
+      "citation_text": "1",
+      "cited_by_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=12443725293363076272",
+      "title": "AniTales: End-to-End Multimodal Story Generation Through Natural Language Prompting (Student Abstract)",
+      "year": "2026"
+    },
+    {
+      "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&cstart=20&pagesize=80&citation_for_view=95n7XTkAAAAJ:vV6vV6tmYwMC",
+      "citation_text": "",
+      "cited_by_url": null,
+      "title": "Learning from Use: Test-Time Learning in Large Language Models and Agents",
+      "year": "2026"
+    },
+    {
+      "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&cstart=20&pagesize=80&citation_for_view=95n7XTkAAAAJ:lSLTfruPkqcC",
+      "citation_text": "",
+      "cited_by_url": null,
+      "title": "Group Alignment-Induced Sycophancy: A Two-Sided Evaluation of Steerable Pluralistic Alignment",
+      "year": "2026"
+    },
+    {
+      "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&cstart=20&pagesize=80&citation_for_view=95n7XTkAAAAJ:RGFaLdJalmkC",
+      "citation_text": "",
+      "cited_by_url": null,
+      "title": "ExpressionCueLens: A Cross-Cultural Analysis of Human-AI Companion Conversations on Social Media",
+      "year": "2026"
+    },
+    {
+      "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&cstart=20&pagesize=80&citation_for_view=95n7XTkAAAAJ:O3NaXMp0MMsC",
+      "citation_text": "",
+      "cited_by_url": null,
+      "title": "PACE: A Proxy for Agentic Capability Evaluation",
+      "year": "2026"
+    },
+    {
+      "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&cstart=20&pagesize=80&citation_for_view=95n7XTkAAAAJ:GnPB-g6toBAC",
+      "citation_text": "",
+      "cited_by_url": null,
+      "title": "TartanMaroon: Multi-Agent Academic Advising with Iterative Negotiation and Transparent Collaboration",
+      "year": "2026"
+    },
+    {
+      "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&cstart=20&pagesize=80&citation_for_view=95n7XTkAAAAJ:iH-uZ7U-co4C",
+      "citation_text": "",
+      "cited_by_url": null,
+      "title": "Say Something Else: Rethinking Contextual Privacy as Information Sufficiency",
+      "year": "2026"
+    }
+  ],
+  "retrieved_at": "2026-09-10T21:31:28.899Z",
+  "verified_article_links": {
+    "2026.eacl-long.23": {
+      "citation_for_view": "95n7XTkAAAAJ:RHpTSmoSYBkC",
+      "publication_url": "https://aclanthology.org/2026.eacl-long.23/",
+      "reason": "Scholar article detail links to the canonical ACL paper despite Bilingual/Cross-lingual title difference."
+    }
+  },
+  "search_records": [
+    {
+      "title": "Humanstudy-bench: Towards ai agent design for participant simulation",
+      "article_url": "https://arxiv.org/abs/2602.00685",
+      "citation_text": "4",
+      "cited_by_url": "https://scholar.google.com/scholar?cites=17867900210323412634&as_sdt=2005&sciodt=0,5&hl=en",
+      "source_url": "https://scholar.google.com/scholar?hl=en&q=%22HumanStudy-Bench%22",
+      "year": "2026"
+    }
+  ]
+}

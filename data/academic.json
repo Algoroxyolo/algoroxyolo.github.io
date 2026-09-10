@@ -719,5 +719,123 @@
   "calendar": {
     "url": "https://calendar.google.com/calendar/embed?src=yunzex%40andrew.cmu.edu&ctz=America%2FNew_York&mode=WEEK",
     "timezone_label": "Eastern Time (Pittsburgh)"
+  },
+  "website": {
+    "questions": [
+      {
+        "slug": "human-centered-evaluation",
+        "label": "Human-centered evaluation",
+        "question": "How do we evaluate human-like AI?",
+        "description": "Anthropomorphism, cultural measurement, and the evidence behind claims about AI.",
+        "papers": [
+          "humanizing",
+          "culture",
+          "ai-welfare"
+        ],
+        "next": "What evidence would distinguish a useful human-like behavior from an unsupported claim about human-like properties?"
+      },
+      {
+        "slug": "social-simulation",
+        "label": "People and social simulation",
+        "question": "When can simulated people tell us something about society?",
+        "description": "From persona fidelity and simulated learners to diversity and collective dynamics.",
+        "papers": [
+          "chameleon",
+          "student",
+          "2026.findings-acl.368"
+        ],
+        "next": "When does a convincing individual simulation preserve the variation that matters at population scale?"
+      },
+      {
+        "slug": "trustworthy-agents",
+        "label": "Trustworthy multi-agent systems",
+        "question": "How can we make multi-agent systems trustworthy?",
+        "description": "Coordination and evaluation today; scalable oversight and societal impact as future directions.",
+        "papers": [
+          "2026.acl-demo.83",
+          "2026.acl-long.520",
+          "2604.22452"
+        ],
+        "next": "How can we oversee interacting agents as their decisions become harder to inspect individually?"
+      }
+    ],
+    "short_titles": {
+      "humanizing": "Humanizing Machines",
+      "culture": "Hire Your Anthropologist!",
+      "ai-welfare": "AI Welfare Is Bullshit",
+      "chameleon": "The Chameleon’s Limit",
+      "student": "Valid Student Simulation",
+      "2026.findings-acl.368": "Sentipolis",
+      "2026.acl-demo.83": "TartanMaroon",
+      "2026.acl-long.520": "The Confidence Dichotomy",
+      "2604.22452": "Superminds Test"
+    },
+    "paper_topics": {
+      "human-centered-evaluation": [
+        "humanizing",
+        "culture",
+        "ai-welfare",
+        "2607.13924",
+        "2505.18139",
+        "2025.emnlp-main.79",
+        "10.1038/s41586-025-09962-4",
+        "2026.eacl-long.23",
+        "2404.13885",
+        "2601.02186",
+        "2608.11528",
+        "2604.06409"
+      ],
+      "social-simulation": [
+        "chameleon",
+        "student",
+        "2026.findings-acl.368",
+        "2026.findings-acl.1270",
+        "2025.emnlp-main.831",
+        "2024.acl-long.102",
+        "2602.00685",
+        "2606.11232",
+        "2604.22452"
+      ],
+      "trustworthy-agents": [
+        "2026.acl-demo.83",
+        "2026.acl-long.520",
+        "2607.02032",
+        "2604.22452",
+        "2026.findings-acl.368",
+        "2608.11528"
+      ]
+    },
+    "study_notes": {
+      "chameleon-limit": {
+        "scope": "The findings concern the tested models, personas, and evaluation tasks. The interactive illustration below explains a distinction; it does not reproduce the paper’s measurements.",
+        "related": [
+          "humanizing",
+          "student",
+          "2026.findings-acl.368"
+        ]
+      },
+      "sentipolis": {
+        "scope": "Emotional continuity and perceived believability are separate outcomes. Improvements in these simulations do not establish predictive validity for real societies.",
+        "related": [
+          "chameleon",
+          "2604.22452"
+        ]
+      },
+      "tartanmaroon": {
+        "scope": "The evidence comes from academic advising at Carnegie Mellon University Qatar. Stronger performance on constrained planning does not establish general-purpose oversight or safety.",
+        "related": [
+          "2026.acl-long.520",
+          "2604.22452"
+        ]
+      }
+    },
+    "writing": [
+      {
+        "title": "The Chameleon’s Limit",
+        "url": "/blog/2026/chameleon-limit/",
+        "description": "A research companion on persona collapse, diversity, and what individual fidelity can miss.",
+        "paper": "chameleon"
+      }
+    ]
   }
 }

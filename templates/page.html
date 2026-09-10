@@ -44,10 +44,12 @@
     
 
   <link rel="stylesheet" href="/assets/css/academic.css?v={{STYLE_VERSION}}">
+  <script defer src="/assets/js/research.js?v={{SCRIPT_VERSION}}"></script>
   </head>
 
   <!-- Body -->
   <body class="fixed-top-nav ">
+    <a class="skip-link" href="#main-content">Skip to content</a>
 
     <!-- Header -->
     <header>
@@ -67,30 +69,7 @@
           <div class="collapse navbar-collapse text-right" id="navbarNav">
             <ul class="navbar-nav ml-auto flex-nowrap">
 
-              <!-- About -->
-              <li class="nav-item ">
-                <a class="nav-link" href="/">about</a>
-              </li>
-              
-              <!-- Blog -->
-              <li class="nav-item ">
-                <a class="nav-link" href="/blog/">blog</a>
-              </li>
-
-              <!-- Other pages -->
-              <li class="nav-item "><a class="nav-link" href="/projects/">projects</a></li>
-              <li class="nav-item ">
-                <a class="nav-link" href="/publications/">publications</a>
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="/cv/">cv<span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item dropdown ">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">more</a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="/teaching/">teaching</a>
-                </div>
-              </li>
+              {{NAVIGATION}}
 
               <!-- Toogle theme mode -->
               <li class="toggle-container">
@@ -114,7 +93,7 @@
 
 
     <!-- Content -->
-    <div class="container mt-5">
+    <main id="main-content" class="container mt-5">
       <!-- _layouts/cv.html -->
         <div class="post">
 
@@ -124,12 +103,12 @@
 
         </div>
 
-    </div>
+    </main>
 
     <!-- Footer -->    
     <footer class="academic-footer">
       <div class="container mt-0">
-        © Copyright 2026 {{DISPLAY_NAME}}. 
+        © 2026 {{DISPLAY_NAME}}. <a href="/teaching/">Teaching &amp; mentoring</a> · <a href="/#contact">Contact</a>
       </div>
     </footer>
 

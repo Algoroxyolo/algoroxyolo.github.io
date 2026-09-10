@@ -36,6 +36,7 @@ def latex_text(text):
     return text.replace('&', r'\&').replace('%', r'\%').replace('_', r'\_').replace('–', '--')
 
 class Renderer:
+    anchor = staticmethod(anchor)
     def __init__(self, data):
         self.d = data
         self.pubs = {p['key']: p for p in data['publications']}
@@ -49,6 +50,11 @@ class Renderer:
             if k not in self.pubs: raise ValueError('Unknown publication: ' + k)
         for e in data['education']:
             if (e['status'] == 'in_progress') != (e['end'] is None): raise ValueError('Degree status/end date disagree')
+        for question in data['website']['questions']:
+            for key in question['papers']:
+                if key not in self.pubs: raise ValueError('Unknown question paper: ' + key)
+        for keys in data['website']['paper_topics'].values():
+            if any(k not in self.pubs for k in keys): raise ValueError('Unknown topic paper')
 
     def tex(self, s):
         out = ''; i = 0
@@ -148,15 +154,18 @@ class Renderer:
         heading = '<span class="font-weight-bold">' + escape(display[0]) + '</span>' + (' ' + escape(display[1]) if len(display) > 1 else '')
         values = {'DISPLAY_NAME': escape(self.d['profile']['display_name']), 'NAME': escape(self.d['profile']['name']), 'NAME_HEADING': heading, 'EMAIL': escape(self.d['profile']['email']), **values}
         values['STYLE_VERSION'] = digest(read(ROOT / 'assets/css/academic.css').encode('utf-8'))[:12]
+        values['SCRIPT_VERSION'] = digest(read(ROOT / 'assets/js/research.js').encode('utf-8'))[:12]
+        route = values.get('ROUTE', '/')
+        nav = [('/', 'Home'), ('/research/', 'Research'), ('/publications/', 'Publications'), ('/writing/', 'Writing'), ('/cv/', 'CV')]
+        values['NAVIGATION'] = ''.join('<li class="nav-item' + (' active' if route == url or url == '/research/' and route.startswith('/research/') else '') + '"><a class="nav-link" href="' + url + '"' + (' aria-current="page"' if route == url else '') + '>' + label + '</a></li>' for url,label in nav)
         for k, v in values.items(): s = s.replace('{{' + k + '}}', v)
         remaining = re.findall(r'\{\{[A-Z_]+\}\}', s)
         if remaining: raise ValueError('Missing template values: ' + str(remaining))
         return s
 
     def page(self, title, route, body, subtitle=''):
+        title = {'publications':'Publications', 'cv':'CV', 'news':'News', 'teaching &amp; mentoring':'Teaching &amp; Mentoring'}.get(title, title)
         s = self.template('page.html', {'TITLE': title, 'ROUTE': route, 'BODY': body, 'SUBTITLE': subtitle, 'DESCRIPTION': escape(title.capitalize() + ' by ' + self.d['profile']['name'])})
-        s = s.replace('nav-item active', 'nav-item ').replace('<span class="sr-only">(current)</span>', '')
-        s = re.sub(r'(<li class="nav-item )("[^>]*>\s*<a class="nav-link" href="' + re.escape(route) + '")', r'\1active\2', s)
         return s
 
     def website(self):
@@ -166,6 +175,7 @@ class Renderer:
         else: intro = 'I received my ' + escape(master['position']) + ' in ' + month(master['end']) + ' from ' + escape(master['institution']) + '’s '
         intro += self.link(master['institution_url'], master['unit']) + ', ' + ('advised by ' if master['status'] == 'in_progress' else 'where I was advised by ') + self.link(master['advisor_url'], 'Prof. ' + master['advisor']) + '.'
         intro += ' I received my ' + escape(bachelor['position']) + ' from ' + escape(bachelor['institution']) + ' in ' + month(bachelor['end']) + ', with a minor in ' + escape(bachelor['minor']) + ', working with ' + self.link(bachelor['advisor_url'], 'Prof. ' + bachelor['advisor']) + ' and ' + self.link(bachelor['additional_advisor_url'], 'Prof. ' + bachelor['additional_advisor']) + '.'
+        biography = intro
         intro = '<div class="clearfix academic-intro"><p>' + intro + '</p><p>' + self.tex(d['research_interests']) + '</p><p class="academic-contact">' + self.link('mailto:' + p['email'], p['email']) + ' · ' + self.link('/assets/pdf/Yunze_Xiao.pdf', 'Academic CV (PDF)') + ' · ' + self.link('/projects/', 'Research projects') + '</p></div>'
         selected = '<h2>' + self.link('/publications/', 'selected publications') + '</h2><ol class="academic-publications">' + ''.join(self.publication(k, True) for k in d['selected_publications']) + '</ol><p>' + self.link('/publications/', 'All publications and preprints') + '</p>'
         cal = '<details class="calendar-card calendar-disclosure"><summary>Schedule a conversation<span>View my calendar</span></summary><div class="calendar-card__header"><p class="calendar-card__note">Times shown in ' + escape(d['calendar']['timezone_label']) + '. You can also ' + self.link('mailto:' + p['email'], 'email me') + '.</p></div><div class="calendar-card__embed"><iframe loading="lazy" src="' + escape(d['calendar']['url'], quote=True) + '" title="Yunze Xiao’s availability calendar"></iframe></div></details>'
@@ -186,12 +196,15 @@ class Renderer:
         body += self.teaching() + '<section><h2>NLP Ethics in a Nutshell</h2><p>' + escape(d['course_description']['text']) + '</p><p>' + self.link(d['course_description']['materials'], 'Course materials (PDF)') + '</p></section>'
         outputs['teaching/index.html'] = self.page('teaching &amp; mentoring', '/teaching/', body)
         outputs['news/index.html'] = self.page('news', '/news/', self.news())
-        body = '<p>Evaluating simulated people, studying collective dynamics, and designing collaboration among AI agents.</p><div class="research-projects">'
-        for project in d['projects']:
-            pub = self.pubs[project['publication']]
-            body += '<section class="research-project" id="' + project['slug'] + '"><h2>' + escape(project['name']) + '</h2><p class="project-theme">' + escape(project['theme']) + '</p><p class="project-question">' + escape(project['question']) + '</p><p class="paper-takeaway">' + escape(project['finding']) + '</p><p>' + escape(project['method']) + '</p><p class="project-role"><strong>My role:</strong> ' + escape(project['role']) + '</p><p class="paper-venue">' + str(pub['year']) + '. ' + self.tex(pub['venue']) + '</p>' + self.resources(pub) + '</section>'
-        body += '</div><details class="project-archive"><summary>Earlier projects</summary><ul><li>' + self.link('/projects/2_project/', 'Early coursework: Auto Question Generator') + '</li><li>' + self.link('/projects/1_project/', 'Earlier study notes: ethical hacking certification preparation') + '</li></ul></details>'
-        outputs['projects/index.html'] = self.page('research projects', '/projects/', body)
+        from research_site import enhance
+        outputs = enhance(self, outputs, biography, cal)
+        sitemap = read(ROOT / 'sitemap.xml')
+        for name in outputs:
+            route = '/' + name.removesuffix('index.html')
+            url = 'https://algoroxyolo.github.io' + route
+            if '<loc>' + url + '</loc>' not in sitemap:
+                sitemap = sitemap.replace('</urlset>', '<url><loc>' + url + '</loc></url>\n</urlset>')
+        outputs['sitemap.xml'] = sitemap
         return outputs
 
     def cv_files(self):
@@ -301,6 +314,6 @@ def main():
         raise ValueError('PDF changed independently: pass --cv-dir to regenerate it from the canonical data')
     for path,s in outputs.items(): write(ROOT/path,s)
     write(manifest_path,json.dumps(manifest,indent=2)+'\n')
-    print(f'Rendered {len(outputs)} academic pages and synchronized {len(renderer.pubs)} publications; PDF matches the canonical data.')
+    print(f'Rendered {sum(p.endswith(".html") for p in outputs)} academic pages and synchronized {len(renderer.pubs)} publications; PDF matches the canonical data.')
 
 if __name__ == '__main__': main()

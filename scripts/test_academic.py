@@ -37,4 +37,21 @@ class AcademicContentTests(unittest.TestCase):
         self.data['publications'] = [p for p in self.data['publications'] if p['key'] != 'chameleon']
         with self.assertRaisesRegex(ValueError, 'Unknown publication'): Renderer(self.data)
 
+    def test_archive_preserves_authors_anchors_and_copy_text(self):
+        renderer = Renderer(self.data)
+        archive = renderer.website()['publications/index.html']
+        self.assertEqual(archive.count('class="text-button copy-citation"'), len(self.data['publications']))
+        for paper in self.data['publications']:
+            self.assertIn('id="'+anchor(paper['key'])+'"', archive)
+            self.assertIn(renderer.tex(paper['authors']), archive)
+
+    def test_research_routes_preserve_project_bookmarks(self):
+        pages = Renderer(self.data).website()
+        self.assertEqual(pages['research/index.html'], pages['projects/index.html'])
+        for project in self.data['projects']:
+            self.assertIn('id="'+project['slug']+'"', pages['projects/index.html'])
+            self.assertIn('research/'+project['slug']+'/index.html', pages)
+        self.assertIn('Illustrative model.', pages['index.html'])
+        self.assertLess(pages['index.html'].index('Questions behind the work'), pages['index.html'].index('Selected publications'))
+
 if __name__ == '__main__': unittest.main()

@@ -106,7 +106,7 @@
       try {
         if (!navigator.clipboard) throw new Error('Clipboard unavailable');
         await navigator.clipboard.writeText(button.dataset.citation);
-        feedback.textContent = 'Citation copied.';
+        feedback.textContent = button.classList.contains('copy-bibtex') ? 'BibTeX copied.' : 'Citation copied.';
       } catch (_) {
         fallback.hidden = false; fallback.focus(); fallback.select();
         feedback.textContent = 'Select and copy the citation below.';

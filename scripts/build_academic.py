@@ -200,6 +200,7 @@ class Renderer:
         outputs = enhance(self, outputs, biography, cal)
         sitemap = read(ROOT / 'sitemap.xml')
         for name in outputs:
+            if not name.endswith('.html'): continue
             route = '/' + name.removesuffix('index.html')
             url = 'https://algoroxyolo.github.io' + route
             if '<loc>' + url + '</loc>' not in sitemap:

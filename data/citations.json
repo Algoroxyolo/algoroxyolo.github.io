@@ -1,0 +1,247 @@
+{
+  "source": "OpenAlex",
+  "updated": "2026-09-10",
+  "scope": "Listed work records; not a Google Scholar author-profile total. Versions may have different counts.",
+  "papers": {
+    "2026.acl-long.520": {
+      "count": 0,
+      "status": "matched",
+      "source_url": "https://openalex.org/W7166880412",
+      "matched_title": "The Confidence Dichotomy: Analyzing and Mitigating Miscalibration in Tool-Use Agents",
+      "doi": "https://doi.org/10.18653/v1/2026.acl-long.520",
+      "updated": "2026-09-10"
+    },
+    "2026.findings-acl.368": {
+      "count": 0,
+      "status": "matched",
+      "source_url": "https://openalex.org/W7166854518",
+      "matched_title": "Sentipolis: Emotion-Aware Agents for Social Simulations",
+      "doi": "https://doi.org/10.18653/v1/2026.findings-acl.368",
+      "updated": "2026-09-10"
+    },
+    "2026.findings-acl.1270": {
+      "count": 0,
+      "status": "matched",
+      "source_url": "https://openalex.org/W7166833243",
+      "matched_title": "Can LLMs Estimate Student Struggles? Human-AI Difficulty Alignment with Proficiency Simulation for Item Difficulty Prediction",
+      "doi": "https://doi.org/10.18653/v1/2026.findings-acl.1270",
+      "updated": "2026-09-10"
+    },
+    "2026.acl-demo.83": {
+      "count": 0,
+      "status": "matched",
+      "source_url": "https://openalex.org/W7166817564",
+      "matched_title": "TartanMaroon: Multi-Agent Academic Advising with Iterative Negotiation and Transparent Collaboration",
+      "doi": "https://doi.org/10.18653/v1/2026.acl-demo.83",
+      "updated": "2026-09-10"
+    },
+    "ai-welfare": {
+      "count": 0,
+      "status": "matched",
+      "source_url": "https://openalex.org/W7160067725",
+      "matched_title": "Position: AI Welfare Is Bullshit",
+      "doi": "https://doi.org/10.2139/ssrn.6574439",
+      "updated": "2026-09-10"
+    },
+    "2026.eacl-long.23": {
+      "count": 0,
+      "status": "matched",
+      "source_url": "https://openalex.org/W7140105696",
+      "matched_title": "JiraiBench: A Bilingual Benchmark for Evaluating Large Language Models’ Detection of Human risky health behavior Content in Jirai Community",
+      "doi": "https://doi.org/10.18653/v1/2026.eacl-long.23",
+      "updated": "2026-09-10"
+    },
+    "culture": {
+      "count": 1,
+      "status": "matched",
+      "source_url": "https://openalex.org/W7140110515",
+      "matched_title": "Hire Your Anthropologist! Rethinking Culture Benchmarks Through an Anthropological Lens",
+      "doi": "https://doi.org/10.18653/v1/2026.findings-eacl.63",
+      "updated": "2026-09-10"
+    },
+    "2607.13924": {
+      "count": 0,
+      "status": "matched",
+      "source_url": "https://openalex.org/W7196963736",
+      "matched_title": "ExpressionCueLens: a cross-cultural analysis of human-AI companion conversations on social media",
+      "doi": "https://doi.org/10.1007/s12652-026-05109-z",
+      "updated": "2026-09-10"
+    },
+    "2504.02956": {
+      "count": 0,
+      "status": "matched",
+      "source_url": "https://openalex.org/W4415976483",
+      "matched_title": "Understanding Aha Moments: from External Observations to Internal Mechanisms",
+      "doi": "https://doi.org/10.48550/arxiv.2504.02956",
+      "updated": "2026-09-10"
+    },
+    "10.1038/s41586-025-09962-4": {
+      "count": 21,
+      "status": "matched",
+      "source_url": "https://openalex.org/W4406840771",
+      "matched_title": "A benchmark of expert-level academic questions to assess AI capabilities",
+      "doi": "https://doi.org/10.1038/s41586-025-09962-4",
+      "updated": "2026-09-10"
+    },
+    "humanizing": {
+      "count": 8,
+      "status": "matched",
+      "source_url": "https://openalex.org/W4416036888",
+      "matched_title": "Humanizing Machines: Rethinking LLM Anthropomorphism Through a Multi-Level Framework of Design",
+      "doi": "https://doi.org/10.18653/v1/2025.emnlp-main.164",
+      "updated": "2026-09-10"
+    },
+    "2025.emnlp-main.79": {
+      "count": 9,
+      "status": "matched",
+      "source_url": "https://openalex.org/W4416037358",
+      "matched_title": "MMLU-ProX: A Multilingual Benchmark for Advanced Large Language Model Evaluation",
+      "doi": "https://doi.org/10.18653/v1/2025.emnlp-main.79",
+      "updated": "2026-09-10"
+    },
+    "2025.emnlp-main.831": {
+      "count": 0,
+      "status": "matched",
+      "source_url": "https://openalex.org/W4416036172",
+      "matched_title": "Synthetic Socratic Debates: Examining Persona Effects on Moral Decision and Persuasion Dynamics",
+      "doi": "https://doi.org/10.18653/v1/2025.emnlp-main.831",
+      "updated": "2026-09-10"
+    },
+    "2505.18139": {
+      "count": 0,
+      "status": "matched",
+      "source_url": "https://openalex.org/W6966554118",
+      "matched_title": "Embracing Contradiction: Theoretical Inconsistency Will Not Impede the Road of Building Responsible AI Systems",
+      "doi": "https://doi.org/10.48550/arxiv.2505.18139",
+      "updated": "2026-09-10"
+    },
+    "toxicloak": {
+      "count": 10,
+      "status": "matched",
+      "source_url": "https://openalex.org/W4404782854",
+      "matched_title": "ToxiCloakCN: Evaluating Robustness of Offensive Language Detection in Chinese with Cloaking Perturbations",
+      "doi": "https://doi.org/10.18653/v1/2024.emnlp-main.345",
+      "updated": "2026-09-10"
+    },
+    "2024.acl-long.102": {
+      "count": 40,
+      "status": "matched",
+      "source_url": "https://openalex.org/W4402671884",
+      "matched_title": "InCharacter: Evaluating Personality Fidelity in Role-Playing Agents through Psychological Interviews",
+      "doi": "https://doi.org/10.18653/v1/2024.acl-long.102",
+      "updated": "2026-09-10"
+    },
+    "2024.lrec-main.1508": {
+      "count": 0,
+      "status": "matched",
+      "source_url": "https://openalex.org/W7131818617",
+      "matched_title": "Verbing Weirds Language (Models): Evaluation of English Zero-Derivation in Five LLMs",
+      "doi": "https://doi.org/10.63317/5agdorun7s22",
+      "updated": "2026-09-10"
+    },
+    "nexus": {
+      "count": 2,
+      "status": "matched",
+      "source_url": "https://openalex.org/W4389518333",
+      "matched_title": "Nexus at ArAIEval Shared Task: Fine-Tuning Arabic Language Models for Propaganda and Disinformation Detection",
+      "doi": "https://doi.org/10.18653/v1/2023.arabicnlp-1.58",
+      "updated": "2026-09-10"
+    },
+    "10.1109/ICCRD54409.2022.9730454": {
+      "count": 5,
+      "status": "matched",
+      "source_url": "https://openalex.org/W4220971309",
+      "matched_title": "A Transformer-based Attention Flow Model for Intelligent Question and Answering Chatbot",
+      "doi": "https://doi.org/10.1109/iccrd54409.2022.9730454",
+      "updated": "2026-09-10"
+    },
+    "2608.11528": {
+      "count": 0,
+      "status": "matched",
+      "source_url": "https://openalex.org/W7202369973",
+      "matched_title": "Group Alignment-Induced Sycophancy: A Two-Sided Evaluation of Steerable Pluralistic Alignment",
+      "doi": "https://doi.org/10.48550/arxiv.2608.11528",
+      "updated": "2026-09-10"
+    },
+    "2607.02032": {
+      "count": 0,
+      "status": "matched",
+      "source_url": "https://openalex.org/W7167280081",
+      "matched_title": "PACE: A Proxy for Agentic Capability Evaluation",
+      "doi": "https://doi.org/10.48550/arxiv.2607.02032",
+      "updated": "2026-09-10"
+    },
+    "2606.11232": {
+      "count": 0,
+      "status": "matched",
+      "source_url": "https://openalex.org/W7164407369",
+      "matched_title": "Every Act Has Its Price: Compressed Moral Composition in Frontier LLMs",
+      "doi": "https://doi.org/10.48550/arxiv.2606.11232",
+      "updated": "2026-09-10"
+    },
+    "chameleon": {
+      "count": 0,
+      "status": "matched",
+      "source_url": "https://openalex.org/W7157258148",
+      "matched_title": "The Chameleon's Limit: Investigating Persona Collapse and Homogenization in Large Language Models",
+      "doi": "https://doi.org/10.48550/arxiv.2604.24698",
+      "updated": "2026-09-10"
+    },
+    "2604.22452": {
+      "count": 0,
+      "status": "matched",
+      "source_url": "https://openalex.org/W7156036250",
+      "matched_title": "Superminds Test: Actively Evaluating Collective Intelligence of Agent Society via Probing Agents",
+      "doi": "https://doi.org/10.48550/arxiv.2604.22452",
+      "updated": "2026-09-10"
+    },
+    "2604.06409": {
+      "count": 0,
+      "status": "matched",
+      "source_url": "https://openalex.org/W7152410653",
+      "matched_title": "Say Something Else: Rethinking Contextual Privacy as Information Sufficiency",
+      "doi": "https://doi.org/10.48550/arxiv.2604.06409",
+      "updated": "2026-09-10"
+    },
+    "2602.00685": {
+      "count": 0,
+      "status": "matched",
+      "source_url": "https://openalex.org/W7127378580",
+      "matched_title": "HumanStudy-Bench: Towards AI Agent Design for Participant Simulation",
+      "doi": "https://doi.org/10.48550/arxiv.2602.00685",
+      "updated": "2026-09-10"
+    },
+    "student": {
+      "count": 0,
+      "status": "matched",
+      "source_url": "https://openalex.org/W7123316713",
+      "matched_title": "Towards Valid Student Simulation with Large Language Models",
+      "doi": "https://doi.org/10.48550/arxiv.2601.05473",
+      "updated": "2026-09-10"
+    },
+    "2601.02186": {
+      "count": 1,
+      "status": "matched",
+      "source_url": "https://openalex.org/W7118708034",
+      "matched_title": "Toward Global Large Language Models in Medicine",
+      "doi": "https://doi.org/10.48550/arxiv.2601.02186",
+      "updated": "2026-09-10"
+    },
+    "2404.13885": {
+      "count": 7,
+      "status": "matched",
+      "source_url": "https://openalex.org/W4395064525",
+      "matched_title": "Surveying Attitudinal Alignment Between Large Language Models Vs. Humans Towards 17 Sustainable Development Goals",
+      "doi": "https://doi.org/10.48550/arxiv.2404.13885",
+      "updated": "2026-09-10"
+    },
+    "survey": {
+      "count": 0,
+      "status": "matched",
+      "source_url": "https://openalex.org/W4393334861",
+      "matched_title": "Chinese Offensive Language Detection:Current Status and Future Directions",
+      "doi": "https://doi.org/10.48550/arxiv.2403.18314",
+      "updated": "2026-09-10"
+    }
+  }
+}

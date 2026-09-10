@@ -47,3 +47,8 @@
 互动实验放在 Chameleon 详情页，首页只保留入口。使用 24 个固定的合成人物和两个独立控制量，只解释“人设匹配与额外行为维度上的多样性需要分别评价”。不展示论文实验分数，不调用模型。网址中的 `labf` / `labd` 可分享状态；论文页的 `q` / `topic` / `status` 可分享检索条件。关闭 JavaScript 后保留全部论文、研究内容及实验的静态说明。检查交互逻辑可运行 `node scripts/test_research.js`，内容同步回归检查运行 `python scripts/test_academic.py`。
 
 生成器会改写上述学术 CV 章节；如需调整排版，应修改生成器的 `cv_files()` 或 CV 的排版类，不要直接修改生成章节。个人贡献只录入本人确认的信息。硕士状态当前沿用本轮 CV 的在读信息；如确认 May 2026 已毕业，请在学历数据中统一修正。
+# Citation counts and BibTeX
+
+`data/citations.json` is a dated OpenAlex snapshot, separate from academic facts. Run `python scripts/update_citations.py` and then `python scripts/build_academic.py` to refresh and publish counts. DOI lookup is preferred; title-search fallback requires a close title match and Yunze Xiao in the author list. Missing matches are unavailable, not zero. Transient failures preserve older verified counts with a cached marker. Totals deduplicate matched OpenAlex work IDs and refer to the listed records, not a Google Scholar profile total.
+
+BibTeX is generated from the canonical full author lists, titles, years, venues and URLs. Each publication has an `assets/bib/paper-*.bib` download, and `assets/bib/yunze-xiao.bib` contains the full list. Equal-contribution markers are omitted from machine-readable author names. These minimal exports retain the known fields; they do not invent page ranges or other publisher metadata.

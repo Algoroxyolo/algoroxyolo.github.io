@@ -21,6 +21,12 @@
   if (form) {
     const search = document.getElementById('paper-search');
     const topic = document.getElementById('paper-topic');
+    const topicButtons = Array.from(form.querySelectorAll('[data-topic]'));
+    const topicAliases = JSON.parse(topic.dataset.aliases || '{}');
+    function resolveTopic(value) {
+      const resolved = topicAliases[value] || value;
+      return topicButtons.some(button => button.dataset.topic === resolved) ? resolved : '';
+    }
     const status = document.getElementById('paper-status');
     const count = document.getElementById('paper-count');
     const papers = Array.from(document.querySelectorAll('.academic-publication')).map(el => ({el,
@@ -30,16 +36,15 @@
     function fromURL() {
       const params = new URL(location.href).searchParams;
       search.value = params.get('q') || '';
-      topic.value = params.get('topic') || '';
+      topic.value = resolveTopic(params.get('topic') || '');
       status.value = params.get('status') || '';
       if (!status.value && ['#published', '#preprints'].includes(location.hash)) {
         status.value = location.hash === '#published' ? 'published' : 'preprint';
       }
-      const disclosure = document.querySelector('.portfolio-search');
-      if (disclosure && (search.value || topic.value || status.value)) disclosure.open = true;
     }
     function filter(mode) {
       const filters = {q: search.value, topic: topic.value, status: status.value};
+      topicButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.topic === filters.topic)));
       let visible = 0;
       papers.forEach(p => { p.el.hidden = !matchesPaper(p.text, p.topics, p.status, filters); if (!p.el.hidden) visible++; });
       document.querySelectorAll('.publication-year').forEach(section => {
@@ -63,8 +68,6 @@
       const target = document.getElementById(id);
       if (id === 'published' || id === 'preprints') {
         status.value = id === 'published' ? 'published' : 'preprint';
-        const disclosure = document.querySelector('.portfolio-search');
-        if (disclosure) disclosure.open = true;
         filter();
       }
       const paper = target && target.closest('.academic-publication');
@@ -76,7 +79,21 @@
     }
     search.addEventListener('input', () => { filter(searchSession ? 'replace' : 'push'); searchSession = true; });
     search.addEventListener('blur', () => { searchSession = false; });
-    [topic, status].forEach(control => control.addEventListener('change', () => filter('push')));
+    status.addEventListener('change', () => filter('push'));
+    topicButtons.forEach(button => button.addEventListener('click', () => {
+      topic.value = topic.value === button.dataset.topic ? '' : button.dataset.topic;
+      filter('push');
+    }));
+    document.querySelectorAll('.paper-tags a').forEach(link => link.addEventListener('click', event => {
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
+      event.preventDefault();
+      topic.value = resolveTopic(new URL(link.href).searchParams.get('topic') || '');
+      search.value = status.value = '';
+      filter('push');
+      form.scrollIntoView({block: 'start'});
+      const selected = topicButtons.find(button => button.dataset.topic === topic.value);
+      if (selected) selected.focus({preventScroll: true});
+    }));
     form.addEventListener('submit', event => { event.preventDefault(); filter('push'); });
     document.getElementById('clear-filters').addEventListener('click', () => {
       search.value = topic.value = status.value = ''; filter('push'); search.focus();

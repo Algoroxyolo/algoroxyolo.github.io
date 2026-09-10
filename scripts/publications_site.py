@@ -18,6 +18,8 @@ def publication_tags(r):
     data = json.loads((ROOT / 'data/publication-tags.json').read_text(encoding='utf-8'))
     slugs = [tag['slug'] for tag in data['tags']]
     if len(slugs) != len(set(slugs)): raise ValueError('Duplicate publication tag')
+    for old, current in data.get('aliases', {}).items():
+        if old in slugs or current not in slugs: raise ValueError('Invalid publication tag alias: ' + old)
     for key, tags in data['papers'].items():
         if key not in r.pubs: raise ValueError('Unknown tagged publication: ' + key)
         if any(tag not in slugs for tag in tags): raise ValueError('Unknown publication tag: ' + key)
@@ -25,14 +27,13 @@ def publication_tags(r):
     return data
 
 
-def topic_options(r):
+def topic_controls(r):
     data = publication_tags(r)
-    def options(items):
-        return ''.join('<option value="' + escape(t['slug'], quote=True) + '">' + escape(t['label']) + '</option>' for t in items)
-    result = '<optgroup label="Research themes">' + options(r.d['website']['questions']) + '</optgroup>'
-    for group in ['Applications', 'Topics & methods']:
-        result += '<optgroup label="' + escape(group, quote=True) + '">' + options(sorted((t for t in data['tags'] if t['group'] == group and t['slug'] not in r.d['website']['paper_topics']), key=lambda t: t['label'])) + '</optgroup>'
-    return result
+    aliases = escape(json.dumps(data.get('aliases', {})), quote=True)
+    result = '<fieldset class="topic-filter"><legend>Topics</legend><input type="hidden" id="paper-topic" name="topic" value="" data-aliases="' + aliases + '"><div class="topic-chips">'
+    for tag in [{'slug': '', 'label': 'All topics'}] + data['tags']:
+        result += '<button type="button" class="topic-chip" data-topic="' + escape(tag['slug'], quote=True) + '" aria-pressed="' + ('false' if tag['slug'] else 'true') + '">' + escape(tag['label']) + '</button>'
+    return result + '</div></fieldset>'
 
 
 def bibtex(r, p):
@@ -69,9 +70,8 @@ def render(r, filters, outputs):
         body += f'<section class="publication-year" id="year-{year}"><header class="year-heading"><h2>{year}</h2><p>{len(group)} papers · Published work and preprints</p></header><ol class="portfolio-cards">'
         for p in group:
             key = p['key']; title = r.tex(p['title']); authors = r.tex(p['authors'])
-            topics = [slug for slug, keys in r.d['website']['paper_topics'].items() if key in keys]
             tags = taxonomy['papers'].get(key, [])
-            topics = list(dict.fromkeys(topics + tags))
+            topics = tags
             aliases = f'<span class="paper-anchor" id="pub-{r.labels[key]}"></span>'
             if p.get('legacy_anchor'):
                 aliases += f'<span class="paper-anchor" id="{escape(p["legacy_anchor"])}"></span>'
@@ -110,7 +110,7 @@ def render(r, filters, outputs):
         body += '</ol></section>'
     css = (ROOT / 'assets/css/publications.css').read_text(encoding='utf-8')
     outputs['assets/bib/yunze-xiao.bib'] = '\n'.join(bibtex(r, p) for p in pubs)
-    content = metrics + '<p class="publication-downloads"><a download href="/assets/bib/yunze-xiao.bib">Download all BibTeX</a> · ' + r.link('/assets/pdf/Yunze_Xiao.pdf', 'CV (PDF)') + '</p><details class="portfolio-search"><summary>Search &amp; filter papers</summary>' + filters + '</details>'
+    content = metrics + '<p class="publication-downloads"><a download href="/assets/bib/yunze-xiao.bib">Download all BibTeX</a> · ' + r.link('/assets/pdf/Yunze_Xiao.pdf', 'CV (PDF)') + '</p>' + filters
     content += '<div class="portfolio-shell" id="showcase-top"><nav class="portfolio-rail" aria-label="Publication years">' + nav + '</nav><div class="portfolio-content"><span id="published"></span><span id="preprints"></span><p class="contribution-note">* Equal contribution in author lists. Citation counts retain Google Scholar’s own * markers.</p>' + body + '</div></div>'
     page = r.page('Publications', '/publications/', content, 'Human–AI interaction, human-centered evaluation, and multi-agent social simulation.')
     page = page.replace('class="fixed-top-nav "', 'class="fixed-top-nav publications-page"')

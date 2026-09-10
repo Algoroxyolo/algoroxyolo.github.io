@@ -10,10 +10,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>news | Yunze (Lorenzo) Xiao</title>
-    <meta name="author" content="Yunze (Lorenzo) Xiao">
-    <meta name="description" content="News by Yunze Xiao">
-    <meta name="keywords" content="human–AI interaction, multi-agent systems, social simulation, human-centered evaluation, Yunze Xiao">
+    <title>{{TITLE}} | {{DISPLAY_NAME}}</title>
+    <meta name="author" content="{{DISPLAY_NAME}}">
+    <meta name="description" content="{{DESCRIPTION}}">
+    <meta name="keywords" content="human–AI interaction, multi-agent systems, social simulation, human-centered evaluation, {{NAME}}">
 
 
     <!-- Bootstrap & MDB -->
@@ -33,7 +33,7 @@
     <link rel="shortcut icon" href="/assets/img/favicon.jpg">
     
     <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="canonical" href="https://algoroxyolo.github.io/news/">
+    <link rel="canonical" href="https://algoroxyolo.github.io{{ROUTE}}">
     
     <!-- Dark Mode -->
     
@@ -55,7 +55,7 @@
       <!-- Nav Bar -->
       <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
         <div class="container">
-          <a class="navbar-brand title font-weight-lighter" href="/"><span class="font-weight-bold">Yunze</span> (Lorenzo) Xiao</a>
+          <a class="navbar-brand title font-weight-lighter" href="/">{{NAME_HEADING}}</a>
           <!-- Navbar Toggle -->
           <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -82,8 +82,8 @@
               <li class="nav-item ">
                 <a class="nav-link" href="/publications/">publications</a>
               </li>
-              <li class="nav-item ">
-                <a class="nav-link" href="/cv/">cv</a>
+              <li class="nav-item active">
+                <a class="nav-link" href="/cv/">cv<span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item dropdown ">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">more</a>
@@ -118,9 +118,9 @@
       <!-- _layouts/cv.html -->
         <div class="post">
 
-          <header class="post-header"><h1 class="post-title">news</h1><p class="post-description"></p></header>
+          <header class="post-header"><h1 class="post-title">{{TITLE}}</h1><p class="post-description">{{SUBTITLE}}</p></header>
 
-          <article class="academic-content"><div class="news"><div class="table-responsive"><table class="table table-sm table-borderless"><tr><th scope="row">Jul. 2026</th><td>Our ACL 2026 papers include <a href="/publications/#paper-2026-findings-acl-368">Sentipolis</a>, <a href="/publications/#paper-2026-acl-demo-83">TartanMaroon</a>, <a href="/publications/#paper-2026-acl-long-520">The Confidence Dichotomy</a>, and <a href="/publications/#paper-2026-findings-acl-1270">student difficulty estimation</a>.</td></tr><tr><th scope="row">May 2026</th><td>I presented <em>Persona Collapse: Measuring Diversity Failures in LLM-Simulated Populations</em> at the STAMINA-WG Research Talk Series.</td></tr><tr><th scope="row">Apr 26, 2026</th><td>New blog post &amp; interactive microsite — <a href="/blog/2026/chameleon-limit/">The Chameleon’s Limit</a> summarizes our preprint on persona collapse in LLMs (<a href="/projects/chameleon-limit/">explore the microsite</a>).</td></tr><tr><th scope="row">Feb. 2026</th><td>I presented <em>Embracing Contradiction</em> at the CMU FEAT Reading Group.</td></tr><tr><th scope="row">Oct. 2025</th><td>I presented <a href="/publications/#paper-humanizing">Humanizing Machines</a> at the MLNLP Seminar.</td></tr><tr><th scope="row">Sep 28, 2024</th><td>Happy to share that I am reviewing for ICWSM 2025 and CSCW 2025!</td></tr><tr><th scope="row">Sep 28, 2024</th><td>Happy to share that our work on Cloaked Offensive Language is accepted by EMNLP 2024!</td></tr><tr><th scope="row">Jun 19, 2024</th><td>Our work on Cloaked Offensive Language is on <a href="https://arxiv.org/abs/2406.12223" rel="external nofollow noopener" target="_blank">arxiv</a> now!</td></tr></table></div></div></article>
+          <article class="academic-content">{{BODY}}</article>
 
         </div>
 
@@ -129,7 +129,7 @@
     <!-- Footer -->    
     <footer class="fixed-bottom">
       <div class="container mt-0">
-        © Copyright 2026 Yunze (Lorenzo) Xiao. 
+        © Copyright 2026 {{DISPLAY_NAME}}. 
       </div>
     </footer>
 

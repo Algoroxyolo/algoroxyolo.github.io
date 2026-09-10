@@ -1,0 +1,723 @@
+{
+  "schema_version": 1,
+  "updated": "2026-09-10",
+  "profile": {
+    "name": "Yunze Xiao",
+    "display_name": "Yunze (Lorenzo) Xiao",
+    "email": "lyxiao@cmu.edu",
+    "github": "algoroxyolo",
+    "linkedin": "yunzexiao",
+    "tagline": "Human–AI interaction · Multi-agent social simulation · Human-centered evaluation"
+  },
+  "education": [
+    {
+      "position": "MS in Language Technology",
+      "institution": "Carnegie Mellon University",
+      "location": "Pittsburgh, PA",
+      "status": "in_progress",
+      "start": "2025-08",
+      "end": null,
+      "advisor": "Mona Diab",
+      "advisor_url": "https://r3lit-lab.github.io/",
+      "institution_url": "https://lti.cmu.edu",
+      "unit": "Language Technology Institute",
+      "gpa": "4.0/4.0",
+      "honors": []
+    },
+    {
+      "position": "BS in Computer Science",
+      "institution": "Carnegie Mellon University Qatar",
+      "location": "Doha, Qatar",
+      "status": "completed",
+      "start": "2022-07",
+      "end": "2025-05",
+      "advisor": "Houda Bouamor",
+      "advisor_url": "https://www.andrew.cmu.edu/user/hbouamor/",
+      "additional_advisor": "Kemal Oflazer",
+      "additional_advisor_url": "https://sites.google.com/andrew.cmu.edu/kemal-oflazer/",
+      "minor": "Computational Ethics",
+      "honors": [
+        "Dean's List, 2025"
+      ]
+    }
+  ],
+  "research": [
+    {
+      "position": "Advisor: Prof. Mona Diab",
+      "institution": "Carnegie Mellon University",
+      "location": "Pittsburgh, PA",
+      "date": "Jan. 2025 -- Present",
+      "items": [
+        "\\textbf{Human-centered evaluation.} Co-authored frameworks for evaluating anthropomorphic design cues \\pubref{humanizing} and cultural benchmarks \\pubref{culture}; audited \\textbf{20 cultural benchmarks} and identified six recurring methodological pitfalls.",
+        "\\textbf{Multi-agent social simulation.} Co-first author of \\textit{Sentipolis} \\pubref{2026.findings-acl.368}, which studies how persistent emotional states and memory shape agent interactions and emergent social dynamics.",
+        "\\textbf{Student simulation.} Co-authored a formalization of simulated learners as constrained generation under explicit knowledge-access, error, and learning-state specifications \\pubref{student}."
+      ]
+    },
+    {
+      "position": "Advisor: Prof. Roy Ka-Wei Lee",
+      "institution": "Singapore University of Technology and Design",
+      "location": "Singapore",
+      "date": "May 2024 -- Jul. 2024",
+      "items": [
+        "Developed \\textbf{ToxiCloakCN}; implemented LLM and classifier baselines to measure macro-F1 degradation under homophone and emoji perturbations. EMNLP 2024, co-first author \\pubref{toxicloak}."
+      ]
+    },
+    {
+      "position": "Advisor: Dr. Firoj Alam",
+      "institution": "Qatar Computing Research Institute",
+      "location": "Doha, Qatar",
+      "date": "May 2023 -- Oct. 2023",
+      "items": [
+        "Fine-tuned Arabic BERT-based models, evaluated dropout settings, and benchmarked zero-shot and few-shot GPT-4 for propaganda and disinformation detection. ArAIEval 2023 \\pubref{nexus}."
+      ]
+    },
+    {
+      "position": "Advisor: Prof. Houda Bouamor",
+      "institution": "Carnegie Mellon University Qatar",
+      "location": "Doha, Qatar",
+      "date": "",
+      "items": [
+        "\\textbf{Multi-agent academic advising.} Co-authored \\textit{TartanMaroon} \\pubref{2026.acl-demo.83}, an advising system using iterative negotiation among specialized agents for constrained degree planning, evaluated on 220 advising queries. ACL 2026, System Demonstrations.",
+        "\\textbf{Chinese offensive language detection (May--Oct. 2023).} Led a survey of datasets, methods, and evaluation challenges \\pubref{survey}; designed a labeling task and curated a \\textbf{6k+ entry dataset} of subversive Chinese phrases."
+      ]
+    }
+  ],
+  "research_interests": "I study how AI systems represent, interact with, and simulate people, from individual behavior to collective social dynamics. My work spans anthropomorphism and human-centered evaluation \\pubref{humanizing}, \\pubref{culture}; persona and multi-agent social simulation \\pubref{chameleon}, \\pubref{2026.findings-acl.368}; and the evidential foundations of AI welfare claims \\pubref{ai-welfare}. Looking ahead, I am interested in scalable oversight and trustworthy multi-agent systems, with a focus on understanding and shaping their societal impact.",
+  "mentoring": [
+    {
+      "name": "Peidi Dong",
+      "level": "Undergraduate",
+      "institution": "Carnegie Mellon University Qatar",
+      "short_institution": "CMU Qatar",
+      "start": "2025-09",
+      "end": null,
+      "topics": [
+        "AI safety",
+        "human–AI interaction",
+        "education"
+      ],
+      "short_topics": [
+        "AI safety",
+        "HAI",
+        "education"
+      ],
+      "publications": [
+        "2026.acl-demo.83"
+      ]
+    },
+    {
+      "name": "Ethan Pan",
+      "level": "Undergraduate",
+      "institution": "University of Wisconsin–Madison",
+      "short_institution": "UW–Madison",
+      "start": "2024-09",
+      "end": null,
+      "topics": [
+        "Social simulation",
+        "human–computer interaction"
+      ],
+      "short_topics": [
+        "Social simulation",
+        "HCI"
+      ],
+      "publications": []
+    }
+  ],
+  "additional_mentoring": [
+    {
+      "name": "Weijia Zhang",
+      "start_year": 2024,
+      "url": "https://charliedreemur.github.io/"
+    }
+  ],
+  "teaching": [
+    {
+      "course": "98-031: NLP Ethics in a Nutshell",
+      "role": "Student Instructor",
+      "location": "",
+      "date": "Spr. 2024"
+    },
+    {
+      "course": "15-112: Fundamentals of Programming and Computer Science",
+      "role": "Course Assistant",
+      "location": "",
+      "date": "Spr. 2024"
+    },
+    {
+      "course": "15-110: Principles of Computing",
+      "role": "Course Assistant",
+      "location": "",
+      "date": "Fall 2023"
+    }
+  ],
+  "course_description": {
+    "text": "I created and taught 98-031: NLP Ethics in a Nutshell in Spring 2024. The course introduced 15 students to the foundations of NLP ethics through projects presented to academic experts.",
+    "materials": "/assets/pdf/NLP_Ethics.pdf"
+  },
+  "service": [
+    {
+      "title": "Academic Leadership",
+      "entries": [
+        {
+          "organization": "ACL Rolling Review",
+          "role": "Area Chair",
+          "location": "",
+          "date": "2026"
+        },
+        {
+          "organization": "SocialSim @ COLM",
+          "role": "Organizer",
+          "location": "",
+          "date": "2026"
+        },
+        {
+          "organization": "PersonaNLP @ NeurIPS",
+          "role": "Lead Organizer",
+          "location": "",
+          "date": "2025"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "title": "Program Committees \\& Reviewing",
+      "entries": [
+        {
+          "organization": "AAAI Student Abstract and Poster Program",
+          "role": "Program Committee Member",
+          "location": "",
+          "date": "2025"
+        }
+      ],
+      "notes": [
+        "\\textbf{Conferences:} ACL (2025, 2026); CAIS (2026); CSCW (2025); EMNLP (2025); ICASSP (2026); ICLR (2025, 2026); ICWSM (2025); WWW (2026).",
+        "\\textbf{Journals:} IJHCI; TAFFC; TMLR; TNNLS."
+      ]
+    },
+    {
+      "title": "University \\& Community Service",
+      "entries": [
+        {
+          "organization": "LTI Teaching Track Search Committee",
+          "role": "Student Member",
+          "location": "",
+          "date": "2026"
+        },
+        {
+          "organization": "The Web Conference",
+          "role": "Volunteer",
+          "location": "",
+          "date": "2024"
+        },
+        {
+          "organization": "Student Majilis",
+          "role": "Head of Academics",
+          "location": "",
+          "date": "2023"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "talks": [
+    {
+      "text": "\\textbf{Persona Collapse: Measuring Diversity Failures in LLM-Simulated Populations.} STAMINA-WG Research Talk Series on Agents, Sims, Social Tech, and Safety. \\textit{May 2026}."
+    },
+    {
+      "text": "\\textbf{Embracing Contradiction: Theoretical Inconsistency Will Not Impede the Road of Building Responsible AI Systems.} CMU FEAT Reading Group. \\textit{Feb. 2026}."
+    },
+    {
+      "text": "\\textbf{Humanizing Machines: Rethinking LLM Anthropomorphism Through a Multi-Level Framework of Design.} MLNLP Seminar. \\textit{Oct. 2025}."
+    },
+    {
+      "text": "\\textbf{Classical and Modern Language Modeling Techniques for Transmembrane Helix Prediction.} ISMB, extended abstract poster. With Malak Ibrahim and Madhavi Ganapathiraju. \\textit{2024}."
+    }
+  ],
+  "publications": [
+    {
+      "key": "2026.acl-long.520",
+      "group": "published",
+      "authors": "Weihao Xuan, Qingcheng Zeng, Heli Qi, \\textbf{Yunze Xiao}, Junjue Wang, and Naoto Yokoya",
+      "year": 2026,
+      "title": "The Confidence Dichotomy: Analyzing and Mitigating Miscalibration in Tool-Use Agents",
+      "url": "https://aclanthology.org/2026.acl-long.520/",
+      "venue": "\\textit{ACL 2026}.",
+      "abstract": null,
+      "legacy_anchor": null,
+      "links": []
+    },
+    {
+      "key": "2026.findings-acl.368",
+      "group": "published",
+      "authors": "Chiyuan Fu*, Lyuhao Chen*, \\textbf{Yunze Xiao}*, Weihao Xuan, Carlos Busso, and Mona Diab",
+      "year": 2026,
+      "title": "Sentipolis: Emotion-Aware Agents for Social Simulations",
+      "url": "https://aclanthology.org/2026.findings-acl.368/",
+      "venue": "\\textit{Findings of ACL 2026}.",
+      "abstract": null,
+      "legacy_anchor": null,
+      "links": []
+    },
+    {
+      "key": "2026.findings-acl.1270",
+      "group": "published",
+      "authors": "Ming Li*, Han Chen*, \\textbf{Yunze Xiao}, Jian Chen, Hong Jiao, and Tianyi Zhou",
+      "year": 2026,
+      "title": "Can LLMs Estimate Student Struggles? Human-AI Difficulty Alignment with Proficiency Simulation for Item Difficulty Prediction",
+      "url": "https://aclanthology.org/2026.findings-acl.1270/",
+      "venue": "\\textit{Findings of ACL 2026}.",
+      "abstract": null,
+      "legacy_anchor": "li2025llmsestimatestudentstruggles",
+      "links": []
+    },
+    {
+      "key": "2026.acl-demo.83",
+      "group": "published",
+      "authors": "Peidi Dong, Houda Bouamor, \\textbf{Yunze Xiao}, and Devi G Kurup",
+      "year": 2026,
+      "title": "TartanMaroon: Multi-Agent Academic Advising with Iterative Negotiation and Transparent Collaboration",
+      "url": "https://aclanthology.org/2026.acl-demo.83/",
+      "venue": "\\textit{ACL 2026, System Demonstrations}.",
+      "abstract": null,
+      "legacy_anchor": null,
+      "links": []
+    },
+    {
+      "key": "ai-welfare",
+      "group": "published",
+      "authors": "\\textbf{Yunze Xiao}*, Gordon Dai*, Shahan Ali Memon*, Jen-tse Huang, Maarten Sap, and Mona T. Diab",
+      "year": 2026,
+      "title": "Position: AI Welfare Is Bullshit",
+      "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6574439",
+      "venue": "\\textit{ICML 2026, Position Paper Track}.",
+      "abstract": null,
+      "legacy_anchor": null,
+      "links": [
+        {
+          "label": "PDF",
+          "url": "/assets/pdf/xiao-2026-ai-welfare.pdf"
+        }
+      ]
+    },
+    {
+      "key": "2026.eacl-long.23",
+      "group": "published",
+      "authors": "\\textbf{Yunze Xiao}*, Tingyu He*, Lionel Z. Wang*, Yiming Ma, Xingyu Song, Xiaohang Xu, Mona Diab, Irene Li, and Ka Chung Ng",
+      "year": 2026,
+      "title": "JiraiBench: A Cross-lingual Benchmark for Evaluating Large Language Models' Detection of Human Risky Health Behavior Content in Jirai Community",
+      "url": "https://aclanthology.org/2026.eacl-long.23/",
+      "venue": "\\textit{EACL 2026}. \\textbf{Oral}.",
+      "abstract": null,
+      "legacy_anchor": "xiao2025jiraibenchbilingualbenchmarkevaluating",
+      "links": []
+    },
+    {
+      "key": "culture",
+      "group": "published",
+      "authors": "Mai Alkhamissi*, \\textbf{Yunze Xiao}*, Badr AlKhamissi, and Mona Diab",
+      "year": 2026,
+      "title": "Hire Your Anthropologist! Rethinking Culture Benchmarks Through an Anthropological Lens",
+      "url": "https://aclanthology.org/2026.findings-eacl.63/",
+      "venue": "\\textit{Findings of EACL 2026}.",
+      "abstract": null,
+      "legacy_anchor": "alkhamissi2025hireanthropologistrethinkingculture",
+      "links": []
+    },
+    {
+      "key": "2607.13924",
+      "group": "published",
+      "authors": "Lynnette Hui Xian Ng*, \\textbf{Yunze Xiao}*, Lionel Z. Wang, Weihao Xuan, and Mona Diab",
+      "year": 2026,
+      "title": "ExpressionCueLens: a cross-cultural analysis of human-AI companion conversations on social media",
+      "url": "https://link.springer.com/article/10.1007/s12652-026-05109-z",
+      "venue": "\\textit{Journal of Ambient Intelligence and Humanized Computing, 17, 1567--1578}.",
+      "abstract": null,
+      "legacy_anchor": null,
+      "links": []
+    },
+    {
+      "key": "2504.02956",
+      "group": "published",
+      "authors": "Shu Yang, Junchao Wu, Xin Chen, \\textbf{Yunze Xiao}, Xinyi Yang, Derek F. Wong, and Di Wang",
+      "year": 2026,
+      "title": "Understanding Aha Moments: From External Observations to Internal Mechanisms",
+      "url": "https://arxiv.org/abs/2504.02956",
+      "venue": "\\textit{TACL}.",
+      "abstract": null,
+      "legacy_anchor": "yang2025understandingahamomentsexternal",
+      "links": []
+    },
+    {
+      "key": "10.1038/s41586-025-09962-4",
+      "group": "published",
+      "authors": "Center for AI Safety, Scale AI, and HLE Contributors Consortium (including \\textbf{Yunze Xiao})",
+      "year": 2026,
+      "title": "A benchmark of expert-level academic questions to assess AI capabilities",
+      "url": "https://www.nature.com/articles/s41586-025-09962-4",
+      "venue": "(Humanity's Last Exam). \\textit{Nature, 649, 1139--1146}.",
+      "abstract": null,
+      "legacy_anchor": null,
+      "links": []
+    },
+    {
+      "key": "humanizing",
+      "group": "published",
+      "authors": "\\textbf{Yunze Xiao}*, Lynnette Hui Xian Ng*, Jiarui Liu, and Mona Diab",
+      "year": 2025,
+      "title": "Humanizing Machines: Rethinking LLM Anthropomorphism Through a Multi-Level Framework of Design",
+      "url": "https://aclanthology.org/2025.emnlp-main.164/",
+      "venue": "\\textit{EMNLP 2025}. \\textbf{Oral}.",
+      "abstract": "Large Language Models (LLMs) increasingly exhibit anthropomorphism characteristics – human-like qualities portrayed across their outlook, language, behavior, and reasoning functions. Such characteristics enable more intuitive and engaging human-AI interactions. However, current research on anthropomorphism remains predominantly risk-focused, emphasizing over-trust and user deception while offering limited design guidance. We argue that anthropomorphism should instead be treated as a concept of design that can be intentionally tuned to support user goals. Drawing from multiple disciplines, we propose that the anthropomorphism of an LLM-based artifact should reflect the interaction between artifact designers and interpreters. This interaction is facilitated by cues embedded in the artifact by the designers and the (cognitive) responses of the interpreters to the cues. Cues are categorized into four dimensions: perceptive, linguistic, behavioral, and cognitive. By analyzing the manifestation and effectiveness of each cue, we provide a unified taxonomy with actionable levers for practitioners. Consequently, we advocate for function-oriented evaluations of anthropomorphic design.",
+      "legacy_anchor": "xiao-etal-2025-humanizing",
+      "links": []
+    },
+    {
+      "key": "2025.emnlp-main.79",
+      "group": "published",
+      "authors": "Weihao Xuan, Rui Yang, Heli Qi, Qingcheng Zeng, \\textbf{Yunze Xiao}, Aosong Feng, Dairui Liu, Yun Xing, Junjue Wang, Fan Gao, Jinghui Lu, Yuang Jiang, Huitao Li, Xin Li, Kunyu Yu, Ruihai Dong, Shangding Gu, Yuekang Li, Xiaofei Xie, Felix Juefei-Xu, Foutse Khomh, Osamu Yoshie, Qingyu Chen, Douglas Teodoro, Nan Liu, Randy Goebel, Lei Ma, Edison Marrese-Taylor, Shijian Lu, Yusuke Iwasawa, Yutaka Matsuo, and Irene Li",
+      "year": 2025,
+      "title": "MMLU-ProX: A Multilingual Benchmark for Advanced Large Language Model Evaluation",
+      "url": "https://aclanthology.org/2025.emnlp-main.79/",
+      "venue": "\\textit{EMNLP 2025}.",
+      "abstract": "Existing large language model (LLM) evaluation benchmarks primarily focus on English, while current multilingual tasks lack parallel questions that specifically assess cross-lingual reasoning abilities. This dual limitation makes it challenging to assess LLMs’ performance in the multilingual setting comprehensively. To fill this gap, we introduce MMLU-ProX, a comprehensive benchmark covering 29 languages, built on an English benchmark. Each language version consists of 11,829 identical questions, enabling direct cross-lingual comparisons. Additionally, to meet efficient evaluation needs, we provide a lite version containing 658 questions per language. To ensure the high quality of MMLU-ProX, we employ a rigorous development process that involves multiple powerful LLMs for translation, followed by expert review to ensure accurate expression, consistent terminology, and cultural relevance. Building on this, we systematically evaluate 36 state-of-the-art LLMs, including reasoning-enhanced and multilingual-optimized LLMs. The results reveal significant disparities in the multilingual capabilities of LLMs: While they perform well in high-resource languages, their performance declines markedly in low-resource languages, particularly for African languages. Through MMLU-ProX, we aim to advance the development of more inclusive AI systems and promote equitable access to technology across global contexts.",
+      "legacy_anchor": "xuan-etal-2025-mmlu",
+      "links": []
+    },
+    {
+      "key": "2025.emnlp-main.831",
+      "group": "published",
+      "authors": "Jiarui Liu, Yueqi Song, \\textbf{Yunze Xiao}, Mingqian Zheng, Lindia Tjuatja, Jana Schaich Borg, Mona Diab, and Maarten Sap",
+      "year": 2025,
+      "title": "Synthetic Socratic Debates: Examining Persona Effects on Moral Decision and Persuasion Dynamics",
+      "url": "https://aclanthology.org/2025.emnlp-main.831/",
+      "venue": "\\textit{EMNLP 2025}.",
+      "abstract": "As large language models (LLMs) are increasingly used in morally sensitive domains, it is crucial to understand how persona traits affect their moral reasoning and persuasive behavior. We present the first large-scale study of multi-dimensional persona effects in AI-AI debates over real-world moral dilemmas. Using a 6-dimensional persona space (age, gender, country, social class, ideology, and personality), we simulate structured debates between AI agents over 131 relationship-based cases. Our results show that personas affect initial moral stances and debate outcomes, with political ideology and personality traits exerting the strongest influence. Persuasive success varies across traits, with liberal and open personalities reaching higher consensus. While logit-based confidence grows during debates, emotional and credibility-based appeals diminish, indicating more tempered argumentation over time. These trends mirror findings from psychology and cultural studies, reinforcing the need for persona-aware evaluation frameworks for AI moral reasoning.",
+      "legacy_anchor": "liu-etal-2025-synthetic",
+      "links": []
+    },
+    {
+      "key": "2505.18139",
+      "group": "published",
+      "authors": "Gordon Dai* and \\textbf{Yunze Xiao}*",
+      "year": 2025,
+      "title": "Embracing Contradiction: Theoretical Inconsistency Will Not Impede the Road of Building Responsible AI Systems",
+      "url": "https://proceedings.neurips.cc/paper_files/paper/2025/file/dd4a4bc7a7ba0b197b679c0025cb2df8-Paper-Position_Paper_Track.pdf",
+      "venue": "\\textit{NeurIPS 2025, Position Paper Track}.",
+      "abstract": null,
+      "legacy_anchor": "dai2025embracingcontradictiontheoreticalinconsistency",
+      "links": []
+    },
+    {
+      "key": "toxicloak",
+      "group": "published",
+      "authors": "\\textbf{Yunze Xiao}*, Yujia Hu*, Kenny Tsu Wei Choo, and Roy Ka-Wei Lee",
+      "year": 2024,
+      "title": "ToxiCloakCN: Evaluating Robustness of Offensive Language Detection in Chinese with Cloaking Perturbations",
+      "url": "https://aclanthology.org/2024.emnlp-main.345/",
+      "venue": "\\textit{EMNLP 2024}.",
+      "abstract": "Detecting hate speech and offensive language is essential for maintaining a safe and respectful digital environment. This study examines the limitations of state-of-the-art large language models (LLMs) in identifying offensive content within systematically perturbed data, with a focus on Chinese, a language particularly susceptible to such perturbations. We introduce ToxiCloakCN, an enhanced dataset derived from ToxiCN, augmented with homophonic substitutions and emoji transformations, to test the robustness of LLMs against these cloaking perturbations. Our findings reveal that existing models significantly underperform in detecting offensive content when these perturbations are applied. We provide an in-depth analysis of how different types of offensive content are affected by these perturbations and explore the alignment between human and model explanations of offensiveness. Our work highlights the urgent need for more advanced techniques in offensive language detection to combat the evolving tactics used to evade detection mechanisms.",
+      "legacy_anchor": "xiao-etal-2024-toxicloakcn",
+      "links": []
+    },
+    {
+      "key": "2024.acl-long.102",
+      "group": "published",
+      "authors": "Xintao Wang, \\textbf{Yunze Xiao}, Jen-tse Huang, Siyu Yuan, Rui Xu, Haoran Guo, Quan Tu, Yaying Fei, Ziang Leng, Wei Wang, Jiangjie Chen, Cheng Li, and Yanghua Xiao",
+      "year": 2024,
+      "title": "InCharacter: Evaluating Personality Fidelity in Role-Playing Agents through Psychological Interviews",
+      "url": "https://aclanthology.org/2024.acl-long.102/",
+      "venue": "\\textit{ACL 2024}.",
+      "abstract": "Role-playing agents (RPAs), powered by large language models, have emerged as a flourishing field of applications. However, a key challenge lies in assessing whether RPAs accurately reproduce the personas of target characters, namely their character fidelity. Existing methods mainly focus on the knowledge and linguistic patterns of characters. This paper, instead, introduces a novel perspective to evaluate the personality fidelity of RPAs with psychological scales. Overcoming drawbacks of previous self-report assessments on RPAs, we propose InCharacter, namely **In**terviewing **Character** agents for personality tests. Experiments include various types of RPAs and LLMs, covering 32 distinct characters on 14 widely used psychological scales. The results validate the effectiveness of InCharacter in measuring RPA personalities. Then, with InCharacter, we show that state-of-the-art RPAs exhibit personalities highly aligned with the human-perceived personalities of the characters, achieving an accuracy up to 80.7%.",
+      "legacy_anchor": "wang-etal-2024-incharacter",
+      "links": []
+    },
+    {
+      "key": "2024.lrec-main.1508",
+      "group": "published",
+      "authors": "David R. Mortensen*, Valentina Izrailevitch*, \\textbf{Yunze Xiao}, Hinrich Schütze, and Leonie Weissweiler",
+      "year": 2024,
+      "title": "Verbing Weirds Language (Models): Evaluation of English Zero-Derivation in Five LLMs",
+      "url": "https://aclanthology.org/2024.lrec-main.1508/",
+      "venue": "\\textit{LREC-COLING 2024}.",
+      "abstract": "Lexical-syntactic flexibility, in the form of conversion (or zero-derivation) is a hallmark of English morphology. In conversion, a word with one part of speech is placed in a non-prototypical context, where it is coerced to behave as if it had a different part of speech. However, while this process affects a large part of the English lexicon, little work has been done to establish the degree to which language models capture this type of generalization. This paper reports the first study on the behavior of large language models with reference to conversion. We design a task for testing lexical-syntactic flexibility—the degree to which models can generalize over words in a construction with a non-prototypical part of speech. This task is situated within a natural language inference paradigm. We test the abilities of five language models—two proprietary models (GPT-3.5 and GPT-4), three open source model (Mistral 7B, Falcon 40B, and Llama 2 70B). We find that GPT-4 performs best on the task, followed by GPT-3.5, but that the open source language models are also able to perform it and that the 7-billion parameter Mistral displays as little difference between its baseline performance on the natural language inference task and the non-prototypical syntactic category task, as the massive GPT-4.",
+      "legacy_anchor": "mortensen-etal-2024-verbing",
+      "links": []
+    },
+    {
+      "key": "nexus",
+      "group": "published",
+      "authors": "\\textbf{Yunze Xiao} and Firoj Alam",
+      "year": 2023,
+      "title": "Nexus at ArAIEval Shared Task: Fine-Tuning Arabic Language Models for Propaganda and Disinformation Detection",
+      "url": "https://aclanthology.org/2023.arabicnlp-1.58/",
+      "venue": "\\textit{ArabicNLP 2023}.",
+      "abstract": null,
+      "legacy_anchor": "xiao-alam-2023-nexus",
+      "links": []
+    },
+    {
+      "key": "10.1109/ICCRD54409.2022.9730454",
+      "group": "published",
+      "authors": "\\textbf{Yunze Xiao}",
+      "year": 2022,
+      "title": "A Transformer-based Attention Flow Model for Intelligent Question and Answering Chatbot",
+      "url": "https://doi.org/10.1109/ICCRD54409.2022.9730454",
+      "venue": "\\textit{ICCRD 2022, 167--170}.",
+      "abstract": null,
+      "legacy_anchor": "9730454",
+      "links": []
+    },
+    {
+      "key": "2608.11528",
+      "group": "preprint",
+      "authors": "Haokai Zhao, \\textbf{Yunze Xiao}, Weihao Xuan, Flora Salim, Benjamin Tag, and Aditya Joshi",
+      "year": 2026,
+      "title": "Group Alignment-Induced Sycophancy: A Two-Sided Evaluation of Steerable Pluralistic Alignment",
+      "url": "https://arxiv.org/abs/2608.11528",
+      "venue": "\\mbox{\\textit{arXiv:2608.11528}}.",
+      "abstract": null,
+      "legacy_anchor": null,
+      "links": []
+    },
+    {
+      "key": "2607.02032",
+      "group": "preprint",
+      "authors": "Yueqi Song, Lintang Sutawika, Jiarui Liu, Lindia Tjuatja, Jiayi Geng, \\textbf{Yunze Xiao}, Daniel Lee, Aditya Bharat Soni, Vincent Lo, Xiang Yue, and Graham Neubig",
+      "year": 2026,
+      "title": "PACE: A Proxy for Agentic Capability Evaluation",
+      "url": "https://arxiv.org/abs/2607.02032",
+      "venue": "\\newline \\mbox{\\textit{arXiv:2607.02032}}.",
+      "abstract": null,
+      "legacy_anchor": null,
+      "links": []
+    },
+    {
+      "key": "2606.11232",
+      "group": "preprint",
+      "authors": "Weijia Zhang, Ruiqi Chen, \\textbf{Yunze Xiao}, and Weihao Xuan",
+      "year": 2026,
+      "title": "Every Act Has Its Price: Compressed Moral Composition in Frontier LLMs",
+      "url": "https://arxiv.org/abs/2606.11232",
+      "venue": "\\mbox{\\textit{arXiv:2606.11232}}.",
+      "abstract": null,
+      "legacy_anchor": null,
+      "links": []
+    },
+    {
+      "key": "chameleon",
+      "group": "preprint",
+      "authors": "\\textbf{Yunze Xiao}*, Vivienne J. Zhang*, Chenghao Yang, Ningshan Ma, Weihao Xuan, and Jen-tse Huang",
+      "year": 2026,
+      "title": "The Chameleon's Limit: Investigating Persona Collapse and Homogenization in Large Language Models",
+      "url": "https://arxiv.org/abs/2604.24698",
+      "venue": "\\newline \\mbox{\\textit{arXiv:2604.24698}}.",
+      "abstract": null,
+      "legacy_anchor": null,
+      "links": [
+        {
+          "label": "Interactive project",
+          "url": "/projects/chameleon-limit/"
+        },
+        {
+          "label": "Research post",
+          "url": "/blog/2026/chameleon-limit/"
+        }
+      ]
+    },
+    {
+      "key": "2604.22452",
+      "group": "preprint",
+      "authors": "Xirui Li, Ming Li, \\textbf{Yunze Xiao}, Ryan Wong, Dianqi Li, Timothy Baldwin, and Tianyi Zhou",
+      "year": 2026,
+      "title": "Superminds Test: Actively Evaluating Collective Intelligence of Agent Society via Probing Agents",
+      "url": "https://arxiv.org/abs/2604.22452",
+      "venue": "\\mbox{\\textit{arXiv:2604.22452}}.",
+      "abstract": null,
+      "legacy_anchor": null,
+      "links": []
+    },
+    {
+      "key": "2604.06409",
+      "group": "preprint",
+      "authors": "\\textbf{Yunze Xiao}, Wenkai Li, Xiaoyuan Wu, Ningshan Ma, Yueqi Song, and Weihao Xuan",
+      "year": 2026,
+      "title": "Say Something Else: Rethinking Contextual Privacy as Information Sufficiency",
+      "url": "https://arxiv.org/abs/2604.06409",
+      "venue": "\\mbox{\\textit{arXiv:2604.06409}}.",
+      "abstract": null,
+      "legacy_anchor": null,
+      "links": []
+    },
+    {
+      "key": "2602.00685",
+      "group": "preprint",
+      "authors": "Xuan Liu, Haoyang Shang, Zizhang Liu, Xinyan Liu, \\textbf{Yunze Xiao}, Yiwen Tu, and Haojian Jin",
+      "year": 2026,
+      "title": "HumanStudy-Bench: Towards AI Agent Design for Participant Simulation",
+      "url": "https://arxiv.org/abs/2602.00685",
+      "venue": "\\mbox{\\textit{arXiv:2602.00685}}.",
+      "abstract": null,
+      "legacy_anchor": null,
+      "links": []
+    },
+    {
+      "key": "student",
+      "group": "preprint",
+      "authors": "Zhihao Yuan*, \\textbf{Yunze Xiao}*, Ming Li*, Weihao Xuan, Richard Tong, Mona Diab, and Tom Mitchell",
+      "year": 2026,
+      "title": "Towards Valid Student Simulation with Large Language Models",
+      "url": "https://arxiv.org/abs/2601.05473",
+      "venue": "\\mbox{\\textit{arXiv:2601.05473}}.",
+      "abstract": null,
+      "legacy_anchor": null,
+      "links": []
+    },
+    {
+      "key": "2601.02186",
+      "group": "preprint",
+      "authors": "Rui Yang, Huitao Li, Weihao Xuan, Heli Qi, Xin Li, Kunyu Yu, Yingjian Chen, Rongrong Wang, Jacques Behmoaras, Tianxi Cai, Bibhas Chakraborty, Qingyu Chen, Lionel Tim-Ee Cheng, Marie-Louise Damwanza, Chido Dzinotyiwei, Aosong Feng, Chuan Hong, Yusuke Iwasawa, Yuhe Ke, Linah Kitala, Taehoon Ko, Jisan Lee, Irene Li, Jonathan Chong Kai Liew, Hongfang Liu, Lian Leng Low, Edison Marrese-Taylor, Yutaka Matsuo, Isheanesu Misi, Yilin Ning, Jasmine Chiat Ling Ong, Marcus Eng Hock Ong, Enrico Petretto, Hossein Rouhizadeh, Abiram Sandralegar, Oren Schreier, Iain Bee Huat Tan, Patrick Tan, Daniel Shu Wei Ting, Junjue Wang, Chunhua Weng, Matthew Yu Heng Wong, Fang Wu, \\textbf{Yunze Xiao}, Xuhai Xu, Qingcheng Zeng, Zhuo Zheng, Yifan Peng, Douglas Teodoro, and Nan Liu",
+      "year": 2026,
+      "title": "Toward Global Large Language Models in Medicine",
+      "url": "https://arxiv.org/abs/2601.02186",
+      "venue": "\\mbox{\\textit{arXiv:2601.02186}}.",
+      "abstract": null,
+      "legacy_anchor": null,
+      "links": []
+    },
+    {
+      "key": "2404.13885",
+      "group": "preprint",
+      "authors": "Qingyang Wu, Ying Xu, Tingsong Xiao, \\textbf{Yunze Xiao}, Yitong Li, Tianyang Wang, Yichi Zhang, Shanghai Zhong, Yuwei Zhang, Wei Lu, and Yifan Yang",
+      "year": 2024,
+      "title": "Surveying Attitudinal Alignment Between Large Language Models Vs. Humans Towards 17 Sustainable Development Goals",
+      "url": "https://arxiv.org/abs/2404.13885",
+      "venue": "\\mbox{\\textit{arXiv:2404.13885}}.",
+      "abstract": null,
+      "legacy_anchor": "wu2024surveying",
+      "links": []
+    },
+    {
+      "key": "survey",
+      "group": "preprint",
+      "authors": "\\textbf{Yunze Xiao}, Houda Bouamor, and Wajdi Zaghouani",
+      "year": 2024,
+      "title": "Chinese Offensive Language Detection: Current Status and Future Directions",
+      "url": "https://arxiv.org/abs/2403.18314",
+      "venue": "\\mbox{\\textit{arXiv:2403.18314}}.",
+      "abstract": null,
+      "legacy_anchor": "xiao2024chinese",
+      "links": []
+    }
+  ],
+  "selected_publications": [
+    "chameleon",
+    "2026.findings-acl.368",
+    "ai-welfare",
+    "humanizing"
+  ],
+  "findings": {
+    "chameleon": "High persona fidelity can coexist with a homogeneous simulated population: convincing individuals do not guarantee population diversity.",
+    "2026.findings-acl.368": "Persistent emotion–memory coupling improves emotional continuity in the evaluated simulations; gains in believability depend on the model.",
+    "ai-welfare": "We argue that AI welfare claims need independent validation beyond steerable behavioral indicators, and that governance should prioritize verifiable harms.",
+    "humanizing": "We propose evaluating anthropomorphic cues against user goals and context, treating human-like design as something to assess rather than simply maximize."
+  },
+  "projects": [
+    {
+      "slug": "chameleon-limit",
+      "name": "The Chameleon's Limit",
+      "publication": "chameleon",
+      "theme": "Validity of simulated populations",
+      "question": "Do distinct persona profiles produce behaviorally diverse populations?",
+      "finding": "High persona fidelity can coexist with a homogeneous simulated population: convincing individuals do not guarantee population diversity.",
+      "method": "We evaluate 10 language models and 1,144 personas across personality responses, moral judgments, and self-introductions.",
+      "role": "Co-first author.",
+      "links": [
+        {
+          "label": "Interactive project",
+          "url": "/projects/chameleon-limit/"
+        },
+        {
+          "label": "Code",
+          "url": "https://github.com/Algoroxyolo/PersonaCollapse"
+        },
+        {
+          "label": "Research post",
+          "url": "/blog/2026/chameleon-limit/"
+        }
+      ]
+    },
+    {
+      "slug": "sentipolis",
+      "name": "Sentipolis",
+      "publication": "2026.findings-acl.368",
+      "theme": "Emotion and collective dynamics",
+      "question": "How do persistent emotions shape agent interactions over time?",
+      "finding": "Persistent emotion–memory coupling improves emotional continuity in the evaluated simulations; gains in believability depend on the model.",
+      "method": "A 25-agent social simulation couples continuous emotional state with memory; component ablations, human judgments, and network diagnostics examine its effects.",
+      "role": "Co-first author.",
+      "links": []
+    },
+    {
+      "slug": "tartanmaroon",
+      "name": "TartanMaroon",
+      "publication": "2026.acl-demo.83",
+      "theme": "Multi-agent collaboration in education",
+      "question": "When does academic advising need coordination among specialized agents?",
+      "finding": "Iterative proposal–critique negotiation improves constrained degree planning, with greater benefits on complex tasks than on simple factual queries.",
+      "method": "TartanBench evaluates advising across 220 queries and five complexity tiers; an interface makes agent coordination visible to users.",
+      "role": "Co-author; research mentor to Peidi Dong at Carnegie Mellon University Qatar.",
+      "links": [
+        {
+          "label": "Code",
+          "url": "https://github.com/peidid/Multi-Agent-Advising-Bot"
+        },
+        {
+          "label": "Demo",
+          "url": "https://multi-agent-advising-bot.vercel.app/"
+        },
+        {
+          "label": "Video",
+          "url": "https://www.youtube.com/watch?v=JRDQ1g5k52I"
+        }
+      ]
+    }
+  ],
+  "news": [
+    {
+      "date": "Jul. 2026",
+      "body_html": "Our ACL 2026 papers include <a href=\"/publications/#paper-2026-findings-acl-368\">Sentipolis</a>, <a href=\"/publications/#paper-2026-acl-demo-83\">TartanMaroon</a>, <a href=\"/publications/#paper-2026-acl-long-520\">The Confidence Dichotomy</a>, and <a href=\"/publications/#paper-2026-findings-acl-1270\">student difficulty estimation</a>."
+    },
+    {
+      "date": "May 2026",
+      "body_html": "I presented <em>Persona Collapse: Measuring Diversity Failures in LLM-Simulated Populations</em> at the STAMINA-WG Research Talk Series."
+    },
+    {
+      "date": "Apr 26, 2026",
+      "body_html": "New blog post &amp; interactive microsite — <a href=\"/blog/2026/chameleon-limit/\">The Chameleon’s Limit</a> summarizes our preprint on persona collapse in LLMs (<a href=\"/projects/chameleon-limit/\">explore the microsite</a>)."
+    },
+    {
+      "date": "Feb. 2026",
+      "body_html": "I presented <em>Embracing Contradiction</em> at the CMU FEAT Reading Group."
+    },
+    {
+      "date": "Oct. 2025",
+      "body_html": "I presented <a href=\"/publications/#paper-humanizing\">Humanizing Machines</a> at the MLNLP Seminar."
+    },
+    {
+      "date": "Sep 28, 2024",
+      "body_html": "Happy to share that I am reviewing for ICWSM 2025 and CSCW 2025!"
+    },
+    {
+      "date": "Sep 28, 2024",
+      "body_html": "Happy to share that our work on Cloaked Offensive Language is accepted by EMNLP 2024!"
+    },
+    {
+      "date": "Jun 19, 2024",
+      "body_html": "Our work on Cloaked Offensive Language is on <a href=\"https://arxiv.org/abs/2406.12223\" rel=\"external nofollow noopener\" target=\"_blank\">arxiv</a> now!"
+    }
+  ],
+  "calendar": {
+    "url": "https://calendar.google.com/calendar/embed?src=yunzex%40andrew.cmu.edu&ctz=America%2FNew_York&mode=WEEK",
+    "timezone_label": "Eastern Time (Pittsburgh)"
+  }
+}

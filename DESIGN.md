@@ -114,7 +114,7 @@ components:
 
 The established academic website pairs expressive serif headings with quiet sans-serif reading text, a retained portrait, and light/dark themes. This is a record of the implemented system, not a new identity.
 
-Interactive experiments are the user-approved personal signature. Their controls and precise geometric plots sit within the same reading column, with a readable conclusion and a route to the research.
+The homepage prioritizes directly visible academic information: full biography, substantive interests, recent news, and six representative publications. The user rejected an exploration-first homepage with reduced information density. Interactive experiments remain optional depth on study pages.
 
 This phrase records the approved signature; it does not introduce a new branded metaphor. Authority is the actual cascade in `assets/css/main.css` then `assets/css/academic.css`, the templates, and `assets/js/research.js`, constrained by `PRODUCT.md` and `INTERACTION_BRIEF.md`. The tokens describe the shared academic surfaces, not every inherited blog or project-microsite style.
 
@@ -165,7 +165,7 @@ The serif supplies the academic voice; the sans serif handles dense information 
 
 A centered container has a maximum width (880px), with horizontal padding (24px); phone padding is narrower (22px). The fixed navigation has a divider and an anchor offset below it. Main content has a minimum height (`calc(100vh - 220px)`).
 
-The Home introduction pairs text with a portrait column (148px) and a gap (2.5rem). At widths up to 767px, the portrait column becomes 108px; at widths up to 575px, a 92px portrait precedes the text in one column. Broad section gaps use the major-section token and contract to the section token on phones.
+The Home introduction pairs full biography text with a portrait column (132px) and a gap (1.5rem). At widths up to 767px, the portrait column becomes 108px; at widths up to 575px, an 84px portrait floats beside the opening biography. Full research interests follow at reading width. Home uses compact section spacing (1.75rem) and publication padding (1rem). Larger section gaps remain on deeper reading pages.
 
 Publication filters use three columns (1.3fr / 1fr / .7fr), then two with search spanning the row, then one. Experiment controls and plots use two equal columns and become one at the phone breakpoint. Actions wrap; navigation collapses below 768px. Publication entries remain a continuous ruled list with complete author text that can wrap anywhere.
 

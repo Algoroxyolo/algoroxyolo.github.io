@@ -144,9 +144,9 @@ class Renderer:
             result += '</ul>' + ''.join('<p>' + self.tex(n) + '</p>' for n in g['notes'])
         return result + '</section>'
 
-    def news(self, home=False):
-        rows = ''.join('<tr><th scope="row">' + escape(n['date']) + '</th><td>' + n['body_html'] + '</td></tr>' for n in self.d['news'][:5 if home else None])
-        return ('<h2>' + self.link('/news/', 'news') + '</h2>' if home else '') + '<div class="news"><div class="table-responsive"><table class="table table-sm table-borderless">' + rows + '</table></div></div>' + ('<p>' + self.link('/news/', 'All news') + '</p>' if home else '')
+    def news(self, home=False, limit=5):
+        rows = ''.join('<tr><th scope="row">' + escape(n['date']) + '</th><td>' + n['body_html'] + '</td></tr>' for n in self.d['news'][:limit if home else None])
+        return ('<h2>' + self.link('/news/', 'News') + '</h2>' if home else '') + '<div class="news"><div class="table-responsive"><table class="table table-sm table-borderless">' + rows + '</table></div></div>' + ('<p>' + self.link('/news/', 'All news') + '</p>' if home else '')
 
     def template(self, name, values):
         s = read(ROOT / 'templates' / name)

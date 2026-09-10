@@ -49,23 +49,16 @@ def enhance(r, outputs, biography, calendar):
     def named_interests():
         text = r.tex(d['research_interests'])
         for key in r.pubs:
-            text = text.replace(r.ref(key), r.link('/publications/#' + r.anchor(key), title(key)))
+            text = text.replace(r.ref(key), '[' + r.link('/publications/#' + r.anchor(key), title(key)) + ']')
         return text
 
-    def question_list():
-        return '<div class="research-questions">' + ''.join(
-            '<section class="question-row"><h3>' + r.link('/research/#' + q['slug'], q['question']) +
-            '</h3><p>' + escape(q['description']) + '</p><div class="question-papers">' +
-            ' · '.join(paper_link(k) for k in q['papers']) + '</div></section>' for q in questions) + '</div>'
-
-    # Reuse the canonical identity and calendar; reduce biography density on arrival.
-    current, separator, previous = biography.partition(' I received my BS')
-    bio_detail = '<details class="short-bio"><summary>Education &amp; background</summary><p>I received my BS' + previous + '</p></details>' if separator else ''
-    intro = '<div class="home-intro"><div><p class="research-lead">When AI stands in for people, what are we actually measuring?</p><p>I study how AI systems represent, interact with, and simulate people, from individual behavior to collective social dynamics.</p><p class="identity-line">' + current + '</p>' + bio_detail + '<p class="academic-contact">' + r.link('/research/', 'Explore my research') + ' · ' + r.link('#population-lab', 'Try an experiment') + ' · ' + r.link('/assets/pdf/Yunze_Xiao.pdf', 'Academic CV (PDF)') + ' · ' + r.link('#contact', 'Get in touch') + '</p></div><figure class="home-portrait"><img src="/assets/img/Yunze%20Xiao.jpg" width="480" height="480" alt="Portrait of Yunze Xiao"></figure></div>'
-    discovery = '<section class="home-research"><h2>Questions behind the work</h2>' + question_list() + '</section>'
-    selected = '<section class="home-selected"><h2>Selected publications</h2><ol class="academic-publications">' + ''.join(r.publication(k, True) for k in d['selected_publications']) + '</ol><p>' + r.link('/publications/', 'Browse all publications') + '</p></section>'
-    contact = '<section id="contact" class="contact-section"><h2>Let’s compare notes.</h2><p>Human–AI interaction, simulated people, or trustworthy multi-agent systems: ' + r.link('mailto:' + d['profile']['email'], d['profile']['email']) + '.</p><p class="academic-note">GHC 5418 · 4902 Forbes Ave · Pittsburgh, PA 15213</p>' + calendar + '</section>'
-    outputs['index.html'] = r.template('home.html', {'INTRO':intro, 'TAGLINE':escape(d['profile']['tagline']), 'SELECTED':discovery + experiment() + selected, 'NEWS':r.news(True), 'CALENDAR':contact})
+    # Academic visitors need identity, research fit, and evidence without extra clicks.
+    portrait = '<figure class="home-portrait"><img src="/assets/img/Yunze%20Xiao.jpg" width="480" height="480" alt="Portrait of Yunze Xiao"></figure>'
+    intro = '<div class="home-intro">' + portrait + '<div><p>' + biography + '</p></div></div><div class="home-interests"><p>' + named_interests() + '</p></div><p class="academic-contact home-contact">' + r.link('mailto:' + d['profile']['email'], d['profile']['email']) + ' · ' + r.link('/assets/pdf/Yunze_Xiao.pdf', 'CV (PDF)') + ' · ' + r.link('/publications/', 'All publications') + ' · ' + r.link('https://github.com/' + d['profile']['github'], 'GitHub') + ' · ' + r.link('/teaching/', 'Teaching & mentoring') + '</p>'
+    selected = '<section class="home-selected"><div class="section-heading"><h2>Selected publications</h2>' + r.link('/publications/', 'All publications & preprints') + '</div><p class="academic-note">* Equal contribution.</p><ol class="academic-publications">' + ''.join(r.publication(k, True) for k in d['selected_publications']) + '</ol></section>'
+    project_links = '<section class="home-project-links"><h2>Research projects &amp; interactive explanations</h2><ul>' + ''.join('<li>' + r.link('/research/' + p['slug'] + '/', p['name']) + ' — ' + escape(p['question']) + '</li>' for p in d['projects']) + '</ul><p id="population-lab">' + r.link('/research/chameleon-limit/#population-lab', 'Try the persona fidelity and diversity illustration') + '</p></section>'
+    contact = '<section id="contact" class="contact-section"><h2>Contact</h2><p>' + r.link('mailto:' + d['profile']['email'], d['profile']['email']) + ' · GHC 5418, Carnegie Mellon University</p><p class="academic-note">4902 Forbes Ave · Pittsburgh, PA 15213</p>' + calendar + '</section>'
+    outputs['index.html'] = r.template('home.html', {'INTRO':intro, 'TAGLINE':escape(d['profile']['tagline']), 'SELECTED':selected + project_links, 'NEWS':r.news(True, limit=3), 'CALENDAR':contact})
 
     body = '<p class="page-lead">From human-like behavior to collective social dynamics: three questions connect my work.</p><nav class="section-jumps" aria-label="Research questions">' + ''.join(r.link('#' + q['slug'], q['label']) for q in questions) + '</nav>'
     for q in questions:

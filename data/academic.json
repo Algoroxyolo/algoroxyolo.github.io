@@ -612,14 +612,18 @@
   "selected_publications": [
     "chameleon",
     "2026.findings-acl.368",
+    "2026.acl-demo.83",
     "ai-welfare",
+    "culture",
     "humanizing"
   ],
   "findings": {
     "chameleon": "High persona fidelity can coexist with a homogeneous simulated population: convincing individuals do not guarantee population diversity.",
     "2026.findings-acl.368": "Persistent emotion–memory coupling improves emotional continuity in the evaluated simulations; gains in believability depend on the model.",
     "ai-welfare": "We argue that AI welfare claims need independent validation beyond steerable behavioral indicators, and that governance should prioritize verifiable harms.",
-    "humanizing": "We propose evaluating anthropomorphic cues against user goals and context, treating human-like design as something to assess rather than simply maximize."
+    "humanizing": "We propose evaluating anthropomorphic cues against user goals and context, treating human-like design as something to assess rather than simply maximize.",
+    "2026.acl-demo.83": "Iterative proposal–critique negotiation improves constrained degree planning, with greater benefits on complex tasks than on simple factual queries.",
+    "culture": "An audit of 20 cultural benchmarks identifies six recurring methodological pitfalls in how cultural knowledge and behavior are evaluated."
   },
   "projects": [
     {

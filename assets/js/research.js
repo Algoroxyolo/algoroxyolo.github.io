@@ -91,7 +91,7 @@
   });
 
   const lab = document.getElementById('population-lab');
-  if (lab) {
+  if (lab && lab.classList.contains('population-lab')) {
     const fidelity = document.getElementById('fidelity');
     const diversity = document.getElementById('diversity');
     const readout = document.getElementById('lab-reading');

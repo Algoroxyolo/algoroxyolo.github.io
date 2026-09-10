@@ -51,7 +51,14 @@ class AcademicContentTests(unittest.TestCase):
         for project in self.data['projects']:
             self.assertIn('id="'+project['slug']+'"', pages['projects/index.html'])
             self.assertIn('research/'+project['slug']+'/index.html', pages)
-        self.assertIn('Illustrative model.', pages['index.html'])
-        self.assertLess(pages['index.html'].index('Questions behind the work'), pages['index.html'].index('Selected publications'))
+        self.assertIn('Illustrative model.', pages['research/chameleon-limit/index.html'])
+
+    def test_homepage_exposes_academic_information_before_optional_exploration(self):
+        homepage = Renderer(self.data).website()['index.html']
+        self.assertIn('I received my BS', homepage)
+        self.assertIn('scalable oversight', homepage)
+        self.assertNotIn('Education &amp; background</summary>', homepage)
+        self.assertNotIn('id="fidelity"', homepage)
+        self.assertLess(homepage.index('Selected publications'), homepage.index('Research projects &amp; interactive explanations'))
 
 if __name__ == '__main__': unittest.main()

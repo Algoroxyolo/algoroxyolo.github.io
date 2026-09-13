@@ -6,22 +6,24 @@
 web
 
 ## Users
-Academic peers, potential advisors, and research collaborators. Their first task is to establish identity, research fit, publication record, recent activity, and contact details. The user rejected a homepage that reduced information density and placed exploratory questions and a demonstration ahead of academic evidence.
+Academic peers, potential advisors, and research collaborators. Their first task is to establish identity, research fit, publication record, recent activity, and contact details.
 
 ## Product Purpose
 Explain Yunze Xiao's research and make its papers, code, demonstrations, writing, and academic CV easy to find.
 
 ## Capabilities and Constraints
-Static HTML generated with Python from data/academic.json, published on GitHub Pages. Preserve existing paper anchors, project and blog URLs, full author lists, CV synchronization, and accessible reading without JavaScript. Keep the presentation academic; exclude industry employment. Future scalable oversight and trustworthy MAS interests must remain distinct from completed results.
+Static HTML generated with Python from data/academic.json, published on GitHub Pages. Preserve all 30 publications, six selected papers, complete author lists, paper anchors, project and blog URLs, and CV synchronization. Google Scholar is the sole citation-count source; show its retrieval date and provenance. Keep the presentation academic and exclude industry employment. Future scalable oversight and trustworthy multi-agent-system interests remain distinct from completed results. Content remains readable without JavaScript.
 
 ## Brand Commitments
-Retain the established academic typography, portrait, and light/dark themes. Interactive experiments are optional depth within research pages; they must not displace the homepage’s academic information. Do not invent hobbies or biographical facts.
+The user approved direction A, research poster, and rejected the proposed novel interactions. Retain Fraunces, Source Sans 3, the portrait, and light/dark themes. Use existing paper figures with provenance. The existing Chameleon illustration remains optional depth at its study-page location. Preserve supplied academic facts and roles.
 
 ## Evidence on Hand
-Thirty publications, confirmed project summaries and roles, an existing Chameleon research microsite and figures, teaching and mentoring records, and a synchronized PDF CV.
+Thirty publications, six selected papers, confirmed project summaries and roles, the existing Chameleon research microsite and figures, teaching and mentoring records, and a synchronized PDF CV. Publication figure sources are recorded in assets/img/publications/README.md and PNG text metadata; Chameleon reuses projects/chameleon-limit/assets/figures/fig_combined.png. This poster build generated or replaced no raster assets.
 
 ## Product Principles
-- Show biography, substantive research interests, recent news, and representative publications directly on Home. Organize deeper research pages around questions.
+- Lead Home with identity and the complete research overview, followed by three connected research directions and representative papers. Keep full background and recent activity directly visible lower on Home.
+- Give Research, Publications, Writing, and study pages distinct reading purposes while sharing the academic design system.
 - Distinguish observed findings, position-paper arguments, future questions, and illustrative simulations.
-- Interactive explanations always have a readable conclusion and a route to the actual research.
-- Maintain academic facts in one source.
+- Preserve existing useful controls and readable explanations. Add no new interaction concepts to the approved poster build.
+- Maintain academic facts in one source and keep the website and PDF CV synchronized.
+- Record missing research work as concrete development TODOs; use existing contribution records until the author supplies more detail.

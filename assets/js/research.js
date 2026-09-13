@@ -23,6 +23,12 @@
     const topic = document.getElementById('paper-topic');
     const topicButtons = Array.from(form.querySelectorAll('[data-topic]'));
     const topicAliases = JSON.parse(topic.dataset.aliases || '{}');
+    const topicDetails = form.querySelector('.topic-details');
+    if (topicDetails) {
+      const desktopTopics = window.matchMedia('(min-width: 768px)');
+      topicDetails.open = desktopTopics.matches;
+      desktopTopics.addEventListener('change', event => { topicDetails.open = event.matches; });
+    }
     function resolveTopic(value) {
       const resolved = topicAliases[value] || value;
       return topicButtons.some(button => button.dataset.topic === resolved) ? resolved : '';
@@ -45,6 +51,8 @@
     function filter(mode) {
       const filters = {q: search.value, topic: topic.value, status: status.value};
       topicButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.topic === filters.topic)));
+      const topicLabel = document.getElementById('selected-topic-label');
+      if (topicLabel) topicLabel.textContent = topicButtons.find(button => button.dataset.topic === filters.topic)?.textContent || 'All topics';
       let visible = 0;
       papers.forEach(p => { p.el.hidden = !matchesPaper(p.text, p.topics, p.status, filters); if (!p.el.hidden) visible++; });
       document.querySelectorAll('.publication-year').forEach(section => {
@@ -90,6 +98,7 @@
       topic.value = resolveTopic(new URL(link.href).searchParams.get('topic') || '');
       search.value = status.value = '';
       filter('push');
+      if (topicDetails) topicDetails.open = true;
       form.scrollIntoView({block: 'start'});
       const selected = topicButtons.find(button => button.dataset.topic === topic.value);
       if (selected) selected.focus({preventScroll: true});

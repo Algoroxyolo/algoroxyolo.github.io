@@ -30,10 +30,10 @@ def publication_tags(r):
 def topic_controls(r):
     data = publication_tags(r)
     aliases = escape(json.dumps(data.get('aliases', {})), quote=True)
-    result = '<fieldset class="topic-filter"><legend>Topics</legend><input type="hidden" id="paper-topic" name="topic" value="" data-aliases="' + aliases + '"><div class="topic-chips">'
+    result = '<fieldset class="topic-filter"><legend class="sr-only">Topics</legend><input type="hidden" id="paper-topic" name="topic" value="" data-aliases="' + aliases + '"><details class="topic-details" open><summary>Topics <span id="selected-topic-label">All topics</span></summary><div class="topic-chips">'
     for tag in [{'slug': '', 'label': 'All topics'}] + data['tags']:
         result += '<button type="button" class="topic-chip" data-topic="' + escape(tag['slug'], quote=True) + '" aria-pressed="' + ('false' if tag['slug'] else 'true') + '">' + escape(tag['label']) + '</button>'
-    return result + '</div></fieldset>'
+    return result + '</div></details></fieldset>'
 
 
 def bibtex(r, p):
@@ -63,7 +63,7 @@ def render(r, filters, outputs):
     total = snapshot['profile_total']
     coverage = sum(records.get(p['key'], {}).get('count') is not None for p in pubs)
     metrics = f'<p class="publication-summary"><strong>{len(pubs)}</strong> papers · {counts["published"]} published · {counts["preprint"]} preprints · ' + r.link(snapshot['profile_url'], f'{total:,} citations · Google Scholar') + '</p>'
-    metrics += f'<p class="citation-source">Google Scholar profile total · Updated {escape(snapshot["updated"])} · Individual counts verified for {coverage}/{len(pubs)} listed papers.</p>'
+    metrics += f'<p class="citation-source">Google Scholar profile total · Updated {escape(snapshot["updated"])}.</p>'
     body = ''
     for year in years:
         group = [p for p in pubs if p['year'] == year]
@@ -111,8 +111,8 @@ def render(r, filters, outputs):
     css = (ROOT / 'assets/css/publications.css').read_text(encoding='utf-8')
     outputs['assets/bib/yunze-xiao.bib'] = '\n'.join(bibtex(r, p) for p in pubs)
     content = metrics + '<p class="publication-downloads"><a download href="/assets/bib/yunze-xiao.bib">Download all BibTeX</a> · ' + r.link('/assets/pdf/Yunze_Xiao.pdf', 'CV (PDF)') + '</p>' + filters
-    content += '<div class="portfolio-shell" id="showcase-top"><nav class="portfolio-rail" aria-label="Publication years">' + nav + '</nav><div class="portfolio-content"><span id="published"></span><span id="preprints"></span><p class="contribution-note">* Equal contribution in author lists. Citation counts retain Google Scholar’s own * markers.</p>' + body + '</div></div>'
-    page = r.page('Publications', '/publications/', content, 'Human–AI interaction, human-centered evaluation, and multi-agent social simulation.')
+    content += '<div class="portfolio-shell" id="showcase-top"><nav class="portfolio-rail" aria-label="Publication years">' + nav + '</nav><div class="portfolio-content"><span id="published"></span><span id="preprints"></span>' + body + '<p class="contribution-note">* Equal contribution in author lists. Citation counts retain Google Scholar’s own * markers.</p></div></div>'
+    page = r.page('Publications', '/publications/', content)
     page = page.replace('class="fixed-top-nav "', 'class="fixed-top-nav publications-page"')
     page = page.replace('</head>', '<link rel="stylesheet" href="/assets/css/publications.css?v=' + sha256(css.encode()).hexdigest()[:12] + '">\n</head>')
     return '\n'.join(line.rstrip() for line in page.splitlines()) + '\n'

@@ -1,6 +1,6 @@
 # 学术网站与 CV 的维护
 
-`data/academic.json` 是学术资料的唯一维护入口。页面模板保留现有主题，生成后的 HTML 可直接由 GitHub Pages 托管，不需要浏览器端 JavaScript 加载资料。
+`data/academic.json` 是学术资料的唯一维护入口。页面使用统一的研究海报式框架，生成后的 HTML 可直接由 GitHub Pages 托管，不需要浏览器端 JavaScript 加载资料。
 
 ## 更新流程
 
@@ -42,7 +42,9 @@
 
 ## 排版与检查
 
-模板在 `templates/home.html`、`templates/page.html`，学术页面样式在 `assets/css/academic.css`。`scripts/research_site.py` 生成研究阅读路径；`assets/js/research.js` 渐进增强检索、引用复制与互动实验。生成器检查站内链接、锚点、重复 ID、未填模板、论文 key 和 PDF 来源版本。PDF 编译失败或出现引用/溢出警告时，不会替换网页和网站下载文件；修正后重新运行。
+模板在 `templates/home.html`、`templates/page.html`，学术页面样式在 `assets/css/academic.css`，论文列表另用 `assets/css/publications.css`。`assets/js/site.js` 管理浅色和深色主题。`scripts/research_site.py` 生成首页三栏、研究详情和 Writing 列表；`assets/js/research.js` 渐进增强检索、引用复制与已有互动实验。生成器检查站内链接、锚点、重复 ID、未填模板、论文 key 和 PDF 来源版本。PDF 编译失败或出现引用/溢出警告时，不会替换网页和网站下载文件；修正后重新运行。
+
+首页从 `website.questions` 读取三个研究方向，并按方向分组展示六篇代表作；手机上保持相同顺序，改为单栏。论文图来自已有论文或项目资产，每张图提供原论文和全尺寸入口。完整背景、新闻和联系信息保留在首页下方，日历默认折叠。Writing 列表读取现有 `blog/index.html` 的文章标题、日期、摘要和链接；文章正文与独立项目站点继续使用各自模板。
 
 互动实验放在 Chameleon 详情页，首页只保留入口。使用 24 个固定的合成人物和两个独立控制量，只解释“人设匹配与额外行为维度上的多样性需要分别评价”。不展示论文实验分数，不调用模型。网址中的 `labf` / `labd` 可分享状态；论文页的 `q` / `topic` / `status` 可分享检索条件。关闭 JavaScript 后保留全部论文、研究内容及实验的静态说明。检查交互逻辑可运行 `node scripts/test_research.js`，内容同步回归检查运行 `python scripts/test_academic.py`。
 
@@ -55,4 +57,4 @@ BibTeX is generated from the canonical full author lists, titles, years, venues 
 
 ## Publication tags
 
-`data/publication-tags.json` maintains ten website-only topics separately from the CV facts. Assign each paper 1–3 directly supported topics using its stable publication key. The Publications page presents clickable topic buttons above search and status controls; clicking an active topic clears it. Paper tags select the same filter, and search includes visible tag labels. The `aliases` map redirects retired granular tags and former research-theme URLs to their closest current topic. New topic slugs must not collide with aliases. Rebuild with `python scripts/build_academic.py` after editing tags.
+`data/publication-tags.json` maintains ten website-only topics separately from the CV facts. Assign each paper 1–3 directly supported topics using its stable publication key. The Publications page presents clickable topic buttons below search and status controls; clicking an active topic clears it. On mobile, the topic list is a disclosure with the current selection in its summary. Paper tags select the same filter, and search includes visible tag labels. The `aliases` map redirects retired granular tags and former research-theme URLs to their closest current topic. New topic slugs must not collide with aliases. Rebuild with `python scripts/build_academic.py` after editing tags.

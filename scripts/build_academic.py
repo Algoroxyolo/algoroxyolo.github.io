@@ -154,8 +154,11 @@ class Renderer:
         heading = '<span class="font-weight-bold">' + escape(display[0]) + '</span>' + (' ' + escape(display[1]) if len(display) > 1 else '')
         values = {'DISPLAY_NAME': escape(self.d['profile']['display_name']), 'NAME': escape(self.d['profile']['name']), 'NAME_HEADING': heading, 'EMAIL': escape(self.d['profile']['email']), **values}
         values['STYLE_VERSION'] = digest(read(ROOT / 'assets/css/academic.css').encode('utf-8'))[:12]
+        values.setdefault('BIOGRAPHY', '')
+        values['SITE_VERSION'] = digest(read(ROOT / 'assets/js/site.js').encode('utf-8'))[:12]
         values['SCRIPT_VERSION'] = digest(read(ROOT / 'assets/js/research.js').encode('utf-8'))[:12]
         route = values.get('ROUTE', '/')
+        values['PAGE_CLASS'] = ('home-page' if route == '/' else 'publications-page' if route == '/publications/' else 'study-page' if route.startswith('/research/') and route != '/research/' else 'research-page' if route == '/research/' else 'reading-page')
         nav = [('/', 'Home'), ('/research/', 'Research'), ('/publications/', 'Publications'), ('/writing/', 'Writing'), ('/cv/', 'CV')]
         values['NAVIGATION'] = ''.join('<li class="nav-item' + (' active' if route == url or url == '/research/' and route.startswith('/research/') else '') + '"><a class="nav-link" href="' + url + '"' + (' aria-current="page"' if route == url else '') + '>' + label + '</a></li>' for url,label in nav)
         for k, v in values.items(): s = s.replace('{{' + k + '}}', v)

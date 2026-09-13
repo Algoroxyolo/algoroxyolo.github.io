@@ -2,6 +2,9 @@
 from html import escape, unescape
 import re
 from urllib.parse import urlencode
+from pathlib import Path
+import json
+import struct
 
 
 def plain(html):
@@ -29,7 +32,7 @@ def experiment():
 </div>
 <p class="lab-static">Matching explicit profile attributes does not by itself establish diversity in other behaviors. These two properties need separate evaluation.</p>
 <details class="lab-method"><summary>What this illustration assumes</summary><p>The two controls are independent by construction. Profile fidelity changes the distance from 24 fixed target preferences; response diversity changes the spread of a separate, unspecified behavior. The axes are unitless and synthetic. This is a counterexample to treating fidelity as sufficient evidence of diversity, not a claim that the two are independent in real models.</p></details>
-<p><a href="/research/chameleon-limit/">Read the research behind this question</a> · <a href="/projects/chameleon-limit/">Explore the paper’s experiments</a></p>
+<p><a href="https://arxiv.org/abs/2604.24698">Read the paper</a> · <a href="/projects/chameleon-limit/">Explore the paper’s experiments</a></p>
 </section>'''
 
 
@@ -63,23 +66,47 @@ def enhance(r, outputs, biography, calendar):
             text = text.replace(r.ref(key), '[' + r.link('/publications/#' + r.anchor(key), title(key)) + ']')
         return text
 
-    # Academic visitors need identity, research fit, and evidence without extra clicks.
-    portrait = '<figure class="home-portrait"><img src="/assets/img/Yunze%20Xiao.jpg" width="480" height="480" alt="Portrait of Yunze Xiao"></figure>'
-    intro = '<div class="home-intro">' + portrait + '<div><p>' + biography + '</p></div></div><div class="home-interests"><p>' + named_interests() + '</p></div><p class="academic-contact home-contact">' + r.link('mailto:' + d['profile']['email'], d['profile']['email']) + ' · ' + r.link('/assets/pdf/Yunze_Xiao.pdf', 'CV (PDF)') + ' · ' + r.link('/publications/', 'All publications') + ' · ' + r.link('https://github.com/' + d['profile']['github'], 'GitHub') + ' · ' + r.link('/teaching/', 'Teaching & mentoring') + '</p>'
-    selected = '<section class="home-selected"><div class="section-heading"><h2>Selected publications</h2>' + r.link('/publications/', 'All publications & preprints') + '</div><p class="academic-note">* Equal contribution.</p><ol class="academic-publications">' + ''.join(r.publication(k, True) for k in d['selected_publications']) + '</ol></section>'
-    project_links = '<section class="home-project-links"><h2>Research projects &amp; interactive explanations</h2><ul>' + ''.join('<li>' + r.link('/research/' + p['slug'] + '/', p['name']) + ' — ' + escape(p['question']) + '</li>' for p in d['projects']) + '</ul><p id="population-lab">' + r.link('/research/chameleon-limit/#population-lab', 'Try the persona fidelity and diversity illustration') + '</p></section>'
-    contact = '<section id="contact" class="contact-section"><h2>Contact</h2><p>' + r.link('mailto:' + d['profile']['email'], d['profile']['email']) + ' · GHC 5418, Carnegie Mellon University</p><p class="academic-note">4902 Forbes Ave · Pittsburgh, PA 15213</p>' + calendar + '</section>'
-    outputs['index.html'] = r.template('home.html', {'INTRO':intro, 'TAGLINE':escape(d['profile']['tagline']), 'SELECTED':selected + project_links, 'NEWS':r.news(True, limit=3), 'CALENDAR':contact})
+    figures = {
+        'human-centered-evaluation': ('humanizing', '/assets/img/publications/paper-humanizing.png', 'Humanizing Machines · framework of design'),
+        'social-simulation': ('chameleon', '/projects/chameleon-limit/assets/figures/fig_combined.png', 'Chameleon · population diversity and persona fidelity'),
+        'trustworthy-agents': ('2026.acl-demo.83', '/assets/img/publications/paper-2026-acl-demo-83.png', 'TartanMaroon · multi-agent advising architecture'),
+    }
+    def figure(key, src, caption, class_name='research-figure'):
+        width, height = struct.unpack('>II', (Path(__file__).resolve().parents[1] / src.lstrip('/')).read_bytes()[16:24])
+        return '<figure class="' + class_name + '"><a href="' + src + '" aria-label="View full-size figure: ' + escape(caption, quote=True) + '"><img src="' + src + '" width="' + str(width) + '" height="' + str(height) + '" loading="lazy" alt="' + escape(caption, quote=True) + '"></a><figcaption>' + r.link(r.pubs[key]['url'], caption) + ' · ' + r.link(src, 'Full-size figure') + '</figcaption></figure>'
+
+    interest = named_interests()
+    lead, _, remainder = interest.partition('. ')
+    master = d['education'][0]
+    identity = master['position'] + ' · ' + master['institution']
+    if master['status'] != 'in_progress': identity += ' · Graduate'
+    contact_links = r.link('mailto:' + d['profile']['email'], 'Email') + r.link('https://scholar.google.com/citations?user=95n7XTkAAAAJ&hl=en', 'Google Scholar') + r.link('/assets/pdf/Yunze_Xiao.pdf', 'CV (PDF)') + r.link('https://github.com/' + d['profile']['github'], 'GitHub')
+    intro = '<header class="poster-masthead"><div class="poster-identity"><h1>' + escape(d['profile']['display_name']) + '</h1><div class="poster-person"><img src="/assets/img/Yunze%20Xiao.jpg" width="480" height="480" alt="Portrait of Yunze Xiao"><div><p>' + escape(identity) + '</p><p class="academic-note">' + r.link(master['institution_url'], master['unit']) + '</p><nav class="identity-links" aria-label="Contact and profiles">' + contact_links + '</nav></div></div></div><div class="poster-intro"><p class="poster-lead">' + lead + '.</p><p>' + remainder + '</p></div></header>'
+    selected = '<section class="home-selected" id="selected-publications"><div class="section-heading"><h2>Selected publications</h2>' + r.link('/publications/', 'All publications & preprints') + '</div><p class="academic-note">* Equal contribution.</p><div class="poster-columns">'
+    for q in questions:
+        fkey, src, caption = figures[q['slug']]
+        selected += '<section class="poster-column" aria-labelledby="home-' + q['slug'] + '"><h3 id="home-' + q['slug'] + '">' + r.link('/research/#' + q['slug'], q['label']) + '</h3><p class="poster-question">' + escape(q['question']) + '</p>' + figure(fkey, src, caption, 'poster-figure') + '<ol class="academic-publications">'
+        for key in q['papers']:
+            if key not in d['selected_publications']: continue
+            entry = r.publication(key, True).replace('<h3>', '<h4>').replace('</h3>', '</h4>')
+            if key in projects:
+                entry = entry.replace('</li>', '<p class="study-entry-link">' + r.link(study_url(key), 'Study overview') + ' · ' + escape(projects[key]['role']) + '</p></li>')
+            selected += entry
+        selected += '</ol><p class="theme-route">' + r.link('/research/#' + q['slug'], 'Research direction') + '</p></section>'
+    selected += '</div></section>'
+    contact = '<section id="contact" class="contact-section"><div><h2>Contact</h2><p>' + r.link('mailto:' + d['profile']['email'], d['profile']['email']) + '</p><p>GHC 5418, Carnegie Mellon University<br>4902 Forbes Ave · Pittsburgh, PA 15213</p><p>' + r.link('/teaching/', 'Teaching & mentoring') + ' · ' + r.link('/cv/', 'Academic CV') + '</p></div>' + calendar + '</section>'
+    background = '<p>' + biography + '</p><p id="population-lab">' + r.link('/research/chameleon-limit/#population-lab', 'Chameleon: persona fidelity and diversity illustration') + '</p>'
+    outputs['index.html'] = r.template('home.html', {'INTRO':intro, 'BIOGRAPHY':background, 'TAGLINE':escape(d['profile']['tagline']), 'SELECTED':selected, 'NEWS':r.news(True, limit=3), 'CALENDAR':contact})
 
     body = '<p class="page-lead">From human-like behavior to collective social dynamics: three questions connect my work.</p><nav class="section-jumps" aria-label="Research questions">' + ''.join(r.link('#' + q['slug'], q['label']) for q in questions) + '</nav>'
     for q in questions:
-        body += '<section class="research-theme" id="' + q['slug'] + '"><h2>' + escape(q['question']) + '</h2><p>' + escape(q['description']) + '</p><ul class="theme-evidence">'
+        body += '<section class="research-theme" id="' + q['slug'] + '"><div class="theme-intro"><h2>' + escape(q['question']) + '</h2><p>' + escape(q['description']) + '</p>' + figure(*figures[q['slug']]) + '</div><div class="theme-body"><ul class="theme-evidence">'
         for key in q['papers']:
             pub = r.pubs[key]; finding = d['findings'].get(key)
             project = projects.get(key)
             if not finding and project: finding = project['finding']
             body += '<li><h3>' + paper_link(key) + '</h3>' + ('<p>' + escape(finding) + '</p>' if finding else '') + '<p class="academic-note">' + str(pub['year']) + ' · ' + r.tex(pub['venue']) + '</p></li>'
-        body += '</ul><div class="open-question"><h3>Looking ahead</h3><p>' + escape(q['next']) + '</p></div><p>' + r.link('/publications/?' + urlencode({'topic':q['slug']}), 'Browse papers on this theme') + '</p></section>'
+        body += '</ul><div class="open-question"><h3>Looking ahead</h3><p>' + escape(q['next']) + '</p></div><p>' + r.link('/publications/?' + urlencode({'topic':q['slug']}), 'Browse papers on this theme') + '</p></div></section>'
     body += '<section id="projects"><h2>Inside three studies</h2><div class="study-index">'
     for project in d['projects']:
         body += '<section id="' + project['slug'] + '"><h3>' + r.link('/research/' + project['slug'] + '/', project['name']) + '</h3><p>' + escape(project['question']) + '</p></section>'
@@ -91,9 +118,11 @@ def enhance(r, outputs, biography, calendar):
     for project in d['projects']:
         key = project['publication']; note = web['study_notes'][project['slug']]; pub = r.pubs[key]
         body = '<nav class="breadcrumbs" aria-label="Breadcrumb">' + r.link('/research/', 'Research') + ' / ' + escape(project['name']) + '</nav><p class="project-question">' + escape(project['question']) + '</p><p class="study-finding">' + escape(project['finding']) + '</p>' + r.resources(pub)
+        study_src = '/projects/chameleon-limit/assets/figures/fig_combined.png' if key == 'chameleon' else '/assets/img/publications/' + r.anchor(key) + '.png'
+        body += figure(key, study_src, project['name'] + ' · figure from the paper')
         body += '<section><h2>What we studied</h2><p>' + escape(project['method']) + '</p><h3>My contribution</h3><p>' + escape(project['role']) + '</p></section>'
+        body += '<section><h2>How to read the result</h2><p>' + escape(note['scope'].replace('The interactive illustration below explains a distinction; it does not reproduce the paper’s measurements.', 'The illustration below uses synthetic data to explain persona fidelity and population diversity.')) + '</p></section><section><h2>Paper &amp; authors</h2><ol class="academic-publications">' + r.publication(key, True) + '</ol></section>'
         if key == 'chameleon': body += experiment()
-        body += '<section><h2>How to read the result</h2><p>' + escape(note['scope']) + '</p></section><section><h2>Paper &amp; authors</h2><ol class="academic-publications">' + r.publication(key, True) + '</ol></section>'
         body += '<section class="related-reading"><h2>Continue the question</h2><ul>' + ''.join('<li>' + paper_link(k) + '</li>' for k in note['related']) + '</ul><p>' + r.link('/research/', 'Back to all research questions') + '</p></section>'
         outputs['research/' + project['slug'] + '/index.html'] = r.page(project['name'], '/research/' + project['slug'] + '/', body, project['theme'])
 
@@ -103,10 +132,14 @@ def enhance(r, outputs, biography, calendar):
     from publications_site import render
     outputs['publications/index.html'] = render(r, filters, outputs)
 
-    writing = '<p class="page-lead">Research ideas, explained through writing and interactive experiments.</p>'
-    for post in web['writing']:
-        writing += '<section class="writing-entry"><h2>' + r.link(post['url'], post['title']) + '</h2><p>' + escape(post['description']) + '</p><p>' + r.link(post['url'], 'Read the essay') + ' · ' + paper_link(post['paper']) + '</p></section>'
-    writing += '<section><h2>Try the idea</h2><p>Matching a persona and preserving population diversity are different tests. Change one while holding the other still.</p><p>' + r.link('/research/chameleon-limit/#population-lab', 'Open the interactive illustration') + '</p></section><p>' + r.link('/blog/', 'Browse the full writing archive') + '</p>'
+    writing = '<p class="page-lead">Research essays and notes on language models, evaluation, and agent systems.</p><div class="writing-list">'
+    archive = (Path(__file__).resolve().parents[1] / 'blog/index.html').read_text(encoding='utf-8')
+    entries = re.findall(r'<h2 class="blog-card__title">\s*<a href="([^"]+)">(.*?)</a>\s*</h2>(.*?)(?=<h2 class="blog-card__title">|$)', archive, re.S)
+    for url, post_title, tail in entries:
+        description = re.search(r'<p class="blog-card__desc">(.*?)</p>', tail, re.S)
+        date = re.search(r'([A-Z][a-z]{2} \d{1,2}, \d{4})', tail)
+        writing += '<section class="writing-entry">' + ('<p class="entry-date">' + date[1] + '</p>' if date else '') + '<div><h2>' + r.link(url, plain(post_title)) + '</h2>' + ('<p>' + escape(plain(description[1])) + '</p>' if description else '') + '<p>' + r.link(url, 'Read essay') + '</p></div></section>'
+    writing += '</div><p>' + r.link('/blog/', 'Full writing archive & series') + '</p>'
     outputs['writing/index.html'] = r.page('Writing', '/writing/', writing)
     # Keep full interests in the CV, with descriptive web references.
     outputs['cv/index.html'] = outputs['cv/index.html'].replace(r.tex(d['research_interests']), named_interests())

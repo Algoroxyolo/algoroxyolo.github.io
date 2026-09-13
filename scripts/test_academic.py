@@ -59,6 +59,6 @@ class AcademicContentTests(unittest.TestCase):
         self.assertIn('scalable oversight', homepage)
         self.assertNotIn('Education &amp; background</summary>', homepage)
         self.assertNotIn('id="fidelity"', homepage)
-        self.assertLess(homepage.index('Selected publications'), homepage.index('Research projects &amp; interactive explanations'))
+        self.assertLess(homepage.index('Selected publications'), homepage.index('id="background"'))
 
 if __name__ == '__main__': unittest.main()

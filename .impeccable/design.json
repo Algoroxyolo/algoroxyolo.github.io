@@ -1,0 +1,414 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-13T18:46:54.155Z",
+  "title": "Design System: Yunze Xiao academic website",
+  "extensions": {
+    "colorMeta": {
+      "accent-light": {
+        "role": "primary",
+        "displayName": "accent light",
+        "tonalRamp": [
+          "oklch(15.00% 0.24057 331.06)",
+          "oklch(26.43% 0.24057 331.06)",
+          "oklch(37.86% 0.24057 331.06)",
+          "oklch(49.29% 0.24057 331.06)",
+          "oklch(60.71% 0.24057 331.06)",
+          "oklch(72.14% 0.24057 331.06)",
+          "oklch(83.57% 0.24057 331.06)",
+          "oklch(95.00% 0.24057 331.06)"
+        ]
+      },
+      "accent-dark": {
+        "role": "primary",
+        "displayName": "accent dark",
+        "tonalRamp": [
+          "oklch(15.00% 0.10832 223.17)",
+          "oklch(26.43% 0.10832 223.17)",
+          "oklch(37.86% 0.10832 223.17)",
+          "oklch(49.29% 0.10832 223.17)",
+          "oklch(60.71% 0.10832 223.17)",
+          "oklch(72.14% 0.10832 223.17)",
+          "oklch(83.57% 0.10832 223.17)",
+          "oklch(95.00% 0.10832 223.17)"
+        ]
+      },
+      "background-light": {
+        "role": "neutral",
+        "displayName": "background light",
+        "tonalRamp": [
+          "oklch(15.00% 0.00000 89.88)",
+          "oklch(26.43% 0.00000 89.88)",
+          "oklch(37.86% 0.00000 89.88)",
+          "oklch(49.29% 0.00000 89.88)",
+          "oklch(60.71% 0.00000 89.88)",
+          "oklch(72.14% 0.00000 89.88)",
+          "oklch(83.57% 0.00000 89.88)",
+          "oklch(95.00% 0.00000 89.88)"
+        ]
+      },
+      "background-dark": {
+        "role": "neutral",
+        "displayName": "background dark",
+        "tonalRamp": [
+          "oklch(15.00% 0.00191 286.25)",
+          "oklch(26.43% 0.00191 286.25)",
+          "oklch(37.86% 0.00191 286.25)",
+          "oklch(49.29% 0.00191 286.25)",
+          "oklch(60.71% 0.00191 286.25)",
+          "oklch(72.14% 0.00191 286.25)",
+          "oklch(83.57% 0.00191 286.25)",
+          "oklch(95.00% 0.00191 286.25)"
+        ]
+      },
+      "text-light": {
+        "role": "neutral",
+        "displayName": "text light",
+        "tonalRamp": [
+          "oklch(15.00% 0.00624 314.71)",
+          "oklch(26.43% 0.00624 314.71)",
+          "oklch(37.86% 0.00624 314.71)",
+          "oklch(49.29% 0.00624 314.71)",
+          "oklch(60.71% 0.00624 314.71)",
+          "oklch(72.14% 0.00624 314.71)",
+          "oklch(83.57% 0.00624 314.71)",
+          "oklch(95.00% 0.00624 314.71)"
+        ]
+      },
+      "text-dark": {
+        "role": "neutral",
+        "displayName": "text dark",
+        "tonalRamp": [
+          "oklch(15.00% 0.00000 89.88)",
+          "oklch(26.43% 0.00000 89.88)",
+          "oklch(37.86% 0.00000 89.88)",
+          "oklch(49.29% 0.00000 89.88)",
+          "oklch(60.71% 0.00000 89.88)",
+          "oklch(72.14% 0.00000 89.88)",
+          "oklch(83.57% 0.00000 89.88)",
+          "oklch(95.00% 0.00000 89.88)"
+        ]
+      },
+      "muted-light": {
+        "role": "neutral",
+        "displayName": "muted light",
+        "tonalRamp": [
+          "oklch(15.00% 0.01649 318.69)",
+          "oklch(26.43% 0.01649 318.69)",
+          "oklch(37.86% 0.01649 318.69)",
+          "oklch(49.29% 0.01649 318.69)",
+          "oklch(60.71% 0.01649 318.69)",
+          "oklch(72.14% 0.01649 318.69)",
+          "oklch(83.57% 0.01649 318.69)",
+          "oklch(95.00% 0.01649 318.69)"
+        ]
+      },
+      "muted-dark": {
+        "role": "neutral",
+        "displayName": "muted dark",
+        "tonalRamp": [
+          "oklch(15.00% 0.01304 317.74)",
+          "oklch(26.43% 0.01304 317.74)",
+          "oklch(37.86% 0.01304 317.74)",
+          "oklch(49.29% 0.01304 317.74)",
+          "oklch(60.71% 0.01304 317.74)",
+          "oklch(72.14% 0.01304 317.74)",
+          "oklch(83.57% 0.01304 317.74)",
+          "oklch(95.00% 0.01304 317.74)"
+        ]
+      },
+      "rule-light": {
+        "role": "neutral",
+        "displayName": "rule light",
+        "tonalRamp": [
+          "oklch(15.00% 0.00626 317.75)",
+          "oklch(26.43% 0.00626 317.75)",
+          "oklch(37.86% 0.00626 317.75)",
+          "oklch(49.29% 0.00626 317.75)",
+          "oklch(60.71% 0.00626 317.75)",
+          "oklch(72.14% 0.00626 317.75)",
+          "oklch(83.57% 0.00626 317.75)",
+          "oklch(95.00% 0.00626 317.75)"
+        ]
+      },
+      "rule-dark": {
+        "role": "neutral",
+        "displayName": "rule dark",
+        "tonalRamp": [
+          "oklch(15.00% 0.01687 314.62)",
+          "oklch(26.43% 0.01687 314.62)",
+          "oklch(37.86% 0.01687 314.62)",
+          "oklch(49.29% 0.01687 314.62)",
+          "oklch(60.71% 0.01687 314.62)",
+          "oklch(72.14% 0.01687 314.62)",
+          "oklch(83.57% 0.01687 314.62)",
+          "oklch(95.00% 0.01687 314.62)"
+        ]
+      },
+      "card-light": {
+        "role": "neutral",
+        "displayName": "card light",
+        "tonalRamp": [
+          "oklch(15.00% 0.00000 89.88)",
+          "oklch(26.43% 0.00000 89.88)",
+          "oklch(37.86% 0.00000 89.88)",
+          "oklch(49.29% 0.00000 89.88)",
+          "oklch(60.71% 0.00000 89.88)",
+          "oklch(72.14% 0.00000 89.88)",
+          "oklch(83.57% 0.00000 89.88)",
+          "oklch(95.00% 0.00000 89.88)"
+        ]
+      },
+      "card-dark": {
+        "role": "neutral",
+        "displayName": "card dark",
+        "tonalRamp": [
+          "oklch(15.00% 0.00191 286.25)",
+          "oklch(26.43% 0.00191 286.25)",
+          "oklch(37.86% 0.00191 286.25)",
+          "oklch(49.29% 0.00191 286.25)",
+          "oklch(60.71% 0.00191 286.25)",
+          "oklch(72.14% 0.00191 286.25)",
+          "oklch(83.57% 0.00191 286.25)",
+          "oklch(95.00% 0.00191 286.25)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Page title",
+        "purpose": "Shared academic page titles."
+      },
+      "poster-name": {
+        "displayName": "Poster identity",
+        "purpose": "Large name in the Home masthead."
+      },
+      "poster-heading": {
+        "displayName": "Research column heading",
+        "purpose": "Three open research columns."
+      },
+      "title": {
+        "displayName": "Publication title",
+        "purpose": "Sans-serif scholarly titles."
+      }
+    },
+    "shadows": [
+      {
+        "name": "shared-shell",
+        "value": "none",
+        "purpose": "The shared reading shell separates content with space and rules."
+      }
+    ],
+    "motion": [
+      {
+        "name": "reduced-motion",
+        "value": "scroll-behavior: auto !important; animation: none !important; transition: none !important",
+        "purpose": "Applied to all elements and pseudo-elements when reduced motion is requested."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "poster-compact",
+        "value": "1000px"
+      },
+      {
+        "name": "academic-mobile",
+        "value": "767px"
+      },
+      {
+        "name": "archive-phone",
+        "value": "575px"
+      }
+    ],
+    "focus": [
+      {
+        "name": "links-buttons-disclosures",
+        "value": "2px solid var(--global-theme-color); outline-offset: 4px"
+      },
+      {
+        "name": "form-controls",
+        "value": "2px solid var(--global-theme-color); outline-offset: 3px"
+      }
+    ],
+    "evidence": {
+      "sources": [
+        "assets/css/academic.css",
+        "assets/css/publications.css",
+        "templates/home.html",
+        "templates/page.html",
+        "scripts/research_site.py",
+        "assets/js/site.js",
+        "assets/js/research.js"
+      ],
+      "captureDirectory": ".impeccable/review/poster/",
+      "availableCaptures": [
+        "home-dark.png",
+        "home-desktop.png",
+        "home-mobile.png",
+        "home-papers-desktop.png",
+        "home-papers-mobile.png",
+        "publications-desktop.png",
+        "publications-mobile-dark.png",
+        "publications-mobile.png",
+        "research-desktop.png",
+        "study-desktop.png",
+        "topics-mobile-focused.png",
+        "writing-desktop.png"
+      ],
+      "inspectedCaptures": [
+        ".impeccable/review/poster/home-desktop.png",
+        ".impeccable/review/poster/home-mobile.png",
+        ".impeccable/review/poster/publications-mobile-dark.png",
+        ".impeccable/review/poster/research-desktop.png"
+      ],
+      "captureScope": "Viewport captures and scrolled paper views; responsive behavior is also grounded in source inspection.",
+      "tonalRamps": "Synthesized OKLCH preview strips only; not shipped colors.",
+      "componentPreviews": "Self-contained markup and CSS extracts; JavaScript behavior and third-party embeds remain in the live site.",
+      "figureProvenance": [
+        "assets/img/publications/README.md",
+        "PNG text metadata",
+        "projects/chameleon-limit/assets/figures/fig_combined.png"
+      ],
+      "rasterChanges": "No raster generated or replaced in the poster build.",
+      "notCanonized": "Unused legacy layout selectors and independent project-microsite styles."
+    },
+    "publications": {
+      "scope": "Shared 1200px reading shell and static navigation.",
+      "sources": [
+        "assets/css/publications.css",
+        "templates/page.html",
+        "scripts/publications_site.py",
+        "assets/js/research.js"
+      ],
+      "layout": "Sticky 125px year rail, 28px gap, 1rem top offset; static horizontal scrolling rail and stacked figures at 767px and below.",
+      "citations": "Google Scholar counts display source and retrieval date. Native BibTeX disclosures retain wrapping text and downloads.",
+      "topics": "Disclosure follows the 768px media query; paper-tag navigation opens it before selected-chip focus."
+    },
+    "layout": {
+      "container": "1200px",
+      "readingContainer": "920px",
+      "studyContainer": "1040px",
+      "desktopPadding": "30px",
+      "mobilePadding": "22px",
+      "navigation": "static",
+      "posterColumns": "repeat(3,minmax(0,1fr))",
+      "mobilePosterColumns": "1fr"
+    }
+  },
+  "components": [
+    {
+      "name": "Experiment preset",
+      "kind": "button",
+      "refersTo": "preset",
+      "description": "Unselected native experiment preset; selection is applied by the site script.",
+      "html": "<button class=\"ds-component\" type=\"button\" aria-pressed=\"false\">Accurate and varied</button>",
+      "css": ".ds-component{background:transparent;color:var(--global-text-color);border:1px solid var(--global-text-color-light);border-radius:4px;font-family:\"Source Sans 3\",sans-serif;font-size:.95rem;line-height:1.65;padding:.6rem .85rem;min-height:44px;cursor:pointer}.ds-component[aria-pressed=true]{border-color:var(--global-theme-color);color:var(--global-bg-color);background:var(--global-theme-color)}.ds-component:hover{text-decoration:underline;text-underline-offset:.2em}.ds-component:focus-visible{outline:2px solid var(--global-theme-color);outline-offset:4px}"
+    },
+    {
+      "name": "Selected experiment preset",
+      "kind": "button",
+      "refersTo": "preset-selected",
+      "description": "The same control selected, with theme-aware fill and foreground.",
+      "html": "<button class=\"ds-component\" type=\"button\" aria-pressed=\"true\">Accurate but alike</button>",
+      "css": ".ds-component{background:transparent;color:var(--global-text-color);border:1px solid var(--global-text-color-light);border-radius:4px;font-family:\"Source Sans 3\",sans-serif;font-size:.95rem;line-height:1.65;padding:.6rem .85rem;min-height:44px;cursor:pointer}.ds-component[aria-pressed=true]{border-color:var(--global-theme-color);color:var(--global-bg-color);background:var(--global-theme-color)}.ds-component:hover{text-decoration:underline;text-underline-offset:.2em}.ds-component:focus-visible{outline:2px solid var(--global-theme-color);outline-offset:4px}"
+    },
+    {
+      "name": "Text action",
+      "kind": "button",
+      "refersTo": "text-button",
+      "description": "Underlined actions for reset, clearing filters, and citation copying.",
+      "html": "<button class=\"ds-component\" type=\"button\">Clear filters</button>",
+      "css": ".ds-component{border:0;background:transparent;color:var(--global-theme-color);font-family:\"Source Sans 3\",sans-serif;font-size:.95rem;line-height:1.65;padding:.5rem 0;min-height:44px;cursor:pointer;text-decoration:underline;text-underline-offset:.2em}.ds-component:hover{color:var(--global-text-color)}.ds-component:focus-visible{outline:2px solid var(--global-theme-color);outline-offset:4px}"
+    },
+    {
+      "name": "Publication search",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "Labeled native search field; the same surface styles native selects.",
+      "html": "<label class=\"ds-label\" for=\"ds-paper-search\">Find a paper</label><input class=\"ds-component\" id=\"ds-paper-search\" type=\"search\" placeholder=\"Title, author, or keyword\">",
+      "css": ".ds-label{display:block;font-family:\"Source Sans 3\",sans-serif;font-size:.95rem;font-weight:600;color:var(--global-text-color);margin-bottom:.4rem}.ds-component{width:100%;min-width:0;min-height:44px;border:1px solid var(--global-text-color-light);border-radius:4px;padding:.6rem;font-family:\"Source Sans 3\",sans-serif;font-size:.95rem;line-height:1.65;color:var(--global-text-color);background:var(--global-bg-color)}.ds-component::placeholder{color:var(--global-text-color-light);opacity:1}.ds-component:focus-visible{outline:2px solid var(--global-theme-color);outline-offset:3px}"
+    },
+    {
+      "name": "Static reading navigation",
+      "kind": "nav",
+      "description": "Visible text navigation; links wrap to a second row on mobile.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Primary\"><a class=\"ds-link\" href=\"/\">Home</a><a class=\"ds-link ds-active\" href=\"/research/\" aria-current=\"page\">Research</a><a class=\"ds-link\" href=\"/publications/\">Publications</a></nav>",
+      "css": ".ds-nav{position:static;display:flex;flex-wrap:wrap;gap:1.6rem;background:var(--global-bg-color);border-bottom:1px solid var(--academic-rule);font-family:\"Source Sans 3\",sans-serif}.ds-link{min-height:44px;display:inline-flex;align-items:center;color:var(--global-text-color-light);text-decoration:none;font-size:1rem}.ds-link:hover{text-decoration:underline}.ds-active{color:var(--global-theme-color);text-decoration:underline;text-underline-offset:.4em}.ds-link:focus-visible{outline:2px solid var(--global-theme-color);outline-offset:4px}"
+    },
+    {
+      "name": "Publication row",
+      "kind": "custom",
+      "refersTo": "publication-row",
+      "description": "A minimal title/link excerpt of a ruled entry; full entries also retain all authors, venue, and takeaway.",
+      "html": "<article class=\"ds-row\"><h3 class=\"ds-title\"><a class=\"ds-title-link\" href=\"/research/sentipolis/\">Sentipolis: Emotion-Aware Agents for Social Simulations</a></h3><div class=\"ds-links\"><a class=\"ds-link\" href=\"/research/sentipolis/\">Read the study</a></div></article>",
+      "css": ".ds-row{padding:1.75rem 0;border-bottom:1px solid var(--academic-rule);font-family:\"Source Sans 3\",sans-serif;color:var(--global-text-color)}.ds-title{font-family:\"Source Sans 3\",sans-serif;font-size:1.2rem;font-weight:600;line-height:1.4;margin:0 0 .4rem;text-wrap:pretty}.ds-title-link{color:var(--global-text-color);text-decoration:none}.ds-title-link:hover{color:var(--global-theme-color);text-decoration:underline}.ds-links{display:flex;gap:.25rem 1.25rem;flex-wrap:wrap;margin-top:.7rem;font-size:.95rem;font-weight:600}.ds-link{color:var(--global-theme-color);min-height:44px;display:inline-flex;align-items:center;text-decoration:underline;text-underline-offset:.18em}.ds-link:hover{color:var(--global-theme-color)}.ds-link:focus-visible,.ds-title-link:focus-visible{outline:2px solid var(--global-theme-color);outline-offset:4px}"
+    },
+    {
+      "name": "Calendar container",
+      "kind": "card",
+      "refersTo": "calendar",
+      "description": "Existing scheduling embed shell; the third-party iframe is omitted from this preview.",
+      "html": "<div class=\"ds-calendar\"><div class=\"ds-calendar-header\">Schedule a conversation</div><p class=\"ds-calendar-note\">View my calendar</p></div>",
+      "css": ".ds-calendar{border:1px solid var(--academic-rule);border-radius:4px;overflow:hidden;margin:0;background:var(--global-bg-color);font-family:\"Source Sans 3\",sans-serif;color:var(--global-text-color)}.ds-calendar-header{padding:1rem}.ds-calendar-note{padding:1rem;font-size:.85rem;color:var(--global-text-color-light)}"
+    },
+    {
+      "name": "Experiment range",
+      "kind": "input",
+      "description": "Native range with theme accent; the live site supplies the output update.",
+      "html": "<label class=\"ds-label\" for=\"ds-fidelity\">Profile fidelity <output class=\"ds-output\" for=\"ds-fidelity\">High</output><input class=\"ds-component\" id=\"ds-fidelity\" type=\"range\" min=\"0\" max=\"100\" value=\"90\"><span class=\"ds-hint\">Off-profile to closely matched</span></label>",
+      "css": ".ds-label{font-family:\"Source Sans 3\",sans-serif;font-size:1rem;font-weight:600;display:block;color:var(--global-text-color)}.ds-output{float:right;font-weight:400;color:var(--global-text-color-light)}.ds-component{display:block;width:100%;min-height:44px;margin:.25rem 0 0;accent-color:var(--global-theme-color);cursor:pointer}.ds-hint{font-weight:400;font-size:.875rem;color:var(--global-text-color-light)}.ds-component:focus-visible{outline:2px solid var(--global-theme-color);outline-offset:3px}"
+    },
+    {
+      "name": "Topic chip",
+      "kind": "chip",
+      "refersTo": "topic-chip",
+      "description": "Native publication-topic filter, with an exposed pressed state.",
+      "html": "<button class=\"ds-topic\" type=\"button\" aria-pressed=\"true\">AI Evaluation</button>",
+      "css": ".ds-topic{border:1px solid var(--academic-rule);border-radius:999px;padding:.3rem .6rem;min-height:40px;background:var(--global-bg-color);color:var(--global-text-color);font-family:\"Source Sans 3\",sans-serif;font-size:.8rem;cursor:pointer}.ds-topic:hover{border-color:var(--global-theme-color);color:var(--global-theme-color)}.ds-topic[aria-pressed=true]{border-color:var(--global-theme-color);background:var(--global-theme-color);color:var(--global-bg-color);font-weight:600}.ds-topic:focus-visible{outline:2px solid var(--global-theme-color);outline-offset:3px}"
+    },
+    {
+      "name": "Theme toggle",
+      "kind": "button",
+      "refersTo": "theme-toggle",
+      "description": "Text button naming the destination theme; the live script changes the theme and saves preference.",
+      "html": "<button class=\"ds-theme\" type=\"button\" aria-label=\"Switch to dark theme\">Dark</button>",
+      "css": ".ds-theme{min-width:44px;min-height:44px;border:1px solid var(--academic-rule);border-radius:4px;color:var(--global-text-color);background:transparent;cursor:pointer;padding:.35rem .65rem;font-family:\"Source Sans 3\",sans-serif;font-size:.875rem}.ds-theme:hover{border-color:var(--global-theme-color)}.ds-theme:focus-visible{outline:2px solid var(--global-theme-color);outline-offset:4px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Research poster",
+    "overview": "The research poster uses a wide reading surface, a strong masthead rule, open research columns, and figures from the papers. Fraunces gives names and research questions their hierarchy; Source Sans 3 carries complete scholarly metadata and prose.\n\nThe shared shell has static text navigation and a persistent light/dark theme switch. Research, bibliography, writing, and study pages use the same typography, colors, rules, and figure treatment with widths suited to their content. The approved direction is A, research poster; the proposed novel interactions were rejected.",
+    "keyCharacteristics": [
+      "Open columns, thin dividers, and a strong masthead rule.",
+      "Fraunces headings, Source Sans 3 text, and the retained circular portrait.",
+      "Existing research figures with captions, paper links, and full-size access."
+    ],
+    "rules": [
+      {
+        "name": "The Theme Pair Rule",
+        "body": "Resolve interactive colors through the existing light and dark theme variables.",
+        "section": "colors"
+      },
+      {
+        "name": "The Reading Hierarchy Rule",
+        "body": "Use serif type for names and research headings; use sans serif type for publication titles, metadata, and controls.",
+        "section": "typography"
+      },
+      {
+        "name": "The Open Surface Rule",
+        "body": "Separate research and publication groups with spacing and thin rules.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do retain the established fonts, portrait, and light/dark theme pairing.",
+      "Do preserve full author lists and wrap scholarly metadata within the available column.",
+      "Do use visible keyboard focus, native controls, and readable content without JavaScript.",
+      "Do keep paper figures uncropped on white with captions and full-size links."
+    ],
+    "donts": [
+      "Don't introduce container cards, decorative animation, or novel interactions into the approved poster direction.",
+      "Don't present synthetic illustration values as paper measurements or a live model.",
+      "Don't copy obsolete fixed navigation, collapsed mobile menus, or the superseded 880px shell into new academic surfaces."
+    ]
+  }
+}

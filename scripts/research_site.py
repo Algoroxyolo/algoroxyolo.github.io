@@ -76,13 +76,18 @@ def enhance(r, outputs, biography, calendar):
         return '<figure class="' + class_name + '"><a href="' + src + '" aria-label="View full-size figure: ' + escape(caption, quote=True) + '"><img src="' + src + '" width="' + str(width) + '" height="' + str(height) + '" loading="lazy" alt="' + escape(caption, quote=True) + '"></a><figcaption>' + r.link(r.pubs[key]['url'], caption) + ' · ' + r.link(src, 'Full-size figure') + '</figcaption></figure>'
 
     interest = named_interests()
-    lead, _, remainder = interest.partition('. ')
+    agenda = json.loads((Path(__file__).resolve().parents[1] / 'data/homepage-agenda.json').read_text(encoding='utf-8'))
+    agenda_html = '<p class="poster-lead">' + escape(agenda['lead']) + '</p><p>' + escape(agenda['framing']) + '</p><dl class="research-agenda">'
+    for direction in agenda['directions']:
+        agenda_html += '<div><dt>' + escape(direction['title']) + '</dt><dd>' + escape(direction['description']) + '</dd></div>'
+    agenda_html += '</dl>'
+    foundations = interest.partition('. ')[2].split(' Looking ahead,')[0]
     master = d['education'][0]
     identity = master['position'] + ' · ' + master['institution']
     if master['status'] != 'in_progress': identity += ' · Graduate'
     contact_links = r.link('mailto:' + d['profile']['email'], 'Email') + r.link('https://scholar.google.com/citations?user=95n7XTkAAAAJ&hl=en', 'Google Scholar') + r.link('/assets/pdf/Yunze_Xiao.pdf', 'CV (PDF)') + r.link('https://github.com/' + d['profile']['github'], 'GitHub')
-    intro = '<header class="poster-masthead"><div class="poster-identity"><h1>' + escape(d['profile']['display_name']) + '</h1><div class="poster-person"><img src="/assets/img/Yunze%20Xiao.jpg" width="480" height="480" alt="Portrait of Yunze Xiao"><div><p>' + escape(identity) + '</p><p class="academic-note">' + r.link(master['institution_url'], master['unit']) + '</p><nav class="identity-links" aria-label="Contact and profiles">' + contact_links + '</nav></div></div></div><div class="poster-intro"><p class="poster-lead">' + lead + '.</p><p>' + remainder + '</p></div></header>'
-    selected = '<section class="home-selected" id="selected-publications"><div class="section-heading"><h2>Selected publications</h2>' + r.link('/publications/', 'All publications & preprints') + '</div><p class="academic-note">* Equal contribution.</p><div class="poster-columns">'
+    intro = '<header class="poster-masthead"><div class="poster-identity"><h1>' + escape(d['profile']['display_name']) + '</h1><div class="poster-person"><img src="/assets/img/Yunze%20Xiao.jpg" width="480" height="480" alt="Portrait of Yunze Xiao"><div><p>' + escape(identity) + '</p><p class="academic-note">' + r.link(master['institution_url'], master['unit']) + '</p><nav class="identity-links" aria-label="Contact and profiles">' + contact_links + '</nav></div></div></div><div class="poster-intro">' + agenda_html + '</div></header>'
+    selected = '<section class="home-selected" id="selected-publications"><div class="section-heading"><h2>Selected publications</h2>' + r.link('/publications/', 'All publications & preprints') + '</div><p class="research-foundations">' + foundations + '</p><p class="academic-note">* Equal contribution.</p><div class="poster-columns">'
     for q in questions:
         fkey, src, caption = figures[q['slug']]
         selected += '<section class="poster-column" aria-labelledby="home-' + q['slug'] + '"><h3 id="home-' + q['slug'] + '">' + r.link('/research/#' + q['slug'], q['label']) + '</h3><p class="poster-question">' + escape(q['question']) + '</p>' + figure(fkey, src, caption, 'poster-figure') + '<ol class="academic-publications">'

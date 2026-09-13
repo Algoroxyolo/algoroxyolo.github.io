@@ -46,6 +46,8 @@
 
 首页从 `website.questions` 读取三个研究方向，并按方向分组展示六篇代表作；手机上保持相同顺序，改为单栏。论文图来自已有论文或项目资产，每张图提供原论文和全尺寸入口。完整背景、新闻和联系信息保留在首页下方，日历默认折叠。Writing 列表读取现有 `blog/index.html` 的文章标题、日期、摘要和链接；文章正文与独立项目站点继续使用各自模板。
 
+`data/homepage-agenda.json` 维护首页正在发展的研究议程：Private Personal Intelligence、Experimental Social Simulation、Institutional Agent Safety。它记录研究问题，独立于已完成论文和 CV 的事实资料。首页先展示这三个问题，再用原有论文方向和完整代表作呈现研究基础；新增项目须先核对实际成果，不能仅凭议程表述加入论文记录。
+
 互动实验放在 Chameleon 详情页，首页只保留入口。使用 24 个固定的合成人物和两个独立控制量，只解释“人设匹配与额外行为维度上的多样性需要分别评价”。不展示论文实验分数，不调用模型。网址中的 `labf` / `labd` 可分享状态；论文页的 `q` / `topic` / `status` 可分享检索条件。关闭 JavaScript 后保留全部论文、研究内容及实验的静态说明。检查交互逻辑可运行 `node scripts/test_research.js`，内容同步回归检查运行 `python scripts/test_academic.py`。
 
 生成器会改写上述学术 CV 章节；如需调整排版，应修改生成器的 `cv_files()` 或 CV 的排版类，不要直接修改生成章节。个人贡献只录入本人确认的信息。硕士状态当前沿用本轮 CV 的在读信息；如确认 May 2026 已毕业，请在学历数据中统一修正。

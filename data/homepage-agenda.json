@@ -1,0 +1,18 @@
+{
+  "lead": "My research asks how AI systems should represent individuals, simulate social dynamics, and govern interactions.",
+  "framing": "I am developing a research agenda on AI-mediated societies: how information boundaries and institutional rules shape interactions among people and AI agents.",
+  "directions": [
+    {
+      "title": "Private Personal Intelligence",
+      "description": "How can personal agents use memory, preferences, and context while keeping people in control of what they disclose?"
+    },
+    {
+      "title": "Experimental Social Simulation",
+      "description": "How can simulations grounded in observations of people help us compare interventions and evaluate their effects on collective behavior?"
+    },
+    {
+      "title": "Institutional Agent Safety",
+      "description": "How can permissions, incentives, audit mechanisms, and scalable oversight govern interacting agents and protect human agency?"
+    }
+  ]
+}

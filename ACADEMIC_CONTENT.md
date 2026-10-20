@@ -8,7 +8,7 @@
 2. 使用 Python 3 和已安装的 XeLaTeX / latexmk，运行：
 
    ```powershell
-   python scripts/build_academic.py --cv-dir "D:/LocalTree/Yunze Xiao_CV"
+   python scripts/build_academic.py --cv-dir "D:/Projects/academic-site/cv"
    ```
 
    Python 构建脚本只使用标准库。若系统没有 `python` 命令，可用本机已有的 Python 可执行文件替换它。
@@ -16,7 +16,7 @@
 3. 同步检查：
 
    ```powershell
-   python scripts/build_academic.py --check --cv-dir "D:/LocalTree/Yunze Xiao_CV"
+   python scripts/build_academic.py --check --cv-dir "D:/Projects/academic-site/cv"
    ```
 
 4. 查看本地网页及 PDF 后，按原有 GitHub Pages 工作流提交和发布。这两个命令都不会提交、推送或发布。

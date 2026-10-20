@@ -1,279 +1,279 @@
 {
   "source": "Google Scholar",
-  "updated": "2026-09-10",
+  "updated": "2026-10-20",
   "profile_url": "https://scholar.google.com/citations?user=95n7XTkAAAAJ&hl=en",
-  "profile_total": 1616,
+  "profile_total": 1789,
   "scope": "Profile total is taken directly from Google Scholar, not summed from this selected publication list.",
   "papers": {
     "2026.acl-long.520": {
-      "count": 12,
+      "count": 16,
       "status": "matched",
+      "updated": "2026-10-20",
       "source_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=10865585850865414653",
       "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:L8Ckcad2t8MC",
       "matched_title": "The Confidence Dichotomy: Analyzing and Mitigating Miscalibration in Tool-Use Agents",
-      "scholar_marker": "",
-      "updated": "2026-09-10"
+      "scholar_marker": ""
     },
     "2026.findings-acl.368": {
       "count": 2,
       "status": "matched",
+      "updated": "2026-10-20",
       "source_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=13138361893130647649",
       "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&cstart=20&pagesize=80&citation_for_view=95n7XTkAAAAJ:ZeXyd9-uunAC",
       "matched_title": "Sentipolis: Emotion-Aware Agents for Social Simulations",
-      "scholar_marker": "",
-      "updated": "2026-09-10"
+      "scholar_marker": ""
     },
     "2026.findings-acl.1270": {
-      "count": 12,
+      "count": 13,
       "status": "matched",
+      "updated": "2026-10-20",
       "source_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=14854778054547167310",
       "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:QIV2ME_5wuYC",
       "matched_title": "Can LLMs Estimate Student Struggles? Human-AI Difficulty Alignment with Proficiency Simulation for Item Difficulty Prediction",
-      "scholar_marker": "",
-      "updated": "2026-09-10"
+      "scholar_marker": ""
     },
     "2026.acl-demo.83": {
       "count": 0,
       "status": "matched",
+      "updated": "2026-10-20",
       "source_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&cstart=20&pagesize=80&citation_for_view=95n7XTkAAAAJ:GnPB-g6toBAC",
       "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&cstart=20&pagesize=80&citation_for_view=95n7XTkAAAAJ:GnPB-g6toBAC",
       "matched_title": "TartanMaroon: Multi-Agent Academic Advising with Iterative Negotiation and Transparent Collaboration",
-      "scholar_marker": "",
-      "updated": "2026-09-10"
+      "scholar_marker": ""
     },
     "ai-welfare": {
       "count": 1,
       "status": "matched",
+      "updated": "2026-10-20",
       "source_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=8183039733276419965,1839136466085976954",
       "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&cstart=20&pagesize=80&citation_for_view=95n7XTkAAAAJ:k_IJM867U9cC",
       "matched_title": "Position: AI Welfare Is Bullshit",
-      "scholar_marker": "",
-      "updated": "2026-09-10"
+      "scholar_marker": ""
     },
     "2026.eacl-long.23": {
       "count": 6,
       "status": "matched",
+      "updated": "2026-10-20",
       "source_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=10124818816952861511",
       "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:RHpTSmoSYBkC",
       "matched_title": "JiraiBench: A Bilingual Benchmark for Evaluating Large Language Models’ Detection of Human risky health behavior Content in Jirai Community",
-      "scholar_marker": "",
-      "updated": "2026-09-10"
+      "scholar_marker": ""
     },
     "culture": {
-      "count": 9,
+      "count": 12,
       "status": "matched",
+      "updated": "2026-10-20",
       "source_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=11485114674120824496",
       "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:4JMBOYKVnBMC",
       "matched_title": "Hire your anthropologist! rethinking culture benchmarks through an anthropological lens",
-      "scholar_marker": "",
-      "updated": "2026-09-10"
+      "scholar_marker": ""
     },
     "2607.13924": {
       "count": 0,
       "status": "matched",
+      "updated": "2026-10-20",
       "source_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&cstart=20&pagesize=80&citation_for_view=95n7XTkAAAAJ:RGFaLdJalmkC",
       "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&cstart=20&pagesize=80&citation_for_view=95n7XTkAAAAJ:RGFaLdJalmkC",
       "matched_title": "ExpressionCueLens: A Cross-Cultural Analysis of Human-AI Companion Conversations on Social Media",
-      "scholar_marker": "",
-      "updated": "2026-09-10"
+      "scholar_marker": ""
     },
     "2504.02956": {
-      "count": 47,
+      "count": 48,
       "status": "matched",
+      "updated": "2026-10-20",
       "source_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=10345380000042201421",
       "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:LkGwnXOMwfcC",
       "matched_title": "Understanding aha moments: from external observations to internal mechanisms",
-      "scholar_marker": "",
-      "updated": "2026-09-10"
+      "scholar_marker": ""
     },
     "10.1038/s41586-025-09962-4": {
-      "count": 869,
+      "count": 900,
       "status": "matched",
-      "source_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=7259718440450810100,6239537948684441362,1274537797459527807,2590536447730340670,5400841999944501731,1422367768388967541",
+      "updated": "2026-10-20",
+      "source_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=7259718440450810100,6239537948684441362,2590536447730340670,1274537797459527807,5400841999944501731,1422367768388967541",
       "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:qUcmZB5y_30C",
       "matched_title": "A benchmark of expert-level academic questions to assess AI capabilities",
-      "scholar_marker": "*",
-      "updated": "2026-09-10"
+      "scholar_marker": "*"
     },
     "humanizing": {
-      "count": 35,
+      "count": 37,
       "status": "matched",
+      "updated": "2026-10-20",
       "source_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=10487343159960108718",
       "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:8k81kl-MbHgC",
       "matched_title": "Humanizing Machines: Rethinking LLM Anthropomorphism Through a Multi-Level Framework of Design",
-      "scholar_marker": "",
-      "updated": "2026-09-10"
+      "scholar_marker": ""
     },
     "2025.emnlp-main.79": {
-      "count": 134,
+      "count": 137,
       "status": "matched",
+      "updated": "2026-10-20",
       "source_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=12766815193302589343,8687862630080986201",
       "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:MXK_kJrjxJIC",
       "matched_title": "Mmlu-prox: A multilingual benchmark for advanced large language model evaluation",
-      "scholar_marker": "",
-      "updated": "2026-09-10"
+      "scholar_marker": ""
     },
     "2025.emnlp-main.831": {
       "count": 28,
       "status": "matched",
+      "updated": "2026-10-20",
       "source_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=12233962316560853893,11442745151232705008",
       "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:UebtZRa9Y70C",
       "matched_title": "Synthetic Socratic Debates: Examining Persona Effects on Moral Decision and Persuasion Dynamics",
-      "scholar_marker": "",
-      "updated": "2026-09-10"
+      "scholar_marker": ""
     },
     "2505.18139": {
       "count": 9,
       "status": "matched",
+      "updated": "2026-10-20",
       "source_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=1458543247881926854",
       "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:roLk4NBRz8UC",
       "matched_title": "Embracing Contradiction: Theoretical Inconsistency Will Not Impede the Road of Building Responsible AI Systems",
-      "scholar_marker": "",
-      "updated": "2026-09-10"
+      "scholar_marker": ""
     },
     "toxicloak": {
-      "count": 59,
+      "count": 66,
       "status": "matched",
+      "updated": "2026-10-20",
       "source_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=16662407705167816187",
       "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:Tyk-4Ss8FVUC",
       "matched_title": "Toxicloakcn: Evaluating robustness of offensive language detection in chinese with cloaking perturbations",
-      "scholar_marker": "",
-      "updated": "2026-09-10"
+      "scholar_marker": ""
     },
     "2024.acl-long.102": {
-      "count": 308,
+      "count": 319,
       "status": "matched",
+      "updated": "2026-10-20",
       "source_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=8274712073914849629,16027786210079608892,15219304991136172931,5855761006248069697,17264804492840743435",
       "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:Se3iqnhoufwC",
       "matched_title": "Incharacter: Evaluating personality fidelity in role-playing agents through psychological interviews",
-      "scholar_marker": "*",
-      "updated": "2026-09-10"
+      "scholar_marker": "*"
     },
     "2024.lrec-main.1508": {
       "count": 6,
       "status": "matched",
+      "updated": "2026-10-20",
       "source_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=2464989318365801209",
       "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:IjCSPb-OGe4C",
       "matched_title": "Verbing weirds language (models): evaluation of english zero-derivation in five LLMs",
-      "scholar_marker": "",
-      "updated": "2026-09-10"
+      "scholar_marker": ""
     },
     "nexus": {
       "count": 4,
       "status": "matched",
+      "updated": "2026-10-20",
       "source_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=11748846282973836871",
       "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:2osOgNQ5qMEC",
       "matched_title": "Nexus at araieval shared task: Fine-tuning arabic language models for propaganda and disinformation detection",
-      "scholar_marker": "",
-      "updated": "2026-09-10"
+      "scholar_marker": ""
     },
     "10.1109/ICCRD54409.2022.9730454": {
       "count": 7,
       "status": "matched",
+      "updated": "2026-10-20",
       "source_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=9184244781417711217",
       "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:u5HHmVD_uO8C",
       "matched_title": "A transformer-based attention flow model for intelligent question and answering chatbot",
-      "scholar_marker": "",
-      "updated": "2026-09-10"
+      "scholar_marker": ""
     },
     "2608.11528": {
       "count": 0,
       "status": "matched",
+      "updated": "2026-10-20",
       "source_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&cstart=20&pagesize=80&citation_for_view=95n7XTkAAAAJ:lSLTfruPkqcC",
       "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&cstart=20&pagesize=80&citation_for_view=95n7XTkAAAAJ:lSLTfruPkqcC",
       "matched_title": "Group Alignment-Induced Sycophancy: A Two-Sided Evaluation of Steerable Pluralistic Alignment",
-      "scholar_marker": "",
-      "updated": "2026-09-10"
+      "scholar_marker": ""
     },
     "2607.02032": {
-      "count": 0,
+      "count": 4,
       "status": "matched",
+      "updated": "2026-10-20",
       "source_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&cstart=20&pagesize=80&citation_for_view=95n7XTkAAAAJ:O3NaXMp0MMsC",
       "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&cstart=20&pagesize=80&citation_for_view=95n7XTkAAAAJ:O3NaXMp0MMsC",
       "matched_title": "PACE: A Proxy for Agentic Capability Evaluation",
-      "scholar_marker": "",
-      "updated": "2026-09-10"
+      "scholar_marker": ""
     },
     "2606.11232": {
       "count": 1,
       "status": "matched",
+      "updated": "2026-10-20",
       "source_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=67177841241031117",
       "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&cstart=20&pagesize=80&citation_for_view=95n7XTkAAAAJ:YFjsv_pBGBYC",
       "matched_title": "Every Act Has Its Price: Compressed Moral Composition in Frontier LLMs",
-      "scholar_marker": "",
-      "updated": "2026-09-10"
+      "scholar_marker": ""
     },
     "chameleon": {
       "count": 3,
       "status": "matched",
+      "updated": "2026-10-20",
       "source_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=9891165623914163694",
       "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&cstart=20&pagesize=80&citation_for_view=95n7XTkAAAAJ:TFP_iSt0sucC",
       "matched_title": "The Chameleon's Limit: Investigating Persona Collapse and Homogenization in Large Language Models",
-      "scholar_marker": "",
-      "updated": "2026-09-10"
+      "scholar_marker": ""
     },
     "2604.22452": {
       "count": 2,
       "status": "matched",
+      "updated": "2026-10-20",
       "source_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=16748152569865275845",
       "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&cstart=20&pagesize=80&citation_for_view=95n7XTkAAAAJ:isC4tDSrTZIC",
       "matched_title": "Superminds Test: Actively Evaluating Collective Intelligence of Agent Society via Probing Agents",
-      "scholar_marker": "",
-      "updated": "2026-09-10"
+      "scholar_marker": ""
     },
     "2604.06409": {
       "count": 0,
       "status": "matched",
+      "updated": "2026-10-20",
       "source_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&cstart=20&pagesize=80&citation_for_view=95n7XTkAAAAJ:iH-uZ7U-co4C",
       "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&cstart=20&pagesize=80&citation_for_view=95n7XTkAAAAJ:iH-uZ7U-co4C",
       "matched_title": "Say Something Else: Rethinking Contextual Privacy as Information Sufficiency",
-      "scholar_marker": "",
-      "updated": "2026-09-10"
+      "scholar_marker": ""
     },
     "2602.00685": {
       "count": 4,
       "status": "matched",
+      "updated": "2026-10-20",
       "source_url": "https://scholar.google.com/scholar?cites=17867900210323412634&as_sdt=2005&sciodt=0,5&hl=en",
       "article_url": "https://arxiv.org/abs/2602.00685",
       "matched_title": "Humanstudy-bench: Towards ai agent design for participant simulation",
-      "scholar_marker": "",
-      "updated": "2026-09-10"
+      "scholar_marker": ""
     },
     "student": {
-      "count": 13,
+      "count": 15,
       "status": "matched",
+      "updated": "2026-10-20",
       "source_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=2904386111941060719,12833164339773482304",
       "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:7PzlFSSx8tAC",
       "matched_title": "Towards Valid Student Simulation with Large Language Models",
-      "scholar_marker": "",
-      "updated": "2026-09-10"
+      "scholar_marker": ""
     },
     "2601.02186": {
       "count": 5,
       "status": "matched",
+      "updated": "2026-10-20",
       "source_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=9500332365097437949",
       "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:dhFuZR0502QC",
       "matched_title": "Toward global large language models in medicine",
-      "scholar_marker": "",
-      "updated": "2026-09-10"
+      "scholar_marker": ""
     },
     "2404.13885": {
       "count": 22,
       "status": "matched",
+      "updated": "2026-10-20",
       "source_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=416467282502272117",
       "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:zYLM7Y9cAGgC",
       "matched_title": "Surveying attitudinal alignment between large language models vs. humans towards 17 sustainable development goals",
-      "scholar_marker": "",
-      "updated": "2026-09-10"
+      "scholar_marker": ""
     },
     "survey": {
       "count": 17,
       "status": "matched",
+      "updated": "2026-10-20",
       "source_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=7306988241024104192",
       "article_url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=95n7XTkAAAAJ&citation_for_view=95n7XTkAAAAJ:UeHWp8X0CEIC",
       "matched_title": "Chinese offensive language detection: Current status and future directions",
-      "scholar_marker": "",
-      "updated": "2026-09-10"
+      "scholar_marker": ""
     }
   }
 }

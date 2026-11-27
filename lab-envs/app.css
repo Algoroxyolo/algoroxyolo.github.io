@@ -197,7 +197,7 @@ section{scroll-margin-top:72px}
 .rl-btn .t{font-size:14px;font-weight:500}
 .rl-btn .s{font:500 12px/1.4 var(--mono);text-align:right}
 .rl-btn .d{grid-column:1/-1;font-size:12px;color:var(--ink3);line-height:1.35}
-.s.pass{color:var(--green)}.s.fail{color:var(--red)}.s.part{color:#B26A00}
+.s.pass{color:var(--green)}.s.fail{color:var(--red)}.s.part{color:var(--ink2)}
 .run-main{min-width:0;border:1px solid var(--line);border-radius:16px;background:var(--bg);overflow:hidden}
 .rm-head{padding:22px 24px;border-bottom:1px solid var(--line)}
 .rm-title{display:flex;justify-content:space-between;gap:16px;align-items:baseline;flex-wrap:wrap}
@@ -315,9 +315,6 @@ section{scroll-margin-top:72px}
 .pl-op .src{margin-left:8px;font-size:11px;color:var(--dink3)}
 .pl-obs{font:400 12px/1.45 var(--mono);color:var(--dink3);word-break:break-word;max-height:2.9em;overflow:hidden}
 .pl-op .kind{display:inline-block;font:600 10.5px/1 var(--f);letter-spacing:.06em;padding:4px 6px;border-radius:4px;margin-right:8px;vertical-align:1px;background:#2B3140;color:var(--dink)}
-.pl-op .kind.k-MEASURE{background:#1E3A5F;color:#BFD7FF}
-.pl-op .kind.k-DFT{background:#3B2A5C;color:#DCCBFF}
-.pl-op .kind.k-DELIVER{background:#1F4A36;color:#BFF0D6}
 .pl-call{display:flex;gap:8px;align-items:flex-start;padding:9px 11px;border-radius:8px;background:rgba(229,72,77,.16);border:1px solid rgba(229,72,77,.45);color:#FFE3E4;font-size:13px;line-height:1.45}
 .pl-call.now{background:rgba(229,72,77,.3)}
 .pl-call .pin{margin-top:1px}
@@ -331,7 +328,7 @@ section{scroll-margin-top:72px}
 .pl-now span{display:block;margin-top:3px;font:400 12px var(--mono);color:var(--dink3)}
 .pl-bud{display:grid;grid-template-columns:repeat(auto-fill,minmax(14px,1fr));gap:3px}
 .pl-bud i{height:14px;border-radius:3px;background:#1C2029;border:1px solid var(--dline)}
-.pl-bud i.on{background:#5D72D9;border-color:#5D72D9}
+.pl-bud i.on{background:var(--dink3);border-color:var(--dink3)}
 .pl-bud i.just{background:#E9EAEE;border-color:#E9EAEE}
 .pl-quiet{font-size:12.5px;color:var(--dink3)}
 .pl-side .st-ev div{background:rgba(242,169,59,.14);color:var(--dink);font-size:12.5px}

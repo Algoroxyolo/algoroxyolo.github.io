@@ -338,6 +338,252 @@ const ICO = {
   next: `<svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="2" fill="none"/></svg>`,
   play: `<svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg>`,
 };
+/* ---------- wet bench scene: the animated lab bench (glove box, bench, furnaces, tray, instruments) ---------- */
+const SCENES = {};
+function loadScene(id) { if (!(id in SCENES)) SCENES[id] = fetch(`data/${id}-scene.json`).then(r => r.ok ? r.json() : null).then(d => d && (SCENES[id] = makeScene(d))).catch(() => null); return SCENES[id]; }
+function makeScene(D) {
+  const R = D.R, S = R.steps;
+  const ease = t => t <= 0 ? 0 : t >= 1 ? 1 : t * t * (3 - 2 * t), lerp = (a, b, t) => a + (b - a) * t;
+  const CAT = { brief: "info", status: "info", ledger: "info", env_log: "info", reference_cif: "info", read_file: "info",
+    new_vessel: "prep", move: "prep", weigh: "prep", add: "prep", transfer: "prep", grind: "prep", press: "prep", seal: "prep", empty: "prep", weigh_vessel: "prep",
+    heat: "heat", wait: "heat", wait_for: "heat", collect: "heat", xrd: "meas", squid_mt: "meas", edx: "meas", deliver: "deliver" };
+  const HK = { air: ["var(--s-bad)", "air degradation"], leak: ["var(--s-bad)", "seal leak"], residue: ["var(--s-hid)", "boat residue"],
+    media: ["var(--s-hid)", "grinding media"], product: ["var(--s-hid)", "product truth"], lot: ["var(--s-hid)", "reagent lot"] };
+  const fmtT = h => { h = Math.max(0, h || 0); const d = Math.floor(h / 24), r = h - 24 * d, hh = Math.floor(r), mm = Math.floor((r - hh) * 60); return `Day ${d + 1} · ${String(hh).padStart(2, "0")}:${String(mm).padStart(2, "0")}`; };
+  const envAt = h => R.env[Math.min(R.env.length - 1, Math.floor(Math.max(0, h) / 24))] || { t_room_c: 21, rh_pct: 40, box_h2o_ppm: 1 };
+  const hue = el => { let h = 7; for (const c of el) h = (h * 31 + c.charCodeAt(0)) % 360; return h; };
+  const elCol = el => `hsl(${hue(el)} 38% 58%)`;
+  const mixCol = c => { let best = null, bg = -1; for (const [k, g] of Object.entries(c)) if (g > bg) { bg = g; best = k; } return best ? `hsl(${hue(best)} 16% 52%)` : "var(--s-steel)"; };
+  const total = c => Object.values(c).reduce((a, b) => a + b, 0);
+  const BOX = { x: 16, y: 50, w: 420, h: 290 }, BENCH = { x: 462, y: 50, w: 238, h: 290 };
+  const FURN = [{ x: 722, y: 56, w: 262, h: 128 }, { x: 722, y: 208, w: 262, h: 128 }];
+  const TRAY = { x: 16, y: 360, w: 290, h: 188 };
+  const INS = { xrd: { x: 322, y: 360, w: 216, h: 188, cx: 430, cy: 446 }, squid_mt: { x: 554, y: 360, w: 206, h: 188, cx: 657, cy: 446 }, edx: { x: 776, y: 360, w: 208, h: 188, cx: 880, cy: 446 } };
+  const STN = { balance: 70, mill: 170, press: 270, torch: 370 };
+  const slotPos = (place, slot) => {
+    if (place === "glovebox") { const r = Math.floor(slot / 5), c = slot % 5; return { x: 64 + c * 80, y: r === 0 ? 168 : r === 1 ? 236 : 268, s: r > 1 ? .8 : 1 }; }
+    const r = Math.floor(slot / 4), c = slot % 4; return { x: 490 + c * 46, y: r === 0 ? 168 : r === 1 ? 262 : 296, s: r > 1 ? .8 : 1 };
+  };
+  const workPos = (place, w) => place === "glovebox" ? { x: STN[w] || 70, y: 312, s: 1 } : { x: 668, y: 312, s: 1 };
+  const vpos = v => { if (v.inF != null) { const f = FURN[v.inF]; return { x: f.x + f.w / 2 + 10, y: f.y + f.h / 2 + 22, s: .72 }; } if (v.work) return workPos(v.place, v.work); return slotPos(v.place, v.slot ?? 0); };
+  // state after each step
+  const snaps = [];
+  {
+    const st = { now: 0, spent: 0, v: {}, jobs: {}, prod: {}, order: [], furn: [null, null], delivered: null };
+    const free = (place, self) => { const used = new Set(Object.values(st.v).filter(x => x.id !== self && !x.gone && x.place === place && x.inF == null && x.slot != null).map(x => x.slot)); let i = 0; while (used.has(i)) i++; return i; };
+    const revive = v => { if (v.gone) { v.gone = false; v.slot = free(v.place, v.id); } };
+    for (const s of S) {
+      const a = s.args || {}, o = (s.obs && typeof s.obs === "object") ? s.obs : {};
+      for (const k in st.v) st.v[k].work = null;
+      if (!s.err) switch (s.tool) {
+        case "new_vessel": { const id = o.vessel; if (!id) break; st.v[id] = { id, kind: a.kind || "jar", place: a.place || "glovebox", slot: null, sealed: false, form: "empty", c: {}, mixed: false, gone: false, inF: null, flags: [], atm: null }; st.v[id].slot = free(st.v[id].place, id); break; }
+        case "move": { const v = st.v[a.vessel]; if (v) { v.place = a.place; v.slot = free(a.place, v.id); } break; }
+        case "weigh": case "add": { const v = st.v[a.vessel]; if (!v) break; revive(v); v.c[a.reagent] = (v.c[a.reagent] || 0) + (o.reading_g ?? a.mass_g ?? 0.03); v.form = "powder"; v.mixed = false; if (s.tool === "weigh") v.work = "balance"; break; }
+        case "transfer": { const src = st.v[a.src], dst = st.v[a.dst]; if (!src || !dst) break; revive(dst);
+          const T = total(src.c); let f = 1; const fr = a.fraction;
+          if (a.mass_g != null && T > 0) f = Math.min(1, a.mass_g / T); else if (typeof fr === "number") f = fr; else if (fr === "unstated") f = .55;
+          for (const [k, g] of Object.entries(src.c)) { dst.c[k] = (dst.c[k] || 0) + g * f; src.c[k] = g * (1 - f); }
+          dst.mixed = src.mixed || dst.mixed; dst.form = src.form === "pellet" && f >= .999 ? "pellet" : (src.form === "empty" ? dst.form : "powder");
+          if (total(src.c) < 1e-6) { src.c = {}; src.gone = true; } break; }
+        case "grind": { const v = st.v[a.vessel]; if (v) { v.mixed = true; v.form = "powder"; v.work = "mill"; } break; }
+        case "press": { const v = st.v[a.vessel]; if (v) { v.form = "pellet"; v.work = "press"; } break; }
+        case "seal": { const v = st.v[a.vessel]; if (v) { v.sealed = true; v.atm = a.atmosphere; if (v.place === "glovebox") v.work = "torch"; } break; }
+        case "heat": { const v = st.v[a.vessel]; if (!v || !o.job) break;
+          const ends = st.furn.map(j => j ? st.jobs[j].end : -1);
+          let f = ends.findIndex(e => e <= o.start_h + 1e-6); if (f < 0) f = ends[0] <= ends[1] ? 0 : 1;
+          const old = st.furn[f] && st.jobs[st.furn[f]]; if (old) { const ov = st.v[old.vid]; if (ov && ov.inF === f && !ov.gone) { ov.inF = null; ov.slot = free("bench", ov.id); } }
+          st.jobs[o.job] = { id: o.job, vid: v.id, T: +a.setpoint_c, dwell: +a.dwell_h, ramp: +(a.ramp_c_h || 100), start: o.start_h, end: o.end_h, f };
+          st.furn[f] = o.job; v.inF = f; v.job = o.job; v.slot = null; break; }
+        case "collect": { const v = st.v[a.vessel]; if (!v || !o.product) break;
+          const pid = o.product; st.prod[pid] = { id: pid, vid: v.id, i: st.order.length, meas: [], from: v.inF };
+          st.order.push(pid); v.gone = true; if (v.inF != null && st.furn[v.inF] === v.job) st.furn[v.inF] = null; v.inF = null; break; }
+        case "empty": { const v = st.v[a.vessel]; if (v) { v.c = {}; v.gone = true; } break; }
+        case "xrd": case "squid_mt": case "edx": { const p = st.prod[a.product]; if (p) p.meas.push(s.tool); break; }
+        case "deliver": st.delivered = a.product; break;
+      }
+      if (o.now_h != null) st.now = o.now_h;
+      if (o.spent != null) st.spent = o.spent;
+      for (const h of s.hidden || []) {
+        if (h.kind === "product") { const p = Object.values(st.prod).filter(p => p.vid === h.vessel).pop(); if (p) p.truth = true; }
+        else if (st.v[h.vessel]) st.v[h.vessel].flags.push(h.kind);
+      }
+      snaps.push(JSON.parse(JSON.stringify(st)));
+    }
+  }
+  const EMPTY = { now: 0, spent: 0, v: {}, jobs: {}, prod: {}, order: [], furn: [null, null], delivered: null };
+  const COLS = () => (snaps.length && snaps[snaps.length - 1].order.length > 9) ? 4 : 3;
+  const chipPos = i => { const n = COLS(); return { x: 50 + (i % n) * (n > 3 ? 68 : 94), y: 402 + Math.floor(i / n) * 54 }; };
+  // static scene
+  let bg = "";
+  bg += `<rect x="${BOX.x}" y="${BOX.y}" width="${BOX.w}" height="${BOX.h}" rx="16" fill="var(--s-argon-bg)" stroke="var(--s-argon)" stroke-width="1.4"/>`;
+  bg += `<rect x="${BOX.x + 10}" y="${BOX.y + 30}" width="${BOX.w - 20}" height="${BOX.h - 40}" rx="10" fill="none" stroke="var(--s-argon)" stroke-opacity=".35" stroke-dasharray="2 5"/>`;
+  for (const x of [150, 300]) bg += `<circle cx="${x}" cy="${BOX.y + BOX.h}" r="22" fill="var(--s-panel)" stroke="var(--s-argon)" stroke-width="1.4"/><circle cx="${x}" cy="${BOX.y + BOX.h}" r="14" fill="none" stroke="var(--s-argon)" stroke-opacity=".5"/>`;
+  for (const y of [168, 236]) bg += `<line x1="${BOX.x + 22}" x2="${BOX.x + BOX.w - 22}" y1="${y + 1.5}" y2="${y + 1.5}" stroke="var(--s-line)" stroke-width="3" stroke-linecap="round"/>`;
+  bg += `<g transform="translate(${STN.balance} 312)"><rect x="-24" y="1" width="48" height="9" rx="2" fill="var(--s-steel2)" stroke="var(--s-steel)"/><rect x="-16" y="-1" width="32" height="3" rx="1" fill="var(--s-steel)"/></g>`;
+  bg += `<g transform="translate(${STN.mill} 312)"><path d="M-22 10 L-16 0 L16 0 L22 10 Z" fill="var(--s-steel2)" stroke="var(--s-steel)"/></g>`;
+  bg += `<g transform="translate(${STN.press} 312)"><rect x="-22" y="1" width="44" height="9" rx="2" fill="var(--s-steel2)" stroke="var(--s-steel)"/><rect x="-24" y="-74" width="5" height="76" fill="var(--s-steel)"/><rect x="19" y="-74" width="5" height="76" fill="var(--s-steel)"/><rect x="-24" y="-78" width="48" height="6" rx="2" fill="var(--s-steel)"/></g>`;
+  bg += `<g transform="translate(${STN.torch} 312)"><rect x="-22" y="1" width="44" height="9" rx="2" fill="var(--s-steel2)" stroke="var(--s-steel)"/><path d="M24 -40 l14 -10 l3 4 l-14 10 z" fill="var(--s-steel)"/></g>`;
+  for (const [k, x] of Object.entries(STN)) bg += `<text x="${x}" y="334" text-anchor="middle" class="s-lbl">${k}</text>`;
+  bg += `<rect x="430" y="246" width="38" height="46" rx="10" fill="var(--s-panel)" stroke="var(--s-steel)"/><line x1="449" x2="449" y1="250" y2="288" stroke="var(--s-steel)" stroke-dasharray="2 3"/>`;
+  bg += `<rect x="${BENCH.x}" y="${BENCH.y}" width="${BENCH.w}" height="${BENCH.h}" rx="16" fill="none" stroke="var(--s-line)" stroke-width="1.4" stroke-dasharray="5 5"/>`;
+  bg += `<line x1="472" x2="640" y1="169.5" y2="169.5" stroke="var(--s-line)" stroke-width="3" stroke-linecap="round"/><rect x="${BENCH.x + 6}" y="322" width="${BENCH.w - 12}" height="10" rx="3" fill="var(--s-table)"/>`;
+  bg += `<g transform="translate(668 312)"><rect x="-22" y="1" width="44" height="9" rx="2" fill="var(--s-steel2)" stroke="var(--s-steel)"/></g>`;
+  FURN.forEach(f => {
+    bg += `<rect x="${f.x}" y="${f.y}" width="${f.w}" height="${f.h}" rx="12" fill="var(--s-steel2)" stroke="var(--s-steel)" stroke-width="1.4"/><rect x="${f.x + 18}" y="${f.y + f.h / 2 - 8}" width="${f.w - 36}" height="40" rx="20" fill="var(--s-panel)" stroke="var(--s-steel)"/>`;
+    for (let k = 0; k < 9; k++) bg += `<line x1="${f.x + 40 + k * 23}" x2="${f.x + 40 + k * 23}" y1="${f.y + f.h / 2 - 8}" y2="${f.y + f.h / 2 + 32}" stroke="var(--s-steel)" stroke-opacity=".25"/>`;
+  });
+  bg += `<rect x="${TRAY.x}" y="${TRAY.y}" width="${TRAY.w}" height="${TRAY.h}" rx="14" fill="var(--s-panel)" stroke="var(--s-line)"/><text x="${TRAY.x + 14}" y="${TRAY.y + 20}" class="s-lbl2">Products</text>`;
+  for (const b of Object.values(INS)) bg += `<rect x="${b.x}" y="${b.y}" width="${b.w}" height="${b.h}" rx="14" fill="var(--s-panel)" stroke="var(--s-line)"/>`;
+  { const X = INS.xrd; bg += `<circle cx="${X.cx}" cy="${X.cy}" r="54" fill="none" stroke="var(--s-steel)" stroke-dasharray="3 4"/><rect x="${X.cx - 12}" y="${X.cy - 3}" width="24" height="6" rx="1" fill="var(--s-steel)"/>`;
+    const Q = INS.squid_mt; bg += `<rect x="${Q.cx - 30}" y="${Q.cy - 64}" width="60" height="124" rx="30" fill="var(--s-bg)" stroke="var(--s-steel)" stroke-width="1.4"/><rect x="${Q.cx - 18}" y="${Q.cy - 52}" width="36" height="100" rx="18" fill="none" stroke="var(--s-steel)" stroke-opacity=".5"/><rect x="${Q.cx - 6}" y="${Q.cy - 84}" width="12" height="22" fill="var(--s-steel)"/>`;
+    const E = INS.edx; bg += `<path d="M${E.cx - 30} ${E.cy - 70} L${E.cx + 30} ${E.cy - 70} L${E.cx + 16} ${E.cy + 10} L${E.cx - 16} ${E.cy + 10} Z" fill="var(--s-steel2)" stroke="var(--s-steel)"/><rect x="${E.cx - 46}" y="${E.cy + 10}" width="92" height="44" rx="6" fill="var(--s-bg)" stroke="var(--s-steel)"/><path d="M${E.cx + 46} ${E.cy + 24} l22 -16 l6 8 l-22 16 z" fill="var(--s-steel)"/>`; }
+  const LBL = { xrd: "Powder XRD · Cu Kα", squid_mt: "SQUID · M(T) 2–300 K", edx: "EDX · bulk at.%" };
+  for (const [k, b] of Object.entries(INS)) bg += `<text x="${b.x + 14}" y="${b.y + 20}" class="s-lbl2">${LBL[k]}</text><text x="${b.x + b.w - 12}" y="${b.y + b.h - 12}" text-anchor="end" class="s-lbl">1 budget unit</text>`;
+  // vessels
+  const shape = (kind, sealed) => {
+    switch (kind) {
+      case "ampoule": return { d: sealed ? "M-7 -46 L-7 -6 Q-7 0 0 0 Q7 0 7 -6 L7 -46 Q7 -51 2 -55 L0 -64 L-2 -55 Q-7 -51 -7 -46 Z" : "M-7 -58 L-7 -6 Q-7 0 0 0 Q7 0 7 -6 L7 -58", inner: { x: -6, y: -46, w: 12, h: 45 }, cap: 1.6 };
+      case "jar": return { d: "M-15 -34 L-15 -4 Q-15 0 -11 0 L11 0 Q15 0 15 -4 L15 -34 Z", lid: "M-17 -41 L17 -41 L17 -34 L-17 -34 Z", inner: { x: -14, y: -33, w: 28, h: 32 }, cap: 2.4 };
+      case "boat": return { d: "M-21 -12 L21 -12 L15 0 L-15 0 Z", inner: { x: -16, y: -11, w: 32, h: 10 }, cap: 1.4 };
+      case "crucible": return { d: "M-14 -32 L14 -32 L9 0 L-9 0 Z", inner: { x: -10, y: -30, w: 20, h: 29 }, cap: 2 };
+      case "vial": return { d: "M-7 -30 L-7 -2 Q-7 0 -5 0 L5 0 Q7 0 7 -2 L7 -30 Z", lid: "M-8 -36 L8 -36 L8 -30 L-8 -30 Z", inner: { x: -6, y: -29, w: 12, h: 28 }, cap: 1.2 };
+      default: return { d: "M-14 -16 L14 -16 L14 0 L-14 0 Z", inner: { x: -12, y: -14, w: 24, h: 13 }, cap: 1.2 };
+    }
+  };
+  const vesselSVG = (v, p, op, rot) => {
+    const sh = shape(v.kind, v.sealed), I = sh.inner, T = total(v.c);
+    let g = `<g transform="translate(${p.x.toFixed(1)} ${p.y.toFixed(1)}) rotate(${(rot || 0).toFixed(2)}) scale(${(p.s || 1).toFixed(3)})" opacity="${op.toFixed(3)}">`;
+    g += `<path d="${sh.d}" fill="${v.kind === "die" ? "var(--s-steel2)" : v.sealed && v.atm === "Ar" ? "var(--s-argon-bg)" : "var(--s-glass)"}"/>`;
+    if (T > 1e-6) {
+      const fr = Math.min(1, T / sh.cap) * .94;
+      if (v.form === "pellet") { const h = Math.max(4, I.h * fr * .55); g += `<rect x="${I.x + 1.5}" y="${I.y + I.h - h}" width="${I.w - 3}" height="${h}" rx="2.5" fill="${mixCol(v.c)}" stroke="var(--s-ink)" stroke-opacity=".35" stroke-width=".6"/>`; }
+      else if (v.mixed) { const h = I.h * fr; g += `<rect x="${I.x}" y="${I.y + I.h - h}" width="${I.w}" height="${h}" fill="${mixCol(v.c)}"/>`; }
+      else { let yb = I.y + I.h; for (const [el, gm] of Object.entries(v.c)) { const h = I.h * fr * gm / T; if (h < .2) continue; g += `<rect x="${I.x}" y="${(yb - h).toFixed(2)}" width="${I.w}" height="${h.toFixed(2)}" fill="${elCol(el)}"/>`; yb -= h; } }
+    }
+    g += `<path d="${sh.d}" fill="none" stroke="var(--s-ink)" stroke-width="1.2" stroke-linejoin="round"/>`;
+    if (sh.lid) g += `<path d="${sh.lid}" fill="var(--s-steel)" stroke="var(--s-ink)" stroke-width="1"/>`;
+    if (v.flags.length) {
+      if (v.flags.includes("leak")) g += `<path d="M-7 -30 l5 -3 l-2 5 l6 -2" fill="none" stroke="var(--s-bad)" stroke-width="1.6"/>`;
+      g += `<circle cx="14" cy="-46" r="7" fill="var(--s-hid)"/><text x="14" y="-42.5" text-anchor="middle" style="font-size:10px;font-weight:700;fill:var(--s-bg)">!</text>`;
+    }
+    return g + `<text y="14" text-anchor="middle" class="s-lbl">${v.id}</text></g>`;
+  };
+  const furnT = (j, now) => {
+    if (!j || now < j.start) return 25;
+    const tr = Math.max(.01, (j.T - 25) / j.ramp), t = now - j.start, tc = Math.max(.01, j.end - j.start - tr - j.dwell);
+    if (t < tr) return 25 + (j.T - 25) * t / tr; if (t < tr + j.dwell) return j.T; if (t < tr + j.dwell + tc) return j.T - (j.T - 25) * (t - tr - j.dwell) / tc; return 25;
+  };
+  const glow = T => { const f = Math.max(0, Math.min(1, (T - 150) / 850)); return { f, c: `rgb(255 ${Math.round(70 + 150 * f)} ${Math.round(20 + 60 * f * f)})` }; };
+  const wrapT = (text, n) => { const out = []; let line = ""; for (const w of String(text).split(/\s+/)) { if ((line + " " + w).trim().length > n) { if (line) out.push(line); line = w; } else line = (line + " " + w).trim(); } if (line) out.push(line); return out; };
+  const callout = (x, y, kind, text) => {
+    const [col, name] = HK[kind] || ["var(--s-hid)", kind]; const lines = wrapT(text, 34).slice(0, 4);
+    const w = 250, h = 22 + lines.length * 14; let bx = Math.min(1000 - w - 6, Math.max(6, x - w / 2)), by = y - h - 70; if (by < 44) by = y + 22;
+    let g = `<g><line x1="${x}" y1="${y - 40}" x2="${bx + w / 2}" y2="${by + h}" stroke="${col}" stroke-width="1.2" stroke-dasharray="3 3"/><rect x="${bx}" y="${by}" width="${w}" height="${h}" rx="8" fill="var(--s-bg)" stroke="${col}" stroke-width="1.4"/>`;
+    g += `<text x="${bx + 10}" y="${by + 15}" style="font-size:10px;font-weight:600;fill:${col};letter-spacing:.04em">Hidden · ${esc(name)}</text>`;
+    lines.forEach((l, i) => g += `<text x="${bx + 10}" y="${by + 30 + i * 14}" style="font-size:11px;fill:var(--s-ink)">${esc(l)}</text>`);
+    return g + "</g>";
+  };
+  const DUR = s => s.tool === "wait" || s.tool === "wait_for" ? 2600 : s.tool === "read_file" ? 900 : ({ info: 650, prep: 1250, heat: 1500, meas: 1900, deliver: 2600 })[CAT[s.tool] || "info"];
+  function render(idx, t) {
+    const s = S[idx], a = s.args || {}, o = (s.obs && typeof s.obs === "object") ? s.obs : {}, c = snaps[idx], p = idx ? snaps[idx - 1] : EMPTY;
+    const now = lerp(p.now, c.now, (s.tool === "wait" || s.tool === "wait_for") ? Math.min(1, t * 1.15) : ease(t));
+    const env = envAt(now);
+    let g = "";
+    const hr = (now % 24) / 24, day = .5 - .5 * Math.cos(2 * Math.PI * hr);
+    g += `<rect x="16" y="8" width="968" height="30" rx="8" fill="hsl(${lerp(226, 214, day)} ${lerp(22, 30, day)}% ${lerp(12, 30, day)}%)"/>`;
+    g += `<circle cx="${16 + 968 * hr}" cy="23" r="7" fill="${day > .45 ? "#F2D38B" : "#C9CDD6"}" opacity=".9"/>`;
+    g += `<text x="30" y="28" style="font-size:13px;font-weight:600;fill:var(--s-ink)">${fmtT(now)}</text><text x="970" y="28" text-anchor="end" style="font-size:12px;fill:var(--s-muted)">room ${env.t_room_c} °C · RH ${env.rh_pct} %</text>`;
+    const wet = env.box_h2o_ppm > 5;
+    g += `<text x="${BOX.x + 16}" y="${BOX.y + 21}" class="s-lbl2">Glove box · Ar</text><text x="${BOX.x + BOX.w - 14}" y="${BOX.y + 21}" text-anchor="end" style="font-size:11px;fill:${wet ? "var(--s-hid)" : "var(--s-muted)"};font-weight:${wet ? 600 : 400}">H₂O ${env.box_h2o_ppm} ppm${wet ? " · wet day" : ""}</text>`;
+    g += `<text x="${BENCH.x + 14}" y="${BENCH.y + 21}" class="s-lbl2">Open bench</text><text x="${BENCH.x + BENCH.w - 12}" y="${BENCH.y + 21}" text-anchor="end" class="s-lbl">air · RH ${env.rh_pct} %</text>`;
+    FURN.forEach((f, i) => {
+      const jid = (c.furn[i] || p.furn[i]), j = jid && (c.jobs[jid] || p.jobs[jid]), T = j ? furnT(j, now) : 25, G = glow(T);
+      if (G.f > 0) g += `<rect x="${f.x + 18}" y="${f.y + f.h / 2 - 8}" width="${f.w - 36}" height="40" rx="20" fill="${G.c}" opacity="${(.15 + .7 * G.f).toFixed(2)}"/>`;
+      g += `<text x="${f.x + 14}" y="${f.y + 21}" class="s-lbl2">Furnace ${i + 1}</text>`;
+      if (j) {
+        const prog = Math.max(0, Math.min(1, (now - j.start) / (j.end - j.start))), state = now < j.start ? "queued" : prog >= 1 ? "done · cold" : `${Math.round(T)} °C`;
+        g += `<text x="${f.x + f.w - 14}" y="${f.y + 21}" text-anchor="end" style="font-size:12px;font-weight:600;fill:${prog > 0 && prog < 1 ? "var(--s-ink)" : "var(--s-muted)"}">${j.id} · ${state}</text>`;
+        g += `<text x="${f.x + 14}" y="${f.y + 38}" class="s-lbl">${j.T} °C set · ${j.dwell} h dwell · ${j.ramp} °C/h</text>`;
+        g += `<rect x="${f.x + 14}" y="${f.y + f.h - 16}" width="${f.w - 28}" height="5" rx="2.5" fill="var(--s-bg)"/><rect x="${f.x + 14}" y="${f.y + f.h - 16}" width="${((f.w - 28) * prog).toFixed(1)}" height="5" rx="2.5" fill="var(--s-muted)"/>`;
+      } else g += `<text x="${f.x + f.w - 14}" y="${f.y + 21}" text-anchor="end" class="s-lbl">idle</text>`;
+    });
+    const k = ease(Math.min(1, t / .35)), ids = new Set([...Object.keys(c.v), ...Object.keys(p.v)]), posNow = {};
+    for (const id of ids) {
+      const vc = c.v[id], vp = p.v[id];
+      if (vc && !vc.gone) {
+        const a1 = vp && !vp.gone ? vpos(vp) : null, b1 = vpos(vc);
+        const q = a1 ? { x: lerp(a1.x, b1.x, k), y: lerp(a1.y, b1.y, k), s: lerp(a1.s || 1, b1.s || 1, k) } : b1;
+        const op = a1 ? 1 : ease(t / .3), rot = s.tool === "grind" && a.vessel === id && t > .3 && t < .9 ? 7 * Math.sin(t * 60) : 0;
+        const show = ((s.tool === "weigh" && a.vessel === id) || (s.tool === "transfer" && a.dst === id)) && t < .6 && vp ? { ...vc, c: vp.c, form: vp.form, mixed: vp.mixed } : vc;
+        g += vesselSVG(show, q, op, rot); posNow[id] = q;
+      } else if (vp && !vp.gone) { const q = vpos(vp); g += vesselSVG(vp, q, 1 - ease(t / .7), 0); posNow[id] = q; }
+    }
+    const P = id => posNow[id] || { x: 500, y: 280 };
+    if (s.tool === "weigh" && !s.err && t > .2 && t < .85) {
+      const q = P(a.vessel), u = (t - .2) / .65, tilt = Math.min(1, u * 3) * 50;
+      g += `<g transform="translate(${q.x + 18} ${q.y - 82}) rotate(${tilt})"><rect x="-9" y="-16" width="18" height="24" rx="3" fill="var(--s-panel)" stroke="var(--s-ink)"/><rect x="-9" y="-6" width="18" height="10" fill="${elCol(a.reagent || "")}"/><text y="-19" text-anchor="middle" style="font-size:10px;font-weight:600;fill:var(--s-ink)">${esc(a.reagent)}</text></g>`;
+      for (let i = 0; i < 9; i++) { const ph = (u * 2.2 + i / 9) % 1; g += `<circle cx="${q.x + 4 + Math.sin(i * 2.3) * 3}" cy="${q.y - 72 + ph * 40}" r="1.8" fill="${elCol(a.reagent || "")}" opacity="${(1 - ph).toFixed(2)}"/>`; }
+    }
+    if (s.tool === "weigh" && !s.err) { const q = P(a.vessel); g += `<g><rect x="${q.x - 30}" y="${q.y + 18}" width="60" height="16" rx="3" fill="var(--s-bg)" stroke="var(--s-line)"/><text x="${q.x}" y="${q.y + 30}" text-anchor="middle" style="font-size:11px;fill:var(--s-ink)">${t > .55 ? Number(o.reading_g).toFixed(4) : "0.0000"} g</text></g>`; }
+    if (s.tool === "grind" && !s.err && t > .25) { const q = P(a.vessel); g += `<g transform="translate(${q.x} ${q.y - 22})"><circle r="26" fill="none" stroke="var(--s-ink)" stroke-opacity=".6" stroke-width="1.5" stroke-dasharray="6 8" transform="rotate(${t * 900})"/></g><text x="${q.x}" y="${q.y + 30}" text-anchor="middle" style="font-size:11px;fill:var(--s-ink)">${a.minutes} min · ${esc(a.media || "agate")}</text>`; }
+    if (s.tool === "press" && !s.err) { const q = P(a.vessel), d = t < .55 ? ease((t - .2) / .35) : 1 - ease((t - .7) / .25); g += `<rect x="${q.x - 12}" y="${q.y - 74 + 30 * Math.max(0, d)}" width="24" height="10" rx="2" fill="var(--s-steel)" stroke="var(--s-ink)"/>`; }
+    if (s.tool === "seal" && !s.err && t > .25 && t < .85) { const q = P(a.vessel), fl = 1 + .25 * Math.sin(t * 80); g += `<g transform="translate(${q.x + 4} ${q.y - 58}) scale(${fl})"><path d="M18 -6 Q4 0 18 6 Q30 0 18 -6 Z" fill="#F2A93B" opacity=".85"/><path d="M14 -3 Q6 0 14 3 Q22 0 14 -3 Z" fill="#FFF1C9"/></g><text x="${q.x}" y="${q.y + 30}" text-anchor="middle" style="font-size:11px;fill:var(--s-ink)">sealed · ${esc(a.atmosphere)}</text>`; }
+    if (s.tool === "transfer" && !s.err && t > .15 && t < .8) {
+      const A = (p.v[a.src] && vpos(p.v[a.src])) || P(a.src), B = P(a.dst), u = (t - .15) / .65;
+      for (let i = 0; i < 10; i++) { const ph = (u * 1.6 + i / 10) % 1, x = lerp(A.x, B.x, ph), y = lerp(A.y - 40, B.y - 50, ph) - 50 * Math.sin(Math.PI * ph); g += `<circle cx="${x}" cy="${y}" r="2" fill="${mixCol((p.v[a.src] || {}).c || {})}" opacity="${(1 - .6 * ph).toFixed(2)}"/>`; }
+    }
+    for (const pr of c.order.map(id => c.prod[id])) {
+      const q = chipPos(pr.i), fresh = s.tool === "collect" && o.product === pr.id; let x = q.x, y = q.y, op = 1;
+      if (fresh) { const f = FURN[pr.from ?? 0], u = ease(Math.min(1, (t - .2) / .6)); x = lerp(f.x + f.w / 2, q.x, u); y = lerp(f.y + f.h / 2, q.y, u) - 60 * Math.sin(Math.PI * u); op = t < .2 ? 0 : 1; }
+      const dl = c.delivered === pr.id;
+      g += `<g opacity="${op}"><circle cx="${x}" cy="${y}" r="17" fill="var(--s-bg)" stroke="var(--s-ink)" stroke-width="${dl ? 3 : 1.2}"/><circle cx="${x}" cy="${y}" r="9" fill="var(--s-steel)" opacity=".55"/><text x="${x}" y="${y + 4}" text-anchor="middle" style="font-size:10px;font-weight:600;fill:var(--s-ink)">${pr.id}</text>`;
+      const m = [...new Set(pr.meas)].map(z => ({ xrd: "X", squid_mt: "M", edx: "E" })[z]).join(" ");
+      if (m) g += `<text x="${x}" y="${y + 28}" text-anchor="middle" style="font-size:9.5px;fill:var(--s-muted)">${m}</text>`;
+      const tr = R.products[pr.id];
+      if (tr) { const okk = tr.single_phase && tr.distorted && Math.abs(tr.tn - R.target) <= R.tol;
+        g += `<text x="${x + 21}" y="${y - 5}" style="font-size:9.5px;fill:var(--s-hid)">T_N ${tr.tn.toFixed(0)}</text><text x="${x + 21}" y="${y + 6}" style="font-size:9.5px;font-weight:600;fill:${okk ? "var(--s-ok)" : "var(--s-bad)"}">${okk ? "in spec" : "off spec"}</text>`; }
+      g += `</g>`;
+    }
+    for (const [key, b] of Object.entries(INS)) {
+      const on = s.tool === key && !s.err, u = on ? t : 0;
+      if (key === "xrd") { const th = on ? 15 + 55 * Math.min(1, Math.max(0, (u - .3) / .7)) : 25;
+        for (const sgn of [-1, 1]) g += `<line x1="${b.cx}" y1="${b.cy}" x2="${b.cx + sgn * 52 * Math.cos(th * Math.PI / 180)}" y2="${b.cy - 52 * Math.sin(th * Math.PI / 180)}" stroke="${on ? "var(--s-ink)" : "var(--s-steel)"}" stroke-width="4" stroke-linecap="round"/>`; }
+      if (key === "squid_mt" && on) g += `<rect x="${b.cx - 18}" y="${b.cy - 52}" width="36" height="100" rx="18" fill="var(--s-argon)" opacity="${(.15 + .25 * Math.sin(u * 20) ** 2).toFixed(2)}"/>`;
+      if (key === "edx" && on && u > .3) g += `<line x1="${b.cx}" y1="${b.cy - 60}" x2="${b.cx}" y2="${b.cy + 26}" stroke="var(--s-ink)" stroke-width="2" stroke-dasharray="4 3" stroke-dashoffset="${-u * 80}"/>`;
+      if (on) { const src = c.prod[a.product]; if (src) { const q = chipPos(src.i), v2 = ease(Math.min(1, u / .35)), back = u > .85 ? ease((u - .85) / .15) : 0;
+        const ty = key === "squid_mt" ? b.cy - 20 : key === "edx" ? b.cy + 30 : b.cy, x = lerp(lerp(q.x, b.cx, v2), q.x, back), y = lerp(lerp(q.y, ty, v2), q.y, back);
+        g += `<circle cx="${x}" cy="${y}" r="9" fill="var(--s-ink)" opacity=".85"/><text x="${x}" y="${y + 3}" text-anchor="middle" style="font-size:7px;font-weight:700;fill:var(--s-bg)">${a.product}</text>`;
+        g += `<rect x="${b.x + 3}" y="${b.y + 3}" width="${b.w - 6}" height="${b.h - 6}" rx="12" fill="none" stroke="var(--s-ink)" stroke-width="1.5" opacity="${(.4 + .4 * Math.sin(u * 14)).toFixed(2)}"/>`; } }
+    }
+    if ((s.tool === "wait" || s.tool === "wait_for") && !s.err) { const dh = c.now - p.now, al = Math.sin(Math.PI * Math.min(1, t));
+      g += `<g opacity="${al.toFixed(2)}"><rect x="330" y="224" width="340" height="66" rx="14" fill="var(--s-bg)" stroke="var(--s-line)" opacity=".95"/><text x="500" y="254" text-anchor="middle" style="font-size:20px;font-weight:600;fill:var(--s-ink)">+${dh.toFixed(1)} h</text><text x="500" y="276" text-anchor="middle" style="font-size:12px;fill:var(--s-muted)">${s.tool === "wait_for" ? "waiting for " + esc(a.job) : "waiting"} · ${fmtT(now)}</text></g>`; }
+    if (s.tool === "deliver" && !s.err && t > .3) { const pr = c.prod[a.product]; if (pr) { const q = chipPos(pr.i), sc = 1 + 2 * (1 - ease((t - .3) / .4));
+      g += `<g transform="translate(${q.x} ${q.y}) scale(${sc.toFixed(2)})" opacity="${ease((t - .3) / .3).toFixed(2)}"><circle r="22" fill="none" stroke="var(--s-ink)" stroke-width="2.5"/></g><text x="${TRAY.x + TRAY.w - 14}" y="${TRAY.y + 20}" text-anchor="end" style="font-size:12px;font-weight:600;fill:var(--s-ink)">delivered ${a.product}</text>`; } }
+    if (s.err && t > .1 && t < .9) g += `<g><rect x="360" y="230" width="280" height="40" rx="10" fill="var(--s-bad)" opacity=".92"/><text x="500" y="255" text-anchor="middle" style="font-size:13px;font-weight:600;fill:#fff">rejected: ${esc(s.tool)}</text></g>`;
+    if (CAT[s.tool] === "info" && t < .95) g += `<text x="500" y="${BOX.y + 21}" text-anchor="middle" style="font-size:11px;fill:var(--s-muted)">reads ${esc(s.tool === "read_file" ? a.name : s.tool.replace("_", " "))}</text>`;
+    if (s.hidden && t > .25) for (const h of s.hidden) {
+      let q = posNow[h.vessel] || (p.v[h.vessel] && vpos(p.v[h.vessel]));
+      if (h.kind === "product") { const pr = c.order.map(i => c.prod[i]).filter(z => z.vid === h.vessel).pop(); if (pr) q = chipPos(pr.i); }
+      if (q) g += callout(q.x, q.y, h.kind, h.text);
+    }
+    return g;
+  }
+  return { map: D.map, bg, render, dur: i => DUR(S[i]), n: S.length };
+}
+function drawScene(r, k) {
+  const host = $("#exScene"); if (!host) return;
+  const sc = SCENES[r.id];
+  if (!sc || typeof sc.then === "function") { loadScene(r.id).then(() => { if (ex.run === r && ex.k === k) drawScene(r, k); }); return; }
+  const svg = host.querySelector("svg");
+  if (svg.dataset.run !== r.id) { svg.dataset.run = r.id; svg.querySelector(".s-bgl").innerHTML = sc.bg; }
+  const idx = sc.map[k] ?? 0, dyn = svg.querySelector(".s-dyn");
+  cancelAnimationFrame(ex.raf);
+  if (REDUCED || !ex.playing) { dyn.innerHTML = sc.render(idx, 1); return; }
+  const D = Math.min(sc.dur(idx) / ex.speed, dwell(k) * .92), t0 = performance.now();
+  const f = now => { const t = Math.min(1, (now - t0) / D); dyn.innerHTML = sc.render(idx, t); if (t < 1) ex.raf = requestAnimationFrame(f); };
+  ex.raf = requestAnimationFrame(f);
+}
+
 function openRun(id, k = 0, scroll = true) {
   const r = RUNS[id]; if (!r) return;
   stopPlay();
@@ -359,7 +605,7 @@ function openRun(id, k = 0, scroll = true) {
       <div class="pl-map" id="exMap"></div>
       <div class="pl-grid">
         <div class="pl-stage">
-          <div class="pl-screen" id="exScreen"><img alt="" hidden><div class="pl-empty" id="exEmpty"></div><div class="pl-tag" id="exTag" hidden></div><div class="pl-ov" id="exOv"></div></div>
+          <div class="pl-screen${r.env === "wet" ? " scene" : ""}" id="exScreen">${r.env === "wet" ? `<div id="exScene"><svg viewBox="0 0 1000 560" role="img" aria-label="The lab bench at this step: glove box, open bench, two furnaces, product tray and instruments, with hidden events marked"><g class="s-bgl"></g><g class="s-dyn"></g></svg></div>` : ""}<img alt="" hidden><div class="pl-empty" id="exEmpty"></div><div class="pl-tag" id="exTag" hidden></div><div class="pl-ov" id="exOv"></div></div>
           <div class="pl-words"><div class="t">What the model said <span id="exWordsAt"></span></div><p id="exWords">Nothing yet.</p></div>
         </div>
         <div class="pl-sidewrap"><aside class="pl-side">
@@ -467,10 +713,11 @@ function drawStep() {
     if (img.dataset.want !== fr.frame) { setImg(img, fr.frame); img.alt = /\.svg$/.test(fr.frame) ? `Instrument data returned at step ${fr.i}` : `Agent's screen after step ${fr.i}`; }
     $("#exScreen").classList.toggle("plot", /\.svg$/.test(fr.frame));
   } else {
-    img.hidden = true; empty.hidden = false;
+    img.hidden = true; empty.hidden = r.env === "wet";
     empty.textContent = r.env === "wet" ? "The agent works this bench through tool calls. Instrument data appears here as soon as a measurement returns." : "Waiting for the first screen.";
   }
   let c = 0; for (let d = k + 1; d < r.steps.length && c < 6; d++) { const f2 = r.steps[d].frame; if (f2 && !preloaded.has(f2)) { preloaded.add(f2); prefetch(f2); c++; } }
+  if (r.env === "wet") drawScene(r, k);
   const tag = $("#exTag");
   if (s.flag) { tag.hidden = false; tag.className = "pl-tag f-" + s.flag; tag.textContent = FLAGTXT[s.flag] || s.flag; } else tag.hidden = true;
   // overlay: the call, what came back and, near a failure point, what went wrong
